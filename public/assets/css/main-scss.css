@@ -1,0 +1,41 @@
+@font-face {
+  font-family: exo_light;
+  src: url("../font/Exo2.0-Light.otf");
+}
+
+@font-face {
+  font-family: exo_regular;
+  src: url("../font/Exo2.0-Regular.otf");
+}
+
+@font-face {
+  font-family: exo_bold;
+  src: url("../font/Exo2.0-SemiBold.otf");
+}
+
+/* line 27, ../sass/main-scss.scss */
+body {
+  background-color: red;
+  margin: 0;
+}
+
+/* line 40, ../sass/main-scss.scss */
+.nav-fixed .nav-content {
+  margin: auto;
+  width: 100%;
+  background-color: white;
+}
+/* line 47, ../sass/main-scss.scss */
+.nav-fixed .nav-content .nav-item-left {
+  float: left;
+  background-color: green;
+  padding: 0;
+}
+/* line 54, ../sass/main-scss.scss */
+.nav-fixed .nav-content .nav-item-left li {
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}

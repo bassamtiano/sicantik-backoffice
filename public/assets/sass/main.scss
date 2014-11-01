@@ -1,0 +1,30 @@
+@import '_fonts';
+
+$main-background-color: #F0EFE8;
+$default-font-family: roboto_condensed;
+$default-font-size: 15px;
+
+$container-background-color:none;
+$container-width:100%;
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: $default-font-family;
+	font-size: $default-font-size;
+	background-color: $main-background-color;
+}
+
+$nav-ratio:100%;
+
+@import '_header';
+@import '_form';
+
+
+@import '_body';
+@import '_table';
+@import '_onepage';
+@import '_animation';
+@import '_modal';
+
+/* Table Width */

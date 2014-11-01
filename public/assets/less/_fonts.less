@@ -1,0 +1,51 @@
+@font-face {
+	font-family:roboto_light;
+	src:url('../fonts/Roboto-Light.ttf');
+}
+
+@font-face {
+	font-family:roboto_condensed_regular;
+	src:url('../fonts/RobotoCondensed-Regular.ttf');
+}
+
+@font-face {
+	font-family:roboto_condensed;
+	src:url('../fonts/RobotoCondensed-Light.ttf');
+}
+
+@regular:roboto_light;
+@bold:roboto_condensed_regular;
+
+h1, h2, h3, h4, h5, h6 {
+	padding: 0;
+	margin: 0;
+
+	font-family:@bold;
+}
+
+p {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	float: left;
+
+	.center {
+		text-align: center;
+	}
+
+	.left {
+		text-align: left;
+	}
+
+	.right {
+		text-align: right;
+	}
+
+	.justify {
+		text-align: justify;
+	}
+}
+
+// p + p {
+// 	margin-top:20px;
+// }

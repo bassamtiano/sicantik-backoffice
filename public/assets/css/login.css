@@ -1,0 +1,27 @@
+/* line 1, ../sass/login.scss */
+body {
+  background-color: green;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 7, ../sass/login.scss */
+.login-pannel {
+  margin: auto;
+  margin-top: 50px;
+  height: 100px;
+  width: 30%;
+  background-color: white;
+}
+
+/* line 26, ../sass/login.scss */
+input[type="text"] {
+  border: 0;
+  padding: 10px;
+}
+
+/* line 32, ../sass/login.scss */
+button[type="submit"] {
+  border: 0;
+  padding: 10px;
+}

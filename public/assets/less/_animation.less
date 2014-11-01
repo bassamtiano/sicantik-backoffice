@@ -1,0 +1,38 @@
+@time: 0.5s;
+
+.modal {
+	-webkit-animation: fadein @time; /* Safari, Chrome and Opera > 12.1 */
+	-moz-animation: fadein @time; /* Firefox < 16 */
+	-ms-animation: fadein @time; /* Internet Explorer */
+	-o-animation: fadein @time; /* Opera < 12.1 */
+	animation: fadein @time;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: @time; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: @time; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: @time; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: @time; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: @time; }
+}

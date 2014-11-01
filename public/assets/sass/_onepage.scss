@@ -1,0 +1,111 @@
+$form-item-horizontal-padding:10px;
+$form-group-label-vertical-padding: $form-item-horizontal-padding + 1pt;
+$form-group-label-horizontal-padding: 20px;
+
+.page-form {
+	clear: both;
+	width: 100%;
+	height: auto;
+	
+	// height: $table-content-height;
+	overflow: auto;
+	background-color: white;
+
+	.form-wrapper {
+		width: 98%;
+		height: 100%;
+
+		margin: auto;
+
+		.form-1-column {
+			width: 100%;
+
+			.form-group:nth-child(even) {
+				background-color: #ECF0F1;
+			}
+
+			.form-group {
+
+				float: left;
+				width: 100% ;
+				padding-top: 10px;
+				padding-bottom: 10px;
+
+				label {
+					float: left;
+					width: calc(50%  - #{$form-group-label-horizontal-padding});
+
+					padding-top: $form-group-label-vertical-padding;
+					padding-bottom: $form-group-label-vertical-padding;
+					padding-left: $form-group-label-horizontal-padding / 2;
+					padding-right: $form-group-label-horizontal-padding / 2;
+
+					font-size: $default-font-size;
+
+					
+				}
+
+				.form-item {
+
+					width: calc(50% - 10px);
+					float: left;
+					input[type="text"] {
+
+						font-family: $default-font-family;
+						font-size: $default-font-size;
+
+						width: 100%;
+						border: solid #436AB7 1pt;
+						border-radius: 5px;
+
+						padding: 10px;
+
+						outline: 0;
+					}
+
+					select {
+						width: 100%;
+						height: 40px;
+						
+						padding: 10px;
+						border: solid #436AB7 1pt;
+						font-family: $default-font-family;
+						font-size: $default-font-size;
+
+						option {
+							
+						}
+					}
+				}
+
+				
+
+				
+
+
+
+			}
+
+			
+
+
+		}
+
+		.form-2-column{
+			.form-left {
+				float: left;
+				background-color: blue;
+				width: 50%;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+			.form-right {
+				background-color: yellow;
+				float: left;
+				width: 50%;
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
+		}
+	}
+}

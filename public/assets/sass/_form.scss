@@ -1,0 +1,80 @@
+$form-text-backgroound-color:black;
+$form-text-font-size:11px;
+$form-horizontal-padding:10px;
+$form-padding:8px;
+
+form {
+	width: 100%;
+}
+
+form[role="form"] {
+
+
+	input[type="text"] {
+		background-color: $form-text-backgroound-color;
+		border:0;
+
+
+
+	}
+
+	input[type="checkbox"] {
+		display: none;
+	}
+
+	input[type="checkbox"] + label {
+		display:inline-block;
+		background-color: red;
+		cursor:pointer;
+		width: 10px;
+		height: 10px;
+		
+	}
+
+	input[type="checkbox"]:checked + label{
+		display:inline-block;
+		background-color: blue;
+		cursor:pointer;
+
+	}
+
+}
+
+form[role="form-horizontal"] {
+
+	float: right;
+	padding:0;
+	margin:0;
+
+
+
+}
+
+.form-content {
+
+	width: calc(100% - 20px);
+	float: left;
+	padding: 10px;
+
+	label {
+		width: 50%;
+		padding-top: $form-padding / 2;
+		padding-bottom: $form-padding / 2;
+		float: left;
+	}
+
+	input {
+		float: left;
+		border:0;
+		padding: $form-padding;
+		border-radius: 4px;
+		outline: 0;
+	}
+
+	
+
+	input[type="text"] {
+		background-color: red;
+		width: 50%;
+	}
+}
