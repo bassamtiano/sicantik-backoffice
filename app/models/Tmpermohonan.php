@@ -694,32 +694,36 @@
 
 		public static function fetch_with_tmpemohon_tmperusahaan_for_pendataan_entry_data_perizinan_edit($id) {
 			return DB::table('tmpermohonan')
-			->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
-			->join('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
+			->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+			->leftjoin('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
 
-			->join('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
-			->join('tmperusahaan', 'tmpermohonan_tmperusahaan.tmperusahaan_id', '=', 'tmperusahaan.id')
+			->leftjoin('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
+			->leftjoin('tmperusahaan', 'tmpermohonan_tmperusahaan.tmperusahaan_id', '=', 'tmperusahaan.id')
 
-			->join('tmpemohon_trkelurahan', 'tmpemohon.id', '=', 'tmpemohon_trkelurahan.tmpemohon_id')
-			->join('trkelurahan', 'tmpemohon_trkelurahan.trkelurahan_id', '=', 'trkelurahan.id')
+			->leftjoin('tmpemohon_trkelurahan', 'tmpemohon.id', '=', 'tmpemohon_trkelurahan.tmpemohon_id')
+			->leftjoin('trkelurahan', 'tmpemohon_trkelurahan.trkelurahan_id', '=', 'trkelurahan.id')
 
-			->join('trkecamatan_trkelurahan', 'trkelurahan.id', '=', 'trkecamatan_trkelurahan.trkelurahan_id')
-			->join('trkecamatan', 'trkecamatan_trkelurahan.trkecamatan_id', '=', 'trkecamatan.id')
+			->leftjoin('trkecamatan_trkelurahan', 'trkelurahan.id', '=', 'trkecamatan_trkelurahan.trkelurahan_id')
+			->leftjoin('trkecamatan', 'trkecamatan_trkelurahan.trkecamatan_id', '=', 'trkecamatan.id')
 
-			->join('trkabupaten_trkecamatan', 'trkecamatan.id', '=', 'trkabupaten_trkecamatan.trkecamatan_id')
-			->join('trkabupaten', 'trkabupaten_trkecamatan.trkabupaten_id', '=', 'trkabupaten.id')
+			->leftjoin('trkabupaten_trkecamatan', 'trkecamatan.id', '=', 'trkabupaten_trkecamatan.trkecamatan_id')
+			->leftjoin('trkabupaten', 'trkabupaten_trkecamatan.trkabupaten_id', '=', 'trkabupaten.id')
 
-			->join('trkabupaten_trpropinsi', 'trkabupaten.id', '=', 'trkabupaten_trpropinsi.trkabupaten_id')
-			->join('trpropinsi', 'trkabupaten_trpropinsi.trpropinsi_id', '=', 'trpropinsi.id')
+			->leftjoin('trkabupaten_trpropinsi', 'trkabupaten.id', '=', 'trkabupaten_trpropinsi.trkabupaten_id')
+			->leftjoin('trpropinsi', 'trkabupaten_trpropinsi.trpropinsi_id', '=', 'trpropinsi.id')
 
-			->join('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
-			->join('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+			->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
 
 
 			->select(['tmpermohonan.id', 'tmpermohonan.pendaftaran_id', 'tmpemohon.n_pemohon', 'tmpemohon.a_pemohon', 'trkelurahan.n_kelurahan', 'trkecamatan.n_kecamatan', 'trkabupaten.n_kabupaten', 'trpropinsi.n_propinsi', 'trperizinan.n_perizinan', 'tmpermohonan.a_izin'])
 			->where('tmpermohonan.id', '=', $id)
 			->get();
 
+		}
+
+		public static function edit_data_perizinan_for_entry_data_perizinan($data) {
+			
 		}
 
 		public static function fetch_with_tmpemohon_for_pendataan_entry_data_perizinan_data_awal_data($tmpermohonan_id) {

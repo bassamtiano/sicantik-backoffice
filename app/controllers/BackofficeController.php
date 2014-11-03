@@ -15,7 +15,9 @@
 		# @ Bagian Modal =======================================================
 
 		public function pendataan_entry_data_perizinan_edit() {
-			// Tmpermohonan::
+			$data = [];
+			Tmpermohonan::edit_data_perizinan_for_entry_data_perizinan();
+
 		}
 
 		public function pendataan_entry_data_perizinan_edit_data($id) {
@@ -66,10 +68,12 @@
 					$test[$y] = $v;
 				}
 			}
-
+			
 			return $test;
 
 		}
+
+
 
 		public function pendataan_entry_data_perizinan_data_awal() {
 
