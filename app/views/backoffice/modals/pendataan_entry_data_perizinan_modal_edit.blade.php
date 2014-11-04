@@ -1,5 +1,7 @@
 <div class="modal" ng-show={{ $modal_name }}>
 
+<form target="target_edit" method="post" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/edit') }}">
+
     <div class="modal-container large">
         <div class="modal-header update">
             <h2>Edit</h2><a class="button-close" href ng-click="close_modal('modal_edit')">x</a>
@@ -70,11 +72,11 @@
                         <div class="tab-content-left">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Perusahaan</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.nama_perusahaan }}" placeholder="Nama Perusahaan" /></div>
+                                <div class="content-form-input"><input type="text" name="nama" value="@{{ entry_data_perizinan_edit_data.nama_perusahaan }}" placeholder="Nama Perusahaan" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Alamat Perusahaan / Perorangan</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.alamat_perusahaan_perorangan }}" placeholder="Alamat Perusahaan / Perorangan" /></div>
+                                <div class="content-form-input"><input type="text" name="alamat" value="@{{ entry_data_perizinan_edit_data.alamat_perusahaan_perorangan }}" placeholder="Alamat Perusahaan / Perorangan" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Penanggung Jawab</div>
@@ -141,11 +143,16 @@
             </div>
         </div>
         <div class="modal-footer">
-            as
+            <input type="submit" value="Save" ng-click="close_modal('modal_edit')">
         </div>
 
         <!-- Iframe for post -->
-        <iframe src="#" id="target_post" name="target_frame" style="width:0; height:0; position:relative; background:#fff;"></iframe>
+
 
     </div>
+
+</form>
+
 </div>
+
+<iframe src="#" id="target_edit" name="target_edit" style="width:0; height:0; position:relative; background:#fff;"></iframe>

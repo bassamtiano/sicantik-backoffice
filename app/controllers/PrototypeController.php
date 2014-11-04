@@ -8,7 +8,13 @@
         }
 
         public function submit_data() {
-            DB::table('prototype_bassam')->insert(['nama' => Input::get('nama'), 'alamat' => Input::get('alamat')]);
+            // DB::table('prototype_bassam')->insert(['nama' => Input::get('nama'), 'alamat' => Input::get('alamat')]);
+
+            // echo '<p>' . Input::get('nama') . Input::get('alamat') . '</p>';
+            // return '<p id="result">' . Input::get('nama') . Input::get('alamat') . '</p>';
+            echo "<script>";
+                echo "haiii('coba ah')";
+            echo "</script>";
         }
 
         public function load_file() {

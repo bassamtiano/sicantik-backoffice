@@ -15,8 +15,10 @@
 		# @ Bagian Modal =======================================================
 
 		public function pendataan_entry_data_perizinan_edit() {
-			$data = [];
-			Tmpermohonan::edit_data_perizinan_for_entry_data_perizinan();
+			// $data = [];
+			// Tmpermohonan::edit_data_perizinan_for_entry_data_perizinan();
+
+			Tmholiday::create(['date' => date('Y-m-d'), 'description' => Input::get('nama'), 'holiday_type' => Input::get('alamat')]);
 
 		}
 
@@ -68,7 +70,7 @@
 					$test[$y] = $v;
 				}
 			}
-			
+
 			return $test;
 
 		}
@@ -76,13 +78,16 @@
 
 
 		public function pendataan_entry_data_perizinan_data_awal() {
-
+			$id = '1';
+			// $data['n_pemohon'] = Input::get('n_pemohon');
+			$data['n_pemohon'] = 'asdf';
+			return Tmpemohon::edit_pemohon_for_pendataan_entry_data_perizinan_data_awal($id, $data);
 		}
 
 		public function pendataan_entry_data_perizinan_data_awal_data($id) {
 			$data_pemohon = Tmpermohonan::fetch_with_tmpemohon_for_pendataan_entry_data_perizinan_data_awal_data($id);
 
-			return $data_pemohon;
+			// return $data_pemohon;
 
 			$result = [];
 
@@ -91,8 +96,6 @@
 					$result[$v] = $k;
 				}
 			}
-
-
 
 			$data_syarat = [];
 			$persyaratan = Trsyaratperizinan::fetch_with_tmperizinan_for_pendataan_entry_data_perizinan_data_awal_data($result['perizinan_id']);
@@ -114,7 +117,7 @@
 
 			$result['syarat'] = $data_syarat;
 
-			// return $result;
+			return $result;
 		}
 
 		# Pendaftaran / Pendataan Penjadwalan Tinjauan 	======================================================================
