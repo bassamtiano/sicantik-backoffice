@@ -1,7 +1,9 @@
+<form method="post" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/data_awal') }}">
+
 <div class="modal" ng-show={{ $modal_name }}>
 
 
-<form target="target_edit" method="post" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/edit') }}">
+
 
     <div class="modal-container large">
         <div class="modal-header update">
@@ -11,7 +13,7 @@
             <div class="body-summary">
 
                 <div class="summary-title">
-                    <h3>Data Perizinan</h3>
+                    <h3>Data Perizinan AAA</h3>
                 </div>
                 <div class="body-summary-left">
                     <div class="summary-item">
@@ -83,15 +85,15 @@
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">ID</div>
-                                <div class="content-form-input"><input type="text" name="n_pemohon" value="@{{ entry_data_perizinan_data_awal_data.no_referensi }}" /></div>
+                                <div class="content-form-input"><input type="text" name="no_referensi" value="@{{ entry_data_perizinan_data_awal_data.no_referensi }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Pemohon</div>
-                                <div class="content-form-input"><input type="text" value="@{{ entry_data_perizinan_data_awal_data.n_pemohon }}" /></div>
+                                <div class="content-form-input"><input type="text" name="n_pemohon" value="@{{ entry_data_perizinan_data_awal_data.n_pemohon }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">No Telp / HP</div>
-                                <div class="content-form-input"><input type="text" value="@{{ entry_data_perizinan_data_awal_data.telp_pemohon }}" /></div>
+                                <div class="content-form-input"><input type="text" name="telp_pemohon" value="@{{ entry_data_perizinan_data_awal_data.telp_pemohon }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Tanggal Terima Berkas</div>
@@ -259,23 +261,25 @@
             </ul> -->
 
         </div>
+
+
         <div class="modal-footer">
             <div class="modal-footer-left">
                 &nbsp;
             </div>
             <div class="modal-footer-right">
-                <button type="submit" class="button-red" >Simpan</button>
+                <!-- <input type="submit" class="button-red" value="Simpan" /> -->
+                <input type="submit" value="Simpan" />
                 <!-- <button type="submit" class="button-yellow" >Batal</button> -->
             </div>
         </div>
 
-        <!-- Iframe for post -->
-
-
     </div>
 
-</form>
 
-<iframe src="#" id="target_edit" name="target_edit" style="width:0; height:0; position:relative; background:#fff;"></iframe>
+
+<!-- <iframe src="#" id="target_edit" name="target_edit" style="width:0; height:0; position:relative; background:#fff;"></iframe> -->
 
 </div>
+
+</form>

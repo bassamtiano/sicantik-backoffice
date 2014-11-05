@@ -79,9 +79,20 @@
 
 		public function pendataan_entry_data_perizinan_data_awal() {
 			$id = '1';
-			// $data['n_pemohon'] = Input::get('n_pemohon');
-			$data['n_pemohon'] = 'asdf';
+			$data['n_pemohon'] = Input::get('n_pemohon');
+
+			$data = [
+				'source' => Input::get('source'),
+				'no_referensi' => Input::get('no_referensi'),
+				'n_pemohon' => Input::get('n_pemohon'),
+				'telp_pemohon' => Input::get('telp_pemohon')
+			]
+
 			return Tmpemohon::edit_pemohon_for_pendataan_entry_data_perizinan_data_awal($id, $data);
+
+			echo $data['n_pemohon'];
+
+
 		}
 
 		public function pendataan_entry_data_perizinan_data_awal_data($id) {
