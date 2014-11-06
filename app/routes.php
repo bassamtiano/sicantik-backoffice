@@ -547,11 +547,29 @@ Route::get('backoffice/pendataan/entry_data_perizinan/data', ['as' => 'backoffic
 
 Route::get('backoffice/pendataan/entry_data_perizinan/data/{date_start}/{date_finish}', ['as' => 'backoffice_pendataan_entry_data_perizinan_data', 'uses' => 'BackofficeController@pendataan_entry_data_perizinan_data']);
 
-Route::get('backoffice/pendataan/entry_data_perizinan/edit', ['as' => 'backoffice_pendataan_entry_data_perizinan_edit', 'uses' => 'BackofficeController@pendataan_entry_data_perizinan_edit']);
+Route::post('backoffice/pendataan/entry_data_perizinan/edit', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_edit']);
 
 Route::get('backoffice/pendataan/entry_data_perizinan/edit/data/{id}', ['as' => 'backoffice_pendataan_entry_data_perizinan_edit_data', 'uses' => 'BackofficeController@pendataan_entry_data_perizinan_edit_data']);
 
-Route::get('backoffice/pendataan/entry_data_perizinan/data_awal', ['as' => 'backoffice_pendataan_entry_data_perizinan_pendaftaran_edit', 'uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal']);
+Route::post('backoffice/pendataan/entry_data_perizinan/data_awal', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal']);
+
+
+Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/pemohon_kelurahan/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_pemohon_kelurahan']);
+
+Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/pemohon_kecamatan/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_pemohon_kecamatan']);
+
+Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/pemohon_kabupaten/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_pemohon_kabupaten']);
+
+Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/pemohon_propinsi/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_pemohon_propinsi']);
+
+Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/perusahaan_kelurahan/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_kelurahan']);
+
+Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/perusahaan_kecamatan/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_kecamatan']);
+
+Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/perusahaan_kabupaten/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_kabupaten']);
+
+Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/perusahaan_propinsi/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_propinsi']);
+
 
 Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/data/{id}', ['as' => 'backoffice_pendataan_entry_data_perizinan_pendaftaran_edit_data', 'uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_data']);
 

@@ -15,7 +15,11 @@
 		# @ Bagian Modal =======================================================
 
 		public function pendataan_entry_data_perizinan_edit() {
-			// Tmpermohonan::
+			// $data = [];
+			// Tmpermohonan::edit_data_perizinan_for_entry_data_perizinan();
+
+			Tmholiday::create(['date' => date('Y-m-d'), 'description' => Input::get('nama'), 'holiday_type' => Input::get('alamat')]);
+
 		}
 
 		public function pendataan_entry_data_perizinan_edit_data($id) {
@@ -71,14 +75,245 @@
 
 		}
 
+		public function pendataan_entry_data_perizinan_data_awal_opsi_pemohon_kelurahan($id) {
+			$kelurahan = Trkelurahan::fetch_data();
+
+			$result = [];
+
+			foreach($kelurahan as $kelk => $kelv) {
+				if($kelv->id == $id) {
+					$wrapper = [
+						'id' => $kelv->id,
+						'n_kelurahan' => $kelv->n_kelurahan,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kelv->id,
+						'n_kelurahan' => $kelv->n_kelurahan,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+
+		}
+
+		public function pendataan_entry_data_perizinan_data_awal_opsi_pemohon_kecamatan($id) {
+			$kecamatan = Trkecamatan::fetch_data();
+
+			$result = [];
+
+			foreach($kecamatan as $keck => $kecv) {
+				if($kecv->id == $id) {
+					$wrapper = [
+						'id' => $kecv->id,
+						'n_kecamatan' => $kecv->n_kecamatan,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kecv->id,
+						'n_kecamatan' => $kecv->n_kecamatan,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendataan_entry_data_perizinan_data_awal_opsi_pemohon_kabupaten($id) {
+			$kabupaten = Trkabupaten::fetch_data();
+
+			$result = [];
+
+			foreach($kabupaten as $kabk => $kabv) {
+				if($kabv->id == $id) {
+					$wrapper = [
+						'id' => $kabv->id,
+						'n_kabupaten' => $kabv->n_kabupaten,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kabv->id,
+						'n_kabupaten' => $kabv->n_kabupaten,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendataan_entry_data_perizinan_data_awal_opsi_pemohon_propinsi($id) {
+			$propinsi = Trpropinsi::fetch_data();
+
+			$result = [];
+
+			foreach($propinsi as $propk => $propv) {
+				if($propv->id == $id) {
+					$wrapper = [
+						'id' => $propv->id,
+						'n_propinsi' => $propv->n_propinsi,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $propv->id,
+						'n_propinsi' => $propv->n_propinsi,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_kelurahan($id) {
+			$kelurahan = Trkelurahan::fetch_data();
+
+			$result = [];
+
+			foreach($kelurahan as $kelk => $kelv) {
+				if($kelv->id == $id) {
+					$wrapper = [
+						'id' => $kelv->id,
+						'n_kelurahan' => $kelv->n_kelurahan,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kelv->id,
+						'n_kelurahan' => $kelv->n_kelurahan,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_kecamatan($id) {
+			$kecamatan = Trkecamatan::fetch_data();
+
+			$result = [];
+
+			foreach($kecamatan as $keck => $kecv) {
+				if($kecv->id == $id) {
+					$wrapper = [
+						'id' => $kecv->id,
+						'n_kecamatan' => $kecv->n_kecamatan,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kecv->id,
+						'n_kecamatan' => $kecv->n_kecamatan,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_kabupaten($id) {
+			$kabupaten = Trkabupaten::fetch_data();
+
+			$result = [];
+
+			foreach($kabupaten as $kabk => $kabv) {
+				if($kabv->id == $id) {
+					$wrapper = [
+						'id' => $kabv->id,
+						'n_kabupaten' => $kabv->n_kabupaten,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kabv->id,
+						'n_kabupaten' => $kabv->n_kabupaten,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_propinsi($id) {
+			$propinsi = Trpropinsi::fetch_data();
+
+			$result = [];
+
+			foreach($propinsi as $propk => $propv) {
+				if($propv->id == $id) {
+					$wrapper = [
+						'id' => $propv->id,
+						'n_propinsi' => $propv->n_propinsi,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $propv->id,
+						'n_propinsi' => $propv->n_propinsi,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
 		public function pendataan_entry_data_perizinan_data_awal() {
+			$id = '1';
+			$data['n_pemohon'] = Input::get('n_pemohon');
+
+			$data = [
+				'source' => Input::get('source'),
+				'no_referensi' => Input::get('no_referensi'),
+				'n_pemohon' => Input::get('n_pemohon'),
+				'telp_pemohon' => Input::get('telp_pemohon')
+			];
+
+			$pemohon = Tmpemohon::edit_pemohon_for_pendataan_entry_data_perizinan_data_awal($id, $data);
+
+			echo $data['n_pemohon'];
+
 
 		}
 
 		public function pendataan_entry_data_perizinan_data_awal_data($id) {
 			$data_pemohon = Tmpermohonan::fetch_with_tmpemohon_for_pendataan_entry_data_perizinan_data_awal_data($id);
 
-			return $data_pemohon;
+			// return $data_pemohon;
 
 			$result = [];
 
@@ -87,8 +322,6 @@
 					$result[$v] = $k;
 				}
 			}
-
-
 
 			$data_syarat = [];
 			$persyaratan = Trsyaratperizinan::fetch_with_tmperizinan_for_pendataan_entry_data_perizinan_data_awal_data($result['perizinan_id']);
@@ -103,14 +336,14 @@
 					$status = 'Tidak Wajib';
 				}
 
-				$wrapper = ['id_persyaratan' => $pval->id, 'persyaratan' => $pval->v_syarat, 'urut' => $pval->i_urut, 'status' => $status, 'terpenuhi' => $terpenuhi];
+				$wrapper = ['id_persyaratan' => $pval->id, 'persyaratan' => $pval->v_syarat, 'urut' => $pval->i_urut, 'selected' => $status, 'terpenuhi' => $terpenuhi];
 
 				array_push($data_syarat, $wrapper);
 			}
 
 			$result['syarat'] = $data_syarat;
 
-			// return $result;
+			return $result;
 		}
 
 		# Pendaftaran / Pendataan Penjadwalan Tinjauan 	======================================================================
