@@ -74,12 +74,15 @@
                             <div class="tab-content-form">
                                 <div class="content-form-label">Sumber Identitas</div>
                                 <div class="content-form-input">
-                                    <select ng-model="entry_data_perizinan_data_awal_data.source" ng-options="item.source for item in items"></select>
-                                    <!-- <select ng-model="entry_data_perizinan_data_awal_data.source" ng-options="item.Title for item in items track by item.ID"> -->
+                                    <select name="source" >
+                                        <option ng-repeat="a in items"  ng-if="a.selected == true" selected value="@{{ a.source }}" >@{{ a.Title }} @{{ a.selected }}</option>
+                                        <option ng-repeat="a in items"  ng-if="a.selected == false" value="@{{ a.source }}" >@{{ a.Title }} @{{ a.selected }}</option>
                                     </select>
+                                    <!-- <select ng-model="entry_data_perizinan_data_awal_data.source" ng-options="item.Title for item in items track by item.ID"> -->
 
-                                    <input ng-model="entry_data_perizinan_data_awal_data.source">
-                                    @{{ entry_data_perizinan_data_awal_data.source }}
+
+                                    <input ng-model="entry_data_perizinan_data_awal_data.source.source">
+                                    @{{ entry_data_perizinan_data_awal_data.source.source }}
 
                                 </div>
                             </div>
@@ -97,29 +100,35 @@
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Tanggal Terima Berkas</div>
-                                <div class="content-form-input"><input type="text" value="@{{ entry_data_perizinan_data_awal_data.d_terima_berkas }}" /></div>
+                                <div class="content-form-input"><input type="text" name="d_terima_berkas" value="@{{ entry_data_perizinan_data_awal_data.d_terima_berkas }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Tanggal Peninjauan</div>
-                                <div class="content-form-input"><input type="text" value="@{{ entry_data_perizinan_data_awal_data.d_survey }}" /></div>
+                                <div class="content-form-input"><input type="text" name="d_survey" value="@{{ entry_data_perizinan_data_awal_data.d_survey }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Lokasi Izin</div>
                                 <div class="content-form-input">
-                                    <textarea rows="4">@{{ entry_data_perizinan_data_awal_data.a_izin }}</textarea>
+                                    <textarea name="a_izin" rows="4">@{{ entry_data_perizinan_data_awal_data.a_izin }}</textarea>
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Keterangan</div>
                                 <div class="content-form-input">
-                                    <textarea rows="4">@{{ entry_data_perizinan_data_awal_data.keterangan }}</textarea>
+                                    <textarea name="keterangan" rows="4">@{{ entry_data_perizinan_data_awal_data.keterangan }}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-content-right">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Propinsi</div>
-                                <div class="content-form-input">@{{ entry_data_perizinan_data_awal_data.propinsi_pemohon }}</div>
+                                <!-- <div class="content-form-input">@{{ entry_data_perizinan_data_awal_data.propinsi_pemohon }}</div> -->
+                                <div class="content-form-input">
+                                    <select name="propinsi_pemohon">
+                                        <option ng-repeat="a in opsi_prop_pemohon"  ng-if="a.selected == true" selected value="@{{ a.id }}" >@{{ a.n_propinsi }} @{{ a.selected }}</option>
+                                        <option ng-repeat="a in opsi_prop_pemohon"  ng-if="a.selected == false" value="@{{ a.id }}" >@{{ a.n_propinsi }} @{{ a.selected }}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kabupaten</div>
@@ -181,7 +190,12 @@
                         <div class="tab-content-right">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Propinsi</div>
-                                <div class="content-form-input">@{{ entry_data_perizinan_data_awal_data.propinsi_perusahaan }}</div>
+                                <div class="content-form-input">
+                                    <!-- @{{ data_propinsi_test(entry_data_perizinan_data_awal_data.propinsi_perusahaan) }} -->
+                                    <!-- @{{ entry_data_perizinan_data_awal_data.propinsi_perusahaan }} -->
+
+                                    <select></select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kabupaten</div>

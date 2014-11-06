@@ -4,7 +4,7 @@
 
 		protected $table = 'trkabupaten';
 
-		public static function fetch_data($data) {
+		public static function fetch_data($data = null) {
 			return Trkabupaten::get($data);
 		}
 
