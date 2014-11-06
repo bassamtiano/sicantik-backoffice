@@ -55,6 +55,110 @@
 			->select(['v_prosentase_retribusi'])
 			->get();
 		}
+public static function fetch_trperizinan_for_rekapitulasi_pendaftaran($id, $date_start, $date_finish){
+			if (!empty($date_start) && !empty($date_finish) && !empty($id)) {
+			return DB::table('trperizinan')
+			->join('tmpermohonan_trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
+			->join('tmpermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->join('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
+			->join('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+			->where('trstspermohonan.id','!=', 1)
+			->whereBetween('tmpermohonan.d_terima_berkas', [$date_start, $date_finish])
+			->where('trperizinan.id', '=', $id)
+			->select(DB::raw('count(tmpermohonan.id) as total_perizinan'))
+			->get();
+			}
+			else {
+			return DB::table('trperizinan')
+			->join('tmpermohonan_trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
+			->join('tmpermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->join('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
+			->join('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+			->where('trstspermohonan.id','!=', 1)
+			->select(DB::raw('count(tmpermohonan.id) as total_perizinan'))
+			->get();
+			}
+		}
+
+		public static function fetch_with_trperizinan_trstspermohonan_for_rekapitulasi_pendaftaran_detail($id, $date_start, $date_finish){
+			return DB::table('trperizinan')
+			->join('tmpermohonan_trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
+			->join('tmpermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+
+			->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+			->join('tmpemohon', 'tmpemohon.id', '=', 'tmpemohon_tmpermohonan.tmpemohon_id')
+
+			->leftjoin('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
+			->leftjoin('tmperusahaan', 'tmperusahaan.id', '=', 'tmpermohonan_tmperusahaan.tmperusahaan_id')
+
+			->join('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
+			->join('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+			
+			->where('trstspermohonan.id','!=', 1)
+			->whereBetween('tmpermohonan.d_terima_berkas', [$date_start, $date_finish])
+			->where('trperizinan.id', '=', $id)
+			->select(['tmpemohon.n_pemohon','tmpermohonan.pendaftaran_id','tmpermohonan.d_terima_berkas','trstspermohonan.n_sts_permohonan', 'trperizinan.n_perizinan', 'tmperusahaan.n_perusahaan'])
+			->get();
+		}
+
+public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($id,$date_start,$date_finish){
+				return DB::table('trperizinan')
+			->join('tmpermohonan_trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
+			->join('tmpermohonan','tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+
+			->join('tmbap_tmpermohonan', 'tmpermohonan.id', '=', 'tmbap_tmpermohonan.tmpermohonan_id')
+			->join('tmbap', 'tmbap.id', '=', 'tmbap_tmpermohonan.tmbap_id')
+
+			//->join('tmkeringananretribusi_tmpermohonan', 'tmpermohonan.id', '=', 'tmkeringananretribusi_tmpermohonan.tmpermohonan_id')
+			//->join('tmkeringananretribusi','tmkeringananretribusi.id','=','tmkeringananretribusi_tmpermohonan.tmkeringananretribusi_id')
+
+			->where('tmbap.c_penetapan', '=' ,1)
+			->where('tmbap.status_bap','=',1)
+			->whereBetween('tmpermohonan.d_terima_berkas',[$date_start,$date_finish])
+			->where('trperizinan.id','=',$id)
+			->select(DB::raw('round(sum(tmbap.nilai_retribusi)) as bayar,count(tmpermohonan.id) as izin_jadi'))
+			->get();			
+		}
+
+		public static function fetch_with_tmpermohonan_trperizinan_bayar_for_rekapitulasi_retribusi($id,$date_start,$date_finish){
+			if (!empty($date_start) && !empty($date_finish) && !empty($id)){
+			return DB::table('trperizinan')
+			->join('tmpermohonan_trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
+			->join('tmpermohonan','tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+
+			->join('tmbap_tmpermohonan', 'tmpermohonan.id', '=', 'tmbap_tmpermohonan.tmpermohonan_id')
+			->join('tmbap', 'tmbap.id', '=', 'tmbap_tmpermohonan.tmbap_id')
+
+			//->join('tmkeringananretribusi_tmpermohonan', 'tmpermohonan.id', '=', 'tmkeringananretribusi_tmpermohonan.tmpermohonan_id')
+			//->join('tmkeringananretribusi','tmkeringananretribusi.id','=','tmkeringananretribusi_tmpermohonan.tmkeringananretribusi_id')
+
+			->where('tmbap.c_penetapan', '=' ,1)
+			->where('tmbap.status_bap','=',1)
+			->whereBetween('tmpermohonan.d_terima_berkas',[$date_start,$date_finish])
+			->where('trperizinan.id','=',$id)
+			->where('tmpermohonan.c_status_bayar','=',1)
+			->select(DB::raw('sum(ifnull(tmbap.nilai_retribusi,0)) as retribusi'))
+			->get();
+			}
+			else{
+			return DB::table('trperizinan')
+			->join('tmpermohonan_trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
+			->join('tmpermohonan','tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+
+			->join('tmbap_tmpermohonan', 'tmpermohonan.id', '=', 'tmbap_tmpermohonan.tmpermohonan_id')
+			->join('tmbap', 'tmbap.id', '=', 'tmbap_tmpermohonan.tmbap_id')
+
+			//->join('tmkeringananretribusi_tmpermohonan', 'tmpermohonan.id', '=', 'tmkeringananretribusi_tmpermohonan.tmpermohonan_id')
+			//->join('tmkeringananretribusi','tmkeringananretribusi.id','=','tmkeringananretribusi_tmpermohonan.tmkeringananretribusi_id')
+
+			->where('tmbap.c_penetapan', '=' ,1)
+			->where('tmbap.status_bap','=',1)
+			->where('tmpermohonan.c_status_bayar','=',1)
+			->select(DB::raw('sum(ifnull(tmbap.nilai_retribusi,0)) as retribusi'))
+			->get();
+			}
+		
+		}
 
 		public static function fetch_with_tmpemohon_trperizinan_tmperusahaan_for_rekapitulasi_tinjauan_lapangan($tanggal_awal, $tanggal_akhir) {
 			if(!empty($tanggal_awal) && !empty($tanggal_akhir)) {
@@ -63,18 +167,18 @@
 				->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
 				->join('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
 
-				->join('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
-				->join('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+				->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+				->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
 
-				->join('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
-				->join('tmperusahaan', 'tmpermohonan_tmperusahaan.tmperusahaan_id', '=', 'tmperusahaan.id')
+				->leftjoin('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
+				->leftjoin('tmperusahaan', 'tmpermohonan_tmperusahaan.tmperusahaan_id', '=', 'tmperusahaan.id')
 
 				->where('tmpermohonan.c_pendaftaran', '=', '1')
 				->where('tmpermohonan.c_tinjauan', '=', '1')
 				->where('tmpermohonan.c_izin_dicabut', '=', '0')
 				->where('tmpermohonan.c_izin_selesai', '=', '0')
 				->whereBetween('tmpermohonan.d_terima_berkas', [$tanggal_awal, $tanggal_akhir])
-
+				->orderBy('tmpermohonan.id', 'desc')
 				->select(['tmpermohonan.pendaftaran_id', 'tmpermohonan.d_terima_berkas', 'tmpermohonan.d_survey', 'tmpemohon.n_pemohon', 'tmpemohon.a_pemohon', 'trperizinan.n_perizinan', 'tmperusahaan.n_perusahaan', 'tmpermohonan.a_izin'])
 				->get();
 
@@ -228,7 +332,7 @@
 				->where('tmpermohonan.c_izin_dicabut', '=', 0)
 				->whereBetween('tmpermohonan.d_terima_berkas', [$tanggal_awal, $tanggal_akhir])
 
-				->select(['tmpermohonan.pendaftaran_id', 'desc'])
+				->orderBy('tmpermohonan.id','desc')
 
 				->select(['tmpermohonan.pendaftaran_id', 'tmpermohonan.d_survey as tanggal_peninjauan', 'tmsk.tgl_surat as tanggal_penetapan', 'tmpemohon.n_pemohon', 'tmpemohon.a_pemohon', 'tmperusahaan.n_perusahaan', 'tmpermohonan.a_izin', 'tmsk.c_cetak', 'trperizinan.n_perizinan'])
 				->get();
@@ -257,7 +361,7 @@
 				->where('tmbap.status_bap', '=', 1)
 				->where('tmpermohonan.c_izin_dicabut', '=', 0)
 
-				->select(['tmpermohonan.pendaftaran_id', 'desc'])
+				->orderBy('tmpermohonan.id', 'desc')
 
 				->select(['tmpermohonan.pendaftaran_id', 'tmpermohonan.d_survey as tanggal_peninjauan', 'tmsk.tgl_surat as tanggal_penetapan', 'tmpemohon.n_pemohon', 'tmpemohon.a_pemohon', 'tmperusahaan.n_perusahaan', 'tmpermohonan.a_izin', 'tmsk.c_cetak', 'trperizinan.n_perizinan'])
 				->get();
