@@ -14,6 +14,10 @@
 			return Trperizinan::get($column);
 		}
 
+		public static function fetch_data_opsi() {
+			return Trperizinan::select('id', 'n_perizinan')
+			->get();
+		}
 
 
 		# Modul Reporting ==========================================================================================================================================================================================
@@ -64,16 +68,19 @@
 
 		}
 
-		public static function fetch_with_tmpermohon_for_rekapitulasi_retribusi() {
+		public static function fetch_with_trkelompok_perizinan_for_rekapitulasi_retribusi() {
 			return DB::table('trperizinan')
 
-			->leftjoin('tmpermohonan_trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
-			->leftjoin('tmpermohonan', 'tmpermohonan_trperizinan.tmpermohonan_id', '=', 'tmpermohonan.id')
+			->join('trkelompok_perizinan_trperizinan','trperizinan.id', '=', 'trkelompok_perizinan_trperizinan.trperizinan_id')
+			->join('trkelompok_perizinan','trkelompok_perizinan_trperizinan.trkelompok_perizinan_id', '=', 'trkelompok_perizinan.id')
+			
+			//->join('tmpermohonan_trperizinan', 'trperizinan.id','=','tmpermohonan_trperizinan.trperizinan_id')
+			//->join('tmpermohonan', 'tmpermohonan_trperizinan.tmpermohonan_id', '=' , 'tmpermohonan.id')
 
-			->leftjoin('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
-			->leftjoin('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+			->where('trkelompok_perizinan.id','=', 4)
+			->select(['trperizinan.n_perizinan','trperizinan.id'])
+			//->groupBy('trperizinan.id')
 
-			->select(['id', 'n_perizinan'])
 			->get();
 		}
 
