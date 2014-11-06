@@ -746,6 +746,30 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			->get(['tmpermohonan.pendaftaran_id','trperizinan.n_perizinan','trstspermohonan.n_sts_permohonan','trjenis_permohonan.n_permohonan','tmpemohon.n_pemohon','tmpermohonan.a_izin','tmpermohonan.id']);
 		}
 
+		public static function fetch_with_trperizinan_trjenis_permohonan_tmpermohonan_for_info_tracking_detail($permohonan_id){
+			return DB::table('tmpermohonan')
+			->join('tmpermohonan_trperizinan','tmpermohonan.id','=','tmpermohonan_trperizinan.tmpermohonan_id')
+			->join('trperizinan','tmpermohonan_trperizinan.trperizinan_id','=','trperizinan.id')
+			->join('tmpemohon_tmpermohonan','tmpermohonan.id','=','tmpemohon_tmpermohonan.tmpermohonan_id')
+			->join('tmpemohon','tmpemohon_tmpermohonan.tmpemohon_id','=','tmpemohon.id')
+			->join('tmpermohonan_trjenis_permohonan','tmpermohonan.id','=','tmpermohonan_trjenis_permohonan.tmpermohonan_id')
+			->join('trjenis_permohonan','tmpermohonan_trjenis_permohonan.trjenis_permohonan_id','=','trjenis_permohonan.id')
+			->where('tmpermohonan.id','=', $permohonan_id)
+			->get(['tmpermohonan.id as id_permohonan','tmpermohonan.pendaftaran_id','trperizinan.n_perizinan','tmpemohon.n_pemohon','trjenis_permohonan.n_permohonan','trperizinan.v_hari']);
+		}
+		
+		public static function fetch_with_tmpermohonan_trstspermohonan_for_informasi_tracking_detail($id){
+			return DB::table('tmpermohonan')
+			->join('tmpermohonan_tmtrackingperizinan','tmpermohonan.id','=', 'tmpermohonan_tmtrackingperizinan.tmpermohonan_id')
+			->join('tmtrackingperizinan','tmtrackingperizinan.id','=','tmpermohonan_tmtrackingperizinan.tmtrackingperizinan_id')
+
+			->join('tmtrackingperizinan_trstspermohonan','tmtrackingperizinan.id','=','tmtrackingperizinan_trstspermohonan.tmtrackingperizinan_id')
+			->join('trstspermohonan','trstspermohonan.id','=','tmtrackingperizinan_trstspermohonan.trstspermohonan_id')
+			->where('tmpermohonan.id','=', $id)
+			->select(DB::raw('trstspermohonan.id,trstspermohonan.n_sts_permohonan,tmtrackingperizinan.d_entry_awal,tmtrackingperizinan.d_entry,timediff(tmtrackingperizinan.d_entry,tmtrackingperizinan.d_entry_awal) as span'))
+			->get();
+		}
+
 		public static function fetch_with_trperizinan_trjenis_permohonan_tmpermohonan_for_customer_service_informasi_masa_berlaku(){
 			return DB::table('tmpermohonan')
 			->join('tmpermohonan_trperizinan','tmpermohonan.id','=','tmpermohonan_trperizinan.tmpermohonan_id')

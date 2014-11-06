@@ -110,7 +110,7 @@
 
 			$result['syarat'] = $data_syarat;
 
-			// return $result;
+		 return $result;
 		}
 
 		# Pendaftaran / Pendataan Penjadwalan Tinjauan 	======================================================================

@@ -42,22 +42,149 @@ function PelayananPendaftaranDataPerusahaanCtrl($scope, $http) {
 	});
 }
 
+
 function PelayananCustomerServiceInformasiPerizinanCtrl($scope, $http){
-	$http.get('informasi_perizinan/data').success(function(csip_data){
-		$scope.customer_service_informasi_perizinan_data = csip_data;
-	});
+	$scope.customer_service_informasi_perizinan_data = " ";
+	$scope.show_all = function(){
+		$http.get('informasi_perizinan/data').success(function(csip_data) {
+			$scope.customer_service_informasi_perizinan_data = csip_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.customer_service_informasi_perizinan_data;
+/* # Modal ==================================================================================================== */
+
+		/* Define Modal Name */
+
+		$scope.modal_cs_detail_perizinan = false;
+
+		/* Define Open & Close Handler */
+
+		$scope.open_modal = function(modal_name, id) {
+
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+
+		$scope.close_modal = function(modal_name) {
+			eval("$scope." + modal_name + "= false");
+		}
+
+		/*  Construct Modal Function */
+
+		$scope.modal_cs_detail_perizinan_data = function(id) {
+			$http.get('informasi_perizinan/detail/data/' + id).success(function(ipdd) {
+				$scope.informasi_perizinan_detail_data = ipdd;
+			});
+		}
+
+
+		/* Define Tab Name */
+
+		$scope.tab = [];
+
+		$scope.tab.informasi_perizinan_tab_detail_syarat = true;
+
+		$scope.show_tab = function(tab_name, button_id) {
+
+		$scope.tab.informasi_perizinan_tab_detail_syarat = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
 }
 
 function PelayananCustomerServiceInformasiTrackingCtrl($scope, $http){
-	$http.get('informasi_tracking/data').success(function(csit_data){
-		$scope.customer_service_informasi_tracking_data = csit_data;
-	});
+	$scope.show_all = function(){
+		$http.get('informasi_tracking/data').success(function(csit_data) {
+			$scope.customer_service_informasi_tracking_data = csit_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+/* # Modal ==================================================================================================== */
+
+		/* Define Modal Name */
+
+		$scope.modal_cs_detail_tracking = false;
+
+		/* Define Open & Close Handler */
+
+		$scope.open_modal = function(modal_name, id) {
+
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+
+		$scope.close_modal = function(modal_name) {
+			eval("$scope." + modal_name + "= false");
+		}
+
+		/*  Construct Modal Function */
+
+		$scope.modal_cs_detail_tracking_data = function(id) {
+			$http.get('informasi_tracking/detail/data/' + id).success(function(itdd) {
+				$scope.informasi_tracking_detail_data = itdd;
+			});
+
+
+		}
+
+
+		/* Define Tab Name */
+
+		$scope.tab = [];
+
+		$scope.tab.informasi_tracking_tab_detail_status_permohonan = true;
+
+		$scope.show_tab = function(tab_name, button_id) {
+
+		$scope.tab.informasi_tracking_tab_detail_status_permohonan = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
 }
 
 function PelayananCustomerServiceInformasiMasaBerlakuCtrl($scope, $http){
-	$http.get('informasi_masa_berlaku/data').success(function(csimb_data){
-		$scope.customer_service_informasi_masa_berlaku_data = csimb_data;
-	});
+	$scope.show_all = function(){
+		$http.get('informasi_masa_berlaku/data').success(function(csimb_data) {
+			$scope.customer_service_informasi_masa_berlaku_data = csimb_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
 }
 
 
