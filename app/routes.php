@@ -505,6 +505,8 @@ Route::get('pelayanan/customer_service/informasi_perizinan', array('as' => 'pela
 
 Route::get('pelayanan/customer_service/informasi_perizinan/data', array('as' => 'pelayanan_customer_service_informasi_perizinan_data', 'uses' => 'PelayananController@customer_service_informasi_perizinan_data'));
 
+Route::get('pelayanan/customer_service/informasi_perizinan/detail/data/{id}', array('as' => 'pelayanan_customer_service_informasi_perizinan_detail_data', 'uses' => 'PelayananController@customer_service_informasi_perizinan_detail'));
+
 # Customer Service / Simulasi Tarif Retribusi (Belum)
 
 Route::get('pelayanan/customer_service/simulasi_tarif_retribusi', array('as' => 'pelayanan_customer_service_simuasi_tarif_retribusi', 'uses' => 'PelayananController@customer_service_simulasi_tarif_retribusi'));
@@ -517,6 +519,7 @@ Route::get('pelayanan/customer_service/informasi_tracking', array('as' => 'pelay
 
 Route::get('pelayanan/customer_service/informasi_tracking/data', array('as' => 'pelayanan_customer_service_informasi_tracking_data', 'uses' => 'PelayananController@customer_service_informasi_tracking_data'));
 
+Route::get('pelayanan/customer_service/informasi_tracking/detail/data/{id}' , array('as' => 'pelayanan_customer_service_informasi_tracking_detail_data', 'uses' => 'PelayananController@customer_service_informasi_tracking_detail_data'));
 # Customer Service / Informasi Masa Berlaku
 
 Route::get('pelayanan/customer_service/informasi_masa_berlaku', array('as' => 'pelayanan_customer_service_informasi_masa_berlaku', 'uses' => 'PelayananController@customer_service_informasi_masa_berlaku'));

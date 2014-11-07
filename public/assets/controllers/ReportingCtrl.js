@@ -47,6 +47,72 @@ function ReportingRealisasiPenerimaanCtrl($scope, $http) {
 
 }
 
+function ReportingRekapitulasiPendaftaranCtrl($scope, $http){
+	/* # Prepare Data ============================================================================================= */
+
+	$scope.reporting_rekapitulasi_pendaftaran = "";
+
+	$scope.show_all = function() {
+		$http.get('rekapitulasi_pendaftaran/data/0000-00-00/0000-00-00').success(function(rpd_data) {
+			$scope.reporting_rekapitulasi_pendaftaran = rpd_data;
+		});
+	}
+	$scope.show_all();
+	/* # Filter Data ============================================================================================== */
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+	
+	$scope.loadMore = function() {
+
+		$scope.displayed += fetch_limit;
+		$scope.sisa -= fetch_limit;
+	}
+
+	$scope.reporting_rekapitulasi_pendaftaran;
+
+	/* # Submit =================================================================================================== */
+	$scope.filter_date = function() {
+		$http.get('rekapitulasi_pendaftaran/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(rpd_data) {
+			$scope.reporting_rekapitulasi_pendaftaran = rpd_data;
+		});
+	}
+}
+
+function ReportingRekapitulasiRetribusiCtrl($scope, $http){
+	/* # Prepare Data ============================================================================================= */
+
+	$scope.reporting_rekapitulasi_retribusi = "";
+
+	$scope.show_all = function() {
+		$http.get('rekapitulasi_retribusi/data/0000-00-00/0000-00-00').success(function(rrt_data) {
+			$scope.reporting_rekapitulasi_retribusi = rrt_data;
+		});
+	}
+	$scope.show_all();
+	/* # Filter Data ============================================================================================== */
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+	
+	$scope.loadMore = function() {
+
+		$scope.displayed += fetch_limit;
+		$scope.sisa -= fetch_limit;
+	}
+
+	$scope.reporting_rekapitulasi_retribusi;
+
+	/* # Submit =================================================================================================== */
+	$scope.filter_date = function() {
+		$http.get('rekapitulasi_retribusi/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(rpd_data) {
+			$scope.reporting_rekapitulasi_retribusi = rpd_data;
+		});
+	}
+}
+
 
 function RekapitulasiTinjauanLapanganCtrl($http, $scope) {
 
@@ -125,7 +191,6 @@ function ReportingBerkasKembaliCtrl($http, $scope) {
 			$scope.rekapitulasi_tinjauan_lapangan_data = rtld;
 		});
 	}
-
 }
 
 function ReportingRekapitulasiIzinTercetakCtrl($http, $scope) {

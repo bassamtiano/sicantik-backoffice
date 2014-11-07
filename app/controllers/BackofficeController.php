@@ -343,7 +343,11 @@
 
 			$result['syarat'] = $data_syarat;
 
+<<<<<<< HEAD
 			return $result;
+=======
+		 return $result;
+>>>>>>> pr/2
 		}
 
 		# Pendaftaran / Pendataan Penjadwalan Tinjauan 	======================================================================
