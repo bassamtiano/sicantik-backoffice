@@ -78,6 +78,8 @@ Route::get('reporting/rekapitulasi_pendaftaran/data/detail/{id}/{date_start}/{da
 
 Route::get('reporting/rekapitulasi_perizinan', ['as' => 'reporting_rekapitulasi_perizinan', 'uses' => 'ReportingController@rekapitulasi_perizinan']);
 
+Route::get('reporting/rekapitulasi_perizinan/data', ['as' => 'reporting_rekapitulasi_perizinan_data', 'uses' => 'ReportingController@rekapitulasi_perizinan_data']);
+
 Route::get('reporting/rekapitulasi_perizinan/data/{date_start}/{date_finish}', ['as' => 'reporting_rekapitulasi_perizinan_data', 'uses' => 'ReportingController@rekapitulasi_perizinan_data']);
 
 Route::get('reporting/rekapitulasi_perizinan/cetak', ['as' => 'reporting_rekapitulasi_perizinan_cetak', 'uses' => 'ReportingController@rekapitulasi_perizinan_cetak']);
