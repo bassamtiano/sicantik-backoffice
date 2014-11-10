@@ -1,61 +1,276 @@
-angular.module('sicantik_backoffice', []);
+$app = angular.module('sicantik_backoffice', []);
+
+var fetch_limit = 100;
 ////////////////////////////////////KONFIGURASI START//////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////SETTING PERIZINAN/////////////////////
 function KonfigurasiSettingPerizinanJenisPerizinanCtrl($scope, $http) {
-	$http.get('jenis_perizinan/data').success(function(spjp_data) {
-		$scope.setting_perizinan_jenis_perizinan_data = spjp_data;
-	});
+	/* # Prepare Data ============================================================================================= */
+	$scope.show_all = function(){
+		$http.get('jenis_perizinan/data').success(function(spjp_data) {
+			$scope.setting_perizinan_jenis_perizinan_data = spjp_data;
+		});
+	}
 
+	$scope.opsi_kelompok = function(){ 
+		$http.get('jenis_perizinan/opsi_kelompok').success(function(jpok_data) { 
+			$scope.jenis_perizinan_opsi_kelompok = jpok_data;
+		});
+	}
+
+	$scope.opsi_unitkerja = function(){ 
+		$http.get('jenis_perizinan/opsi_unitkerja').success(function(jpou_data) { 
+			$scope.jenis_perizinan_opsi_unitkerja = jpou_data;
+		});
+	}
+
+	$scope.opsi_kelompok();
+	$scope.opsi_unitkerja();
+
+	$scope.show_all();
+
+	/* # Filter Data ============================================================================================== */
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_perizinan_jenis_perizinan_data;
+
+	/* # Modal ==================================================================================================== */
+
+	/* Define Modal Name */
+
+	$scope.modal_tambah = false;
 	$scope.modal_edit = false;
-	$scope.modal_delete = false;
 
-	$scope.open_modal = function(modal_name) {
+	/* Define Open & Close Handler */
+
+	$scope.open_modal = function(modal_name, id) {
+
 		eval("$scope." + modal_name + "= true");
+		eval("$scope." + modal_name + "_data(" + id + ")");
 	}
 
 	$scope.close_modal = function(modal_name) {
 		eval("$scope." + modal_name + "= false");
 	}
 
+	/*  Construct Modal Function */
+
+	// $scope.modal_data_awal_data = function(id) {
+	// 	$http.get('entry_data_perizinan/data_awal/data/' + id).success(function(edpdad) {
+	// 		$scope.entry_data_perizinan_data_awal_data = edpdad;
+	// 	});
+	// }
+
+	$scope.modal_edit_data = function(id) {
+		$http.get('jenis_perizinan/edit/data/' + id).success(function(jped) {
+			$scope.jenis_perizinan_edit_data = jped;
+		});
+	}
+
+	/* Define Tab Name */
+
+	$scope.tab = [];
+
+	$scope.tab.tambah_data_jenis_perizinan = true;
+	$scope.tab.edit_data_jenis_perizinan = true;
+
+	$scope.show_tab = function(tab_name, button_id) {
+
+		$scope.tab.tambah_data_jenis_perizinan = false;
+		$scope.tab.edit_data_jenis_perizinan = false;
+
+		eval('$scope.' + tab_name + "= true");
+
+		$('.tab-nav-item').removeClass('enable');
+		$('#' + button_id).addClass('enable');
+
+	}
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('jenis_perizinan/data/' + $scope.konfigurasi_id).success(function(spjp_data){
+			$scope.setting_perizinan_jenis_perizinan_data = spjp_data;
+		});
+	}
+
+	$scope.modal_tambah_submit = function() {
+
+	}
+
+	$scope.modal_edit_submit = function() {
+
+	}
+
 }
 
 function KonfigurasiSettingPerizinanPerizinanParalelCtrl($scope, $http) {
-	$http.get('perizinan_paralel/data').success(function(sppp_data) {
-		$scope.setting_perizinan_perizinan_paralel_data = sppp_data;
-	});
+	
+	$scope.show_all = function(){
+		$http.get('perizinan_paralel/data').success(function(sppp_data) {
+			$scope.setting_perizinan_perizinan_paralel_data = sppp_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_perizinan_perizinan_paralel_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('perizinan_paralel/data/' + $scope.konfigurasi_id).success(function(sppp_data){
+			$scope.setting_perizinan_perizinan_paralel_data = sppp_data;
+		});
+	}
 }
 
 function KonfigurasiSettingPerizinanPersyaratanIzinCtrl($scope, $http) {
-	$http.get('persyaratan_izin/data').success(function(sppi_data) {
-		$scope.setting_perizinan_persyaratan_izin_data = sppi_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('persyaratan_izin/data').success(function(sppi_data) {
+			$scope.setting_perizinan_persyaratan_izin_data = sppi_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_perizinan_persyaratan_izin_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('persyaratan_izin/data/' + $scope.konfigurasi_id).success(function(sppi_data){
+			$scope.setting_perizinan_persyaratan_izin_data = sppi_data;
+		});
+	}
 }
 
 function KonfigurasiSettingPerizinanPropertyPendataanCtrl($scope, $http) {
-	$http.get('property_pendataan/data').success(function(sppp_data) {
-		$scope.setting_perizinan_property_pendataan_data = sppp_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('property_pendataan/data').success(function(sppp_data) {
+			$scope.setting_perizinan_property_pendataan_data = sppp_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_perizinan_property_pendataan_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('property_pendataan/data/' + $scope.konfigurasi_id).success(function(sppp_data){
+			$scope.setting_perizinan_property_pendataan_data = sppp_data;
+		});
+	}
 }
 
 function KonfigurasiSettingPerizinanNilaiRetribusiCtrl($scope, $http) {
-	$http.get('nilai_retribusi/data').success(function(spnr_data) {
-		$scope.setting_perizinan_nilai_retribusi_data = spnr_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('nilai_retribusi/data').success(function(spnr_data) {
+			$scope.setting_perizinan_nilai_retribusi_data = spnr_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_perizinan_nilai_retribusi_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('property_pendataan/data/' + $scope.konfigurasi_id).success(function(sppp_data){
+			$scope.setting_perizinan_nilai_retribusi_data = sppp_data;
+		});
+	}
 }
 
 function KonfigurasiSettingPerizinanKoefisienTarifCtrl($scope, $http) {
-	$http.get('koefisein_tarif/data').success(function(spkt_data) {
-		$scope.setting_perizinan_koefisien_tarif_data = spkt_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('koefisien_tarif/data').success(function(spkt_data) {
+			$scope.setting_perizinan_koefisien_tarif_data = spkt_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_perizinan_koefisien_tarif_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('koefisien_tarif/data/' + $scope.konfigurasi_id).success(function(spkt_data){
+			$scope.setting_perizinan_koefisien_tarif_data = spkt_data;
+		});
+	}
 }
 
 ///////////////////////////////////SETTING UMUM/////////////////////////////////////////
 function KonfigurasiSettingUmumHariLiburCtrl($scope, $http){
-	$http.get('hari_libur/data').success(function(suhl_data){
-		$scope.setting_umum_hari_libur = suhl_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('hari_libur/data').success(function(suhl_data){
+			$scope.setting_umum_hari_libur_data = suhl_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_umum_hari_libur_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('hari_libur/data/' + $scope.konfigurasi_id).success(function(suhl_data){
+			$scope.setting_umum_hari_libur_data = suhl_data;
+		});
+	}
 }
 
 function KonfigurasiSettingUmumInstansiCtrl($scope, $http) {
@@ -67,46 +282,193 @@ function KonfigurasiSettingUmumInstansiCtrl($scope, $http) {
 
 //////////////////////////////SETTING USER///////////////////////////////////////
 function KonfigurasiSettingUserPegawaiCtrl($scope, $http){
-	$http.get('pegawai/data').success(function(susp_data){
-		$scope.setting_user_pegawai = susp_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('pegawai/data').success(function(sup_data){
+			$scope.setting_user_pegawai_data = sup_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_user_pegawai_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('pegawai/data/' + $scope.konfigurasi_id).success(function(sup_data){
+			$scope.setting_user_pegawai_data = sup_data;
+		});
+	}
 }
 
 function KonfigurasiSetingUserUnitKerjaCtrl($scope, $http){
-	$http.get('unit_kerja/data').success(function(sukj_data){
-		$scope.setting_user_unit_kerja = sukj_data;
-	});
+	
+	$scope.show_all = function(){
+		$http.get('unit_kerja/data').success(function(suuk_data){
+			$scope.setting_user_unit_kerja_data = suuk_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_user_pegawai_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('unit_kerja/data/' + $scope.konfigurasi_id).success(function(suuk_data){
+			$scope.setting_user_unit_kerja_data = suuk_data;
+		});
+	}
 }
 
 function KonfigurasiSettingUserPenggunaCtrl($scope, $http){
-	$http.get('pengguna/data').success(function(sup_data){
-		$scope.setting_user_pengguna = sup_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('pengguna/data').success(function(sup_data){
+			$scope.setting_user_pengguna_data = sup_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_user_pegawai_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('pengguna/data/' + $scope.konfigurasi_id).success(function(sup_data){
+			$scope.setting_user_pengguna_data = sup_data;
+		});
+	}
 }
 
 /////////////////////////////////SETTING WILAYAH/////////////////////
-function KonfigurasiSettingWilayahKecamatanCtrl($scope, $http){
-	$http.get('kecamatan/data').success(function(swkc_data){
-		$scope.setting_wilayah_kecamatan = swkc_data;
-	});
-}
-
-function KonfigurasiSettingWilayahKelurahanCtrl($scope, $http){
-	$http.get('kelurahan/data').success(function(swkl_data){
-		$scope.setting_wilayah_kelurahan = swkl_data;
-	});
-}
-
 function KonfigurasiSettingWilayahPropinsi($scope, $http) {
-	$http.get('propinsi/data').success(function(swp_data) {
-		$scope.setting_wilayah_propinsi = swp_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('propinsi/data').success(function(swp_data) {
+			$scope.setting_wilayah_propinsi_data = swp_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_wilayah_propinsi_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('propinsi/data/' + $scope.konfigurasi_id).success(function(swp_data){
+			$scope.setting_wilayah_propinsi_data = swp_data;
+		});
+	}
 }
 
 function KonfigurasiSettingWilayahKabupaten($scope, $http) {
-	$http.get('kabupaten/data').success(function(swk_data) {
-		$scope.setting_wilayah_kabupaten = swk_data;
-	});
+
+	$scope.show_all = function(){
+		$http.get('kabupaten/data').success(function(swk_data) {
+			$scope.setting_wilayah_kabupaten_data = swk_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_wilayah_kabupaten_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('kabupaten/data/' + $scope.konfigurasi_id).success(function(swk_data){
+			$scope.setting_wilayah_kabupaten_data = swk_data;
+		});
+	}
+}
+
+function KonfigurasiSettingWilayahKecamatanCtrl($scope, $http){
+
+	$scope.show_all = function(){
+		$http.get('kecamatan/data').success(function(swkc_data){
+			$scope.setting_wilayah_kecamatan_data = swkc_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_wilayah_kecamatan_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('kecamatan/data/' + $scope.konfigurasi_id).success(function(swkc_data){
+			$scope.setting_wilayah_kecamatan_data = swkc_data;
+		});
+	}
+}
+
+function KonfigurasiSettingWilayahKelurahanCtrl($scope, $http){
+
+	$scope.show_all = function(){
+		$http.get('kelurahan/data').success(function(swkl_data){
+			$scope.setting_wilayah_kelurahan_data = swkl_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.setting_wilayah_kecamatan_data;
+
+	$scope.filter_konfigurasi = function(){
+		$http.get('kelurahan/data/' + $scope.konfigurasi_id).success(function(swkl_data){
+			$scope.setting_wilayah_kelurahan_data = swkl_data;
+		});
+	}
 }
 
 function KonfigurasiKeamananDataLogActivity($scope, $http) {

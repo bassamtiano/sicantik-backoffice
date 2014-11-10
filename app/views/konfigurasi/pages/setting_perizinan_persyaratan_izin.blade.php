@@ -24,7 +24,7 @@
 @stop
 
 @section('page_name')
-	Setting Perizinan / Persyaratan Izin
+	Konfigurasi / Setting Perizinan / Persyaratan Izin
 @stop
 
 @section('angular_controller_script')
@@ -40,16 +40,17 @@
 @stop
 
 @section('nav-menu-right')
-	<form>
+	<form ng-submit="filter_konfigurasi()">
 		<div class="table-form-content">
-			<div class="form-item">
-				&nbsp
+			<div class="form-item wide">
+				<select ng-model="opsi_cari" class="form-option">
+					<option value="$">Semua</option>
+					<option value="n_paralel">Jenis Perizinan Paralel</option>
+					<option value="jumlah_persyaratan">Jumlah Izin Terkait</option>
+				</select>
 			</div>
 			<div class="form-item wide">
-				<input type="text" placeholder="Search Key">
-			</div>
-			<div class="form-item">
-				<input type="submit" value="Search">
+				<input type="text" placeholder="Kata Kunci" ng-model="search[opsi_cari]">
 			</div>
 		</div>
 	</form>
@@ -60,8 +61,8 @@
 	<table>
 		<tr>
 			<th class="c_no">No</th>
-			<th class="c_jenis_perizinan_paralel">Jenis Perizinan Paralel</th>
-			<th class="c_jumlah_izin_terkait">Jumlah Izin Terkait</th>
+			<th class="c_jenis_perizinan_paralel" ng-click="predicate='n_perizinan'; reverse=!reverse">Jenis Perizinan Paralel</th>
+			<th class="c_jumlah_izin_terkait" ng-click="predicate='jumlah_persyaratan'; reverse=!reverse">Jumlah Izin Terkait</th>
 			<th class="c_aksi">Aksi</th>
 		</tr>
 	</table>
@@ -71,11 +72,16 @@
 @section('table_content')
 
 	<table role="table-fluid">
-		<tr ng-repeat="sppi in setting_perizinan_persyaratan_izin_data">
+		<tr ng-repeat="sppi in setting_perizinan_persyaratan_izin_data | orderBy:predicate:reverse | filter:search | limitTo:displayed">
 			<td class="c_no">@{{ $index+1 }}</td>
 			<td class="c_jenis_perizinan_paralel">@{{ sppi.n_perizinan }}</td>
 			<td class="c_jumlah_izin_terkait">@{{ sppi.jumlah_persyaratan }}</td>
 			<td class="c_aksi">Aksi</td>
+		</tr>
+		<tr>
+			<td colspan="8" style="text-align:center">
+				<button ng-click="loadMore()" class="btn-load-more">Load More</button>
+			</td>
 		</tr>
 	</table>
 
