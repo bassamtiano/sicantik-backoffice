@@ -120,7 +120,9 @@
 			<td class="c_tanggal_permohonan"> @{{ bppt.d_terima_berkas }} </td>
 			<td class="c_tanggal_peninjauan"> @{{ bppt.d_survey }} </td>
 			<td class="c_aksi">
-				<a href ng-click="open_modal('modal_edit', bppt.id)" class="row-item ya">Edit</a>
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_edit', bppt.id)" class="edit">Edit</a>
+				</span>
 			</td>
 		</tr>
 		<tr>

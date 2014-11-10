@@ -66,7 +66,7 @@ $app = angular.module('sicantik_backoffice', [])
 
 		$scope.opsi_pemohon_kelurahan = function(id) {
 			$http.get('entry_data_perizinan/data_awal/opsi/pemohon_kelurahan/' + id).success(function(kel_pemohon) {
-				$scope.opsi_ke_pemohon = kel_pemohon;
+				$scope.opsi_kel_pemohon = kel_pemohon;
 			});
 		}
 
@@ -86,32 +86,29 @@ $app = angular.module('sicantik_backoffice', [])
 			$http.get('entry_data_perizinan/data_awal/opsi/pemohon_propinsi/' + id).success(function(prop_pemohon) {
 				$scope.opsi_prop_pemohon = prop_pemohon;
 			});
-
-			
-
 		}
 
 		$scope.opsi_perusahaan_kelurahan = function(id) {
 			$http.get('entry_data_perizinan/data_awal/opsi/perusahaan_kelurahan/' + id).success(function(kel_perusahaan) {
-				$scope.backoffice_pendataan_entry_data_perizinan_data = kel_perusahaan;
+				$scope.opsi_kel_perusahaan = kel_perusahaan;
 			});
 		}
 
 		$scope.opsi_perusahaan_kecamatan = function(id) {
 			$http.get('entry_data_perizinan/data_awal/opsi/perusahaan_kecamatan/' + id).success(function(kec_perusahaan) {
-				$scope.backoffice_pendataan_entry_data_perizinan_data = kec_perusahaan;
+				$scope.opsi_kec_perusahaan = kec_perusahaan;
 			});
 		}
 
 		$scope.opsi_perusahaan_kabupaten = function(id) {
 			$http.get('entry_data_perizinan/data_awal/opsi/perusahaan_kabupaten/' + id).success(function(kab_perusahaan) {
-				$scope.backoffice_pendataan_entry_data_perizinan_data = kab_perusahaan;
+				$scope.opsi_kab_perusahaan = kab_perusahaan;
 			});
 		}
 
 		$scope.opsi_perusahaan_propinsi = function(id) {
 			$http.get('entry_data_perizinan/data_awal/opsi/perusahaan_propinsi/' + id).success(function(prop_perusahaan) {
-				$scope.backoffice_pendataan_entry_data_perizinan_data = prop_perusahaan;
+				$scope.opsi_prop_perusahaan = prop_perusahaan;
 			});
 		}
 
@@ -124,18 +121,17 @@ $app = angular.module('sicantik_backoffice', [])
 
 			$http.get('entry_data_perizinan/data_awal/data/' + id).success(function(edpdad) {
 				$scope.entry_data_perizinan_data_awal_data = edpdad;
-				test = edpdad;
 
-				$scope.opsi_pemohon_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_pemohon);
+				$scope.opsi_pemohon_propinsi($scope.entry_data_perizinan_data_awal_data.propinsi_pemohon);
 				$scope.opsi_pemohon_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_pemohon);
 				$scope.opsi_pemohon_kabupaten($scope.entry_data_perizinan_data_awal_data.kabupaten_pemohon);
-				$scope.opsi_pemohon_propinsi($scope.entry_data_perizinan_data_awal_data.propinsi_pemohon);
+				$scope.opsi_pemohon_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_pemohon);
 
-				$scope.opsi_perusahaan_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_perusahaan);
-				$scope.opsi_perusahaan_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_perusahaan);
-				$scope.opsi_perusahaan_kabupaten($scope.entry_data_perizinan_data_awal_data.kabupaten_perusahaan);
 				$scope.opsi_perusahaan_propinsi($scope.entry_data_perizinan_data_awal_data.propinsi_perusahaan);
-
+				$scope.opsi_perusahaan_kabupaten($scope.entry_data_perizinan_data_awal_data.kabupaten_perusahaan);
+				$scope.opsi_perusahaan_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_perusahaan);
+				$scope.opsi_perusahaan_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_perusahaan);
+				
 			});
 
 		}

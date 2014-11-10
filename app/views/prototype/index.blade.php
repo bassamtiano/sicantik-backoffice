@@ -46,6 +46,10 @@ function haiii(aww) {
     alert(aww);
 }
 
+function get_iframe() {
+    alert($('#target_post').contents().find('body').html());
+}
+
 </script>
 
 
@@ -73,7 +77,7 @@ function haiii(aww) {
             <!-- <input type="submit" onclick="haiii()"> -->
             <input type="submit">
         </form>
-
+        <button onclick="get_iframe()">Get Iframe</button>
         <iframe id="target_post" name="target_post" style="width:100; height:100; position:relative; background:#fff;"></iframe>
 
     </div>

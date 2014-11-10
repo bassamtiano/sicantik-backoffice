@@ -110,7 +110,12 @@
 					Tidak
 				</p>
 			</td>
-			<td class="c_aksi"><span class="button-group"><a href ng-click="open_modal('modal_edit')" class="row-item ya">Update</a><a href ng-click="open_modal('modal_delete')" class="row-item tidak">Delete</a></span></td>
+			<td class="c_aksi">
+				<span class="button-group group-2">
+					<a href ng-click="open_modal('modal_edit')" class="edit">Edit</a>
+					<a href ng-click="open_modal('modal_delete')" class="delete">Delete</a>
+				</span>
+			</td>
 		</tr>
 	</table>
 

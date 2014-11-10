@@ -74,16 +74,12 @@
                             <div class="tab-content-form">
                                 <div class="content-form-label">Sumber Identitas</div>
                                 <div class="content-form-input">
+
                                     <select name="source" >
-                                        <option ng-repeat="a in items"  ng-if="a.selected == true" selected value="@{{ a.source }}" >@{{ a.Title }} @{{ a.selected }}</option>
-                                        <option ng-repeat="a in items"  ng-if="a.selected == false" value="@{{ a.source }}" >@{{ a.Title }} @{{ a.selected }}</option>
+                                        <option ng-repeat="a in items"  ng-if="a.selected == true" selected value="@{{ a.source }}" >@{{ a.Title }}</option>
+                                        <option ng-repeat="a in items"  ng-if="a.selected == false" value="@{{ a.source }}" >@{{ a.Title }}</option>
                                     </select>
                                     <!-- <select ng-model="entry_data_perizinan_data_awal_data.source" ng-options="item.Title for item in items track by item.ID"> -->
-
-
-                                    <input ng-model="entry_data_perizinan_data_awal_data.source.source">
-                                    @{{ entry_data_perizinan_data_awal_data.source.source }}
-
                                 </div>
                             </div>
                             <div class="tab-content-form">
@@ -122,27 +118,45 @@
                         <div class="tab-content-right">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Propinsi</div>
+
                                 <!-- <div class="content-form-input">@{{ entry_data_perizinan_data_awal_data.propinsi_pemohon }}</div> -->
                                 <div class="content-form-input">
+                                    <!-- @{{ entry_data_perizinan_data_awal_data.propinsi_pemohon }} -->
                                     <select name="propinsi_pemohon">
-                                        <option ng-repeat="a in opsi_prop_pemohon"  ng-if="a.selected == true" selected value="@{{ a.id }}" >@{{ a.n_propinsi }} @{{ a.selected }}</option>
-                                        <option ng-repeat="a in opsi_prop_pemohon"  ng-if="a.selected == false" value="@{{ a.id }}" >@{{ a.n_propinsi }} @{{ a.selected }}</option>
+                                        <option ng-repeat="oprop_pemohon in opsi_prop_pemohon"  ng-if="oprop_pemohon.selected == true" selected value="@{{ oprop_pemohon.id }}" >@{{ oprop_pemohon.n_propinsi }}</option>
+                                        <option ng-repeat="oprop_pemohon in opsi_prop_pemohon"  ng-if="oprop_pemohon.selected == false" value="@{{ oprop_pemohon.id }}" >@{{ oprop_pemohon.n_propinsi }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kabupaten</div>
                                 <div class="content-form-input">
-                                    @{{ entry_data_perizinan_data_awal_data.kabupaten_pemohon }}
+                                    <!-- @{{ entry_data_perizinan_data_awal_data.kabupaten_pemohon }} -->
+                                    <select name="source" >
+                                        <option ng-repeat="okab_pemohon in opsi_kab_pemohon"  ng-if="okab_pemohon.selected == true" selected value="@{{ okab_pemohon.id }}" >@{{ okab_pemohon.n_kabupaten }}</option>
+                                        <option ng-repeat="okab_pemohon in opsi_kab_pemohon"  ng-if="okab_pemohon.selected == false" value="@{{ okab_pemohon.id }}" >@{{ okab_pemohon.n_kabupaten }}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kecamatan</div>
-                                <div class="content-form-input">@{{ entry_data_perizinan_data_awal_data.kecamatan_pemohon }}</div>
+                                <div class="content-form-input">
+                                    <!-- @{{ entry_data_perizinan_data_awal_data.kecamatan_pemohon }} -->
+                                    <select name="source" >
+                                        <option ng-repeat="okec_pemohon in opsi_kec_pemohon"  ng-if="okec_pemohon.selected == true" selected value="@{{ okec_pemohon.id }}" >@{{ okec_pemohon.n_kecamatan }}</option>
+                                        <option ng-repeat="okec_pemohon in opsi_kec_pemohon"  ng-if="okec_pemohon.selected == false" value="@{{ okec_pemohon.id }}" >@{{ okec_pemohon.n_kecamatan }}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kelurahan</div>
-                                <div class="content-form-input">@{{ entry_data_perizinan_data_awal_data.kelurahan_pemohon }}</div>
+                                <div class="content-form-input">
+                                    <!-- @{{ entry_data_perizinan_data_awal_data.kelurahan_pemohon }} -->
+                                    <select name="source" >
+                                        <option ng-repeat="okel_pemohon in opsi_kel_pemohon"  ng-if="okel_pemohon.selected == true" selected value="@{{ okel_pemohon.id }}" >@{{ okel_pemohon.n_kelurahan }}</option>
+                                        <option ng-repeat="okel_pemohon in opsi_kel_pemohon"  ng-if="okel_pemohon.selected == false" value="@{{ okel_pemohon.id }}" >@{{ okel_pemohon.n_kelurahan }}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Alamat Pemohon</div>
@@ -194,22 +208,41 @@
                                     <!-- @{{ data_propinsi_test(entry_data_perizinan_data_awal_data.propinsi_perusahaan) }} -->
                                     <!-- @{{ entry_data_perizinan_data_awal_data.propinsi_perusahaan }} -->
 
-                                    <select></select>
+                                    <select name="source" >
+                                        <option ng-repeat="oprop_perusahaan in opsi_prop_perusahaan"  ng-if="oprop_perusahaan.selected == true" selected value="@{{ oprop_perusahaan.id }}" >@{{ oprop_perusahaan.n_propinsi }}</option>
+                                        <option ng-repeat="oprop_perusahaan in opsi_prop_perusahaan"  ng-if="oprop_perusahaan.selected == false" value="@{{ oprop_perusahaan.id }}" >@{{ oprop_perusahaan.n_propinsi }}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kabupaten</div>
                                 <div class="content-form-input">
-                                    @{{ entry_data_perizinan_data_awal_data.kabupaten_perusahaan }}
+                                    <!-- @{{ entry_data_perizinan_data_awal_data.kabupaten_perusahaan }} -->
+                                    <select name="source" >
+                                        <option ng-repeat="okab_perusahaan in opsi_kab_perusahaan"  ng-if="okab_perusahaan.selected == true" selected value="@{{ okab_perusahaan.id }}" >@{{ okab_perusahaan.n_kabupaten }}</option>
+                                        <option ng-repeat="okab_perusahaan in opsi_kab_perusahaan"  ng-if="okab_perusahaan.selected == false" value="@{{ okab_perusahaan.id }}" >@{{ okab_perusahaan.n_kabupaten }}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kecamatan</div>
-                                <div class="content-form-input">@{{ entry_data_perizinan_data_awal_data.kecamatan_perusahaan }}</div>
+                                <div class="content-form-input">
+                                    <!-- @{{ entry_data_perizinan_data_awal_data.kecamatan_perusahaan }} -->
+                                    <select name="source" >
+                                        <option ng-repeat="okec_perusahaan in opsi_kec_perusahaan"  ng-if="okec_perusahaan.selected == true" selected value="@{{ okec_perusahaan.id }}" >@{{ okec_perusahaan.n_kecamatan }}</option>
+                                        <option ng-repeat="okec_perusahaan in opsi_kec_perusahaan"  ng-if="okec_perusahaan.selected == false" value="@{{ okec_perusahaan.id }}" >@{{ okec_perusahaan.n_kecamatan }}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kelurahan</div>
-                                <div class="content-form-input">@{{ entry_data_perizinan_data_awal_data.kelurahan_perusahaan }}</div>
+                                <div class="content-form-input">
+                                    <!-- @{{ entry_data_perizinan_data_awal_data.kelurahan_perusahaan }} -->
+                                    <select name="source" >
+                                        <option ng-repeat="okel_perusahaan in opsi_kel_perusahaan"  ng-if="okel_perusahaan.selected == true" selected value="@{{ okel_perusahaan.id }}" >@{{ okel_perusahaan.n_kelurahan }}</option>
+                                        <option ng-repeat="okel_perusahaan in opsi_kel_perusahaan"  ng-if="okel_perusahaan.selected == false" value="@{{ okel_perusahaan.id }}" >@{{ okel_perusahaan.n_kelurahan }}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Alamat Perusahaan</div>

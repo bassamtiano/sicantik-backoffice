@@ -12,9 +12,11 @@
 
             // echo '<p>' . Input::get('nama') . Input::get('alamat') . '</p>';
             // return '<p id="result">' . Input::get('nama') . Input::get('alamat') . '</p>';
-            echo "<script>";
-                echo "haiii('coba ah')";
-            echo "</script>";
+            // echo "<script>";
+            //     echo "haiii('coba ah')";
+            // echo "</script>";
+
+            return Input::get('nama');
         }
 
         public function load_file() {

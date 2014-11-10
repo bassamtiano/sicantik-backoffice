@@ -121,7 +121,9 @@
 			<td class="c_no_surat"> @{{ kpr.no_surat }} </td>
 			<td class="c_status">@{{ kpr.c_status_bayar }}</td>
 			<td class="c_aksi">
-				<a href ng-click="open_modal('modal_rincian', kpr.id)" class="edit">Rincian</a>
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_rincian', kpr.id)" class="edit">Rincian</a>
+				</span>
 			</td>
 		</tr>
 		<tr>
