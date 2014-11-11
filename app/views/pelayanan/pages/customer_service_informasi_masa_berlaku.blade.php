@@ -6,7 +6,7 @@
 			width: 3%;
 			text-align: center;
 		}
-		
+
 		.c_pendaftaran_id {
 			width: 10%;
 			text-align: center;
@@ -53,7 +53,7 @@
 @stop
 
 @section('nav-menu-left')
-	
+
 @stop
 
 @section('nav-menu-right')
@@ -64,7 +64,7 @@
 			</div> -->
 			<div class="form-item wide">
 				<select ng-model="opsi_cari" class="form-option">
-					<option value="">Semua</option>
+					<option value="$">Semua</option>
 					<option value="pendaftaran_id">No Pendaftaran</option>
 					<option value="no_referensi">ID Pemohon</option>
 					<option value="n_pemohon">Nama Pemohon</option>
@@ -83,7 +83,7 @@
 
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -108,7 +108,7 @@
 			<td class="c_n_pemohon">@{{ csimb.n_pemohon }}</td>
 			<td class="c_n_perizinan">@{{ csimb.n_permohonan }}</td>
 			<td class="c_masaberlaku">@{{ csimb.d_berlaku_izin}}</td>
-			<td class="c_status">@{{ csimb.status_masa_berlaku}}</td>			
+			<td class="c_status">@{{ csimb.status_masa_berlaku}}</td>
 		</tr>
 		<tr>
 			<td colspan="12" style="text-align:center">

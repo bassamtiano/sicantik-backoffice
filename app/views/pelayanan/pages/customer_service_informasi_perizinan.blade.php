@@ -6,7 +6,7 @@
 			width: 3%;
 			text-align: center;
 		}
-		
+
 		.c_n_perizinan {
 			width: 10%;
 		}
@@ -43,7 +43,7 @@
 @stop
 
 @section('nav-menu-left')
-	
+
 @stop
 
 @section('nav-menu-right')
@@ -53,7 +53,7 @@
 			</div> -->
 			<div class="form-item wide">
 				<select ng-model="opsi_cari" class="form-option">
-					<option value="">Semua</option>
+					<option value="$">Semua</option>
 					<option value="pendaftaran_id">No Pendaftaran</option>
 					<option value="no_referensi">ID Pemohon</option>
 					<option value="n_pemohon">Nama Pemohon</option>
@@ -72,7 +72,7 @@
 
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -93,7 +93,11 @@
 			<td class="c_n_perizinan">@{{ csip.n_perizinan }}</td>
 			<td class="c_durasi">@{{ csip.v_hari }}</td>
 			<td class="c_masaberlaku">@{{ csip.v_berlaku_tahun }} @{{ csip.v_berlaku_satuan }}</td>
-			<td class="c_aksi"><a href ng-click="open_modal('modal_cs_detail_perizinan', csip.id)" class="row-item ya">Detail</a></td>			
+			<td class="c_aksi">
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_cs_detail_perizinan', csip.id)" class="edit">Detail</a>
+				</span>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="12" style="text-align:center">
