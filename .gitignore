@@ -1,2 +1,2 @@
-app/config/database.php;
-vendor/*;
+app/config/database.php
+vendor/*

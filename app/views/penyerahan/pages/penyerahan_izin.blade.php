@@ -132,8 +132,8 @@
 			<td class="c_aksi">
 				<!-- @{{ ppi.id }} -->
 				<span class="button-group group-2">
-					<a href ng-click="open_modal('modal_penyerahan', ppi.id)" class="edit">Penyerahan</a>
-					<a href ng-click="open_modal('modal_email', ppi.id)" class="edit">Email</a>
+					<a href ng-click="open_modal('modal_penyerahan', ppi.id)" class="accept">Penyerahan</a>
+					<a href ng-click="open_modal('modal_email', ppi.id)" class="email">Email</a>
 				</span>
 			</td>
 		</tr>

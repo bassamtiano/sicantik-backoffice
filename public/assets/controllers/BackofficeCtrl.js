@@ -1,5 +1,26 @@
 var fetch_limit = 5;
 
+function clear_iframe() {
+	$('#target_edit').attr('src', '');
+}
+
+function awww() {
+
+	setTimeout(function() {
+		result = $('#target_edit').contents().find('body').html();
+		if(result == '') {
+			awww();
+		}
+		else if(result === undefined) {
+			awww();
+		}
+		else {
+			alert(result);
+		}
+	}, 1);
+
+}
+
 $app = angular.module('sicantik_backoffice', [])
 
 .controller('BackofficePendataanEntryDataPerizinanCtrl', ['$http', '$scope',
@@ -61,8 +82,6 @@ $app = angular.module('sicantik_backoffice', [])
 		}
 
 		/* Prepare Opsi */
-
-
 
 		$scope.opsi_pemohon_kelurahan = function(id) {
 			$http.get('entry_data_perizinan/data_awal/opsi/pemohon_kelurahan/' + id).success(function(kel_pemohon) {
@@ -131,7 +150,7 @@ $app = angular.module('sicantik_backoffice', [])
 				$scope.opsi_perusahaan_kabupaten($scope.entry_data_perizinan_data_awal_data.kabupaten_perusahaan);
 				$scope.opsi_perusahaan_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_perusahaan);
 				$scope.opsi_perusahaan_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_perusahaan);
-				
+
 			});
 
 		}
@@ -176,14 +195,28 @@ $app = angular.module('sicantik_backoffice', [])
 			});
 		}
 
-		$scope.modal_data_awal_submit = function() {
-			$http({
-				method: "POST",
-				url: 'submit_data',
-				data: $scope.prototype_post,
-			}).success(function(data){
+		/* Trial */
 
-			});
+
+
+		$scope.modal_data_awal_submit = function() {
+
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html();
+				if(result == '') {
+					awww();
+				}
+				else if(result === undefined) {
+					awww();
+				}
+				else {
+					alert(result);
+				}
+				clear_iframe();
+			}, 1);
+
+
 
 		}
 

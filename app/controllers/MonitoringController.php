@@ -9,6 +9,10 @@ class MonitoringController extends BaseController {
 			return Tmpermohonan::fetch_with_tmpermohonan_trperizinan_tmpemohon_trstspermohonan_trkelurahan_tmbap_for_per_jenis_perizinan($date_start, $date_finish, $id);
 		}
 
+		public function per_jenis_perizinan_datacombo(){
+			return Trperizinan::fetch_data_opsi();
+		}
+
 		public function per_jangka_waktu() {
 			return View::make('monitoring.pages.monitoring_per_jangka_waktu');
 		}
@@ -55,31 +59,24 @@ class MonitoringController extends BaseController {
 			return Tmpermohonan::fetch_with_trstspermohonan_tmpemohon_trperizinan_trkelurahan_filterby_status_perizinan_for_per_status_perizinan($id, $date_start, $date_finish);
 		}
 
+		public function per_status_perizinan_datacombo() {
+			return Tmpermohonan::fetch_combo();
+		}
+
 		public function per_nama_pemohon() {
 			return View::make('monitoring.pages.monitoring_per_nama_pemohon');
 		}
 
-		public function per_nama_pemohon_data() {
-			$data=[
-				'n_pemohon' => 'a',
-				'date_start' => '2004-09-01',
-				'date_finish' => '2014-09-01'
-			];
-			return Tmpermohonan::fetch_with_trstspermohonan_tmpemohon_trperizinan_trkelurahan_filterby_nama_pemohon_for_per_nama_pemohon($data);
+		public function per_nama_pemohon_data($n_pemohon = null, $date_start = null, $date_finish = null) {
+			return Tmpermohonan::fetch_with_trstspermohonan_tmpemohon_trperizinan_trkelurahan_filterby_nama_pemohon_for_per_nama_pemohon($n_pemohon, $date_start, $date_finish);
 		}
 
 		public function per_nama_perusahaan() {
 			return View::make('monitoring.pages.monitoring_per_nama_perusahaan');
 		}
 
-		public function per_nama_perusahaan_data() {
-			$data=[
-				'n_perusahaan' => '',
-				'date_start' => '2004-09-01',
-				'date_finish' => '2014-09-01'
-			];
-			return Tmpermohonan::fetch_with_trstspermohonan_tmperusahaan_trperizinan_trkelurahan_for_per_nama_perusahaan($data);
-
+		public function per_nama_perusahaan_data($nm = null, $date_start = null, $date_finish = null) {
+			return Tmpermohonan::fetch_with_trstspermohonan_tmperusahaan_trperizinan_trkelurahan_for_per_nama_perusahaan($nm, $date_start, $date_finish);
 		}
 		public function per_bulan_pengambilan_izin() {
 			return View::make('monitoring.pages.monitoring_per_bulan_pengambilan_izin');

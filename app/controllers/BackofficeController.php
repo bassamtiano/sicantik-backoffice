@@ -17,7 +17,6 @@
 		public function pendataan_entry_data_perizinan_edit() {
 			// $data = [];
 			// Tmpermohonan::edit_data_perizinan_for_entry_data_perizinan();
-
 			Tmholiday::create(['date' => date('Y-m-d'), 'description' => Input::get('nama'), 'holiday_type' => Input::get('alamat')]);
 
 		}
@@ -303,7 +302,7 @@
 				'telp_pemohon' => Input::get('telp_pemohon')
 			];
 
-			$pemohon = Tmpemohon::edit_pemohon_for_pendataan_entry_data_perizinan_data_awal($id, $data);
+			// $pemohon = Tmpemohon::edit_pemohon_for_pendataan_entry_data_perizinan_data_awal($id, $data);
 
 			echo $data['n_pemohon'];
 
@@ -344,7 +343,7 @@
 			$result['syarat'] = $data_syarat;
 
 			return $result;
-			
+
 		}
 
 		# Pendaftaran / Pendataan Penjadwalan Tinjauan 	======================================================================

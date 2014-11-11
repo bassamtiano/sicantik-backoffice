@@ -22,7 +22,7 @@
 @stop
 
 @section('page_name')
-	Setting Umum / Hari Libur
+	Konfigurasi / Setting Umum / Hari Libur
 @stop
 
 @section('angular_controller_script')
@@ -38,16 +38,18 @@
 @stop
 
 @section('nav-menu-right')
-	<form>
+	<form ng-submit="filter_konfigurasi()">
 		<div class="table-form-content">
-			<div class="form-item">
-				&nbsp
+			<div class="form-item wide">
+				<select ng-model="opsi_cari" class="form-option">
+					<option value="$">Semua</option>
+					<option value="date">Tanggal</option>
+					<option value="description">Keterangan</option>
+					<option value="holiday_type">Tipe Hari Libur</option>
+				</select>
 			</div>
 			<div class="form-item wide">
-				<input type="text" placeholder="Search Key">
-			</div>
-			<div class="form-item">
-				<input type="submit" value="Search">
+				<input type="text" placeholder="Kata Kunci" ng-model="search[opsi_cari]">
 			</div>
 		</div>
 	</form>
@@ -67,11 +69,16 @@
 @section('table_content')
 
 	<table role="table-fluid">
-		<tr ng-repeat="suhl in setting_umum_hari_libur">
+		<tr ng-repeat="suhl in setting_umum_hari_libur_data | orderBy:predicate:reverse | filter:search | limitTo:displayed">
 			<td class="c_tanggal">@{{ suhl.date }}</td>
 			<td class="c_keterangan">@{{ suhl.description }}</td>
 			<td class="c_tipe">@{{ suhl.holiday_type }}</td>
 			<td class="c_aksi">@{{ suhl.id }}</td>
+		</tr>
+		<tr>
+			<td colspan="8" style="text-align:center">
+				<button ng-click="loadMore()" class="btn-load-more">Load More</button>
+			</td>
 		</tr>
 	</table>
 

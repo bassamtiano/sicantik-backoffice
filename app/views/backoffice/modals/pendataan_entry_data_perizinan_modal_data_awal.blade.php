@@ -1,4 +1,4 @@
-<form method="post" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/data_awal') }}">
+<form id="form_data_awal" method="post" target="target_edit" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/data_awal') }}">
 
 <div class="modal" ng-show={{ $modal_name }}>
 
@@ -13,7 +13,7 @@
             <div class="body-summary">
 
                 <div class="summary-title">
-                    <h3>Data Perizinan AAA</h3>
+                    <h3>Data Perizinan</h3>
                 </div>
                 <div class="body-summary-left">
                     <div class="summary-item">
@@ -315,9 +315,9 @@
                 &nbsp;
             </div>
             <div class="modal-footer-right">
-                <!-- <input type="submit" class="button-red" value="Simpan" /> -->
-                <input type="submit" value="Simpan" />
-                <!-- <button type="submit" class="button-yellow" >Batal</button> -->
+                <input type="submit" value="Simpan" class="btn button-green" ng-click="modal_data_awal_submit()"/>
+                <a class="btn button-red" ng-click="close_modal('modal_data_awal')">Batal</a>
+                <a onclick="clear_iframe()">Clear</a>
             </div>
         </div>
 
@@ -325,7 +325,9 @@
 
 
 
-<!-- <iframe src="#" id="target_edit" name="target_edit" style="width:0; height:0; position:relative; background:#fff;"></iframe> -->
+<iframe id="target_edit" name="target_edit" style="width:100; height:100; position:relative; background:#fff;">
+
+</iframe>
 
 </div>
 

@@ -228,7 +228,7 @@
 		public static function fetch_with_trproperty_trperizinan() {
 
 			#not finished
-
+			
 			return DB::table('trperizinan')
 
 			->join('trperizinan_trproperty', 'trperizinan.id', '=', 'trperizinan_trproperty.trperizinan_id')
@@ -237,7 +237,7 @@
 			// ->join('trkoefesientarifretribusi_trproperty', 'trproperty.id', '=', 'trkoefesientarifretribusi_trproperty.trproperty_id')
 			// ->join('trkoefesientarifretribusi', 'trkoefesientarifretribusi_trproperty.trkoefesientarifretribusi_id', '=', 'trkoefesientarifretribusi.id')
 			->groupBy('trperizinan.id')
-			->select(DB::raw('trperizinan.id, trperizinan.n_perizinan, count(trproperty.id)'))
+			->select(DB::raw('trperizinan.id, trperizinan.n_perizinan, count(trproperty.id) as jumlah_property'))
 			->get();
 		}
 
@@ -279,6 +279,25 @@
 			->select(DB::raw('trperizinan.n_perizinan, count(tmpermohonan_trstspermohonan.tmpermohonan_id)'))
 			->get();
 
+		}
+
+		public static function fetch_data_opsi() {
+			return Trperizinan::select('id', 'n_perizinan')
+			->get();
+		}
+		
+		public static function fetch_with_trkelompok_perizinan_trunitkerja_edit($id) {
+
+			return DB::table('trperizinan')
+			->join('trkelompok_perizinan_trperizinan', 'trperizinan.id', '=', 'trkelompok_perizinan_trperizinan.trperizinan_id')
+			->join('trkelompok_perizinan', 'trkelompok_perizinan_trperizinan.trkelompok_perizinan_id', '=', 'trkelompok_perizinan.id')
+
+			->join('trperizinan_trunitkerja', 'trperizinan.id', '=', 'trperizinan_trunitkerja.trperizinan_id')
+			->join('trunitkerja', 'trperizinan_trunitkerja.trunitkerja_id', '=', 'trunitkerja.id')
+			->groupBy('trperizinan.id')
+			->select(DB::raw('trperizinan.id, trperizinan.n_perizinan, trperizinan.v_hari, trperizinan.v_berlaku_tahun, trperizinan.v_berlaku_satuan, trperizinan.v_perizinan, trkelompok_perizinan.n_kelompok, trunitkerja.n_unitkerja, trperizinan.is_open, trperizinan.c_foto, trperizinan.c_keputusan, trperizinan.c_berlaku'))
+			->where('trperizinan.id', '=', $id)
+			->get();
 		}
 
 

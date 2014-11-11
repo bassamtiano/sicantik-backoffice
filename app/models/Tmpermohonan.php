@@ -445,7 +445,7 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 		public static function fetch_with_tmpermohonan_trperizinan_tmpemohon_trstspermohonan_trkelurahan_tmbap_for_per_jenis_perizinan($date_start, $date_finish, $id) {
 
-			if(!empty($date_start) && !empty($date_finish) && !empty($id)) {
+			if(!empty($date_start) && !empty($date_finish) && !empty($id)) { 
 				return DB::table('tmpermohonan')
 
 				->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
@@ -492,8 +492,55 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 				->get();
 			}
 
-
+			
 		}
+
+		public static function fetch_with_tmpermohonan_trperizinan_tmpemohon_trstspermohonan_trkelurahan_tmbap_filterby_jangka_waktu($date_start, $date_finish) {
+			if(!empty($date_start) && !empty($date_finish)){
+				return DB::table('tmpermohonan')
+				->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+				->leftjoin('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
+
+				->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+				->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+
+				->leftjoin('tmbap_tmpermohonan', 'tmpermohonan.id', '=', 'tmbap_tmpermohonan.tmpermohonan_id')
+				->leftjoin('tmbap', 'tmbap_tmpermohonan.tmbap_id', '=', 'tmbap.id')
+
+				->leftjoin('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
+				->leftjoin('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+
+				->leftjoin('tmpemohon_trkelurahan', 'tmpemohon.id', '=', 'tmpemohon_trkelurahan.tmpemohon_id')
+				->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmpemohon_trkelurahan.trkelurahan_id')
+
+
+				->select(DB::raw('tmpermohonan.id, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmpemohon.n_pemohon, trstspermohonan.n_sts_permohonan, tmpemohon.a_pemohon, trkelurahan.n_kelurahan'))
+				->whereBetween('tmpermohonan.d_terima_berkas', [$date_start, $date_finish])
+				->groupBy('tmpermohonan.pendaftaran_id')
+				->get();
+			}
+			else {
+				return DB::table('tmpermohonan')
+				->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+				->leftjoin('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
+
+				->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+				->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+
+				->leftjoin('tmbap_tmpermohonan', 'tmpermohonan.id', '=', 'tmbap_tmpermohonan.tmpermohonan_id')
+				->leftjoin('tmbap', 'tmbap_tmpermohonan.tmbap_id', '=', 'tmbap.id')
+
+				->leftjoin('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
+				->leftjoin('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+
+				->leftjoin('tmpemohon_trkelurahan', 'tmpemohon.id', '=', 'tmpemohon_trkelurahan.tmpemohon_id')
+				->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmpemohon_trkelurahan.trkelurahan_id')
+				->select(DB::raw('tmpermohonan.id, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmpemohon.n_pemohon, trstspermohonan.n_sts_permohonan, tmpemohon.a_pemohon, trkelurahan.n_kelurahan'))
+				->groupBy('tmpermohonan.pendaftaran_id')
+				->get();
+			}
+		}
+
 
 		public static function fetch_with_tmpermohonan_trperizinan_tmpemohon_trstspermohonan_trkelurahan_tmbap_filterby_jangka_waktu_for_per_jangka_waktu($data) {
 
@@ -560,6 +607,15 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			->get();
 		}
 
+		public static function fetch_combo() {
+				return DB::table('trstspermohonan')
+
+				->select(DB::raw('trstspermohonan.id, trstspermohonan.n_sts_permohonan'))
+				->orderBy('trstspermohonan.id')
+				->get();
+
+			}
+
 		public static function fetch_with_tmpermohonan_trperizinan_tmpemohon_trstspermohonan_trkelurahan_tmbap_filterby_status_for_perizinan_belum_sudah_jadi_kadaluarsa($data) {
 
 			return DB::table('tmpermohonan')
@@ -586,7 +642,10 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			->get();
 		}
 
-		public static function fetch_with_trstspermohonan_tmpemohon_trperizinan_trkelurahan_filterby_status_perizinan_for_per_status_perizinan($data) {
+		public static function fetch_with_trstspermohonan_tmpemohon_trperizinan_trkelurahan_filterby_status_perizinan_for_per_status_perizinan($id, $date_start, $date_finish) {
+			
+			if(!empty($id) && !empty($date_start) && !empty($date_finish)) {
+
 			return DB::table('tmpermohonan')
 
 			->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
@@ -602,13 +661,38 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmpemohon_trkelurahan.trkelurahan_id')
 
 			->select(DB::raw('trstspermohonan.id, tmpermohonan.d_terima_berkas as periode_awal, tmpermohonan.d_terima_berkas as periode_akhir, trstspermohonan.n_sts_permohonan, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmpemohon.n_pemohon, trstspermohonan.n_sts_permohonan, tmpemohon.a_pemohon, trkelurahan.n_kelurahan'))
-			->where('trstspermohonan.id', '=', $data['id'])
-			->whereBetween('tmpermohonan.d_terima_berkas', [$data['date_start'], $data['date_finish']])
+			->where('trstspermohonan.id', '=', [$id])
+			->whereBetween('tmpermohonan.d_terima_berkas', [$date_start, $date_finish])
 			->orderBy('trstspermohonan.id')
 			->get();
 		}
 
-		public static function fetch_with_trstspermohonan_tmpemohon_trperizinan_trkelurahan_filterby_nama_pemohon_for_per_nama_pemohon($data) {
+		else {
+
+			return DB::table('tmpermohonan')
+
+			->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+			->leftjoin('tmpemohon', 'tmpemohon.id', '=', 'tmpemohon_tmpermohonan.tmpemohon_id')
+
+			->leftjoin('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
+			->leftjoin('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+
+			->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+
+			->leftjoin('tmpemohon_trkelurahan', 'tmpemohon.id', '=', 'tmpemohon_trkelurahan.tmpemohon_id')
+			->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmpemohon_trkelurahan.trkelurahan_id')
+
+			->select(DB::raw('trstspermohonan.id, tmpermohonan.d_terima_berkas as periode_awal, tmpermohonan.d_terima_berkas as periode_akhir, trstspermohonan.n_sts_permohonan, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmpemohon.n_pemohon, trstspermohonan.n_sts_permohonan, tmpemohon.a_pemohon, trkelurahan.n_kelurahan'))
+			->orderBy('trstspermohonan.id')
+			->get();
+		}
+	}
+
+		public static function fetch_with_trstspermohonan_tmpemohon_trperizinan_trkelurahan_filterby_nama_pemohon_for_per_nama_pemohon($n_pemohon, $date_start, $date_finish) {
+			
+			if(!empty($n_pemohon) && !empty($date_start) && !empty($date_finish)) {
+
 			return DB::table('tmpermohonan')
 
 			->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
@@ -624,17 +708,16 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmpemohon_trkelurahan.trkelurahan_id')
 
 			->select(DB::raw('tmpemohon.id, tmpermohonan.d_terima_berkas as periode_awal, tmpermohonan.d_terima_berkas as periode_akhir, trstspermohonan.n_sts_permohonan, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmpemohon.n_pemohon, trstspermohonan.n_sts_permohonan, tmpemohon.a_pemohon, trkelurahan.n_kelurahan'))
-			->where('tmpemohon.n_pemohon', 'LIKE', '%'.$data['n_pemohon'].'%' )
-			->whereBetween('tmpermohonan.d_terima_berkas', [$data['date_start'], $data['date_finish']])
+			->where('tmpemohon.n_pemohon', 'LIKE', '%'.$n_pemohon.'%' )
+			->whereBetween('tmpermohonan.d_terima_berkas', [$date_start, $date_finish])
 			->orderBy('tmpemohon.n_pemohon')
 			->get();
 		}
+		 else {
+		 	return DB::table('tmpermohonan')
 
-		public static function fetch_with_trstspermohonan_tmperusahaan_trperizinan_trkelurahan_for_per_nama_perusahaan($data) {
-			return DB::table('tmpermohonan')
-
-			->leftjoin('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
-			->leftjoin('tmperusahaan', 'tmperusahaan.id', '=', 'tmpermohonan_tmperusahaan.tmperusahaan_id')
+			->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+			->leftjoin('tmpemohon', 'tmpemohon.id', '=', 'tmpemohon_tmpermohonan.tmpemohon_id')
 
 			->leftjoin('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
 			->leftjoin('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
@@ -642,15 +725,58 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
 			->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
 
-			->leftjoin('tmperusahaan_trkelurahan', 'tmperusahaan.id', '=', 'tmperusahaan_trkelurahan.tmperusahaan_id')
-			->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmperusahaan_trkelurahan.trkelurahan_id')
+			->leftjoin('tmpemohon_trkelurahan', 'tmpemohon.id', '=', 'tmpemohon_trkelurahan.tmpemohon_id')
+			->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmpemohon_trkelurahan.trkelurahan_id')
 
-			->select(DB::raw('tmperusahaan.id, tmpermohonan.d_terima_berkas as periode_awal, tmpermohonan.d_terima_berkas as periode_akhir, trstspermohonan.n_sts_permohonan, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmperusahaan.n_perusahaan, trstspermohonan.n_sts_permohonan, tmperusahaan.a_perusahaan, trkelurahan.n_kelurahan'))
-			->where('tmperusahaan.n_perusahaan', 'LIKE', '%'.$data['n_perusahaan'].'%')
-			->whereBetween('tmpermohonan.d_terima_berkas', [$data['date_start'], $data['date_finish']])
-			->groupBy('tmpermohonan.pendaftaran_id')
-			->orderBy('tmperusahaan.n_perusahaan')
+			->select(DB::raw('tmpemohon.id, tmpermohonan.d_terima_berkas as periode_awal, tmpermohonan.d_terima_berkas as periode_akhir, trstspermohonan.n_sts_permohonan, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmpemohon.n_pemohon, trstspermohonan.n_sts_permohonan, tmpemohon.a_pemohon, trkelurahan.n_kelurahan'))
+			->orderBy('tmpemohon.n_pemohon')
 			->get();
+		 }
+		}
+
+		public static function fetch_with_trstspermohonan_tmperusahaan_trperizinan_trkelurahan_for_per_nama_perusahaan($nm, $date_start, $date_finish) {
+			if(!empty($date_start) && !empty($date_finish) && !empty($nm)){
+				return DB::table('tmpermohonan')
+
+				->leftjoin('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
+				->leftjoin('tmperusahaan', 'tmperusahaan.id', '=', 'tmpermohonan_tmperusahaan.tmperusahaan_id')
+
+				->leftjoin('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
+				->leftjoin('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+
+				->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+				->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+
+				->leftjoin('tmperusahaan_trkelurahan', 'tmperusahaan.id', '=', 'tmperusahaan_trkelurahan.tmperusahaan_id')
+				->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmperusahaan_trkelurahan.trkelurahan_id')
+
+				->select(DB::raw('tmperusahaan.id, tmpermohonan.d_terima_berkas as periode_awal, tmpermohonan.d_terima_berkas as periode_akhir, trstspermohonan.n_sts_permohonan, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmperusahaan.n_perusahaan, trstspermohonan.n_sts_permohonan, tmperusahaan.a_perusahaan, trkelurahan.n_kelurahan'))
+				->where('tmperusahaan.n_perusahaan', 'LIKE', '%'.$nm.'%')
+				->whereBetween('tmpermohonan.d_terima_berkas', [$date_start, $date_finish])
+				->groupBy('tmpermohonan.pendaftaran_id')
+				->orderBy('tmpermohonan.d_terima_berkas', 'desc')
+				->get();
+				}
+			else{				
+				return DB::table('tmpermohonan')
+				->leftjoin('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
+				->leftjoin('tmperusahaan', 'tmperusahaan.id', '=', 'tmpermohonan_tmperusahaan.tmperusahaan_id')
+
+				->leftjoin('tmpermohonan_trstspermohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trstspermohonan.tmpermohonan_id')
+				->leftjoin('trstspermohonan', 'tmpermohonan_trstspermohonan.trstspermohonan_id', '=', 'trstspermohonan.id')
+
+				->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+				->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+
+				->leftjoin('tmperusahaan_trkelurahan', 'tmperusahaan.id', '=', 'tmperusahaan_trkelurahan.tmperusahaan_id')
+				->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmperusahaan_trkelurahan.trkelurahan_id')
+
+				->select(DB::raw('tmperusahaan.id, tmpermohonan.d_terima_berkas as periode_awal, tmpermohonan.d_terima_berkas as periode_akhir, trstspermohonan.n_sts_permohonan, tmpermohonan.pendaftaran_id, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, tmperusahaan.n_perusahaan, trstspermohonan.n_sts_permohonan, tmperusahaan.a_perusahaan, trkelurahan.n_kelurahan'))
+				->groupBy('tmpermohonan.pendaftaran_id')
+				->orderBy('tmpermohonan.d_terima_berkas', 'desc')
+				->get();
+			}
+
 		}
 
 		public static function fetch_with_tmpemohon_trperizinan_trkelurahan_filterby_bulan_pengambilan_izin_for_per_bulan_pengambilan_izin($data) {
@@ -691,6 +817,28 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			->groupBy('tmpermohonan.id')
 			->orderBy('tmpermohonan.id')
 			->get();
+		}
+
+		public static function fetch_with_tmpemohon_tmpermohonan(){
+
+			return DB::table('tmpermohonan')
+
+			->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+			->join('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
+			->join('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->join('trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
+			->join('tmpermohonan_trjenis_permohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trjenis_permohonan.tmpermohonan_id')
+			->join('trjenis_permohonan', 'tmpermohonan_trjenis_permohonan.trjenis_permohonan_id', '=', 'trjenis_permohonan.id')
+
+			->select(DB::raw('tmpermohonan.id, tmpermohonan.c_paralel, tmpermohonan.pendaftaran_id, tmpemohon.no_referensi, tmpemohon.n_pemohon, trperizinan.n_perizinan, tmpermohonan.d_terima_berkas, trjenis_permohonan.n_permohonan'))
+
+			->where('tmpermohonan.c_pendaftaran','=', '0')
+			->where('trjenis_permohonan.id','=', '1')
+			// ->groupBy('tmpemohon.id')
+			->orderBy('tmpermohonan.id')
+			->groupBy('tmpermohonan.id')
+			->get();
+
 		}
 
 		public static function fetch_with_tmpermohonan_perubahan_izin_for_pendaftaran_perubahan_izin(){
@@ -747,6 +895,189 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			// ->groupBy('tmpemohon.id')
 			->orderBy('tmpermohonan.id')
 			->get();
+		}
+
+		public static function fetch_with_tmpemohon_for_permohonan_sementara_edit_data($tmpermohonan_id) {
+			
+			return DB::table('tmpermohonan')
+
+			->leftjoin('tmpemohon_sementara_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_sementara_tmpermohonan.tmpermohonan_id')
+			->leftjoin('tmpemohon_sementara', 'tmpemohon_sementara_tmpermohonan.tmpemohon_sementara_id', '=', 'tmpemohon_sementara.id')
+
+			->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+
+			->leftjoin('trkelompok_perizinan_trperizinan', 'trperizinan.id', '=', 'trkelompok_perizinan_trperizinan.trperizinan_id')
+			->leftjoin('trkelompok_perizinan', 'trkelompok_perizinan_trperizinan.trkelompok_perizinan_id', '=', 'trkelompok_perizinan.id')
+
+			->leftjoin('tmpermohonan_trjenis_permohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trjenis_permohonan.tmpermohonan_id')
+			->leftjoin('trjenis_permohonan', 'tmpermohonan_trjenis_permohonan.trjenis_permohonan_id', '=', 'trjenis_permohonan.id')
+
+			->leftjoin('tmpemohon_sementara_trkelurahan', 'tmpemohon_sementara.id', '=', 'tmpemohon_sementara_trkelurahan.tmpemohon_sementara_id')
+			->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmpemohon_sementara_trkelurahan.trkelurahan_id')
+
+			->leftjoin('trkecamatan_trkelurahan', 'trkelurahan.id', '=', 'trkecamatan_trkelurahan.trkelurahan_id')
+			->leftjoin('trkecamatan', 'trkecamatan.id', '=', 'trkecamatan_trkelurahan.trkecamatan_id')
+
+			->leftjoin('trkabupaten_trkecamatan', 'trkecamatan.id', '=', 'trkabupaten_trkecamatan.trkecamatan_id')
+			->leftjoin('trkabupaten', 'trkabupaten.id', '=', 'trkabupaten_trkecamatan.trkabupaten_id')
+
+			->leftjoin('trkabupaten_trpropinsi', 'trkabupaten.id', '=', 'trkabupaten_trpropinsi.trkabupaten_id')
+			->leftjoin('trpropinsi', 'trpropinsi.id', '=', 'trkabupaten_trpropinsi.trpropinsi_id')
+
+			->leftjoin('tmpermohonan_tmperusahaan_sementara', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan_sementara.tmpermohonan_id')
+			->leftjoin('tmperusahaan_sementara', 'tmpermohonan_tmperusahaan_sementara.tmperusahaan_sementara_id', '=', 'tmperusahaan_sementara.id')
+
+			->leftjoin('tmperusahaan_sementara_trkelurahan', 'tmperusahaan_sementara.id', '=', 'tmperusahaan_sementara_trkelurahan.tmperusahaan_sementara_id')
+			->leftjoin('trkelurahan as perusahaan_kelurahan', 'perusahaan_kelurahan.id', '=', 'tmperusahaan_sementara_trkelurahan.trkelurahan_id')
+
+			->leftjoin('trkecamatan_trkelurahan as trkecamatan_trkelurahan_perusahaan', 'perusahaan_kelurahan.id', '=', 'trkecamatan_trkelurahan_perusahaan.trkelurahan_id')
+			->leftjoin('trkecamatan as perusahaan_kecamatan', 'perusahaan_kecamatan.id', '=', 'trkecamatan_trkelurahan_perusahaan.trkecamatan_id')
+
+			->leftjoin('trkabupaten_trkecamatan as trkabupaten_trkecamatan_perusahaan', 'perusahaan_kecamatan.id', '=', 'trkabupaten_trkecamatan_perusahaan.trkecamatan_id')
+			->leftjoin('trkabupaten as perusahaan_kabupaten', 'perusahaan_kabupaten.id', '=', 'trkabupaten_trkecamatan_perusahaan.trkabupaten_id')
+
+			->leftjoin('trkabupaten_trpropinsi as trkabupaten_trpropinsi_perusahaan', 'perusahaan_kabupaten.id', '=', 'trkabupaten_trpropinsi_perusahaan.trkabupaten_id')
+			->leftjoin('trpropinsi as perusahaan_propinsi', 'perusahaan_propinsi.id', '=', 'trkabupaten_trpropinsi_perusahaan.trpropinsi_id')
+
+			->select(['tmpermohonan.id', 
+					'trperizinan.id as perizinan_id',
+					'trperizinan.n_perizinan', 
+					'trkelompok_perizinan.n_kelompok', 
+					'trjenis_permohonan.n_permohonan', 
+					'tmpermohonan.pendaftaran_id', 
+					'trperizinan.n_perizinan', 
+					'tmpemohon_sementara.source', 
+					'tmpemohon_sementara.no_referensi', 
+					'tmpemohon_sementara.n_pemohon', 
+					'tmpemohon_sementara.telp_pemohon', 
+					'tmpermohonan.d_terima_berkas', 
+					'tmpermohonan.d_survey', 
+					'tmpermohonan.a_izin', 
+					'tmpermohonan.keterangan', 
+					'trpropinsi.id as propinsi_pemohon', 
+					'trkabupaten.id as kabupaten_pemohon', 
+					'trkecamatan.id as kecamatan_pemohon', 
+					'trkelurahan.id as kelurahan_pemohon', 
+					'tmpemohon_sementara.a_pemohon', 
+					'tmpemohon_sementara.a_pemohon_luar', 
+					'tmperusahaan_sementara.npwp', 
+					'tmperusahaan_sementara.n_perusahaan as nama_perusahaan', 
+					'tmperusahaan_sementara.i_telp_perusahaan as telp_perusahaan', 
+					'tmperusahaan_sementara.fax as fax_perusahaan',
+					'tmperusahaan_sementara.email as email_perusahaan', 
+					'perusahaan_propinsi.id as propinsi_perusahaan', 
+					'perusahaan_kabupaten.id as kabupaten_perusahaan', 
+					'perusahaan_kecamatan.id as kecamatan_perusahaan', 
+					'perusahaan_kelurahan.id as kelurahan_perusahaan', 
+					'tmperusahaan_sementara.a_perusahaan as alamat_perusahaan'])
+		
+			->where('tmpermohonan.id', '=', $tmpermohonan_id)
+			->groupBy('tmpermohonan.id')
+			->orderBy('tmpermohonan.id')
+			->get();
+
+		}
+
+		public static function fetch_with_tmpemohon_for_coba_data($tmpermohonan_id) {
+
+			return DB::table('tmpermohonan')
+
+			->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+			->leftjoin('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
+
+			->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+
+			->leftjoin('tmpermohonan_trsyarat_perizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trsyarat_perizinan.tmpermohonan_id')
+			->leftjoin('trsyarat_perizinan', 'tmpermohonan_trsyarat_perizinan.trsyarat_perizinan_id', '=', 'trsyarat_perizinan.id')
+
+			->leftjoin('trkelompok_perizinan_trperizinan', 'trperizinan.id', '=', 'trkelompok_perizinan_trperizinan.trperizinan_id')
+			->leftjoin('trkelompok_perizinan', 'trkelompok_perizinan_trperizinan.trkelompok_perizinan_id', '=', 'trkelompok_perizinan.id')
+
+			->leftjoin('tmpermohonan_trjenis_permohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trjenis_permohonan.tmpermohonan_id')
+			->leftjoin('trjenis_permohonan', 'tmpermohonan_trjenis_permohonan.trjenis_permohonan_id', '=', 'trjenis_permohonan.id')
+
+			->leftjoin('tmpermohonan_tmsk', 'tmpermohonan.id', '=', 'tmpermohonan_tmsk.tmpermohonan_id')
+			->leftjoin('tmsk', 'tmsk.id', '=', 'tmpermohonan_tmsk.tmsk_id')
+
+			->leftjoin('tmpemohon_trkelurahan', 'tmpemohon.id', '=', 'tmpemohon_trkelurahan.tmpemohon_id')
+			->leftjoin('trkelurahan', 'trkelurahan.id', '=', 'tmpemohon_trkelurahan.trkelurahan_id')
+
+			->leftjoin('trkecamatan_trkelurahan', 'trkelurahan.id', '=', 'trkecamatan_trkelurahan.trkelurahan_id')
+			->leftjoin('trkecamatan', 'trkecamatan.id', '=', 'trkecamatan_trkelurahan.trkecamatan_id')
+
+			->leftjoin('trkabupaten_trkecamatan', 'trkecamatan.id', '=', 'trkabupaten_trkecamatan.trkecamatan_id')
+			->leftjoin('trkabupaten', 'trkabupaten.id', '=', 'trkabupaten_trkecamatan.trkabupaten_id')
+
+			->leftjoin('trkabupaten_trpropinsi', 'trkabupaten.id', '=', 'trkabupaten_trpropinsi.trkabupaten_id')
+			->leftjoin('trpropinsi', 'trpropinsi.id', '=', 'trkabupaten_trpropinsi.trpropinsi_id')
+
+			->leftjoin('tmpermohonan_tmperusahaan', 'tmpermohonan.id', '=', 'tmpermohonan_tmperusahaan.tmpermohonan_id')
+			->leftjoin('tmperusahaan', 'tmpermohonan_tmperusahaan.tmperusahaan_id', '=', 'tmperusahaan.id')
+
+			->leftjoin('tmperusahaan_trkelurahan', 'tmperusahaan.id', '=', 'tmperusahaan_trkelurahan.tmperusahaan_id')
+			->leftjoin('trkelurahan as perusahaan_kelurahan', 'perusahaan_kelurahan.id', '=', 'tmperusahaan_trkelurahan.trkelurahan_id')
+
+			->leftjoin('trkecamatan_trkelurahan as trkecamatan_trkelurahan_perusahaan', 'perusahaan_kelurahan.id', '=', 'trkecamatan_trkelurahan_perusahaan.trkelurahan_id')
+			->leftjoin('trkecamatan as perusahaan_kecamatan', 'perusahaan_kecamatan.id', '=', 'trkecamatan_trkelurahan_perusahaan.trkecamatan_id')
+
+			->leftjoin('trkabupaten_trkecamatan as trkabupaten_trkecamatan_perusahaan', 'perusahaan_kecamatan.id', '=', 'trkabupaten_trkecamatan_perusahaan.trkecamatan_id')
+			->leftjoin('trkabupaten as perusahaan_kabupaten', 'perusahaan_kabupaten.id', '=', 'trkabupaten_trkecamatan_perusahaan.trkabupaten_id')
+
+			->leftjoin('trkabupaten_trpropinsi as trkabupaten_trpropinsi_perusahaan', 'perusahaan_kabupaten.id', '=', 'trkabupaten_trpropinsi_perusahaan.trkabupaten_id')
+			->leftjoin('trpropinsi as perusahaan_propinsi', 'perusahaan_propinsi.id', '=', 'trkabupaten_trpropinsi_perusahaan.trpropinsi_id')
+
+			->leftjoin('tmperusahaan_trinvestasi', 'tmperusahaan.id', '=', 'tmperusahaan_trinvestasi.tmperusahaan_id')
+			->leftjoin('trinvestasi', 'trinvestasi.id', '=', 'tmperusahaan_trinvestasi.trinvestasi_id')
+
+			->leftjoin('tmperusahaan_trkegiatan', 'tmperusahaan.id', '=', 'tmperusahaan_trkegiatan.tmperusahaan_id')
+			->leftjoin('trkegiatan', 'trkegiatan.id', '=', 'tmperusahaan_trkegiatan.trkegiatan_id')
+
+			->select(['tmpermohonan.id as permohonan_id', 
+					'trperizinan.id as perizinan_id',
+					'trperizinan.n_perizinan', 
+					'trkelompok_perizinan.n_kelompok', 
+					'trjenis_permohonan.n_permohonan', 
+					'tmpermohonan.pendaftaran_id', 
+					'trperizinan.n_perizinan', 
+					'tmsk.no_surat',
+					'tmpemohon.source as sumber_identitas', 
+					'tmpemohon.no_referensi', 
+					'tmpemohon.n_pemohon', 
+					'tmpemohon.telp_pemohon', 
+					'tmpermohonan.d_terima_berkas', 
+					'tmpermohonan.d_survey', 
+					'tmpermohonan.d_perubahan',
+					'tmpermohonan.d_perpanjangan',
+					'tmpermohonan.d_daftarulang',
+					'tmpermohonan.a_izin', 
+					'tmpermohonan.keterangan', 
+					'trpropinsi.n_propinsi as propinsi_pemohon', 
+					'trkabupaten.n_kabupaten as kabupaten_pemohon', 
+					'trkecamatan.n_kecamatan as kecamatan_pemohon', 
+					'trkelurahan.n_kelurahan as kelurahan_pemohon', 
+					'tmpemohon.a_pemohon', 
+					'tmpemohon.a_pemohon_luar', 
+					'tmperusahaan.npwp',
+					'tmperusahaan.n_perusahaan as nama_perusahaan', 
+					'tmperusahaan.i_telp_perusahaan as telp_perusahaan', 
+					'tmperusahaan.fax as fax_perusahaan',
+					'tmperusahaan.email as email_perusahaan', 
+					'perusahaan_propinsi.n_propinsi as propinsi_perusahaan', 
+					'perusahaan_kabupaten.n_kabupaten as kabupaten_perusahaan', 
+					'perusahaan_kecamatan.n_kecamatan as kecamatan_perusahaan', 
+					'perusahaan_kelurahan.n_kelurahan as kelurahan_perusahaan', 
+					'tmperusahaan.a_perusahaan as alamat_perusahaan',
+					'trinvestasi.n_investasi',
+					'trkegiatan.n_kegiatan'
+					])
+		
+			->where('tmpermohonan.id', '=', $tmpermohonan_id)
+			->groupBy('tmpermohonan.id')
+			->orderBy('tmpermohonan.id')
+			->get();
+
 		}
 
 		public static function fetch_tracking_for_customer_service_informasi_tracking(){

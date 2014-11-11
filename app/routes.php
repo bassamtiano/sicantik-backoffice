@@ -136,6 +136,8 @@ Route::get('monitoring/per_jenis_perizinan/data', ['as' => 'monitoring_per_jenis
 
 Route::get('monitoring/per_jenis_perizinan/data/{date_start}/{date_finish}/{id}', ['as' => 'monitoring_per_jenis_perizinan_data', 'uses' => 'MonitoringController@per_jenis_perizinan_data']);
 
+Route::get('monitoring/per_jenis_perizinan/datacombo', ['as' => 'monitoring_per_jenis_perizinan_datacombo', 'uses' => 'MonitoringController@per_jenis_perizinan_datacombo']);
+
 # Monitoring / Per Jangka Waktu (Data Belum Muncul)
 
 Route::get('monitoring/per_jangka_waktu', ['as' => 'monitoring_per_jangka_waktu', 'uses' => 'MonitoringController@per_jangka_waktu']);
@@ -174,13 +176,15 @@ Route::get('monitoring/per_nama_pemohon', ['as' => 'monitoring_per_nama_pemohon'
 
 Route::get('monitoring/per_nama_pemohon/data', ['as' => 'monitoring_per_nama_pemohon_data', 'uses' => 'MonitoringController@per_nama_pemohon_data']);
 
-Route::get('monitoring/per_nama_perusahaan/data/{nm}/{date_start}/{date_finish}', ['as' => 'monitoring_per_nama_perusahaan_data', 'uses' => 'MonitoringController@per_nama_perusahaan_data']);
+Route::get('monitoring/per_nama_pemohon/data/{n_pemohon}/{date_start}/{date_finish}', ['as' => 'monitoring_per_nama_pemohon_data', 'uses' => 'MonitoringController@per_nama_pemohon_data']);
 
 # Monitoring / Per Nama Perusahaan (Belum ada Filter)
 
 Route::get('monitoring/per_nama_perusahaan', ['as' => 'monitoring_per_nama_perusahaan', 'uses' => 'MonitoringController@per_nama_perusahaan']);
 
 Route::get('monitoring/per_nama_perusahaan/data', ['as' => 'monitoring_per_nama_perusahaan_data', 'uses' => 'MonitoringController@per_nama_perusahaan_data']);
+
+Route::get('monitoring/per_nama_perusahaan/data/{n_perusahaan}/{date_start}/{date_finish}', ['as' => 'monitoring_per_nama_perusahaan_data', 'uses' => 'MonitoringController@per_nama_perusahaan_data']);
 
 # Monitoring / Per Bulan Pengambilan Izin (di perjelas opsi untuk siapa)
 
@@ -210,11 +214,17 @@ Route::get('konfigurasi/setting_perizinan/jenis_perizinan', ['as' => 'konfiguras
 
 Route::get('konfigurasi/setting_perizinan/jenis_perizinan/data', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_data', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_data']);
 
+Route::get('konfigurasi/setting_perizinan/jenis_perizinan/data/{id}', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_data', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_data']);
+
 Route::get('konfigurasi/setting_perizinan/jenis_perizinan/insert', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_data', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_insert']);
 
-Route::post('konfigurasi/setting_perizinan/jenis_perizinan/update', ['uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_update']);
+Route::get('konfigurasi/setting_perizinan/jenis_perizinan/opsi_kelompok', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_opsi_kelompok', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_opsi_kelompok']);
 
-Route::get('konfigurasi/setting_perizinan/jenis_perizinan/update/data/{id}', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_data', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_update/data']);
+Route::get('konfigurasi/setting_perizinan/jenis_perizinan/opsi_unitkerja', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_opsi_unitkerja', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_opsi_unitkerja']);
+
+Route::get('konfigurasi/setting_perizinan/jenis_perizinan/edit', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_edit', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_edit']);
+
+Route::get('konfigurasi/setting_perizinan/jenis_perizinan/edit/data/{id}', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_edit_data', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_edit_data']);
 
 Route::get('konfigurasi/setting_perizinan/jenis_perizinan/delete', ['as' => 'konfigurasi_setting_perizinan_jenis_perizinan_data', 'uses' => 'KonfigurasiController@setting_perizinan_jenis_perizinan_delete']);
 
@@ -223,6 +233,8 @@ Route::get('konfigurasi/setting_perizinan/jenis_perizinan/delete', ['as' => 'kon
 Route::get('konfigurasi/setting_perizinan/perizinan_paralel', ['as' => 'konfigurasi_setting_perizinan_perizinan_paralel', 'uses' => 'KonfigurasiController@setting_perizinan_perizinan_paralel']);
 
 Route::get('konfigurasi/setting_perizinan/perizinan_paralel/data', ['as' => 'konfigurasi_setting_perizinan_perizinan_paralel', 'uses' => 'KonfigurasiController@setting_perizinan_perizinan_paralel_data']);
+
+Route::get('konfigurasi/setting_perizinan/perizinan_paralel/data/{id}', ['as' => 'konfigurasi_setting_perizinan_perizinan_paralel', 'uses' => 'KonfigurasiController@setting_perizinan_perizinan_paralel_data']);
 
 Route::get('konfigurasi/setting_perizinan/perizinan_paralel/insert', ['as' => 'konfigurasi_setting_perizinan_perizinan_paralel', 'uses' => 'KonfigurasiController@setting_perizinan_perizinan_paralel_insert']);
 
@@ -465,11 +477,24 @@ Route::get('pelayanan/pendaftaran/permohonan_sementara', array('as' => 'pelayana
 
 Route::get('pelayanan/pendaftaran/permohonan_sementara/data', array('as' => 'pelayanan_pendaftaran_pelayanan_sementara_data', 'uses' => 'PelayananController@pendaftaran_permohonan_sementara_data'));
 
+Route::get('pelayanan/pendaftaran/permohonan_sementara/data/{id}', array('as' => 'pelayanan_pendaftaran_pelayanan_sementara_data', 'uses' => 'PelayananController@pendaftaran_permohonan_sementara_data'));
+
+Route::get('pelayanan/pendaftaran/permohonan_sementara/edit', array('as' => 'pelayanan_pendaftaran_pelayanan_sementara_edit', 'uses' => 'PelayananController@pendaftaran_permohonan_sementara_edit'));
+
+Route::get('pelayanan/pendaftaran/permohonan_sementara/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_pelayanan_sementara_edit_data', 'uses' => 'PelayananController@pendaftaran_permohonan_sementara_edit_data'));
+
+
 # Pelayanan / Pendaftaran / Permohonan Izin Baru ( Belum )
 
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru', array('as' => 'pelayanan_pendaftaran_permohonan_izin', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru'));
 
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru/data', array('as' => 'pelayanan_pendaftaran_permohonan_izin_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_data'));
+
+Route::get('pelayanan/pendaftaran/permohonan_izin_baru/data/{id}', array('as' => 'pelayanan_pendaftaran_permohonan_izin_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_data'));
+
+Route::get('pelayanan/pendaftaran/permohonan_izin_baru/edit', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit'));
+
+Route::get('pelayanan/pendaftaran/permohonan_izin_baru/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit_data'));
 
 # Pelayanan / Pendaftaran / Perubahan Izin
 
@@ -477,11 +502,31 @@ Route::get('pelayanan/pendaftaran/perubahan_izin', array('as' => 'pelayanan_pend
 
 Route::get('pelayanan/pendaftaran/perubahan_izin/data', array('as' => 'pelayanan_pendaftaran_perubahan_izin_table_perubahan_izin', 'uses' => 'PelayananController@pendaftaran_perubahan_izin_data'));
 
+Route::get('pelayanan/pendaftaran/perubahan_izin/data/{id}', array('as' => 'pelayanan_pendaftaran_perubahan_izin_data', 'uses' => 'PelayananController@pendaftaran_perubahan_izin_data'));
+
+Route::get('pelayanan/pendaftaran/perubahan_izin/opsi_kegiatan', array('as' => 'pelayanan_pendaftaran_perubahan_izin_opsi_kegiatan', 'uses' => 'PelayananController@pendaftaran_perubahan_izin_opsi_kegiatan'));
+
+Route::get('pelayanan/pendaftaran/perubahan_izin/opsi_investasi', array('as' => 'pelayanan_pendaftaran_perubahan_izin_opsi_investasi', 'uses' => 'PelayananController@pendaftaran_perubahan_izin_opsi_investasi'));
+
+Route::get('pelayanan/pendaftaran/perubahan_izin/edit', array('as' => 'pelayanan_pendaftaran_perubahan_izin_edit', 'uses' => 'PelayananController@pendaftaran_perubahan_izin_edit'));
+
+Route::get('pelayanan/pendaftaran/perubahan_izin/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_perubahan_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_perubahan_izin_edit_data'));
+
 # Pelayanan / Pendaftaran / Perpanjangan Izin
 
 Route::get('pelayanan/pendaftaran/perpanjangan_izin', array('as' => 'pelayanan_pendaftaran_perpanjanan_izin', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin'));
 
 Route::get('pelayanan/pendaftaran/perpanjangan_izin/data', array('as' => 'pelayanan_pendaftaran_perpanjanan_izin_table_perpanjangan_izin', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin_data'));
+
+Route::get('pelayanan/pendaftaran/perpanjangan_izin/data/{id}', array('as' => 'pelayanan_pendaftaran_perpanjangan_izin_data', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin_data'));
+
+Route::get('pelayanan/pendaftaran/perpanjangan_izin/opsi_kegiatan', array('as' => 'pelayanan_pendaftaran_perpanjangan_izin_opsi_kegiatan', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin_opsi_kegiatan'));
+
+Route::get('pelayanan/pendaftaran/perpanjangan_izin/opsi_investasi', array('as' => 'pelayanan_pendaftaran_perpanjangan_izin_opsi_investasi', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin_opsi_investasi'));
+
+Route::get('pelayanan/pendaftaran/perpanjangan_izin/edit', array('as' => 'pelayanan_pendaftaran_perpanjangan_izin_edit', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin_edit'));
+
+Route::get('pelayanan/pendaftaran/perpanjangan_izin/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_perpanjangan_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin_edit_data'));
 
 # Pelayanan / Pendaftaran / Daftar Ulang Izin
 
@@ -489,17 +534,43 @@ Route::get('pelayanan/pendaftaran/daftar_ulang_izin', array('as' => 'pelayanan_p
 
 Route::get('pelayanan/pendaftaran/daftar_ulang_izin/data', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_table_daftar_ulang_izin', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_data'));
 
+Route::get('pelayanan/pendaftaran/daftar_ulang_izin/data/{id}', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_data', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_data'));
+
+Route::get('pelayanan/pendaftaran/daftar_ulang_izin/opsi_kegiatan', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_opsi_kegiatan', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_opsi_kegiatan'));
+
+Route::get('pelayanan/pendaftaran/daftar_ulang_izin/opsi_investasi', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_opsi_investasi', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_opsi_investasi'));
+
+Route::get('pelayanan/pendaftaran/daftar_ulang_izin/edit', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_edit', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_edit'));
+
+Route::get('pelayanan/pendaftaran/daftar_ulang_izin/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_edit_data'));
+
 # Pelayanan / Pendaftaran / Data Pemohon (Belum)
 
 Route::get('pelayanan/pendaftaran/data_pemohon', array('as' => 'pelayanan_pendaftaran_data_pemohon', 'uses' => 'PelayananController@pendaftaran_data_pemohon'));
 
 Route::get('pelayanan/pendaftaran/data_pemohon/data', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_data'));
 
+Route::get('pelayanan/pendaftaran/data_pemohon/data/{id}', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_data'));
+
+Route::get('pelayanan/pendaftaran/data_pemohon/edit', array('as' => 'pelayanan_pendaftaran_data_pemohon_edit', 'uses' => 'PelayananController@pendaftaran_data_pemohon_edit'));
+
+Route::get('pelayanan/pendaftaran/data_pemohon/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_data_pemohon_edit_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_edit_data'));
+
 # Pelayanan / Pendaftaran / Data Perusahaan (Belum)
 
 Route::get('pelayanan/pendaftaran/data_perusahaan', array('as' => 'pelayanan_pendaftaran_data_perusahaan', 'uses' => 'PelayananController@pendaftaran_data_perusahaan'));
 
 Route::get('pelayanan/pendaftaran/data_perusahaan/data', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_data'));
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/data/{id}', array('as' => 'pelayanan_pendaftaran_data_perusahaan_data', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_data'));
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_kegiatan', array('as' => 'pelayanan_pendaftaran_data_perusahaan_opsi_kegiatan', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_kegiatan'));
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_investasi', array('as' => 'pelayanan_pendaftaran_data_perusahaan_opsi_investasi', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_investasi'));
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/edit', array('as' => 'pelayanan_pendaftaran_data_perusahaan_edit', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_edit'));
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_data_perusahaan_edit_data', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_edit_data'));
 
 # Customer Service / Informasi Perizinan
 
@@ -726,11 +797,27 @@ Route::get('pengaduan/daftar_pengaduan_saran', array('as' => 'pengaduan_daftar_p
 
 Route::get('pengaduan/daftar_pengaduan_saran/data', array('as' => 'pengaduan_daftar_pengaduan_saran_data', 'uses' => 'PengaduanController@daftar_pengaduan_saran_data'));
 
+Route::get('pengaduan/daftar_pengaduan_saran/data/{id}', array('as' => 'pengaduan_daftar_pengaduan_saran_data', 'uses' => 'PengaduanController@daftar_pengaduan_saran_data'));
+
+Route::get('pengaduan/daftar_pengaduan_saran/opsi', array('as' => 'pengaduan_daftar_pengaduan_saran_opsi_pengaduan', 'uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_pengaduan'));
+
+Route::get('pengaduan/daftar_pengaduan_saran/opsi_sumber_pengaduan', array('as' => 'pengaduan_daftar_pengaduan_saran_opsi_sumber_pengaduan', 'uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_sumber_pengaduan'));
+
+Route::get('pengaduan/daftar_pengaduan_saran/edit', array('as' => 'pengaduan_daftar_pengaduan_saran_edit', 'uses' => 'PengaduanController@daftar_pengaduan_saran_edit'));
+
+Route::get('pengaduan/daftar_pengaduan_saran/edit/data/{id}', array('as' => 'pengaduan_daftar_pengaduan_saran_edit_data', 'uses' => 'PengaduanController@daftar_pengaduan_saran_edit_data'));
+
 # Pengaduan / Persetujuan Respon Pengaduan
 
 Route::get('pengaduan/persetujuan_respon_pengaduan', array('as' => 'pengaduan_persetujuan_respon_pengaduan', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan'));
 
 Route::get('pengaduan/persetujuan_respon_pengaduan/data', array('as' => 'pengaduan_persetujuan_respon_pengaduan_data', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_data'));
+
+Route::get('pengaduan/persetujuan_respon_pengaduan/edit', array('as' => 'persetujuan_respon_pengaduan_edit', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_edit'));
+
+Route::get('pengaduan/persetujuan_respon_pengaduan/edit/data/{id}', array('as' => 'persetujuan_respon_pengaduan_edit_data', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_edit_data'));
+
+Route::get('pengaduan/persetujuan_respon_pengaduan/opsi_dinas', array('as' => 'persetujuan_respon_pengaduan_opsi_dinas', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_opsi_dinas'));
 
 # Pengaduan / Pengiriman Respon Pengaduan
 
@@ -738,11 +825,19 @@ Route::get('pengaduan/pengiriman_respon_pengaduan', array('as' => 'pengaduan_pen
 
 Route::get('pengaduan/pengiriman_respon_pengaduan/data', array('as' => 'pengaduan_pengiriman_respon_pengaduan_data', 'uses' => 'PengaduanController@pengiriman_respon_pengaduan_data'));
 
+Route::get('pengaduan/pengiriman_respon_pengaduan/data/{id}', array('as' => 'pengaduan_pengiriman_respon_pengaduan_data', 'uses' => 'PengaduanController@pengiriman_respon_pengaduan_data'));
+
+Route::get('pengaduan/pengiriman_respon_pengaduan/edit', array('as' => 'pengaduan_pengiriman_respon_pengaduan_edit', 'uses' => 'PengaduanController@pengiriman_respon_pengaduan_edit'));
+
+Route::get('pengaduan/pengiriman_respon_pengaduan/edit/data/{id}', array('as' => 'pengaduan_pengiriman_respon_pengaduan_edit_data', 'uses' => 'PengaduanController@pengiriman_respon_pengaduan_edit_data'));
+
 # Pengaduan / Daftar Balasan (Belum)
 
 Route::get('pengaduan/daftar_balasan', array('as' => 'pengaduan_daftar_balasan', 'uses' => 'PengaduanController@daftar_balasan'));
 
 Route::get('pengaduan/daftar_balasan/data', array('as' => 'pengaduan_daftar_balasan_data', 'uses' => 'PengaduanController@daftar_balasan_data'));
+
+Route::get('pengaduan/daftar_balasan/data/{date_start}/{date_finish}', array('as' => 'pengaduan_daftar_balasan_data', 'uses' => 'PengaduanController@daftar_balasan_data'));
 
 /*
 
