@@ -53,14 +53,8 @@
 			</div> -->
 			<div class="form-item wide">
 				<select ng-model="opsi_cari" class="form-option">
-					<option value="">Semua</option>
-					<option value="pendaftaran_id">No Pendaftaran</option>
-					<option value="no_referensi">ID Pemohon</option>
-					<option value="n_pemohon">Nama Pemohon</option>
-					<option value="n_perizinan">Jenis Izin</option>
-					<option value="a_pemohon">Alamat Pemohon</option>
-					<option value="status">Status</option>
-					<option value="d_terima_berkas">Tgl Permohonan</option>
+					<option value="$">Semua</option>
+					<option value="n_perizinan">Nama Perizinan</option>
 				</select>
 			</div>
 			<div class="form-item wide">
