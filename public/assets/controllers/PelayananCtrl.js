@@ -1,17 +1,21 @@
 $app = angular.module('sicantik_backoffice', []);
 
 <<<<<<< HEAD
+fetch_limit = 100;
+=======
+<<<<<<< HEAD
 var fetch_limit = 15;
 ////////////////////////////////////KONFIGURASI START//////////////////////////////
 =======
 var fetch_limit = 100;
+>>>>>>> pr/7
 ////////////////////////////////////KONFIGURASI START//////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 >>>>>>> origin/master
 
 //////////////////////////////SETTING PERIZINAN/////////////////////
 function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
-	
+
 	$scope.show_all = function(){
 		$http.get('permohonan_sementara/data').success(function(ppps_data) {
 			$scope.pelayanan_pendaftaran_permohonan_sementara_data = ppps_data;
@@ -103,7 +107,7 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 }
 
 function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
-	
+
 	$scope.show_all = function(){
 		$http.get('permohonan_izin_baru/data').success(function(pppib_data) {
 			$scope.pelayanan_pendaftaran_permohonan_izin_baru_data = pppib_data;
@@ -489,7 +493,7 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 
 
 function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
-	
+
 	$scope.show_all = function(){
 		$http.get('data_pemohon/data').success(function(ppdp_data) {
 			$scope.pelayanan_pendaftaran_data_pemohon_data = ppdp_data;
@@ -842,5 +846,3 @@ function PelayananCustomerServiceInformasiMasaBerlakuCtrl($scope, $http){
 		$scope.displayed += fetch_limit;
 	}
 }
-
-

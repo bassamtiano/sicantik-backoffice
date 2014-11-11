@@ -141,7 +141,6 @@
 							<a>Customer Service</a>
 							<ul class="sub-nav-branch-wrapper">
 								<a class="sub-nav-branch-item" href="{{ URL::to('pelayanan/customer_service/informasi_perizinan') }}"><li>Informasi Perizinan</li></a>
-								<a class="sub-nav-branch-item" href="{{ URL::to('pelayanan/customer_service/simulasi_tarif_retribusi') }}"><li>Simulasi Tarif Retribusi</li></a>
 								<a class="sub-nav-branch-item" href="{{ URL::to('pelayanan/customer_service/informasi_tracking') }}"><li>Informasi Tracking</li></a>
 								<a class="sub-nav-branch-item" href="{{ URL::to('pelayanan/customer_service/informasi_masa_berlaku') }}"><li>Informasi Masa Berlaku</li></a>
 							</ul>
