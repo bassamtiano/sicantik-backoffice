@@ -162,7 +162,7 @@
 		}
 
 		public function rekapitulasi_pendaftaran_detail_data($id,$date_start,$date_finish){
-			$result = [];			
+			$result = [];
 			$izin = Tmpermohonan::fetch_with_trperizinan_trstspermohonan_for_rekapitulasi_pendaftaran_detail($id,$date_start,$date_finish);
 			foreach ($izin as $k => $v) {
 				$tanggal = $v->d_terima_berkas;
@@ -178,7 +178,7 @@
 				array_push($result, $wrapper);
 			}
 			return $result;
-			
+
 			//return $izin;
 
 		}
@@ -189,7 +189,7 @@
 			return View::make('reporting.pages.rekapitulasi_perizinan');
 		}
 
-		public function rekapitulasi_perizinan_data() {
+		public function rekapitulasi_perizinan_data($date_start = null, $date_finish = null) {
 			/* disini */
 
 
@@ -214,7 +214,7 @@
 					$wrapper['izin_masuk'] = $jmv->jumlah_masuk;
 				}
 
-				$jumlah_proses = Tmpermohonan::fetch_with_trperizinan_trstspermohonan_for_rekapitulasi_perizinan_jumlah_proses($id_perizinan);
+				$jumlah_proses = Tmpermohonan::fetch_with_trperizinan_trstspermohonan_for_rekapitulasi_perizinan_jumlah_proses($id_perizinan, $date_start, $date_finish);
 
 				if(!empty($jumlah_proses)) {
 					foreach($jumlah_proses as $jpk => $jpv) {
@@ -309,14 +309,14 @@
 				//$izin_jadi = $v->izin_jadi;
 				$mohon = Tmpermohonan::fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($id_izin,$date_start,$date_finish);
 				foreach ($mohon as $ik) {
-						
+
 						if (empty($ik->bayar)) {
 							$retribusi = 0;
 						}
 						else{
 							$retribusi = $ik->bayar;
 						}
-						
+
 						$izin_jadi = $ik->izin_jadi;
 						$bayar = Tmpermohonan::fetch_with_tmpermohonan_trperizinan_bayar_for_rekapitulasi_retribusi($id_izin,$date_start,$date_finish);
 						foreach ($bayar as $in) {
@@ -339,7 +339,7 @@
 			 'terbayarkan' => $terbayar,
 			 'terhutangkan' => $terhutang
 			 ];
-			
+
 			 array_push($result, $wrapper);
 			}
 			return $result;

@@ -58,12 +58,13 @@ function ReportingRekapitulasiPendaftaranCtrl($scope, $http){
 		});
 	}
 	$scope.show_all();
+
 	/* # Filter Data ============================================================================================== */
 
 	$scope.opsi_cari = '$';
 	$scope.search = {};
 	$scope.displayed = fetch_limit;
-	
+
 	$scope.loadMore = function() {
 
 		$scope.displayed += fetch_limit;
@@ -78,6 +79,40 @@ function ReportingRekapitulasiPendaftaranCtrl($scope, $http){
 			$scope.reporting_rekapitulasi_pendaftaran = rpd_data;
 		});
 	}
+}
+
+function ReportingRekapitulasiPerizinanCtrl($scope, $http) {
+
+	/* # Prepare Data ============================================================================================= */
+
+	$scope.show_all = function() {
+		$http.get('rekapitulasi_perizinan/data').success(function(rpd_data) {
+			$scope.reporting_rekapitulasi_perizinan = rpd_data;
+		});
+	}
+
+	$scope.show_all();
+
+	/* # Filter Data ============================================================================================== */
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function() {
+
+		$scope.displayed += fetch_limit;
+		$scope.sisa -= fetch_limit;
+	}
+
+	/* # Submit =================================================================================================== */
+	$scope.filter_date = function() {
+		$http.get('rekapitulasi_perizinan/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(rpd_data) {
+			$scope.reporting_rekapitulasi_perizinan = rpd_data;
+		});
+	}
+
+
 }
 
 function ReportingRekapitulasiRetribusiCtrl($scope, $http){
@@ -96,7 +131,7 @@ function ReportingRekapitulasiRetribusiCtrl($scope, $http){
 	$scope.opsi_cari = '$';
 	$scope.search = {};
 	$scope.displayed = fetch_limit;
-	
+
 	$scope.loadMore = function() {
 
 		$scope.displayed += fetch_limit;

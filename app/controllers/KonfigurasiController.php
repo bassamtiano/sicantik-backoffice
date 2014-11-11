@@ -12,6 +12,14 @@
 			return TrkelompokperizinanTrperizinan::fetch_with_trkelompok_perizinan();
 		}
 
+		public function setting_perizinan_jenis_perizinan_opsi_kelompok(){
+			return Trkelompokperizinan::fetch_data();
+		}
+
+		public function setting_perizinan_jenis_perizinan_opsi_unitkerja(){
+			return Trunitkerja::fetch_data();
+		}
+
 		public function setting_perizinan_jenis_perizinan_insert() {
 			$data=[
 				'n_perizinan' => Input::get('n_perizinan'),
@@ -31,8 +39,18 @@
 			return Trperizinan::insert_data($data);
 		}
 
-		public function setting_perizinan_jenis_perizinan_update_data($id) {
-			return Trperizinan::fetch_with_trkelompok_perizinan_trunitkerja($id);
+		public function setting_perizinan_jenis_perizinan_edit_data($id) {
+			$data_perizinan = Trperizinan::fetch_with_trkelompok_perizinan_trunitkerja_edit($id);
+
+			$result = [];
+
+			foreach($data_perizinan as $val => $key) {
+				foreach($key as $v => $k) {
+					$result[$v] = $k;
+				}
+			}
+			
+			return $result;
 			
 		}
 
@@ -164,7 +182,7 @@
 		}
 
 		public function setting_perizinan_koefisien_tarif_data() {
-			return Trperizinan::fetch_with_trproperty();
+			return Trperizinan::fetch_with_trproperty_trperizinan();
 
 		}
 

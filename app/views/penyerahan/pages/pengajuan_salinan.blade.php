@@ -120,7 +120,12 @@
 			<td class="c_tanggal_permohonan"> @{{ pps.d_terima_berkas }} </td>
 			<td class="c_no_surat"> @{{ pps.no_surat }} </td>
 			<td class="c_tanggal_surat"> @{{ pps.tgl_surat }} </td>
-			<td class="c_aksi"> @{{ pps.id }} </td>
+			<td class="c_aksi">
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_penyerahan', ppi.id)" class="accept">Setujui</a>
+				</span>
+				<!-- @{{ pps.id }} -->
+			</td>
 		</tr>
 		<tr>
 			<td colspan="8" style="text-align:center">
@@ -132,5 +137,5 @@
 @stop
 
 @section('modal-content')
-	
+
 @stop

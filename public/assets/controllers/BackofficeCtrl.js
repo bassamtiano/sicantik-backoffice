@@ -1,5 +1,26 @@
 var fetch_limit = 5;
 
+function clear_iframe() {
+	$('#target_edit').attr('src', '');
+}
+
+function awww() {
+
+	setTimeout(function() {
+		result = $('#target_edit').contents().find('body').html();
+		if(result == '') {
+			awww();
+		}
+		else if(result === undefined) {
+			awww();
+		}
+		else {
+			alert(result);
+		}
+	}, 1);
+
+}
+
 $app = angular.module('sicantik_backoffice', [])
 
 .controller('BackofficePendataanEntryDataPerizinanCtrl', ['$http', '$scope',
@@ -32,10 +53,12 @@ $app = angular.module('sicantik_backoffice', [])
 
 		$scope.backoffice_pendataan_entry_data_perizinan_data;
 
+		$scope.select_iseng = 'KTP';
+
 		 $scope.items = [
-		   {source: 'KTP', Title: 'KTP'},
-		   {source: 'SIM', Title: 'SIM'},
-		   {source: 'PASSPORT', Title: 'PASSPORT'},
+		   {source: 'KTP', Title: 'KTP', selected: true},
+		   {source: 'SIM', Title: 'SIM', selected: false},
+		   {source: 'PASSPORT', Title: 'PASSPORT', selected:false},
 		];
 
 
@@ -58,13 +81,77 @@ $app = angular.module('sicantik_backoffice', [])
 			eval("$scope." + modal_name + "= false");
 		}
 
+		/* Prepare Opsi */
+
+		$scope.opsi_pemohon_kelurahan = function(id) {
+			$http.get('entry_data_perizinan/data_awal/opsi/pemohon_kelurahan/' + id).success(function(kel_pemohon) {
+				$scope.opsi_kel_pemohon = kel_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_kecamatan = function(id) {
+			$http.get('entry_data_perizinan/data_awal/opsi/pemohon_kecamatan/' + id).success(function(kec_pemohon) {
+				$scope.opsi_kec_pemohon = kec_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_kabupaten = function(id) {
+			$http.get('entry_data_perizinan/data_awal/opsi/pemohon_kabupaten/' + id).success(function(kab_pemohon) {
+				$scope.opsi_kab_pemohon = kab_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_propinsi = function(id) {
+			$http.get('entry_data_perizinan/data_awal/opsi/pemohon_propinsi/' + id).success(function(prop_pemohon) {
+				$scope.opsi_prop_pemohon = prop_pemohon;
+			});
+		}
+
+		$scope.opsi_perusahaan_kelurahan = function(id) {
+			$http.get('entry_data_perizinan/data_awal/opsi/perusahaan_kelurahan/' + id).success(function(kel_perusahaan) {
+				$scope.opsi_kel_perusahaan = kel_perusahaan;
+			});
+		}
+
+		$scope.opsi_perusahaan_kecamatan = function(id) {
+			$http.get('entry_data_perizinan/data_awal/opsi/perusahaan_kecamatan/' + id).success(function(kec_perusahaan) {
+				$scope.opsi_kec_perusahaan = kec_perusahaan;
+			});
+		}
+
+		$scope.opsi_perusahaan_kabupaten = function(id) {
+			$http.get('entry_data_perizinan/data_awal/opsi/perusahaan_kabupaten/' + id).success(function(kab_perusahaan) {
+				$scope.opsi_kab_perusahaan = kab_perusahaan;
+			});
+		}
+
+		$scope.opsi_perusahaan_propinsi = function(id) {
+			$http.get('entry_data_perizinan/data_awal/opsi/perusahaan_propinsi/' + id).success(function(prop_perusahaan) {
+				$scope.opsi_prop_perusahaan = prop_perusahaan;
+			});
+		}
+
 		/*  Construct Modal Function */
 
+
+
+
 		$scope.modal_data_awal_data = function(id) {
+
 			$http.get('entry_data_perizinan/data_awal/data/' + id).success(function(edpdad) {
 				$scope.entry_data_perizinan_data_awal_data = edpdad;
-			});
 
+				$scope.opsi_pemohon_propinsi($scope.entry_data_perizinan_data_awal_data.propinsi_pemohon);
+				$scope.opsi_pemohon_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_pemohon);
+				$scope.opsi_pemohon_kabupaten($scope.entry_data_perizinan_data_awal_data.kabupaten_pemohon);
+				$scope.opsi_pemohon_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_pemohon);
+
+				$scope.opsi_perusahaan_propinsi($scope.entry_data_perizinan_data_awal_data.propinsi_perusahaan);
+				$scope.opsi_perusahaan_kabupaten($scope.entry_data_perizinan_data_awal_data.kabupaten_perusahaan);
+				$scope.opsi_perusahaan_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_perusahaan);
+				$scope.opsi_perusahaan_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_perusahaan);
+
+			});
 
 		}
 
@@ -73,6 +160,8 @@ $app = angular.module('sicantik_backoffice', [])
 				$scope.entry_data_perizinan_edit_data = edped;
 			});
 		}
+
+
 
 
 		/* Define Tab Name */
@@ -106,14 +195,28 @@ $app = angular.module('sicantik_backoffice', [])
 			});
 		}
 
-		$scope.modal_data_awal_submit = function() {
-			$http({
-				method: "POST",
-				url: 'submit_data',
-				data: $scope.prototype_post,
-			}).success(function(data){
+		/* Trial */
 
-			});
+
+
+		$scope.modal_data_awal_submit = function() {
+
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html();
+				if(result == '') {
+					awww();
+				}
+				else if(result === undefined) {
+					awww();
+				}
+				else {
+					alert(result);
+				}
+				clear_iframe();
+			}, 1);
+
+
 
 		}
 

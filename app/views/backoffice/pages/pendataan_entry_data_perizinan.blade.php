@@ -120,7 +120,7 @@
 			<td class="c_tanggal_permohonan"> @{{ bpedp.d_terima_berkas }} </td>
 			<td class="c_status"> @{{ bpedp.c_pendaftaran }} </td>
 			<td class="c_aksi">
-				<span class="button-group">
+				<span class="button-group group-2">
 					<a href ng-click="open_modal('modal_data_awal', bpedp.id)" class="edit">Data Awal</a>
 					<a href ng-click="open_modal('modal_edit', bpedp.id)" class="edit">Edit</a>
 				</span>
