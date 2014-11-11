@@ -78,7 +78,7 @@
 @stop
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -120,16 +120,9 @@
 				</p>
 			</td>
 			<td class="c_aksi">
-<<<<<<< HEAD
 				<span class="button-group group-2">
-					<a href ng-click="open_modal('modal_edit')" class="edit">Edit</a>
-					<a href ng-click="open_modal('modal_delete')" class="delete">Delete</a>
-				</span>
-			</td>
-=======
-				<span class="button-group">
-					<a href ng-click="open_modal('modal_edit', spjp.id)" class="row-item ya">Edit</a>
-					<a href ng-click="open_modal('modal_delete')" class="row-item tidak">Hapus</a>
+					<a href ng-click="open_modal('modal_edit', spjp.id)" class="edit">Edit</a>
+					<a href ng-click="open_modal('modal_delete')" class="delete">Hapus</a>
 				</span>
 			</td>
 		</tr>
@@ -137,7 +130,6 @@
 			<td colspan="8" style="text-align:center">
 				<button ng-click="loadMore()" class="btn-load-more">Load More</button>
 			</td>
->>>>>>> pr/3
 		</tr>
 	</table>
 

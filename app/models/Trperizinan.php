@@ -73,7 +73,7 @@
 
 			->join('trkelompok_perizinan_trperizinan','trperizinan.id', '=', 'trkelompok_perizinan_trperizinan.trperizinan_id')
 			->join('trkelompok_perizinan','trkelompok_perizinan_trperizinan.trkelompok_perizinan_id', '=', 'trkelompok_perizinan.id')
-			
+
 			//->join('tmpermohonan_trperizinan', 'trperizinan.id','=','tmpermohonan_trperizinan.trperizinan_id')
 			//->join('tmpermohonan', 'tmpermohonan_trperizinan.tmpermohonan_id', '=' , 'tmpermohonan.id')
 
@@ -228,7 +228,7 @@
 		public static function fetch_with_trproperty_trperizinan() {
 
 			#not finished
-			
+
 			return DB::table('trperizinan')
 
 			->join('trperizinan_trproperty', 'trperizinan.id', '=', 'trperizinan_trproperty.trperizinan_id')
@@ -281,11 +281,6 @@
 
 		}
 
-		public static function fetch_data_opsi() {
-			return Trperizinan::select('id', 'n_perizinan')
-			->get();
-		}
-		
 		public static function fetch_with_trkelompok_perizinan_trunitkerja_edit($id) {
 
 			return DB::table('trperizinan')
