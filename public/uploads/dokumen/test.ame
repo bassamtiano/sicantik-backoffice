@@ -1,1 +1,10 @@
-$test;
+echo "<table>";
+
+    foreach($perizinan as $key => $val) {
+        echo "<tr>";
+            echo '<td>' . $val['n_perizinan'] . '</td>';
+            echo '<td>' . $val['v_perizinan'] . '</td>';
+        echo "</tr>";
+    }
+
+echo "</table>";

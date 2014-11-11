@@ -1,8 +1,14 @@
 $app = angular.module('sicantik_backoffice', []);
+<<<<<<< HEAD
 
 
 var fetch_limit = 15;
 ////////////////////////////////////KONFIGURASI START//////////////////////////////
+=======
+fetch_limit = 100;
+
+
+>>>>>>> origin/master
 //////////////////////////////SETTING PERIZINAN/////////////////////
 function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 
@@ -11,6 +17,10 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 			$scope.pelayanan_pendaftaran_permohonan_sementara_data = ppps_data;
 		});
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -83,6 +93,10 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 	$scope.modal_edit_submit = function() {
 
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }
 
 function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
@@ -163,6 +177,10 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 	$scope.modal_edit_submit = function() {
 
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }
 
 function PelayananPendaftaranPermohonanPerubahanIzinCtrl($scope, $http) {
@@ -173,6 +191,10 @@ function PelayananPendaftaranPermohonanPerubahanIzinCtrl($scope, $http) {
 		});
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	$scope.opsi_kegiatan = function(){
 		$http.get('perubahan_izin/opsi_kegiatan').success(function(piok_data) {
 			$scope.perubahan_izin_opsi_kegiatan = piok_data;
@@ -264,6 +286,10 @@ function PelayananPendaftaranPermohonanPerpanjanganIzinCtrl($scope, $http) {
 			$scope.pelayanan_pendaftaran_permohonan_perpanjangan_izin_data = pppi_data;
 		});
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	$scope.opsi_kegiatan = function(){
 		$http.get('perpanjangan_izin/opsi_kegiatan').success(function(piok_data) {
 			$scope.perpanjangan_izin_opsi_kegiatan = piok_data;
@@ -290,6 +316,10 @@ function PelayananPendaftaranPermohonanPerpanjanganIzinCtrl($scope, $http) {
 
 	$scope.pelayanan_pendaftaran_permohonan_perpanjangan_izin_data;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	/* # Modal ==================================================================================================== */
 
 	/* Define Modal Name */
@@ -373,6 +403,10 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 	$scope.opsi_investasi();
 	$scope.opsi_kegiatan();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -384,6 +418,10 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 	}
 
 	$scope.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	/* # Modal ==================================================================================================== */
 
 	/* Define Modal Name */
@@ -460,6 +498,10 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	}
 
 	$scope.opsi_pelayanan();
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -471,6 +513,10 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	}
 
 	$scope.pelayanan_pendaftaran_data_pemohon_data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	/* # Modal ==================================================================================================== */
 
 	/* Define Modal Name */
@@ -517,11 +563,19 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	}
 
 	/* # Submit =================================================================================================== */
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	$scope.filter_pelayanan = function(){
 		$http.get('data_pemohon/data/' + $scope.pelayanan_id).success(function(ppdp_data) {
 			$scope.pelayanan_pendaftaran_data_pemohon_data = ppdp_data;
 		});
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }
 
 

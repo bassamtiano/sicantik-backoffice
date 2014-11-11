@@ -55,10 +55,15 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
+<<<<<<< HEAD
 			// 'database'  => 'tot_masterbo',
 			'database'  => 'backoffice',
+=======
+			'database'  => 'tot_masterbo',
+			// 'database'  => 'agamaja',
+>>>>>>> origin/master
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'admin',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

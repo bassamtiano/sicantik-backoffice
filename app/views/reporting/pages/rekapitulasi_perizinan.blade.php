@@ -57,7 +57,8 @@
 @stop
 
 @section('nav-menu-left')
-    <!-- {{ HTML::linkRoute('reporting_realisasi_penerimaan_cetak', 'Print', [1,1], ['class' => 'btn']) }}-->
+    <!-- {{ HTML::linkRoute('reporting_realisasi_penerimaan_cetak', 'Print', [1,1],  ['class' => 'btn']) }}-->
+
     <form ng-submit="filter_date()">
         <div class="table-form-content">
             <div class="form-item">
@@ -71,6 +72,7 @@
             </div>
         </div>
     </form>
+    <a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_perizinan/cetak') }}/@{{ date.start }}/@{{ date.finish }}" ng-if="date.start !== 'undefined' && date.finish !== 'undefined'">Print</a>
 @stop
 
 @section('nav-menu-right')

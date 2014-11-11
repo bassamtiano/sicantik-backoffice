@@ -82,7 +82,7 @@ Route::get('reporting/rekapitulasi_perizinan/data', ['as' => 'reporting_rekapitu
 
 Route::get('reporting/rekapitulasi_perizinan/data/{date_start}/{date_finish}', ['as' => 'reporting_rekapitulasi_perizinan_data', 'uses' => 'ReportingController@rekapitulasi_perizinan_data']);
 
-Route::get('reporting/rekapitulasi_perizinan/cetak', ['as' => 'reporting_rekapitulasi_perizinan_cetak', 'uses' => 'ReportingController@rekapitulasi_perizinan_cetak']);
+Route::get('reporting/rekapitulasi_perizinan/cetak/{date_start}/{date_finish}', ['as' => 'reporting_rekapitulasi_perizinan_cetak', 'uses' => 'ReportingController@rekapitulasi_perizinan_cetak']);
 
 # Reporting / Rekapitulasi Retribusi
 
