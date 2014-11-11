@@ -47,6 +47,7 @@
 @stop
 
 @section('nav-menu-right')
+	<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_pendaftaran/cetak') }}/@{{ date.start }}/@{{ date.finish }}" ng-if="date.start.length > 0 && date.finish.length > 0"> Print</a>
 @stop
 
 @section('table_nav')

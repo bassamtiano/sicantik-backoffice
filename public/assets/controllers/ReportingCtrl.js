@@ -60,7 +60,7 @@ function ReportingRekapitulasiPendaftaranCtrl($scope, $http){
 	$scope.show_all();
 
 	/* # Filter Data ============================================================================================== */
-
+	$scope.date = [];
 	$scope.opsi_cari = '$';
 	$scope.search = {};
 	$scope.displayed = fetch_limit;
