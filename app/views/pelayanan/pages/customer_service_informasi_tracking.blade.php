@@ -6,7 +6,7 @@
 			width: 3%;
 			text-align: center;
 		}
-		
+
 		.c_pendaftaran_id {
 			width: 10%;
 			text-align: center;
@@ -60,7 +60,7 @@
 @stop
 
 @section('nav-menu-left')
-	
+
 @stop
 
 @section('nav-menu-right')
@@ -86,7 +86,7 @@
 
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -113,7 +113,11 @@
 			<td class="c_pemohon">@{{ csit.n_pemohon }}</td>
 			<td class="c_jenis_permohonan">@{{ csit.n_permohonan }}</td>
 			<td class="c_status">@{{ csit.n_sts_permohonan}}</td>
-			<td class="c_aksi"><a href ng-click="open_modal('modal_cs_detail_tracking', csit.id)" class="row-item ya">Detail</a></td>	
+			<td class="c_aksi">
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_cs_detail_tracking', csit.id)" class="edit">Detail</a>
+				</span>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="12" style="text-align:center">
