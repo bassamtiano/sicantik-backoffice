@@ -288,7 +288,32 @@
 			return $result;
 		}
 
-		public function rekapitulasi_perizinan_cetak() {
+		public function rekapitulasi_perizinan_cetak($date_start = null, $date_finish = null) {
+			$test = [
+				['nama' => 'bassam', 'alamat' => 'jakarta'],
+				['nama' => 'tiano', 'alamat' => 'bogor']
+			];
+
+			$perizinan = Trperizinan::fetch_data(['id', 'n_perizinan', 'v_perizinan']);
+
+			$url = URL::to('uploads/dokumen/test.ame');
+			$result = '';
+			$fh = fopen($url, 'r');
+			while ($line = fgets($fh)) {
+				 $result .= $line;
+			}
+
+			eval($result);
+
+			fclose($fh);
+
+			
+
+			$pdf = PDF::loadView('reporting.dokumen.dokumen_wrapper',  ['result' => $result]);
+			return $pdf->setPaper('a4')->setOrientation('portrait')->download('bassam' . '.pdf');
+
+
+
 
 		}
 
