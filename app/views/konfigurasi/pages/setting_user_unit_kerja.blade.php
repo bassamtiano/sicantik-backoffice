@@ -19,7 +19,7 @@
 @stop
 
 @section('page_name')
-	Setting User / Pegawai
+	Konfigurasi / Setting User / Unit Kerja
 @stop
 
 @section('angular_controller_script')
@@ -35,16 +35,16 @@
 @stop
 
 @section('nav-menu-right')
-	<form>
+	<form ng-submit="filter_konfigurasi()">
 		<div class="table-form-content">
-			<div class="form-item">
-				&nbsp
+			<div class="form-item wide">
+				<select ng-model="opsi_cari" class="form-option">
+					<option value="$">Semua</option>
+					<option value="n_unitKerja">Nama Unit Kerja</option>
+				</select>
 			</div>
 			<div class="form-item wide">
-				<input type="text" placeholder="Search Key">
-			</div>
-			<div class="form-item">
-				<input type="submit" value="Search">
+				<input type="text" placeholder="Kata Kunci" ng-model="search[opsi_cari]">
 			</div>
 		</div>
 	</form>
@@ -54,7 +54,7 @@
 	<table>
 		<tr>
 			<th class="c_no">No</th>
-			<th class="c_nama_unit">Nama Unit Kerja</th>
+			<th class="c_nama_unit" ng-click="predicate='n_unitkerja'; reverse=!reverse">Nama Unit Kerja</th>
 			<th class="c_aksi">Aksi</th>
 		</tr>
 	</table>
@@ -63,10 +63,15 @@
 @section('table_content')
 
 	<table role="table-fluid">
-		<tr ng-repeat="sukj in setting_user_unit_kerja ">
+		<tr ng-repeat="suuk in setting_user_unit_kerja_data | orderBy:predicate:reverse | filter:search | limitTo:displayed">
 			<td class="c_no">@{{ $index+1 }}</td>
-			<td class="c_nama_unit">@{{ sukj.n_unitkerja }}</td>
-			<td class="c_aksi">@{{ sukj.id }}</td>
+			<td class="c_nama_unit">@{{ suuk.n_unitkerja }}</td>
+			<td class="c_aksi">@{{ suuk.id }}</td>
+		</tr>
+		<tr>
+			<td colspan="8" style="text-align:center">
+				<button ng-click="loadMore()" class="btn-load-more">Load More</button>
+			</td>
 		</tr>
 	</table>
 

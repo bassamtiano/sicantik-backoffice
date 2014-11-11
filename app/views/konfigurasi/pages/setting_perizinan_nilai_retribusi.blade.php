@@ -44,7 +44,7 @@
 @stop
 
 @section('page_name')
-	Setting Perizinan / Persyaratan Izin
+	Konfigurasi / Setting Perizinan / Nilai Retribusi
 @stop
 
 @section('angular_controller_script')
@@ -60,16 +60,20 @@
 @stop
 
 @section('nav-menu-right')
-	<form>
+	<form ng-submit="filter_konfigurasi()">
 		<div class="table-form-content">
-			<div class="form-item">
-				&nbsp
+			<div class="form-item wide">
+				<select ng-model="opsi_cari" class="form-option">
+					<option value="$">Semua</option>
+					<option value="n_perizinan">Nama Izin</option>
+					<option value="v_retribusi">Biaya Formulir</option>
+					<option value="v_denda">Nilai Dasar Retribusi</option>
+					<option value="d_sk_mulai_berlaku">Tanggal Mulai Berlaku</option>
+					<option value="d_sk_akhir_berlaku">Tanggal Akhir Berlaku</option>
+				</select>
 			</div>
 			<div class="form-item wide">
-				<input type="text" placeholder="Search Key">
-			</div>
-			<div class="form-item">
-				<input type="submit" value="Search">
+				<input type="text" placeholder="Kata Kunci" ng-model="search[opsi_cari]">
 			</div>
 		</div>
 	</form>
@@ -80,11 +84,11 @@
 	<table>
 		<tr>
 			<th class="c_no">No</th>
-			<th class="c_nama_izin">Nama Izin</th>
-			<th class="c_biaya_formulir">Biaya Formulir</th>
-			<th class="c_nilai_dasar_retribusi">Nilai Dasar Retribusi</th>
-			<th class="c_tanggal_mulai_berlaku">Tanggal Mulai Berlaku</th>
-			<th class="c_tanggal_akhir_berlaku">Tanggal Akhir Berlaku</th>
+			<th class="c_nama_izin" ng-click="predicate='n_perizinan'; reverse=!reverse">Nama Izin</th>
+			<th class="c_biaya_formulir" ng-click="predicate='v_retribusi'; reverse=!reverse">Biaya Formulir</th>
+			<th class="c_nilai_dasar_retribusi" ng-click="predicate='v_denda'; reverse=!reverse">Nilai Dasar Retribusi</th>
+			<th class="c_tanggal_mulai_berlaku" ng-click="predicate='d_sk_terbit'; reverse=!reverse">Tanggal Mulai Berlaku</th>
+			<th class="c_tanggal_akhir_berlaku" ng-click="predicate='d_sk_berakhir'; reverse=!reverse">Tanggal Akhir Berlaku</th>
 			<th class="c_model_perhitungan">Model Perhitungan</th>
 			<th class="c_aksi">Aksi</th>
 		</tr>
@@ -95,7 +99,7 @@
 @section('table_content')
 
 	<table role="table-fluid">
-		<tr ng-repeat="spnr in setting_perizinan_nilai_retribusi_data">
+		<tr ng-repeat="spnr in setting_perizinan_nilai_retribusi_data | orderBy:predicate:reverse | filter:search | limitTo:displayed">
 			<td class="c_no">@{{ $index+1 }}</td>
 			<td class="c_nama_izin">@{{ spnr.n_perizinan }}</td>
 			<td class="c_biaya_formulir">@{{ spnr.v_retribusi }}</td>
@@ -111,6 +115,11 @@
 				</p>
 			</td>
 			<td class="c_aksi">@{{ spnr.id }}</td>
+		</tr>
+		<tr>
+			<td colspan="8" style="text-align:center">
+				<button ng-click="loadMore()" class="btn-load-more">Load More</button>
+			</td>
 		</tr>
 	</table>
 

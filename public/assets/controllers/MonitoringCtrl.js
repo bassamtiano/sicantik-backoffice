@@ -1,10 +1,49 @@
 $app = angular.module('sicantik_backoffice',[]);
-var fetch_limit = 35;
+var fetch_limit = 15;
 
 function MonitoringPerJenisPerizinanCtrl($http, $scope){
-	$http.get('per_jenis_perizinan/data').success(function(mpjp_data) {
-		$scope.per_jenis_perizinan_data = mpjp_data;
+	$scope.show_all = function() {
+	$http.get('per_jenis_perizinan/data').success(function(mpjp_data){
+		$scope.monitoring_per_jenis_perizinan_data = mpjp_data;
 	});
+}
+
+	$scope.show_all();
+
+	$scope.date = [];
+	$scope.date.id = "null";
+
+	$scope.per_jenis_perizinan_datacombo = function() {
+	$http.get('per_jenis_perizinan/datacombo').success(function(mpjpc_datacombo){
+		$scope.monitoring_per_jenis_perizinan_datacombo = mpjpc_datacombo;
+	});
+}
+$scope.per_jenis_perizinan_datacombo();
+
+/* # Filter Data ============================================================================================== */
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function() {
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.monitoring_per_jenis_perizinan_data;
+
+	/* # Modal ==================================================================================================== */
+
+
+
+	/* # Submit =================================================================================================== */
+
+	$scope.filter_date = function() {
+		$http.get('per_jenis_perizinan/data/' + $scope.date.id + '/' + $scope.date.start + '/' + $scope.date.finish).success(function(mpjp_data) {
+			$scope.monitoring_per_jenis_perizinan_data = mpjp_data;
+		});
+	}
+
 }
 
 function MonitoringPerJangkaWaktuCtrl($http, $scope){
@@ -156,6 +195,9 @@ function MonitoringPerNamaPemohonCtrl($http, $scope){
 }
 
 	$scope.show_all();
+	$scope.date = [];
+	
+	$scope.date.n_pemohon = null;
 
 /* # Filter Data ============================================================================================== */
 

@@ -1,31 +1,57 @@
 {{ HTML::script('assets/js/angular.min.js') }}
+{{ HTML::script('assets/js/jquery.min.js') }}
 
 
 <script>
 
-function test($http, $scope) {
-    $scope.mooo = 'test'
+// function test($http, $scope) {
+//     $scope.mooo = 'test'
+//
+//     $scope.prototype_post = {};
+//
+//     $scope.test = {
+//         ['nama' : 'bassam']
+//     };
+//
+//
+//     $scope.send_data = function() {
+//
+//         $http({
+//             method: "POST",
+//             url: 'submit_data',
+//             data: $scope.prototype_post,
+//        }).success(function(data){
+//
+//        });
+//     }
+// }
 
-    $scope.prototype_post = {};
 
-    $scope.test = {
-        ['nama' : 'bassam']
-    };
+function haiii(aww) {
+    // var test = $('#target_post').contents().find('#result');
+
+    // index = test.context;
+
+    // aw = $('iframe#target_post');
 
 
-    $scope.send_data = function() {
+    // aw = index.find('p');
 
-        $http({
-            method: "POST",
-            url: 'submit_data',
-            data: $scope.prototype_post,
-       }).success(function(data){
+    // console.log(index);
+    // console.log(test);
+    // console.log(test.context.all.target_post);
 
-       });
-    }
+    // console.log(aw);
+
+    alert(aww);
+}
+
+function get_iframe() {
+    alert($('#target_post').contents().find('body').html());
 }
 
 </script>
+
 
 
 <html>
@@ -35,7 +61,8 @@ function test($http, $scope) {
 
 <body ng-app>
 
-    <div ng-controller="test">
+    <!-- <div ng-controller="test"> -->
+    <div>
 
         <!-- <form ng-submit="send_data()" method="post"> -->
         <!-- <form action="submit_data" method="post"> -->
@@ -47,12 +74,11 @@ function test($http, $scope) {
             <input type="text" name="nama" placeholder="nama" >
             <input type="text" name="alamat" placeholder="alamat">
 
+            <!-- <input type="submit" onclick="haiii()"> -->
             <input type="submit">
         </form>
-
-        <iframe src="#" id="target_post" name="target_frame" style="width:0; height:0; position:relative; background:#fff;"></iframe>
-
-        <textarea id="submitDebugText1">@{{ajaxSubmitResult1 | json}}</textarea>
+        <button onclick="get_iframe()">Get Iframe</button>
+        <iframe id="target_post" name="target_post" style="width:100; height:100; position:relative; background:#fff;"></iframe>
 
     </div>
 

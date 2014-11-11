@@ -126,8 +126,8 @@
 			<td class="c_tanggal_peninjauan"> @{{ bttpbap.d_survey }} </td>
 			<td class="c_status">@{{ bttpbap.c_tinjauan }}</td>
 			<td class="c_aksi">
-				<span class="button-group">
-					<a href ng-click="open_modal('modal_edit', bttpbap.id)" class="edit">Edit Berita Acara Pemeriksaan</a>
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_edit', bttpbap.id)" class="edit" title="Edit Berita Acara Pemeriksaan">Edit Berita Acara Pemeriksaan</a>
 				</span>
 			</td>
 		</tr>
