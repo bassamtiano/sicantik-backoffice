@@ -102,7 +102,7 @@ Route::get('reporting/rekapitulasi_tinjauan_lapangan/data', ['as' => 'reporting_
 
 Route::get('reporting/rekapitulasi_tinjauan_lapangan/data/{tanggal_awal}/{tanggal_akhir}', ['as' => 'reporting_rekapitulasi_tinjauan_lapangan_data', 'uses' => 'ReportingController@rekapitulasi_tinjauan_lapangan_data']);
 
-Route::get('reporting/rekapitulasi_tinjauan_lapangan/cetak', ['as' => 'reporting_rekapitulasi_tinjauan_lapangan_cetak', 'uses' => 'ReportingController@rekapitulasi_tinjauan_lapangan_cetak']);
+Route::get('reporting/rekapitulasi_tinjauan_lapangan/cetak/{tanggal_awal}/{tanggal_akhir}', ['as' => 'reporting_rekapitulasi_tinjauan_lapangan_cetak', 'uses' => 'ReportingController@rekapitulasi_tinjauan_lapangan_cetak']);
 
 # Reporting / Rekapitulasi Berkas Kembali
 

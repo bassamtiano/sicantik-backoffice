@@ -164,8 +164,8 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			if(!empty($tanggal_awal) && !empty($tanggal_akhir)) {
 				return DB::table('tmpermohonan')
 
-				->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
-				->join('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
+				->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+				->leftjoin('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
 
 				->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
 				->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')

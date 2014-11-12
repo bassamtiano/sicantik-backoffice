@@ -58,6 +58,7 @@
 @stop
 
 @section('nav-menu-right')
+<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_retribusi/cetak') }}/@{{ date.start }}/@{{ date.finish }}" ng-if="date.start.length > 0 && date.finish.length > 0"> Print</a>
 @stop
 
 @section('table_nav')
@@ -65,7 +66,7 @@
 		<tr>
 			<th class="c_no">No</th>
 			<th class="c_jenis_izin"> Jenis Izin </th>
-			<th class="c_total_izin"> Izin Jadi</th>
+			<th class="c_total_izin">Izin Jadi</th>
 			<th class="c_retribusi"> Total Retribusi</th>
 			<th class="c_terbayar"> Terbayar </th>
 			<th class="c_terhutang"> Terhutang </th>
@@ -78,7 +79,7 @@
 		<tr ng-repeat="rrt in reporting_rekapitulasi_retribusi | limitTo:displayed">
 			<td class="c_no">@{{ $index+1 }}</td>
 			<td class="c_jenis_izin"> @{{ rrt.nama_perizinan}} </td>
-			<td class="c_total_izin"> @{{ rrt.total }}</td>
+			<td class="c_total_izin"> @{{ rrt.izin_jadi }}</td>
 			<td class="c_retribusi"> @{{ rrt.retribusi_total}}</td>
 			<td class="c_terbayar"> @{{ rrt.terbayarkan}}</td>
 			<td class="c_terhutang">@{{ rrt.terhutangkan}}</td>

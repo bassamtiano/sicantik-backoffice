@@ -102,7 +102,7 @@
 
 			}
 
-			$settings = Settings::get_data_for_realisasi_penerimaan_cetak();
+			$settings = Settings::get_data_cetak();
 			$header = [];
 
 			foreach ($settings as $key) {
@@ -122,13 +122,6 @@
 				'surat_title' => $surat_title
 
 			];
-
-
-
-			// return View::make('reporting.dokumen.realisasi_penerimaan', $data);
-
-
-
 	        $pdf = PDF::loadView('reporting.dokumen.realisasi_penerimaan', $data);
 	        return $pdf->setPaper('a4')->setOrientation('portrait')->download($surat_title . '.pdf');
 
@@ -181,7 +174,7 @@
 			array_push($result, $wrapper);
 			}
 
-		$settings = Settings::get_data_for_rekapitulasi_pendaftaran_cetak();
+		$settings = Settings::get_data_cetak();
 		$header = [];
 
 			foreach ($settings as $key) {
@@ -226,9 +219,6 @@
 				array_push($result, $wrapper);
 			}
 			return $result;
-
-			//return $izin;
-
 		}
 
 		# Rekapitulasi Perizinan 	====================================================================================================
@@ -393,7 +383,70 @@
 			return $result;
 		}
 
-		public function rekapitulasi_retribusi_cetak() {
+		public function rekapitulasi_retribusi_cetak($date_start = null, $date_finish = null) {
+			$surat_title = 'Laporan Rekapitulasi Retribusi Per tanggal ' . $date_start . ' - ' . $date_finish;
+			$result = [];
+			$terbayar = 0;
+			$retribusi = 0;
+			$izin = Trperizinan::fetch_with_trkelompok_perizinan_for_rekapitulasi_retribusi();
+			foreach ($izin as $k => $v) {
+				$id_izin = $v->id;
+				$n_izin = $v->n_perizinan;
+				//$izin_jadi = $v->izin_jadi;
+				$mohon = Tmpermohonan::fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($id_izin,$date_start,$date_finish);
+				foreach ($mohon as $ik) {
+
+						if (empty($ik->bayar)) {
+							$retribusi = 0;
+						}
+						else{
+							$retribusi = $ik->bayar;
+						}
+
+						$izin_jadi = $ik->izin_jadi;
+						$bayar = Tmpermohonan::fetch_with_tmpermohonan_trperizinan_bayar_for_rekapitulasi_retribusi($id_izin,$date_start,$date_finish);
+						foreach ($bayar as $in) {
+						//$terbayar = $in->retribusi;
+							if (empty($in->retribusi)) {
+								$terbayar = 0;
+							}
+							else{
+								$terbayar = $in->retribusi;
+							}
+						}
+						$terhutang = $retribusi - $terbayar;
+
+				}
+
+			 $wrapper = [
+			 'nama_perizinan' => $n_izin,
+			 'izin_jadi' => $izin_jadi,
+			 'retribusi_total' => $retribusi,
+			 'terbayarkan' => $terbayar,
+			 'terhutangkan' => $terhutang
+			 ];
+			 array_push($result, $wrapper);
+			}
+		$settings = Settings::get_data_cetak();
+		$header = [];
+			foreach ($settings as $key) {
+				$header[$key['name']] = $key['value'];
+			}
+		$title_kabupaten = Trkabupaten::get_nama_kabupaten($header['app_city']);
+		$data = [
+				'logo' => 'assets/img/logo.png',
+				'title_nama' => $header['app_kantor'],
+				'title_kabupaten' => $title_kabupaten,
+				'title_alamat' => $header['app_alamat'],
+				'title_tlp' => $header['app_tlp'],
+				'title_fax' => $header['app_fax'],
+				'result' => $result,
+				'surat_title' => $surat_title
+
+			];
+			// return View::make('reporting.dokumen.realisasi_penerimaan', $data);
+	    $pdf = PDF::loadView('reporting.dokumen.rekapitulasi_retribusi', $data);
+	    return $pdf->setPaper('a4')->setOrientation('portrait')->download($surat_title . '.pdf');
 
 		}
 
@@ -407,8 +460,29 @@
 			return Tmpermohonan::fetch_with_tmpemohon_trperizinan_tmperusahaan_for_rekapitulasi_tinjauan_lapangan($tanggal_awal, $tanggal_akhir);
 		}
 
-		public function rekapitulasi_tinjauan_lapangan_cetak() {
+		public function rekapitulasi_tinjauan_lapangan_cetak($tanggal_awal, $tanggal_akhir) {
+			$surat_title = 'Laporan Rekapitulasi Tinjauan Lapangan Per tanggal ' . $tanggal_awal . ' - ' . $tanggal_akhir;
+			$result = Tmpermohonan::fetch_with_tmpemohon_trperizinan_tmperusahaan_for_rekapitulasi_tinjauan_lapangan($tanggal_awal, $tanggal_akhir);
+			$settings = Settings::get_data_cetak();
+			$header = [];
+				foreach ($settings as $key) {
+					$header[$key['name']] = $key['value'];
+				}
+			$title_kabupaten = Trkabupaten::get_nama_kabupaten($header['app_city']);
+			$data = [
+				'logo' => 'assets/img/logo.png',
+				'title_nama' => $header['app_kantor'],
+				'title_kabupaten' => $title_kabupaten,
+				'title_alamat' => $header['app_alamat'],
+				'title_tlp' => $header['app_tlp'],
+				'title_fax' => $header['app_fax'],
+				'result' => $result,
+				'surat_title' => $surat_title
 
+			];
+			// return View::make('reporting.dokumen.realisasi_penerimaan', $data);
+	    	$pdf = PDF::loadView('reporting.dokumen.rekapitulasi_tinjauan_lapangan', $data);
+	    	return $pdf->setPaper('a4')->setOrientation('portrait')->download($surat_title . '.pdf');
 		}
 
 		# Rekapitulasi Berkas Kembali 	================================================================================================
@@ -422,7 +496,28 @@
 		}
 
 		public function rekapitulasi_berkas_kembali_cetak() {
+			$surat_title = 'Laporan Rekapitulasi Berkas Kembali Per tanggal ' . $tanggal_awal . ' - ' . $tanggal_akhir;
+			$result = Tmpermohonan::fetch_with_tmpemohon_tmperizinan_tmbap_for_rekapitulasi_berkas_kembali($tanggal_awal, $tanggal_akhir);
+			$settings = Settings::get_data_cetak();
+			$header = [];
+				foreach ($settings as $key) {
+					$header[$key['name']] = $key['value'];
+				}
+			$title_kabupaten = Trkabupaten::get_nama_kabupaten($header['app_city']);
+			$data = [
+				'logo' => 'assets/img/logo.png',
+				'title_nama' => $header['app_kantor'],
+				'title_kabupaten' => $title_kabupaten,
+				'title_alamat' => $header['app_alamat'],
+				'title_tlp' => $header['app_tlp'],
+				'title_fax' => $header['app_fax'],
+				'result' => $result,
+				'surat_title' => $surat_title
 
+			];
+			// return View::make('reporting.dokumen.realisasi_penerimaan', $data);
+	    	$pdf = PDF::loadView('reporting.dokumen.rekapitulasi_berkas_kembali', $data);
+	    	return $pdf->setPaper('a4')->setOrientation('portrait')->download($surat_title . '.pdf');
 		}
 
 		# Rekapitulasi Izin Tercetak	================================================================================================
