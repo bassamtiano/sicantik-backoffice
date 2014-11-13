@@ -204,7 +204,7 @@ $app = angular.module('sicantik_backoffice', [])
 	/* # Prepare Data ============================================================================================= */
 
 	$scope.show_all = function() {
-		$http.get('rekapitulasi_berkas_kembali/data').success(function(rbkd) {
+		$http.get('rekapitulasi_berkas_kembali/data/0000-00-00/0000-00-00').success(function(rbkd) {
 			$scope.rekapitulasi_berkas_kembali_data = rbkd;
 		});
 	}
@@ -232,8 +232,8 @@ $app = angular.module('sicantik_backoffice', [])
 	/* # Submit =================================================================================================== */
 
 	$scope.filter_date = function() {
-		$http.get('rekapitulasi_tinjauan_lapangan/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(pps_data) {
-			$scope.rekapitulasi_tinjauan_lapangan_data = rtld;
+		$http.get('rekapitulasi_berkas_kembali/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(rbkd_data) {
+			$scope.rekapitulasi_berkas_kembali_data = rbkd_data;
 		});
 	}
 }
@@ -245,7 +245,7 @@ $app = angular.module('sicantik_backoffice', [])
 	/* # Prepare Data ============================================================================================= */
 
 	$scope.show_all = function() {
-		$http.get('rekapitulasi_izin_tercetak/data').success(function(ritd) {
+		$http.get('rekapitulasi_izin_tercetak/data/0000-00-00/0000-00-00').success(function(ritd) {
 			$scope.rekapitulasi_izin_tercetak_data = ritd;
 		});
 	}
@@ -273,8 +273,8 @@ $app = angular.module('sicantik_backoffice', [])
 	/* # Submit =================================================================================================== */
 
 	$scope.filter_date = function() {
-		$http.get('rekapitulasi_tinjauan_lapangan/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(pps_data) {
-			$scope.rekapitulasi_tinjauan_lapangan_data = rtld;
+		$http.get('rekapitulasi_izin_tercetak/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(ritd_data) {
+			$scope.rekapitulasi_izin_tercetak_data = ritd_data;
 		});
 	}
 }

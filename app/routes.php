@@ -112,7 +112,7 @@ Route::get('reporting/rekapitulasi_berkas_kembali/data', ['as' => 'reporting_rek
 
 Route::get('reporting/rekapitulasi_berkas_kembali/data/{tanggal_awal}/{tanggal_akhir}', ['as' => 'reporting_rekapitulasi_berkas_kembali_data', 'uses' => 'ReportingController@rekapitulasi_berkas_kembali_data']);
 
-Route::get('reporting/rekapitulasi_berkas_kembali/cetak', ['as' => 'reporting_rekapitulasi_berkas_kembali_cetak', 'uses' => 'ReportingController@rekapitulasi_berkas_kembali_cetak']);
+Route::get('reporting/rekapitulasi_berkas_kembali/cetak/{tanggal_awal}/{tanggal_akhir}', ['as' => 'reporting_rekapitulasi_berkas_kembali_cetak', 'uses' => 'ReportingController@rekapitulasi_berkas_kembali_cetak']);
 
 # Reporting / Rekapitulasi Izin Cetak
 
@@ -122,7 +122,7 @@ Route::get('reporting/rekapitulasi_izin_tercetak/data', ['as' => 'reporting_reka
 
 Route::get('reporting/rekapitulasi_izin_tercetak/data/{tanggal_awal}/{tanggal_akhir}', ['as' => 'reporting_rekapitulasi_izin_tercetak_data', 'uses' => 'ReportingController@rekapitulasi_izin_tercetak_data']);
 
-Route::get('reporting/rekapitulasi_izin_tercetak/cetak', ['as' => 'reporting_rekapitulasi_izin_tercetak_cetak', 'uses' => 'ReportingController@rekapitulasi_izin_tercetak_cetak']);
+Route::get('reporting/rekapitulasi_izin_tercetak/cetak/{tanggal_awal}/{tanggal_akhir}', ['as' => 'reporting_rekapitulasi_izin_tercetak_cetak', 'uses' => 'ReportingController@rekapitulasi_izin_tercetak_cetak']);
 
 /*
 

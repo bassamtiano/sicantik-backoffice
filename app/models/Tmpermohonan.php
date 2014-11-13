@@ -250,7 +250,8 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 				->where('tmbap.status_bap', '=', 2)
 				->where('tmpermohonan.c_izin_dicabut', '=', 0)
 				->whereBetween('tmpermohonan.d_terima_berkas', [$tanggal_awal, $tanggal_akhir])
-				->orderBy('tmpermohonan.d_terima_berkas', 'desc')
+				->orderBy('tmpermohonan.d_terima_berkas')
+				->groupBy('tmpermohonan.pendaftaran_id')
 
 				->select(['tmpermohonan.id', 'tmpermohonan.pendaftaran_id', 'tmpermohonan.d_survey', 'tmpemohon.n_pemohon', 'tmpemohon.a_pemohon', 'trkelurahan.n_kelurahan as pemohon_kelurahan',  'trkecamatan.n_kecamatan as pemohon_kecamatan',  'trkabupaten.n_kabupaten as pemohon_kabupaten', 'trpropinsi.n_propinsi as pemohon_propinsi', 'tmperusahaan.n_perusahaan', 'tmpermohonan.a_izin', 'tmpermohonan.d_terima_berkas', 'tmpermohonan.a_izin', 'tmpermohonan.d_ambil_izin', 'tmbap.c_pesan','trperizinan.n_perizinan'])
 

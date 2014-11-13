@@ -491,11 +491,11 @@
 			return View::make('reporting.pages.rekapitulasi_berkas_kembali');
 		}
 
-		public function rekapitulasi_berkas_kembali_data($tanggal_awal = null, $tanggal_akhir = null) {
+		public function rekapitulasi_berkas_kembali_data($tanggal_awal, $tanggal_akhir) {
 			return Tmpermohonan::fetch_with_tmpemohon_tmperizinan_tmbap_for_rekapitulasi_berkas_kembali($tanggal_awal, $tanggal_akhir);
 		}
 
-		public function rekapitulasi_berkas_kembali_cetak() {
+		public function rekapitulasi_berkas_kembali_cetak($tanggal_awal, $tanggal_akhir) {
 			$surat_title = 'Laporan Rekapitulasi Berkas Kembali Per tanggal ' . $tanggal_awal . ' - ' . $tanggal_akhir;
 			$result = Tmpermohonan::fetch_with_tmpemohon_tmperizinan_tmbap_for_rekapitulasi_berkas_kembali($tanggal_awal, $tanggal_akhir);
 			$settings = Settings::get_data_cetak();
@@ -536,8 +536,27 @@
 			return Tmpermohonan::fetch_with_tmpemohon_tmperusahaan_tmperizinan_for_rekapitulasi_izin_cetak($tanggal_awal, $tanggal_akhir);
 		}
 
-		public function rekapitulasi_izin_tercetak_cetak() {
+		public function rekapitulasi_izin_tercetak_cetak($tanggal_awal, $tanggal_akhir) {
+			$surat_title = 'Laporan Rekapitulasi Berkas Kembali Per tanggal ' . $tanggal_awal . ' - ' . $tanggal_akhir;
+			$result = Tmpermohonan::fetch_with_tmpemohon_tmperusahaan_tmperizinan_for_rekapitulasi_izin_cetak($tanggal_awal, $tanggal_akhir);
+			$settings = Settings::get_data_cetak();
+			$header = [];
+				foreach ($settings as $key) {
+					$header[$key['name']] = $key['value'];
+				}
+			$title_kabupaten = Trkabupaten::get_nama_kabupaten($header['app_city']);
+			$data = [
+				'logo' => 'assets/img/logo.png',
+				'title_nama' => $header['app_kantor'],
+				'title_kabupaten' => $title_kabupaten,
+				'title_alamat' => $header['app_alamat'],
+				'title_tlp' => $header['app_tlp'],
+				'title_fax' => $header['app_fax'],
+				'result' => $result,
+				'surat_title' => $surat_title
 
+			];
+	    	$pdf = PDF::loadView('reporting.dokumen.rekapitulasi_izin_tercetak', $data);
+	    	return $pdf->setPaper('a4')->setOrientation('portrait')->download($surat_title . '.pdf');
 		}
-
 	}
