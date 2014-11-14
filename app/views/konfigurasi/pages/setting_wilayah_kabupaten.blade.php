@@ -28,7 +28,7 @@
 @stop
 
 @section('page_name')
-	Konfigurasi / Setting Wilayah / Kabupaten 
+	Setting Wilayah / Kabupaten 
 @stop
 
 @section('angular_controller_script')
@@ -40,22 +40,28 @@
 @stop
 
 @section('nav-menu-left')
+
+	<form ng-submit="tambah_kabupaten()">
+		<div class="table-form-content">
+			<div class="form-item">
+				<button ng-click="open_modal('modal_tambah', suhl.id)" class="row-item ya">Tambah Kabupaten</button>
+			</div>
+		</div>
+	</form>
 	
 @stop
 
 @section('nav-menu-right')
-	<form ng-submit="filter_konfigurasi()">
+	<form>
 		<div class="table-form-content">
-			<div class="form-item wide">
-				<select ng-model="opsi_cari" class="form-option">
-					<option value="$">Semua</option>
-					<option value="n_propinsi">Nama Propinsi</option>
-					<option value="n_kabupaten">Nama Kabupaten</option>
-					<option value="ibukota">Nama Ibu Kota</option>
-				</select>
+			<div class="form-item">
+				&nbsp
 			</div>
 			<div class="form-item wide">
-				<input type="text" placeholder="Kata Kunci" ng-model="search[opsi_cari]">
+				<input type="text" placeholder="Search Key">
+			</div>
+			<div class="form-item">
+				<input type="submit" value="Search">
 			</div>
 		</div>
 	</form>
@@ -66,9 +72,9 @@
 	<table>
 		<tr>
 			<th class="c_no">No</th>
-			<th class="c_nama_kabupaten" ng-click="predicate='n_kabupaten'; reverse=!reverse">Nama Kabupaten</th>
-			<th class="c_nama_propinsi" ng-click="predicate='n_propinsi'; reverse=!reverse">Nama Propinsi</th>
-			<th class="c_nama_ibu_kota" ng-click="predicate='ibukota'; reverse=!reverse">Nama Ibu Kota</th>
+			<th class="c_nama_kabupaten">Nama Kabupaten</th>
+			<th class="c_nama_propinsi">Nama Propinsi</th>
+			<th class="c_nama_ibu_kota">Nama Ibu Kota</th>
 			<th class="c_aksi">Aksi</th>
 		</tr>
 	</table>
@@ -78,18 +84,27 @@
 @section('table_content')
 
 	<table role="table-fluid">
-		<tr ng-repeat="swk in setting_wilayah_kabupaten_data | orderBy:predicate:reverse | filter:search | limitTo:displayed">
+		<tr ng-repeat="swk in setting_wilayah_kabupaten | orderBy:predicate:reverse | filter:search | limitTo:displayed">
 			<td class="c_no">@{{ $index+1 }}</td>
 			<td class="c_nama_kabupaten">@{{ swk.n_kabupaten }}</td>
 			<td class="c_nama_propinsi">@{{ swk.n_propinsi }}</td>
 			<td class="c_nama_ibu_kota">@{{ swk.ibukota }}</td>
-			<td class="c_aksi">@{{ swk.id }}</td>
+			<td class="c_aksi">
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_edit', swk.id)" class="edit">Edit</a>
+				</a>
+			</td>
 		</tr>
 		<tr>
-			<td colspan="8" style="text-align:center">
+			<td colspan="5" style="text-align:center">
 				<button ng-click="loadMore()" class="btn-load-more">Load More</button>
 			</td>
 		</tr>
 	</table>
 
+@stop
+
+@section('modal-content')
+	@include('konfigurasi.modals.setting_wilayah_kabupaten_modal_edit', ['modal_name' => 'modal_edit']);
+	@include('konfigurasi.modals.setting_wilayah_kabupaten_modal_tambah', ['modal_name' => 'modal_tambah']);
 @stop

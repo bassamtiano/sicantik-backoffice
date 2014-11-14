@@ -379,14 +379,29 @@
 
 		public function setting_wilayah_provinsi_insert() {
 
-		}
-
-		public function setting_wilayah_provinsi_update() {
+			Trpropinsi::create(['n_propinsi' => Input::get('n_propinsi')]);
 
 		}
 
-		public function setting_wilayah_provinsi_update_data($id) {
-			return Trpropinsi::search_data($id);
+		public function setting_wilayah_provinsi_edit() {
+			Trpropinsi::where('id', '=', Input::get('id'))->update(['n_propinsi' => Input::get('n_propinsi')]);
+
+		}
+
+		public function setting_wilayah_provinsi_edit_data($id) {
+			$data_propinsi = Trpropinsi::search_data($id);
+
+			$result = [];
+
+			foreach($data_propinsi as $val => $key) {
+				$result['id'] = $key->id;
+				$result['n_propinsi'] = $key->n_propinsi;
+			}
+
+			return $result;
+
+			// return $data_propinsi;
+
 		}
 
 		public function setting_wilayah_provinsi_delete() {
@@ -405,17 +420,43 @@
 
 		public function setting_wilayah_kabupaten_insert() {
 
+			$trpropinsi_id = Input::get('trpropinsi_id');
+
+			$data = [
+			$n_kabupaten = Input::get('n_kabupaten'),
+			$ibukota = Input::get('ibukota')
+			];
+			
+			$trkabupaten_id = Trkabupaten::insert_data($data);
+			TrkabupatenTrpropinsi::insert_data($trkabupaten_id, $trpropinsi_id);
+
+
 		}
 
-		public function setting_wilayah_kabupaten_update() {
+		public function setting_wilayah_kabupaten_edit() {
 
 		}
 
-		public function setting_wilayah_kabupaten_update_data($id) {
-			return Trkabupaten::search_with_propinsi($id);
+		public function setting_wilayah_kabupaten_edit_data($id) {
+			$data_kabupaten = Trkabupaten::search_with_propinsi($id);
+
+			$result = [];
+
+			foreach($data_kabupaten as $val => $key) {
+				foreach($key as $v => $k) {
+					$result[$v] = $k;
+				}
+			}
+
+			return $result;
 		}
 
 		public function setting_wilayah_kabupaten_delete() {
+
+		}
+
+		public function setting_wilayah_kabupaten_opsi_propinsi(){
+			return Trpropinsi::fetch_data();
 
 		}
 
@@ -433,17 +474,38 @@
 
 		}
 
-		public function setting_wilayah_kecamatan_update() {
+		public function setting_wilayah_kecamatan_edit() {
 
 		}
 
-		public function setting_wilayah_kecamatan_update_data($id) {
-			return Trkecamatan::search_with_kabupaten_propinsi($id);
+		public function setting_wilayah_kecamatan_edit_data($id) {
+			$data_kecamatan = Trkecamatan::search_with_kabupaten_propinsi($id);
+
+			$result = [];
+
+			foreach($data_kecamatan as $val => $key) {
+				foreach($key as $v => $k) {
+					$result[$v] = $k;
+				}
+			}
+
+			return $result;
+
 		}
 
 		public function setting_wilayah_kecamatan_delete() {
 
 		}
+
+		public function setting_wilayah_kecamatan_opsi_propinsi(){
+			return Trpropinsi::fetch_data();
+
+		}
+
+		public function setting_wilayah_kecamatan_opsi_kabupaten($id = null){
+			return Trkabupaten::fetch_with_propinsi_by_id($id);
+		}
+
 
 		# Bagian Setting Wilayah / Kelurahan
 
@@ -459,35 +521,40 @@
 
 		}
 
-		public function setting_wilayah_kelurahan_update() {
+		public function setting_wilayah_kelurahan_edit() {
 
 		}
 
-		public function setting_wilayah_kelurahan_update_data($id) {
-			return Trkelurahan::search_with_kecamatan_kabupaten_propinsi($id);
+		public function setting_wilayah_kelurahan_edit_data($id) {
+			$data_kelurahan = Trkelurahan::search_with_kecamatan_kabupaten_propinsi($id);
+
+			$result = [];
+
+			foreach($data_kelurahan as $val => $key) {
+				foreach($key as $v => $k) {
+					$result[$v] = $k;
+				}
+			}
+
+			return $result;
+
 		}
 
 		public function setting_wilayah_kelurahan_delete() {
 
 		}
 
-		# Bagian Keamanan Data / Log Activity
-
-
-		public function keamanan_data_log_activity() {
-			return View::make('konfigurasi.pages.keamanan_data_log_activity');
-		}
-
-		public function keamanan_data_log_activity_data($date_start = null, $date_finish = null) {
-			return Tmlogactivity::fetch_data($date_start, $date_finish);
-		}
-
-		public function keamanan_data_log_activity_insert() {
+		public function setting_wilayah_kelurahan_opsi_propinsi(){
+			return Trpropinsi::fetch_data();
 
 		}
 
-		public function keamanan_data_log_activity_delete() {
+		public function setting_wilayah_kelurahan_opsi_kabupaten($id = null){
+			return Trkabupaten::fetch_with_propinsi_by_id($id);
+		}
 
+		public function setting_wilayah_kelurahan_opsi_kecamatan($id = null){
+			return Trkecamatan::fetch_with_kabupaten_by_id($id);
 		}
 
 		# Bagian Keamanan Data / Backup Database

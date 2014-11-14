@@ -55,8 +55,8 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			// 'database'  => 'tot_masterbo',
-			'database'  => 'agamaja',
+			'database'  => 'agam',
+			//'database'  => 'agamaja',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
