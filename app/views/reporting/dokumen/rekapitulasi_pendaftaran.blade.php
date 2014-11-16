@@ -52,9 +52,8 @@
 
 					<tr>
 						<th class="c_no">No</th>
-						<th class="c_jenis_pelayanan_perizinan">Jenis Pelayanan Perizinan</th>
-						<th class="c_target_anggaran">Target Anggaran</th>
-						<th class="c_realisasi_pendapatan">Realisasi Pendapatan</th>
+						<th class="c_jenis_izin">Jenis Izin</th>
+						<th class="c_jumlah_permohonan">Jumlah Permohonan</th>
 					</tr>
 
 				@foreach( $result as $r )
@@ -62,9 +61,8 @@
 					
 					<tr>
 						<td class="c_no">{{ $index++ }}</td>
-						<td class="c_jenis_pelayanan_perizinan">{{ $r['n_perizinan']; }}</td>
-						<td class="c_target_anggaran">{{ $r['target_anggaran']; }}</td>
-						<td class="c_realisasi_pendapatan">{{ $r['realisasi_pendapatan']; }}</td>
+						<td class="c_jenis_izin">{{ $r['nama_perizinan']; }}</td>
+						<td class="c_jumlah_permohonan">{{ $r['total']; }}</td>
 					</tr>
 
 				@endforeach()

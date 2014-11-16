@@ -56,12 +56,17 @@ return array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// 'database'  => 'tot_masterbo',
 			'database'  => 'backoffice',
 =======
 			'database'  => 'tot_masterbo',
 			// 'database'  => 'agamaja',
 >>>>>>> origin/master
+=======
+			'database'  => 'tot_masterbo',
+			//'database'  => 'agamaja',
+>>>>>>> pr/9
 			'username'  => 'root',
 			'password'  => 'admin',
 			'charset'   => 'utf8',

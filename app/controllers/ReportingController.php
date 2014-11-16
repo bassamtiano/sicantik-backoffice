@@ -161,6 +161,54 @@
 			return $result;
 		}
 
+		public function rekapitulasi_pendaftaran_cetak($date_start = null, $date_finish = null ){
+			$surat_title = 'Laporan Rekapitulasi Pendaftaran Per tanggal ' . $date_start . ' - ' . $date_finish;
+			$result = [];
+			$izin = Trperizinan::fetch_data_opsi();
+			foreach ($izin as $k => $v) {
+				$id_perizinan = $v->id;
+				$nm_perizinan = $v->n_perizinan;
+				$mohon = Tmpermohonan::fetch_trperizinan_for_rekapitulasi_pendaftaran($id_perizinan,$date_start,$date_finish);
+				foreach ($mohon as $ik) {
+						$total = $ik->total_perizinan;
+				}
+			$wrapper = [
+			'id' => $id_perizinan,
+			'nama_perizinan' => $nm_perizinan,
+			'total' => $total
+			];
+
+			array_push($result, $wrapper);
+			}
+
+		$settings = Settings::get_data_for_rekapitulasi_pendaftaran_cetak();
+		$header = [];
+
+			foreach ($settings as $key) {
+			$header[$key['name']] = $key['value'];
+			}
+		$title_kabupaten = Trkabupaten::get_nama_kabupaten($header['app_city']);
+		
+		$data = [
+				'logo' => 'assets/img/logo.png',
+				'title_nama' => $header['app_kantor'],
+				'title_kabupaten' => $title_kabupaten,
+				'title_alamat' => $header['app_alamat'],
+				'title_tlp' => $header['app_tlp'],
+				'title_fax' => $header['app_fax'],
+				'result' => $result,
+				'surat_title' => $surat_title
+
+			];
+			// return View::make('reporting.dokumen.realisasi_penerimaan', $data);
+
+
+
+	    $pdf = PDF::loadView('reporting.dokumen.rekapitulasi_pendaftaran', $data);
+	    return $pdf->setPaper('a4')->setOrientation('portrait')->download($surat_title . '.pdf');
+
+		}
+
 		public function rekapitulasi_pendaftaran_detail_data($id,$date_start,$date_finish){
 			$result = [];
 			$izin = Tmpermohonan::fetch_with_trperizinan_trstspermohonan_for_rekapitulasi_pendaftaran_detail($id,$date_start,$date_finish);

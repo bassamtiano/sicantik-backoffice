@@ -22,5 +22,8 @@
 			return Settings::whereIn('name', ['app_kantor', 'app_city', 'app_alamat', 'app_tlp', 'app_fax'])->get(['name', 'value']);
 		}
 
+		public static function get_data_for_rekapitulasi_pendaftaran_cetak() {
+			return Settings::whereIn('name', ['app_kantor', 'app_city', 'app_alamat', 'app_tlp', 'app_fax'])->get(['name', 'value']);
+		}
 
 	}

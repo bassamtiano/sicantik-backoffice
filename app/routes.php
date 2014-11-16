@@ -70,7 +70,7 @@ Route::get('reporting/rekapitulasi_pendaftaran', ['as' => 'reporting_rekapitulas
 
 Route::get('reporting/rekapitulasi_pendaftaran/data/{date_start}/{date_finish}', ['as' => 'reporting_rekapitulasi__pendaftaran_data', 'uses' => 'ReportingController@rekapitulasi_pendaftaran_data']);
 
-Route::get('reporting/rekapitulasi_pendaftaran/cetak', ['as' => 'reporting_rekapitulasi__pendaftaran_cetak', 'uses' => 'ReportingController@rekapitulasi_pendaftaran_cetak']);
+Route::get('reporting/rekapitulasi_pendaftaran/cetak/{date_start}/{date_finish}', ['as' => 'reporting_rekapitulasi_pendaftaran_cetak', 'uses' => 'ReportingController@rekapitulasi_pendaftaran_cetak']);
 
 Route::get('reporting/rekapitulasi_pendaftaran/data/detail/{id}/{date_start}/{date_finish}', ['as' => 'reporting_rekapitulasi_perizinan_data_detail', 'uses' => 'ReportingController@rekapitulasi_pendaftaran_detail_data']);
 
@@ -88,7 +88,9 @@ Route::get('reporting/rekapitulasi_perizinan/cetak/{date_start}/{date_finish}', 
 
 Route::get('reporting/rekapitulasi_retribusi', ['as' => 'reporting_rekapitulasi_retribusi', 'uses' => 'ReportingController@rekapitulasi_retribusi']);
 
-Route::get('reporting/rekapitulasi_retribusi/data/{date_start}/{date_finish}', ['as' => 'reporting_rekapitulasi_retribusi/data', 'uses' => 'ReportingController@rekapitulasi_retribusi_data']);
+Route::get('reporting/rekapitulasi_retribusi/data/{date_start}/{date_finish}', ['as' => 'reporting_rekapitulasi_retribusi_data', 'uses' => 'ReportingController@rekapitulasi_retribusi_data']);
+
+Route::get('reporting/rekapitulasi_retribusi/cetak/{date_start}/{date_finish}',['as' => 'reporting_rekapitulasi_retribusi_cetak', 'uses' => 'ReportingController@rekapitulasi_retribusi_cetak']);
 
 Route::get('reporting/rekapitulasi_retribusi/cetak', ['as' => 'reporting_rekapitulasi_retribusi/cetak', 'uses' => 'ReportingController@rekapitulasi_retribusi_cetak']);
 
