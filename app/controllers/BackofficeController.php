@@ -292,21 +292,74 @@
 		}
 
 		public function pendataan_entry_data_perizinan_data_awal() {
-			$id = '1';
-			$data['n_pemohon'] = Input::get('n_pemohon');
 
-			$data = [
+			$data_permohonan = [
+				'd_terima_berkas' => Input::get('d_terima_berkas'),
+				'd_survey' => Input::get('d_survey'),
+				'a_izin' => Input::get('a_izin'),
+				'keterangan' => Input::get('keterangan')
+			];
+
+			$data_pemohon = [
 				'source' => Input::get('source'),
 				'no_referensi' => Input::get('no_referensi'),
 				'n_pemohon' => Input::get('n_pemohon'),
-				'telp_pemohon' => Input::get('telp_pemohon')
+				'telp_pemohon' => Input::get('telp_pemohon'),
+				'a_pemohon' => Input::get('alamat_pemohon'),
+				'a_pemohon_luar' => Input::get('alamat_luar_pemohon')
 			];
 
-			// $pemohon = Tmpemohon::edit_pemohon_for_pendataan_entry_data_perizinan_data_awal($id, $data);
+			$kelurahan_pemohon = [
+				'trkelurahan_id' => Input::get('kelurahan_pemohon')
+			];
 
-			echo $data['n_pemohon'];
+			$data_perusahaan =  [
+				'npwp' => Input::get('npwp'),
+				'n_perusahaan' => Input::get('n_perusahaan'),
+				'i_telp_perusahaan' => Input::get('telp_perusahaan'),
+				'fax' => Input::get('fax_perusahaan'),
+				'email' => Input::get('email_perusahaan'),
+				'a_perusahaan' => Input::get('alamat_perusahaan')
+			];
+
+			$kelurahan_perusahaan = [
+				'trkelurahan_id' => Input::get('kelurahan_perusahaan')
+			];
+
+			$tmpermohonan_id = Input::get('id');
+
+			$tmpemohon = Tmpemohontmpermohonan::get_tmpemohon_id($tmpermohonan_id);
+			$tmperusahaan = Tmpermohonantmperusahaan::get_tmperusahaan_id($tmpermohonan_id);
+
+			foreach($tmpemohon as $pem_k => $pem_v) {
+				$tmpemohon_id = $pem_v->tmpemohon_id;
+			}
+
+			foreach($tmperusahaan as $per_k => $per_v) {
+				$tmperusahaan_id = $per_v->tmperusahaan_id;
+			}
+
+			$tmpemohon = Tmpemohon::where('id', '=', $tmpemohon_id)->update($data_pemohon);
+
+			$tmpermohonan = Tmpermohonan::where('id', '=', $tmpermohonan_id)->update($data_permohonan);
+			$tmperusahaan = Tmperusahaan::where('id', '=', $tmperusahaan_id)->update($data_perusahaan);
+
+			$tmpemohon_trkelurahan = Tmpemohontrkelurahan::where('tmpemohon_id', '=', $tmpemohon_id)->update($kelurahan_pemohon);
+			$tmperusahaan_trkelurahan = Tmperusahaantrkelurahan::where('tmperusahaan_id', '=', $tmperusahaan_id)->update($kelurahan_perusahaan);
 
 
+
+			if($tmpemohon == '1' || $tmpermohonan == '1' || $tmperusahaan == '1' || $tmpemohon_trkelurahan == '1' || $tmperusahaan_trkelurahan = '1') {
+				echo 'isi';
+			}
+
+			// if(empty($persyaratan)) {
+			//
+			// }
+			//
+			// else {
+			//
+			// }
 		}
 
 		public function pendataan_entry_data_perizinan_data_awal_data($id) {

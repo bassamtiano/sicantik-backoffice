@@ -58,8 +58,6 @@ return array(
 <<<<<<< HEAD
 <<<<<<< HEAD
 			// 'database'  => 'tot_masterbo',
-			'database'  => 'backoffice',
-=======
 			'database'  => 'tot_masterbo',
 			// 'database'  => 'agamaja',
 >>>>>>> origin/master
