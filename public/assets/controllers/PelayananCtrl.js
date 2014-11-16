@@ -9,7 +9,7 @@ var fetch_limit = 15;
 fetch_limit = 100;
 =======
 
-fetch_limit = 15;
+var fetch_limit = 15;
 ////////////////////////////////////KONFIGURASI START/////////////////////////////
 >>>>>>> pr/9
 

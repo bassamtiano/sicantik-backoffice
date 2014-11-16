@@ -18,11 +18,7 @@
 
 		# Modul Reporting ==========================================================================================================================================================================================
 
-		public static function get_data_for_realisasi_penerimaan_cetak() {
-			return Settings::whereIn('name', ['app_kantor', 'app_city', 'app_alamat', 'app_tlp', 'app_fax'])->get(['name', 'value']);
-		}
-
-		public static function get_data_for_rekapitulasi_pendaftaran_cetak() {
+		public static function get_data_cetak() {
 			return Settings::whereIn('name', ['app_kantor', 'app_city', 'app_alamat', 'app_tlp', 'app_fax'])->get(['name', 'value']);
 		}
 
