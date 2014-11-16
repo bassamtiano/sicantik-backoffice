@@ -352,14 +352,6 @@
 			if($tmpemohon == '1' || $tmpermohonan == '1' || $tmperusahaan == '1' || $tmpemohon_trkelurahan == '1' || $tmperusahaan_trkelurahan = '1') {
 				echo 'isi';
 			}
-
-			// if(empty($persyaratan)) {
-			//
-			// }
-			//
-			// else {
-			//
-			// }
 		}
 
 		public function pendataan_entry_data_perizinan_data_awal_data($id) {

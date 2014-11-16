@@ -1,5 +1,5 @@
-<!-- <form id="form_data_awal" method="post" target="target_edit" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/data_awal') }}"> -->
-<form id="form_data_awal" method="post" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/data_awal') }}">
+<form id="form_data_awal" method="post" target="target_edit" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/data_awal') }}">
+<!-- <form id="form_data_awal" method="post" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/data_awal') }}"> -->
 
 
 <input type="hidden" name="id" value="@{{ entry_data_perizinan_data_awal_data.id }}">

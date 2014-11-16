@@ -1,24 +1,8 @@
 var fetch_limit = 5;
 
 function clear_iframe() {
+	alert('kosongin dong');
 	$('#target_edit').attr('src', '');
-}
-
-function awww() {
-
-	setTimeout(function() {
-		result = $('#target_edit').contents().find('body').html();
-		if(result == '') {
-			awww();
-		}
-		else if(result === undefined) {
-			awww();
-		}
-		else {
-			alert(result);
-		}
-	}, 1);
-
 }
 
 $app = angular.module('sicantik_backoffice', [])
@@ -133,9 +117,6 @@ $app = angular.module('sicantik_backoffice', [])
 
 		/*  Construct Modal Function */
 
-
-
-
 		$scope.modal_data_awal_data = function(id) {
 
 			$http.get('entry_data_perizinan/data_awal/data/' + id).success(function(edpdad) {
@@ -197,24 +178,51 @@ $app = angular.module('sicantik_backoffice', [])
 
 		/* Trial */
 
+		$scope.modal_data_awal_clear = function() {
 
+				$("input[name='d_terima_berkas']").val('');
+				$("input[name='d_survey']").val('');
+				$("input[name='a_izin']").val('');
+				$("input[name='keterangan']").val('');
+				$("input[name='source']").val('');
+				$("input[name='no_referensi']").val('');
+				$("input[name='n_pemohon']").val('');
+				$("input[name='telp_pemohon']").val('');
+				$("input[name='alamat_pemohon']").val('');
+				$("input[name='alamat_luar_pemohon']").val('');
+				$("input[name='kelurahan_pemohon']").val('');
+				$("input[name='npwp']").val('');
+				$("input[name='n_perusahaan']").val('');
+				$("input[name='telp_perusahaan']").val('');
+				$("input[name='fax_perusahaan']").val('');
+				$("input[name='email_perusahaan']").val('');
+				$("input[name='alamat_perusahaan']").val('');
+				$("input[name='kelurahan_perusahaan']").val('');
+
+		}
 
 		$scope.modal_data_awal_submit = function() {
 
 
 			setTimeout(function() {
-				result = $('#target_edit').contents().find('body').html();
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
 				if(result == '') {
-					awww();
+					$scope.modal_data_awal_submit();
 				}
 				else if(result === undefined) {
-					awww();
+					$scope.modal_data_awal_submit();
 				}
 				else {
-					alert(result);
+					// alert(result);
+					clear_iframe();
+					$scope.modal_data_awal_clear();
 				}
-				clear_iframe();
+
 			}, 1);
+
+
+			$scope.show_all();
+			$scope.modal_data_awal = false;
 
 
 
