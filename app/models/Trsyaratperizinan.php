@@ -42,6 +42,16 @@
 
 		}
 
+		public static function fetch_with_trperizinan_trsyarat_perizinan_for_informasi_perizinan($trperizinan_id) {
+			return DB::table('trsyarat_perizinan')
+			->join('trperizinan_trsyarat_perizinan', 'trsyarat_perizinan.id', '=', 'trperizinan_trsyarat_perizinan.trsyarat_perizinan_id')
+			->select(DB::raw('trsyarat_perizinan.id, trsyarat_perizinan.v_syarat, trsyarat_perizinan.status, trperizinan_trsyarat_perizinan.c_show_type'))
+			->orderBy('trsyarat_perizinan.status', 'asc')
+			//->where('trsyarat_perizinan.id', '=', $trsyarat_perizinan_id)
+			->where('trperizinan_trsyarat_perizinan.trperizinan_id', '=', $trperizinan_id)
+			->get();
+		}
+
 		public static function fetch_with_tmpermohonan_for_izin_baru_edit_data($tmpermohonan_id, $trsyarat_perizinan_id) {
 
 			$persyaratan = DB::table('trsyarat_perizinan')
@@ -59,7 +69,7 @@
 			else {
 				return false;
 			}
-			
+
 		}
 
 		public static function fetch_with_tmperizinan_for_izin_baru_edit_data($trperizinan_id) {
@@ -89,7 +99,7 @@
 			else {
 				return false;
 			}
-			
+
 		}
 
 		public static function fetch_with_tmperizinan_for_perubahan_izin_edit_data($trperizinan_id) {
@@ -119,7 +129,7 @@
 			else {
 				return false;
 			}
-			
+
 		}
 
 		public static function fetch_with_tmperizinan_for_perpanjangan_izin_edit_data($trperizinan_id) {
@@ -147,7 +157,7 @@
 			else {
 				return false;
 			}
-			
+
 		}
 
 		public static function fetch_with_tmperizinan_for_daftar_ulang_izin_edit_data($trperizinan_id) {

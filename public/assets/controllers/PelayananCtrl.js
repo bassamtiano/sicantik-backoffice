@@ -1,12 +1,13 @@
 $app = angular.module('sicantik_backoffice', []);
 
-var fetch_limit = 100;
+var fetch_limit = 15;
 ////////////////////////////////////KONFIGURASI START//////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////KONFIGURASI START/////////////////////////////
 
 //////////////////////////////SETTING PERIZINAN/////////////////////
 function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
-	
+
 	$scope.show_all = function(){
 		$http.get('permohonan_sementara/data').success(function(ppps_data) {
 			$scope.pelayanan_pendaftaran_permohonan_sementara_data = ppps_data;
@@ -85,10 +86,11 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 	$scope.modal_edit_submit = function() {
 
 	}
+
 }
 
 function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
-	
+
 	$scope.show_all = function(){
 		$http.get('permohonan_izin_baru/data').success(function(pppib_data) {
 			$scope.pelayanan_pendaftaran_permohonan_izin_baru_data = pppib_data;
@@ -165,6 +167,7 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 	$scope.modal_edit_submit = function() {
 
 	}
+
 }
 
 function PelayananPendaftaranPermohonanPerubahanIzinCtrl($scope, $http) {
@@ -450,12 +453,13 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 
 
 function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
-	
+
 	$scope.show_all = function(){
 		$http.get('data_pemohon/data').success(function(ppdp_data) {
 			$scope.pelayanan_pendaftaran_data_pemohon_data = ppdp_data;
 		});
 	}
+
 
 	$scope.opsi_pelayanan = function(){
 		$http.get('data_pemohon/opsi').success(function(ppdpo_data) {
@@ -464,6 +468,7 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	}
 
 	$scope.opsi_pelayanan();
+
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -481,19 +486,29 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	/* Define Modal Name */
 
 	$scope.modal_edit = false;
-	$scope.modal_tambah = false;
+	$scope.modal_tambah_pemohon = false;
 
 	/* Define Open & Close Handler */
 
 	$scope.open_modal = function(modal_name, id) {
+		if(id == null) {
+			eval("$scope." + modal_name + "= true");
 
-		eval("$scope." + modal_name + "= true");
-		eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+		else {
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+
+
 	}
 
 	$scope.close_modal = function(modal_name) {
 		eval("$scope." + modal_name + "= false");
 	}
+
+	/* Prepare Opsi */
+
 
 	/*  Construct Modal Function */
 
@@ -503,6 +518,9 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 		});
 	}
 
+	$scope.modal_insert_data = function(id){
+
+	}
 
 	/* Define Tab Name */
 
@@ -528,7 +546,6 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 			$scope.pelayanan_pendaftaran_data_pemohon_data = ppdp_data;
 		});
 	}
-
 }
 
 
@@ -621,22 +638,175 @@ function PelayananPendaftaranDataPerusahaanCtrl($scope, $http) {
 
 }
 
+
+function PelayananPendaftaranDataPerusahaanCtrl($scope, $http) {
+
+	$scope.show_all = function(){
+		$http.get('data_perusahaan/data').success(function(ppdp_data) {
+			$scope.pelayanan_pendaftaran_data_perusahaan_data = ppdp_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.pelayanan_pendaftaran_data_perusahaan_data;
+
+	$scope.filter_pelayanan = function(){
+		$http.get('data_perusahaan/data/' + $scope.pelayanan_id).success(function(ppdp_data) {
+			$scope.pelayanan_pendaftaran_data_perusahaan_data = ppdp_data;
+		});
+	}
+
+}
+
 function PelayananCustomerServiceInformasiPerizinanCtrl($scope, $http){
-	$http.get('informasi_perizinan/data').success(function(csip_data){
-		$scope.customer_service_informasi_perizinan_data = csip_data;
-	});
+	$scope.show_all = function(){
+		$http.get('informasi_perizinan/data').success(function(csip_data) {
+			$scope.customer_service_informasi_perizinan_data = csip_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+/* # Modal ==================================================================================================== */
+
+		/* Define Modal Name */
+
+		$scope.modal_cs_detail_perizinan = false;
+
+		/* Define Open & Close Handler */
+
+		$scope.open_modal = function(modal_name, id) {
+
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+
+		$scope.close_modal = function(modal_name) {
+			eval("$scope." + modal_name + "= false");
+		}
+
+		/*  Construct Modal Function */
+
+		$scope.modal_cs_detail_perizinan_data = function(id) {
+			$http.get('informasi_perizinan/detail/data/' + id).success(function(ipdd) {
+				$scope.informasi_perizinan_detail_data = ipdd;
+			});
+
+
+		}
+
+
+		/* Define Tab Name */
+
+		$scope.tab = [];
+
+		$scope.tab.informasi_perizinan_tab_detail_syarat = true;
+
+		$scope.show_tab = function(tab_name, button_id) {
+
+		$scope.tab.informasi_perizinan_tab_detail_syarat = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
 }
 
 function PelayananCustomerServiceInformasiTrackingCtrl($scope, $http){
-	$http.get('informasi_tracking/data').success(function(csit_data){
-		$scope.customer_service_informasi_tracking_data = csit_data;
-	});
+	$scope.show_all = function(){
+		$http.get('informasi_tracking/data').success(function(csit_data) {
+			$scope.customer_service_informasi_tracking_data = csit_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+/* # Modal ==================================================================================================== */
+
+		/* Define Modal Name */
+
+		$scope.modal_cs_detail_tracking = false;
+
+		/* Define Open & Close Handler */
+
+		$scope.open_modal = function(modal_name, id) {
+
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+
+		$scope.close_modal = function(modal_name) {
+			eval("$scope." + modal_name + "= false");
+		}
+
+		/*  Construct Modal Function */
+
+		$scope.modal_cs_detail_tracking_data = function(id) {
+			$http.get('informasi_tracking/detail/data/' + id).success(function(itdd) {
+				$scope.informasi_tracking_detail_data = itdd;
+			});
+
+
+		}
+
+
+		/* Define Tab Name */
+
+		$scope.tab = [];
+
+		$scope.tab.informasi_tracking_tab_detail_status_permohonan = true;
+
+		$scope.show_tab = function(tab_name, button_id) {
+
+		$scope.tab.informasi_tracking_tab_detail_status_permohonan = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
 }
 
 function PelayananCustomerServiceInformasiMasaBerlakuCtrl($scope, $http){
-	$http.get('informasi_masa_berlaku/data').success(function(csimb_data){
-		$scope.customer_service_informasi_masa_berlaku_data = csimb_data;
-	});
+	$scope.show_all = function(){
+		$http.get('informasi_masa_berlaku/data').success(function(csimb_data) {
+			$scope.customer_service_informasi_masa_berlaku_data = csimb_data;
+		});
+	}
+
+	$scope.show_all();
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function(){
+		$scope.displayed += fetch_limit;
+	}
 }
-
-

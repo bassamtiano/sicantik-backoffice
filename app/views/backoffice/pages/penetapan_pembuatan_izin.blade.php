@@ -34,7 +34,7 @@
 
 		.c_status {
 			width: 5%;
-			text-align: center;	
+			text-align: center;
 		}
 		.c_aksi {
 			width: 10%;
@@ -74,7 +74,7 @@
 			</div>
 			</form>
 		</div>
-	
+
 @stop
 
 @section('nav-menu-right')
@@ -102,7 +102,7 @@
 @stop
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -112,7 +112,7 @@
 			<th class="c_tanggal_permohonan" ng-click="predicate='d_terima_berkas'; reverse=!reverse">Tanggal Permohonan</th>
 			<th class="c_no_surat" ng-click="predicate='no_surat'; reverse=!reverse">No Surat</th>
 			<th class="c_tanggal_surat" ng-click="predicate='tgl_surat'; reverse=!reverse">Tanggal Surat</th>
-			<th class="c_status" ng-click="predicate='c_cetak'; reverse=!reverse">Status Cetak Surat Izin</th>
+			<th class="c_status" ng-click="predicate='c_cetak'; reverse=!reverse">Tercetak</th>
 			<th class="c_aksi">Aksi</th>
 		</tr>
 	</table>
@@ -131,7 +131,13 @@
 			<td class="c_no_surat"> @{{ bppi.no_surat }} </td>
 			<td class="c_tanggal_surat"> @{{ bppi.tgl_surat }} </td>
 			<td class="c_status">@{{ bppi.c_cetak }}</td>
-			<td class="c_aksi"> @{{ bppi.id }} </td>
+			<td class="c_aksi">
+				<span class="button-group group-2">
+					<a href ng-click="open_modal('modal_edit', bttpbap.id)" class="edit" title="Edit Berita Acara Pemeriksaan">@{{ bppi.id }}</a>
+					<a href ng-click="open_modal('modal_edit', bttpbap.id)" class="edit" title="Edit Berita Acara Pemeriksaan">@{{ bppi.id }}</a>
+				</span>
+
+			</td>
 		</tr>
 		<tr>
 			<td colspan="9" style="text-align:center">

@@ -2,7 +2,7 @@
 
     <div class="modal-container large">
         <div class="modal-header update">
-            <h2>Data Awal</h2><a class="button-close" href ng-click="close_modal('modal_tambah')">X</a>
+            <h2>Data Awal</h2><a class="button-close" href ng-click="close_modal('modal_tambah_pemohon')">X</a>
         </div>
         <div class="modal-body">
 
@@ -77,19 +77,14 @@
 
                 </div>
             </div>
-
-            <!-- <ul ng-repeat="syarat in entry_data_perizinan_data_awal_data.syarat">
-                <li>@{{ syarat.persyaratan }} , @{{ syarat.status }}, @{{ syarat.terpenuhi }}, urutan @{{ syarat.urut }}</li>
-            </ul> -->
-
         </div>
         <div class="modal-footer">
             <div class="modal-footer-left">
                 &nbsp;
             </div>
             <div class="modal-footer-right">
-                <button type="submit" class="button-red" >Simpan</button>
-                <button type="submit" class="button-yellow" >Batal</button>
+                <button type="submit" class="button-green" >Simpan</button>
+                <button class="button-red" href ng-click="close_modal('modal_tambah_pemohon')">Keluar</button>
             </div>
         </div>
 
