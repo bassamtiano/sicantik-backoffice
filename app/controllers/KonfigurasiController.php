@@ -455,10 +455,36 @@
 
 		}
 
-		public function setting_wilayah_kabupaten_opsi_propinsi(){
-			return Trpropinsi::fetch_data();
+		public function setting_wilayah_kabupaten_opsi_propinsi($id = null){
+			if(!empty($id)) {
+				$prop = Trpropinsi::fetch_data();
+				$result = [];
+				foreach ($prop as $key => $value) {
+					if($value->id == $id) {
+						$wrapper = [
+							'id' => $value->id,
+							'n_propinsi' => $value->n_propinsi,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $value->id,
+							'n_propinsi' => $value->n_propinsi,
+							'selected' => false
+						];
+					}
+					array_push($result, $wrapper);
+				}
 
+				return $result;
+
+			}
+			else {
+				return Trpropinsi::fetch_data();
+			}
 		}
+
 
 		# Bagian Setting Wilayah / Kecamatan
 
@@ -497,13 +523,68 @@
 
 		}
 
-		public function setting_wilayah_kecamatan_opsi_propinsi(){
-			return Trpropinsi::fetch_data();
+		public function setting_wilayah_kecamatan_opsi_propinsi($id = null){
+			if(!empty($id)) {
+				$prop = Trpropinsi::fetch_data();
+				$result = [];
+				foreach ($prop as $key => $value) {
+					if($value->id == $id) {
+						$wrapper = [
+							'id' => $value->id,
+							'n_propinsi' => $value->n_propinsi,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $value->id,
+							'n_propinsi' => $value->n_propinsi,
+							'selected' => false
+						];
+					}
+					array_push($result, $wrapper);
+				}
 
+				return $result;
+
+			}
+			else {
+				return Trpropinsi::fetch_data();
+			}
 		}
 
-		public function setting_wilayah_kecamatan_opsi_kabupaten($id = null){
-			return Trkabupaten::fetch_with_propinsi_by_id($id);
+		public function setting_wilayah_kecamatan_opsi_kabupaten($id_propinsi = null, $id = null){
+
+			if(!empty($id) || !empty($id_propinsi)) {
+				$kab = Trkabupaten::fetch_with_propinsi_by_id($id_propinsi);
+
+				$result = [];
+
+				foreach($kab as $kabk => $kabv) {
+					if($kabv->id == $id) {
+						$wrapper = [
+							'id' => $kabv->id,
+							'n_kabupaten' => $kabv->n_kabupaten,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $kabv->id,
+							'n_kabupaten' => $kabv->n_kabupaten,
+							'selected' => false
+						];
+					}
+
+					array_push($result, $wrapper);
+				}
+
+				return $result;
+			}
+
+			else {
+				return Trkabupaten::fetch_with_propinsi_by_id($id);
+			}
 		}
 
 
@@ -544,18 +625,106 @@
 
 		}
 
-		public function setting_wilayah_kelurahan_opsi_propinsi(){
-			return Trpropinsi::fetch_data();
+		public function setting_wilayah_kelurahan_opsi_propinsi($id = null){
+			if(!empty($id)) {
+				$prop = Trpropinsi::fetch_data();
+				$result = [];
+				foreach ($prop as $key => $value) {
+					if($value->id == $id) {
+						$wrapper = [
+							'id' => $value->id,
+							'n_propinsi' => $value->n_propinsi,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $value->id,
+							'n_propinsi' => $value->n_propinsi,
+							'selected' => false
+						];
+					}
+					array_push($result, $wrapper);
+				}
 
+				return $result;
+
+			}
+			else {
+				return Trpropinsi::fetch_data();
+			}
 		}
 
-		public function setting_wilayah_kelurahan_opsi_kabupaten($id = null){
-			return Trkabupaten::fetch_with_propinsi_by_id($id);
+		public function setting_wilayah_kelurahan_opsi_kabupaten($id_propinsi = null, $id = null){
+
+			if(!empty($id) || !empty($id_propinsi)) {
+				$kab = Trkabupaten::fetch_with_propinsi_by_id($id_propinsi);
+
+				$result = [];
+
+				foreach($kab as $kabk => $kabv) {
+					if($kabv->id == $id) {
+						$wrapper = [
+							'id' => $kabv->id,
+							'n_kabupaten' => $kabv->n_kabupaten,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $kabv->id,
+							'n_kabupaten' => $kabv->n_kabupaten,
+							'selected' => false
+						];
+					}
+
+					array_push($result, $wrapper);
+				}
+
+				return $result;
+			}
+
+			else {
+				return Trkabupaten::fetch_with_propinsi_by_id($id);
+			}
 		}
 
-		public function setting_wilayah_kelurahan_opsi_kecamatan($id = null){
-			return Trkecamatan::fetch_with_kabupaten_by_id($id);
+		public function setting_wilayah_kelurahan_opsi_kecamatan($id_kabupaten = null, $id = null) {
+			if(!empty($id) && !empty($id_kabupaten)){
+
+				$kec = Trkecamatan::fetch_with_kabupaten_by_id($id_kabupaten);
+
+				$result = [];
+
+				foreach($kec as $keck => $kecv) {
+					if($kecv->id == $id) {
+						$wrapper = [
+							'id' => $kecv->id,
+							'n_kecamatan' => $kecv->n_kecamatan,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $kecv->id,
+							'n_kecamatan' => $kecv->n_kecamatan,
+							'selected' => false
+						];
+					}
+
+					array_push($result, $wrapper);
+				}
+
+				return $result;
+			}
+
+			else {
+				return Trkecamatan::fetch_with_kabupaten_by_id($id_kabupaten);
+			}
 		}
+
+		
+
 
 		# Bagian Keamanan Data / Backup Database
 

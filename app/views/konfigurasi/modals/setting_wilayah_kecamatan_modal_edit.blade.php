@@ -20,11 +20,21 @@
 
                             <div class="tab-content-form">
                                 <div class="content-form-label">Propinsi</div>
-                                <div class="content-form-input"><input type="text" value="@{{ kecamatan_edit_data.n_propinsi }}"></div>
+                                <div class="content-form-input">
+                                    <select name="propinsi">
+                                        <option ng-repeat="oprop in opsi_prop"  ng-if="oprop.selected == true" selected value="@{{ oprop.id }}" >@{{ oprop.n_propinsi }}</option>
+                                        <option ng-repeat="oprop in opsi_prop"  ng-if="oprop.selected == false" value="@{{ oprop.id }}" >@{{ oprop.n_propinsi }}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kabupaten</div>
-                                <div class="content-form-input"><input type="text" value="@{{ kecamatan_edit_data.n_kabupaten }}" /></div>
+                                <div class="content-form-input">
+                                    <select name="kabupaten">
+                                        <option ng-repeat="okab in opsi_kab"  ng-if="okab.selected == true" selected value="@{{ okab.id }}" >@{{ okab.n_kabupaten }}</option>
+                                        <option ng-repeat="okab in opsi_kab"  ng-if="okab.selected == false" value="@{{ okab.id }}" >@{{ okab.n_kabupaten }}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Kecamatan</div>

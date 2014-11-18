@@ -20,7 +20,12 @@
 
                             <div class="tab-content-form">
                                 <div class="content-form-label">Propinsi</div>
-                                <div class="content-form-input"><input type="text" value="@{{ kabupaten_edit_data.n_propinsi }}"></div>
+                                <div class="content-form-input">
+                                    <select name="propinsi">
+                                        <option ng-repeat="oprop in opsi_prop"  ng-if="oprop.selected == true" selected value="@{{ oprop.id }}" >@{{ oprop.n_propinsi }}</option>
+                                        <option ng-repeat="oprop in opsi_prop"  ng-if="oprop.selected == false" value="@{{ oprop.id }}" >@{{ oprop.n_propinsi }}</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Kabupaten</div>

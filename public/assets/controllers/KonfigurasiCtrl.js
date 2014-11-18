@@ -438,9 +438,9 @@ $app = angular.module('sicantik_backoffice', [])
 			}, 100);
 
 			eval("$scope." + modal_name + "= false");
-			$scope.show_all();
 
 		}
+
 		
 		/*  Construct Modal Function */
 
@@ -457,19 +457,6 @@ $app = angular.module('sicantik_backoffice', [])
 			$scope.show_all();
 			$scope.close_modal(modal_name);
 
-			// setTimeout(fuction() {
-			// 	result = $('#target_edit').contents().find('body').html();
-			// 	if(result == ''){
-			// 		$scope.modal_edit_submit();
-			// 	}
-			// 	else if(result === undefined) {
-			// 		$scope.modal_edit_submit();
-			// 	}
-			// 	else {
-			// 		alert(result);
-			// 		clear_iframe();
-			// 	}
-			// }, 1);
 		}
 	}
 ])
@@ -507,12 +494,21 @@ $app = angular.module('sicantik_backoffice', [])
 		$scope.close_modal = function(modal_name) {
 			eval("$scope." + modal_name + "= false");
 		}
+
+		/* Prepare Opsi */
+
+		$scope.opsi_propinsi = function(id) {
+			$http.get('kabupaten/opsi/propinsi/' + id).success(function(prop) {
+				$scope.opsi_prop = prop;
+			});
+		}
 		
 		/*  Construct Modal Function */
 
 		$scope.modal_edit_data = function(id) {
 			$http.get('kabupaten/edit/data/' + id).success(function(ped) {
 				$scope.kabupaten_edit_data = ped;
+				$scope.opsi_propinsi($scope.kabupaten_edit_data.trpropinsi_id);
 			});
 		}
 
@@ -567,6 +563,22 @@ $app = angular.module('sicantik_backoffice', [])
 		$scope.modal_edit_data = function(id) {
 			$http.get('kecamatan/edit/data/' + id).success(function(ped) {
 				$scope.kecamatan_edit_data = ped;
+				$scope.opsi_propinsi($scope.kecamatan_edit_data.trpropinsi_id);
+				$scope.opsi_kabupaten($scope.kecamatan_edit_data.trpropinsi_id, $scope.kecamatan_edit_data.trkabupaten_id);
+			});
+		}
+
+		/* Prepare Opsi */
+
+		$scope.opsi_propinsi = function(id) {
+			$http.get('kecamatan/opsi/propinsi/' + id).success(function(prop) {
+				$scope.opsi_prop = prop;
+			});
+		}
+
+		$scope.opsi_kabupaten = function(id_propinsi, id) {
+			$http.get('kecamatan/opsi/kabupaten/' + id_propinsi + '/' + id).success(function(kab) {
+				$scope.opsi_kab = kab;
 			});
 		}
 
@@ -631,8 +643,32 @@ $app = angular.module('sicantik_backoffice', [])
 		$scope.modal_edit_data = function(id) {
 			$http.get('kelurahan/edit/data/' + id).success(function(ped) {
 				$scope.kelurahan_edit_data = ped;
+				$scope.opsi_propinsi($scope.kelurahan_edit_data.trpropinsi_id);
+				$scope.opsi_kabupaten($scope.kelurahan_edit_data.trpropinsi_id, $scope.kelurahan_edit_data.trkabupaten_id);
+				$scope.opsi_kecamatan($scope.kelurahan_edit_data.trkabupaten_id, $scope.kelurahan_edit_data.trkecamatan_id);
 			});
 		}
+
+		/* Prepare Opsi */
+
+		$scope.opsi_propinsi = function(id) {
+			$http.get('kecamatan/opsi/propinsi/' + id).success(function(prop) {
+				$scope.opsi_prop = prop;
+			});
+		}
+
+		$scope.opsi_kabupaten = function(id_propinsi, id) {
+			$http.get('kecamatan/opsi/kabupaten/' + id_propinsi + '/' + id).success(function(kab) {
+				$scope.opsi_kab = kab;
+			});
+		}
+
+		$scope.opsi_kecamatan = function(id_kabupaten, id) {
+			$http.get('kelurahan/opsi/kecamatan/' + id_kabupaten + '/' + id).success(function(kec) {
+				$scope.opsi_kec = kec;
+			});
+		}
+
 
 		/* Define Tab Name */
 

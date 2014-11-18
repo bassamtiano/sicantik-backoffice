@@ -1,2 +1,6 @@
 app/config/database.php
+<<<<<<< HEAD
 vendor/*
+=======
+vendor/*
+>>>>>>> origin/master

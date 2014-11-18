@@ -410,6 +410,8 @@ Route::get('konfigurasi/setting_wilayah/kabupaten/delete', ['as' => 'konfigurasi
 
 Route::get('konfigurasi/setting_wilayah/kabupaten/opsi/propinsi', ['as' => 'konfigurasi_setting_wilayah_kabupaten_opsi_propinsi', 'uses' => 'KonfigurasiController@setting_wilayah_kabupaten_opsi_propinsi']);
 
+Route::get('konfigurasi/setting_wilayah/kabupaten/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kabupaten_opsi_propinsi']);
+
 # Konfigurasi / Setting Wilayah / Kecamatan
 
 Route::get('konfigurasi/setting_wilayah/kecamatan', ['as' => 'konfigurasi_setting_wilayah_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan']);
@@ -429,6 +431,10 @@ Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/propinsi', ['as' => 'konf
 Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/kabupaten', ['as' => 'konfigurasi_setting_wilayah_kecamatan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_kabupaten']);
 
 Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/kabupaten/{id}', ['as' => 'konfigurasi_setting_wilayah_kecamatan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_kabupaten']);
+
+Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_propinsi']);
+
+Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_kabupaten']);
 
 # Konfigurasi / Setting Wilayah / Kelurahan
 
@@ -453,6 +459,12 @@ Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id}', ['as' =>
 Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
 
 Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id_kabupaten}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
 
 # Konfigurasi / Keamanan Data / Log Activity
 

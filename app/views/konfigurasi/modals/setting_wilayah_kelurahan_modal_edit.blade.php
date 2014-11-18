@@ -20,44 +20,29 @@
 
                             <div class="tab-content-form">
                                 <div class="content-form-label">Provinsi</div>
-                                    <select name="id" ng-model="propinsi_id" ng-options="prop.n_propinsi for prop in propinsi_data track by prop.id">
-                                        <option value="">Pilih Propinsi</option>
+                                    <select name="propinsi">
+                                        <option ng-repeat="oprop in opsi_prop"  ng-if="oprop.selected == true" selected value="@{{ oprop.id }}" >@{{ oprop.n_propinsi }}</option>
+                                        <option ng-repeat="oprop in opsi_prop"  ng-if="oprop.selected == false" value="@{{ oprop.id }}" >@{{ oprop.n_propinsi }}</option>
                                     </select>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kabupaten</div>
-                                    <select name="id" ng-model="kabupaten_id" ng-options="kab.n_kabupaten for kab in kabupaten_data track by kab.id">
-                                        <option value="">Pilih Kabupaten</option>
-
+                                    <select name="kabupaten">
+                                        <option ng-repeat="okab in opsi_kab"  ng-if="okab.selected == true" selected value="@{{ okab.id }}" >@{{ okab.n_kabupaten }}</option>
+                                        <option ng-repeat="okab in opsi_kab"  ng-if="okab.selected == false" value="@{{ okab.id }}" >@{{ okab.n_kabupaten }}</option>
                                     </select>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kecamatan</div>
-                                    <select name="id" ng-model="kecamatan_id" ng-options="kec.n_kecamatan for kec in kecamatan_data track by kec.id">
-                                        <option value="">Pilih Kecamatan</option>
+                                    <select name="kabupaten">
+                                        <option ng-repeat="okec in opsi_kec"  ng-if="okec.selected == true" selected value="@{{ okec.id }}" >@{{ okec.n_kecamatan }}</option>
+                                        <option ng-repeat="okec in opsi_kec"  ng-if="okec.selected == false" value="@{{ okec.id }}" >@{{ okec.n_kecamatan }}</option>
                                     </select>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Kelurahan</div>
                                 <div class="content-form-input"><input type="text" value="@{{ kelurahan_edit_data.n_kelurahan }}" /></div>
                             </div>
-
-                           <!--  <div class="tab-content-form">
-                                <div class="content-form-label">Propinsi</div>
-                                <div class="content-form-input"><input type="text" value="@{{ kelurahan_edit_data.n_propinsi }}"></div>
-                            </div>
-                            <div class="tab-content-form">
-                                <div class="content-form-label">Kabupaten</div>
-                                <div class="content-form-input"><input type="text" value="@{{ kelurahan_edit_data.n_kabupaten }}" /></div>
-                            </div>
-                            <div class="tab-content-form">
-                                <div class="content-form-label">Kecamatan</div>
-                                <div class="content-form-input"><input type="text" value="@{{ kelurahan_edit_data.n_kecamatan }}" /></div>
-                            </div>
-                            <div class="tab-content-form">
-                                <div class="content-form-label">Nama Kelurahan</div>
-                                <div class="content-form-input"><input type="text" value="@{{ kelurahan_edit_data.n_kelurahan }}" /></div>
-                            </div> -->
                             
                         </div>
 
