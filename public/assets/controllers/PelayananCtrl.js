@@ -456,13 +456,6 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 		});
 	}
 
-	$scope.opsi_pelayanan = function(){
-		$http.get('data_pemohon/opsi').success(function(ppdpo_data) {
-			$scope.pelayanan_pendaftaran_data_pemohon_opsi = ppdpo_data;
-		});
-	}
-
-	$scope.opsi_pelayanan();
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -480,19 +473,29 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	/* Define Modal Name */
 
 	$scope.modal_edit = false;
-	$scope.modal_tambah = false;
+	$scope.modal_tambah_pemohon = false;
 
 	/* Define Open & Close Handler */
 
 	$scope.open_modal = function(modal_name, id) {
+		if(id == null) {
+			eval("$scope." + modal_name + "= true");
+			
+		}
+		else {
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");	
+		}
 
-		eval("$scope." + modal_name + "= true");
-		eval("$scope." + modal_name + "_data(" + id + ")");
+		
 	}
 
 	$scope.close_modal = function(modal_name) {
 		eval("$scope." + modal_name + "= false");
 	}
+
+	/* Prepare Opsi */
+
 
 	/*  Construct Modal Function */
 
@@ -502,6 +505,9 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 		});
 	}
 
+	$scope.modal_insert_data = function(id){
+
+	}
 
 	/* Define Tab Name */
 

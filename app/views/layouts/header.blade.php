@@ -33,6 +33,10 @@
 			});
 		}
 
+		function show_filter_option(){
+			$('#filter_option_dialog').slideToggle();
+		}
+
 		$(document).ready(function() {
 			calendar();
 		});
