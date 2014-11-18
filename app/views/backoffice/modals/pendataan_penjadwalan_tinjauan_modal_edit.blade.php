@@ -2,8 +2,8 @@
 
 <div class="modal" ng-show={{ $modal_name }}>
 
-    <!-- <form method="post" target="target_edit" action="{{ URL::to('backoffice/pendataan/penjadwalan_tinjauan/edit') }}"> -->
-    <form method="post" action="{{ URL::to('backoffice/pendataan/penjadwalan_tinjauan/edit') }}">
+    <form method="post" target="target_edit" action="{{ URL::to('backoffice/pendataan/penjadwalan_tinjauan/edit') }}">
+    <!-- <form method="post" action="{{ URL::to('backoffice/pendataan/penjadwalan_tinjauan/edit') }}"> -->
         <input type="hidden" name="id" value="@{{ peninjauan_tinjauan_edit_data.id }}">
         <div class="modal-container large">
 

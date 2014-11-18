@@ -55,18 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-<<<<<<< HEAD
+
 			// 'database'  => 'tot_masterbo',
 			'database'  => 'tot_masterbo',
-			// 'database'  => 'agamaja',
-=======
-<<<<<<< HEAD
-			'database'  => 'agam',
-=======
-			'database'  => 'backoffice',
->>>>>>> origin/master
-			//'database'  => 'agamaja',
->>>>>>> pr/11
 			'username'  => 'root',
 			'password'  => 'admin',
 			'charset'   => 'utf8',
