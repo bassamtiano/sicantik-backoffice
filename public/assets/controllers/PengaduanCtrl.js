@@ -54,9 +54,13 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 	/* Define Open & Close Handler */
 
 	$scope.open_modal = function(modal_name, id) {
-
-		eval("$scope." + modal_name + "= true");
-		eval("$scope." + modal_name + "_data(" + id + ")");
+		if(id == null) {
+			eval("$scope." + modal_name + "= true");
+		}
+		else {
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");	
+		}
 	}
 
 	$scope.close_modal = function(modal_name) {
@@ -85,11 +89,19 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 	$scope.tab.tambah_data_tab_pesan_pengaduan = false;
 	$scope.tab.tambah_data_tab_info_pengaduan = false;
 
+	$scope.tab.edit_data_tab_isi_biodata = true;
+	$scope.tab.edit_data_tab_pesan_pengaduan = false;
+	$scope.tab.edit_data_tab_info_pengaduan = false;
+
 	$scope.show_tab = function(tab_name, button_id) {
 
 		$scope.tab.tambah_data_tab_isi_biodata = false;
 		$scope.tab.tambah_data_tab_pesan_pengaduan = false;
 		$scope.tab.tambah_data_tab_info_pengaduan = false;
+
+		$scope.tab.edit_data_tab_isi_biodata = false;
+		$scope.tab.edit_data_tab_pesan_pengaduan = false;
+		$scope.tab.edit_data_tab_info_pengaduan = false;
 
 		eval('$scope.' + tab_name + "= true");
 
