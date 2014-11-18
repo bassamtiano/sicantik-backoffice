@@ -15,9 +15,34 @@
 		# @ Bagian Modal =======================================================
 
 		public function pendataan_entry_data_perizinan_edit() {
+
+			// disini
 			// $data = [];
 			// Tmpermohonan::edit_data_perizinan_for_entry_data_perizinan();
-			Tmholiday::create(['date' => date('Y-m-d'), 'description' => Input::get('nama'), 'holiday_type' => Input::get('alamat')]);
+
+			$property_perizinan = Input::get('property_perizinan');
+			$id_property_perizinan = Input::get('id_property_perizinan');
+			$old_id_property_perizinan = Input::get('old_id_property_perizinan');
+
+			$urutan_property = 0;
+
+			foreach($property_perizinan as $k) {
+
+				if(!empty($old_id_property_perizinan[$urutan_property]) || !empty($id_property_perizinan[$urutan_property])) {
+					if($id_property_perizinan[$urutan_property] == 26) {
+						$data = ['k_property' => $k];
+					}
+					else {
+						$data = ['v_property' => $k];
+					}
+
+					$action = Tmpropertyjenisperizinan::edit_data($old_id_property_perizinan[$urutan_property], $data);
+				}
+
+				$urutan_property += 1;
+			}
+
+			echo 'isi';
 
 		}
 
@@ -50,6 +75,9 @@
 						$nama_property = str_replace([' ', ')',  '_&'], '', $nama_property);
 
 						$property[$nama_property] = $property_value;
+						$property[$nama_property . '_id'] = $k2->id;
+						$property[$nama_property . '_old_id'] = $k1->id;
+
 
 					}
 				}
@@ -58,7 +86,6 @@
 
 
 			}
-
 
 			$test = [];
 

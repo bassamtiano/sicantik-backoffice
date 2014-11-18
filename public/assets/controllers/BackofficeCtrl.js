@@ -1,7 +1,6 @@
-var fetch_limit = 5;
+var fetch_limit = 10;
 
 function clear_iframe() {
-	alert('kosongin dong');
 	$('#target_edit').attr('src', '');
 }
 
@@ -47,6 +46,10 @@ $app = angular.module('sicantik_backoffice', [])
 
 
 		/* # Modal ==================================================================================================== */
+
+		/* Define Loading Handler */
+
+
 
 		/* Define Modal Name */
 
@@ -119,6 +122,10 @@ $app = angular.module('sicantik_backoffice', [])
 
 		$scope.modal_data_awal_data = function(id) {
 
+
+
+			$scope.loading_dialog = true;
+
 			$http.get('entry_data_perizinan/data_awal/data/' + id).success(function(edpdad) {
 				$scope.entry_data_perizinan_data_awal_data = edpdad;
 
@@ -132,6 +139,8 @@ $app = angular.module('sicantik_backoffice', [])
 				$scope.opsi_perusahaan_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_perusahaan);
 				$scope.opsi_perusahaan_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_perusahaan);
 
+			}).success(function() {
+				$scope.loading_dialog = false;
 			});
 
 		}
@@ -180,24 +189,24 @@ $app = angular.module('sicantik_backoffice', [])
 
 		$scope.modal_data_awal_clear = function() {
 
-				$("input[name='d_terima_berkas']").val('');
-				$("input[name='d_survey']").val('');
+				// $("input[name='d_terima_berkas']").val('');
+				// $("input[name='d_survey']").val('');
 				$("input[name='a_izin']").val('');
 				$("input[name='keterangan']").val('');
-				$("input[name='source']").val('');
-				$("input[name='no_referensi']").val('');
-				$("input[name='n_pemohon']").val('');
-				$("input[name='telp_pemohon']").val('');
+				// $("input[name='source']").val('');
+				// $("input[name='no_referensi']").val('');
+				// $("input[name='n_pemohon']").val('');
+				// $("input[name='telp_pemohon']").val('');
 				$("input[name='alamat_pemohon']").val('');
 				$("input[name='alamat_luar_pemohon']").val('');
-				$("input[name='kelurahan_pemohon']").val('');
-				$("input[name='npwp']").val('');
-				$("input[name='n_perusahaan']").val('');
-				$("input[name='telp_perusahaan']").val('');
-				$("input[name='fax_perusahaan']").val('');
-				$("input[name='email_perusahaan']").val('');
+				// $("input[name='kelurahan_pemohon']").val('');
+				// $("input[name='npwp']").val('');
+				// $("input[name='n_perusahaan']").val('');
+				// $("input[name='telp_perusahaan']").val('');
+				// $("input[name='fax_perusahaan']").val('');
+				// $("input[name='email_perusahaan']").val('');
 				$("input[name='alamat_perusahaan']").val('');
-				$("input[name='kelurahan_perusahaan']").val('');
+				// $("input[name='kelurahan_perusahaan']").val('');
 
 		}
 
@@ -213,22 +222,32 @@ $app = angular.module('sicantik_backoffice', [])
 					$scope.modal_data_awal_submit();
 				}
 				else {
-					// alert(result);
 					clear_iframe();
-					$scope.modal_data_awal_clear();
+					$scope.modal_data_awal = false;
 				}
 
 			}, 1);
 
-
 			$scope.show_all();
-			$scope.modal_data_awal = false;
-
-
-
 		}
 
 		$scope.modal_edit_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_edit_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_edit_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_edit = false;
+				}
+
+			}, 1);
+			$scope.show_all();
 
 		}
 

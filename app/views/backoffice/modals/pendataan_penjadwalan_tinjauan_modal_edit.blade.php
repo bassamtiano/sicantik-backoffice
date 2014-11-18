@@ -10,7 +10,6 @@
                 <div class="tab-nav">
                     <ul class="tab-nav-wrapper">
                         <li class="tab-nav-item enable" id="tab_nav_entry_tinjauan_lapangan" ng-click="show_tab('tab.entry_tinjauan_lapangan', 'tab_nav_entry_tinjauan_lapangan')">Entry Tinjauan Lapangan</li>
-                        <li class="tab-nav-item" id="tab_nav_entry_tinjauan_lapangan_1" ng-click="show_tab('tab.entry_tinjauan_lapangan_1', 'tab_nav_entry_tinjauan_lapangan_1')">Entry Tinjauan Lapangan 1</li>
                     <ul>
                 </div>
                 <div class="tab-content-wrapper">
@@ -60,9 +59,6 @@
 
                     </div>
 
-                    <div class="tab-content" ng-show="tab.entry_tinjauan_lapangan_1">
-                        1
-                    </div>
                 </div>
             </div>
 
