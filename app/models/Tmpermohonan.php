@@ -1313,22 +1313,22 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 			return DB::table('tmpermohonan')
 
-			->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
-			->join('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
+			->leftjoin('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
+			->leftjoin('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
 
-			->join('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
-			->join('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+			->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
 
-			->join('tmpermohonan_tmsk', 'tmpermohonan.id', '=', 'tmpermohonan_tmsk.tmpermohonan_id')
-			->join('tmsk', 'tmpermohonan_tmsk.tmsk_id', '=', 'tmsk.id')
+			->leftjoin('tmpermohonan_tmsk', 'tmpermohonan.id', '=', 'tmpermohonan_tmsk.tmpermohonan_id')
+			->leftjoin('tmsk', 'tmpermohonan_tmsk.tmsk_id', '=', 'tmsk.id')
 
-			->join('tmpermohonan_trtanggal_survey', 'tmpermohonan.id', '=', 'tmpermohonan_trtanggal_survey.tmpermohonan_id')
-			->join('trtanggal_survey', 'tmpermohonan_trtanggal_survey.trtanggal_survey_id', '=', 'trtanggal_survey.id')
+			->leftjoin('tmpermohonan_trtanggal_survey', 'tmpermohonan.id', '=', 'tmpermohonan_trtanggal_survey.tmpermohonan_id')
+			->leftjoin('trtanggal_survey', 'tmpermohonan_trtanggal_survey.trtanggal_survey_id', '=', 'trtanggal_survey.id')
 
 			// ->join('tmpegawai_trtanggal_survey', 'trtanggal_survey.id', '=', 'tmpegawai_trtanggal_survey.trtanggal_survey_id')
 			// ->join('tmpegawai', 'tmpegawai_trtanggal_survey.tmpegawai_id', '=', 'tmpegawai.id')
 
-			->select(['tmpermohonan.pendaftaran_id', 'tmpemohon.n_pemohon', 'trperizinan.n_perizinan', 'tmpermohonan.d_terima_berkas', 'tmpermohonan.d_survey', 'tmsk.no_surat', 'tmpermohonan.nama_ttd'])
+			->select(['tmpermohonan.id', 'tmpermohonan.pendaftaran_id', 'tmpemohon.n_pemohon', 'trperizinan.n_perizinan', 'tmpermohonan.d_terima_berkas', 'tmpermohonan.d_survey', 'tmsk.no_surat', 'tmpermohonan.nama_ttd'])
 			->where('tmpermohonan.id', '=', $id)
 
 			->get();

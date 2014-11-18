@@ -430,6 +430,42 @@
 
 		# @ Bagian Modal =======================================================
 
+		public function pendataan_penjadwalan_tinjauan_edit_opsi_penandatangan($name) {
+			$penandatangan = Tmpegawai::where('status', '=', 1)->get(['id', 'n_pegawai']);
+
+			$result = [];
+
+			foreach($penandatangan as $key => $val) {
+				if($val->n_pegawai == $name) {
+					$wrapper = [
+						'n_pegawai' => $val->n_pegawai,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'n_pegawai' => $val->n_pegawai,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+
+		}
+
+		public function pendataan_penjadwalan_tinjauan_edit() {
+			$id = Input::get('id');
+			$data = [
+				'nama_ttd' => Input::get('nama_ttd'),
+				'd_terima_berkas' => Input::get('d_terima_berkas')
+			];
+
+			return Tmpermohonan::where('id', '=', $id)->update($data);
+		}
+
 		public function pendataan_penjadwalan_tinjauan_edit_data($id) {
 
 			$data_permohonan = Tmpermohonan::fetch_with_tmpemohon_trperizinan_tmsk_tmpegawai_trtanggal_survey_for_pendataan_penjadwalan_tinjauan_edit_data($id);

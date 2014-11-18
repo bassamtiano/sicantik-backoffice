@@ -650,7 +650,6 @@ Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/perusahaan_
 
 Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/perusahaan_propinsi/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_propinsi']);
 
-
 Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/data/{id}', ['as' => 'backoffice_pendataan_entry_data_perizinan_pendaftaran_edit_data', 'uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_data']);
 
 # Backoffice / Pendataan / Penjadwalan Tinjauan
@@ -660,6 +659,10 @@ Route::get('backoffice/pendataan/penjadwalan_tinjauan', array('as' => 'backoffic
 Route::get('backoffice/pendataan/penjadwalan_tinjauan/data', ['as' => 'backoffice_pendataan_penjadwalan_tinjauan_data', 'uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_data']);
 
 Route::get('backoffice/pendataan/penjadwalan_tinjauan/data/{date_start}/{date_finish}', ['as' => 'backoffice_pendataan_penjadwalan_tinjauan_data', 'uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_data']);
+
+Route::post('backoffice/pendataan/penjadwalan_tinjauan/edit', ['uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_edit']);
+
+Route::get('backoffice/pendataan/penjadwalan_tinjauan/edit/opsi/{name}', ['as' => 'backoffice_pendataan_penjadwalan_tinjauan_edit_data', 'uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_edit_opsi_penandatangan']);
 
 Route::get('backoffice/pendataan/penjadwalan_tinjauan/edit/data/{id}', ['as' => 'backoffice_pendataan_penjadwalan_tinjauan_edit_data', 'uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_edit_data']);
 
