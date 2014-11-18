@@ -52,8 +52,13 @@
 
 					<tr>
 						<th class="c_no">No</th>
+						<th class="c_no_daftar">Nomor Pendaftaran</th>
+						<th class="c_tanggal_tinjau">Tanggal Peninjauan</th>
+						<th class="c_tanggal_tetap">Tanggal Penetapan</th>
+						<th class="c_nama_alamat">Nama & Alamat Pemohon</th>
+						<th class="c_lokasi">Nama & Lokasi Izin Perusahaan</th>
+						<th class="c_dicetak">Dicetak</th>
 						<th class="c_jenis_izin">Jenis Izin</th>
-						<th class="c_jumlah_permohonan">Jumlah Permohonan</th>
 					</tr>
 
 				@foreach( $result as $r )
@@ -61,8 +66,19 @@
 					
 					<tr>
 						<td class="c_no">{{ $index++ }}</td>
-						<td class="c_jenis_izin">{{ $r['nama_perizinan']; }}</td>
-						<td class="c_jumlah_permohonan">{{ $r['total']; }}</td>
+						<td class="c_no_daftar">{{ $r->pendaftaran_id }}</td>
+						<td class="c_tanggal tinjau ">{{ $r->tanggal_peninjauan }}</td>
+						<td class="c_tanggal_tetap">{{ $r->tanggal_penetapan}}</td>
+						<td class="c_nama_alamat">
+							{{$r->n_pemohon}} <br>
+							{{$r->a_pemohon}}
+						</td>
+						<td class="c_lokasi">
+							{{$r->n_perusahaan}} <br>
+							{{$r->a_izin}}
+						</td>
+						<td class="c_dicetak">{{ $r->c_cetak }} kali</td>
+						<td class="c_jenis_izin">{{ $r->n_perizinan}}</td>
 					</tr>
 
 				@endforeach()

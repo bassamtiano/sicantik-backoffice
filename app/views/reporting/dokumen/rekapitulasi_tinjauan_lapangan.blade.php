@@ -5,12 +5,6 @@
 	<?php $index = 1; ?>
 
 	{{ HTML::style('assets/css/document.css') }}
-	<style>
-
-
-	</style>
-
-
 </head>
 <body>
 
@@ -52,17 +46,29 @@
 
 					<tr>
 						<th class="c_no">No</th>
+						<th class="c_no_daftar">Nomor Pendaftaran</th>
+						<th class="c_tanggal_daftar">Tanggal Daftar</th>
+						<th class="c_tanggal_tinjau">Tanggal Peninjauan</th>
+						<th class="c_nama_alamat">Nama & Alamat Pemohon</th>
 						<th class="c_jenis_izin">Jenis Izin</th>
-						<th class="c_jumlah_permohonan">Jumlah Permohonan</th>
+						<th class="c_lokasi">Nama & Lokasi Izin Perusahaan</th>
 					</tr>
 
-				@foreach( $result as $r )
-
-					
+				@foreach( $result as $r )			
 					<tr>
 						<td class="c_no">{{ $index++ }}</td>
-						<td class="c_jenis_izin">{{ $r['nama_perizinan']; }}</td>
-						<td class="c_jumlah_permohonan">{{ $r['total']; }}</td>
+						<td class="c_no_daftar">{{ $r->pendaftaran_id }}</td>
+						<td class="c_tanggal_daftar">{{ $r->d_terima_berkas }}</td>
+						<td class="c_tanggal_tinjau">{{ $r->d_survey }}</td>
+						<td class="c_nama_alamat">
+							{{$r->n_pemohon}} <br>
+							{{$r->a_pemohon}}
+						</td>
+						<td class="c_jenis_izin">{{ $r->n_perizinan}}</td>
+						<td class="c_lokasi">
+							{{$r->n_perusahaan}} <br>
+							{{$r->a_izin}}
+						</td>
 					</tr>
 
 				@endforeach()

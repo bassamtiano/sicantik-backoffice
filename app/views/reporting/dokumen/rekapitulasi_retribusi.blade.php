@@ -5,12 +5,6 @@
 	<?php $index = 1; ?>
 
 	{{ HTML::style('assets/css/document.css') }}
-	<style>
-
-
-	</style>
-
-
 </head>
 <body>
 
@@ -53,7 +47,10 @@
 					<tr>
 						<th class="c_no">No</th>
 						<th class="c_jenis_izin">Jenis Izin</th>
-						<th class="c_jumlah_permohonan">Jumlah Permohonan</th>
+						<th class="c_izin_jadi">Izin Jadi</th>
+						<th class="c_total">Total Retribusi</th>
+						<th class="c_terbayar">Terbayar</th>
+						<th class="c_terhutang">Terhutang</th>
 					</tr>
 
 				@foreach( $result as $r )
@@ -62,7 +59,10 @@
 					<tr>
 						<td class="c_no">{{ $index++ }}</td>
 						<td class="c_jenis_izin">{{ $r['nama_perizinan']; }}</td>
-						<td class="c_jumlah_permohonan">{{ $r['total']; }}</td>
+						<td class="c_izin_jadi">{{ $r['izin_jadi']; }}</td>
+						<td class="c_total">{{ $r['retribusi_total']; }}</td>
+						<td class="c_terbayar">{{ $r['terbayarkan']; }}</td>
+						<td class="c_terhutang">{{ $r['terhutangkan']; }}</td>
 					</tr>
 
 				@endforeach()
@@ -77,6 +77,3 @@
 
 </body>
 </html>
-
-
-
