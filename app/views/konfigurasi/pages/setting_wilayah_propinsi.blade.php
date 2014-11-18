@@ -31,6 +31,14 @@
 @stop
 
 @section('nav-menu-left')
+
+	<form ng-submit="tambah_propinsi()">
+		<div class="table-form-content">
+			<div class="form-item">
+				<button ng-click="open_modal('modal_tambah', suhl.id)" class="row-item ya">Tambah Provinsi</button>
+			</div>
+		</div>
+	</form>
 	
 @stop
 
@@ -55,7 +63,7 @@
 	<table>
 		<tr>
 			<th class="c_no">No</th>
-			<th class="c_nama_propinsi">Nama Propinsi</th>
+			<th class="c_nama_propinsi">Nama Provinsi</th>
 			<th class="c_aksi">Aksi</th>
 		</tr>
 	</table>
@@ -65,11 +73,25 @@
 @section('table_content')
 
 	<table role="table-fluid">
-		<tr ng-repeat="swp in setting_wilayah_propinsi">
+		<tr ng-repeat="swp in setting_wilayah_propinsi| orderBy:predicate:reverse | filter:search | limitTo:displayed">
 			<td class="c_no">@{{ $index+1 }}</td>
 			<td class="c_nama_propinsi">@{{ swp.n_propinsi }}</td>
-			<td class="c_aksi">@{{ swp.id }}</td>
+			<td class="c_aksi">
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_edit', swp.id)" class="edit">Edit</a>
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="text-align:center">
+				<button ng-click="loadMore()" class="btn-load-more">Load More</button>
+			</td>
 		</tr>
 	</table>
 
+@stop
+
+@section('modal-content')
+	@include('konfigurasi.modals.setting_wilayah_propinsi_modal_edit', ['modal_name' => 'modal_edit']);
+	@include('konfigurasi.modals.setting_wilayah_propinsi_modal_tambah', ['modal_name' => 'modal_tambah']);
 @stop

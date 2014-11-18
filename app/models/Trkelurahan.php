@@ -2,6 +2,8 @@
 class Trkelurahan extends BaseModel {
 
 	protected $table = 'trkelurahan';
+    protected $guarded = ['id'];
+    protected $fillable = ['n_kelurahan'];
 
 	public static function fetch_data() {
 		return Trkelurahan::get();
