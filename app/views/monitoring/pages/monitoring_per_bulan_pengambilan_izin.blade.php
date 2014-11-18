@@ -45,7 +45,7 @@
 @stop
 
 @section('page_name')
-	Monitoring / Per Pengambilan Izin
+	Monitoring / Per Bulan Pengambilan Izin
 @stop
 
 @section('angular_controller_script')
@@ -122,7 +122,7 @@
 	<table role="table-fluid">
 		<tr ng-repeat="mpbpi in monitoring_per_bulan_pengambilan_izin_data | orderBy:predicate:reverse | filter:search | limitTo:displayed">
 			<td class="c_no"> @{{ $index+1 }}</td>
-			<td class="c_no_perizinan">@{{ mpbpi.pendaftaran_id }}</td>
+			<td class="c_no_pendaftaran">@{{ mpbpi.pendaftaran_id }}</td>
 			<td class="c_nama_perizinan">@{{ mpbpi.n_perizinan }}</td>
 			<td class="c_tanggal_pendaftaran">@{{ mpbpi.d_terima_berkas }}</td>
 			<td class="c_nama_pemohon">@{{ mpbpi.n_pemohon }}</td>

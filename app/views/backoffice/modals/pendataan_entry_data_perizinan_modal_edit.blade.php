@@ -212,10 +212,6 @@
                 <a class="btn button-red" ng-click="close_modal('modal_edit')">Batal</a>
             </div>
         </div>
-
-        <!-- Iframe for post -->
-
-
     </div>
 
 </form>

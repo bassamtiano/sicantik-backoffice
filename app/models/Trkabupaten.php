@@ -3,6 +3,8 @@
 	class Trkabupaten extends BaseModel {
 
 		protected $table = 'trkabupaten';
+        protected $guarded = ['id'];
+        protected $fillable = ['n_kabupaten', 'ibukota'];
 
 		public static function fetch_data($data = null) {
 			return Trkabupaten::get($data);
@@ -32,6 +34,17 @@
 			->orderBy('trkabupaten.id')
 			->where('trkabupaten_trpropinsi.trpropinsi_id', '=', $id)
 			->get(['trkabupaten.id', 'trkabupaten.n_kabupaten']);
+		}
+
+		public static function insert_data($data) {
+			Trkabupaten::create($data);
+			$id_kabupaten = Trkabupaten::
+			where('n_kabupaten', '=', $data['n_kabupaten'])
+			-> where('ibukota', '=', $data['ibukota'])
+			-> get();
+			foreach ($id_kabupaten -> lists('id') as $key => $value) {
+				return $value;
+			}
 		}
 
 		# Modul Reporting ==========================================================================================================================================================================================

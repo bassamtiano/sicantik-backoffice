@@ -55,11 +55,15 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
+
 			// 'database'  => 'tot_masterbo',
+<<<<<<< HEAD
 			'database'  => 'tot_masterbo',
-			// 'database'  => 'agamaja',
+=======
+			'database'  => 'sicantik_backoffice',
+>>>>>>> pr/13
 			'username'  => 'root',
-			'password'  => 'admin',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

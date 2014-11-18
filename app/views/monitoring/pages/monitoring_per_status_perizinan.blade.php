@@ -102,12 +102,11 @@
 	<table>
 		<tr>
 			<th class="c_no">No</th>
-			<th class="c_no_pendaftaran" ng-click="predicate='pendaftaran_id'; reverse=!reverse">No Pendaftaran</th>
-			<th class="c_nama_perizinan" ng-click="predicate='n_perizinan'; reverse=!reverse">Nama Perizinan</th>
-			<th class="c_tanggal_pendaftaran" ng-click="predicate='d_terima_berkas'; reverse=!reverse">Tanggal Pendaftaran</th>
-			<th class="c_nama_pemohon" ng-click="predicate='n_pemohon'; reverse=!reverse">Nama Pemohon</th>
-			<th class="c_nomor_surat" ng-click="predicate='no_surat'; reverse=!reverse">No Surat</th>
-			<th class="c_tanggal_surat" ng-click="predicate='tgl_surat'; reverse=!reverse">Tanggal Surat</th>
+			<th class="c_nodaftar" ng-click="predicate='pendaftaran_id'; reverse=!reverse">No Pendaftaran</th>
+			<th class="c_namaizin" ng-click="predicate='n_perizinan'; reverse=!reverse">Nama Perizinan</th>
+			<th class="c_tanggal" ng-click="predicate='d_terima_berkas'; reverse=!reverse">Tanggal Pendaftaran</th>
+			<th class="c_namapemohon" ng-click="predicate='n_pemohon'; reverse=!reverse">Nama Pemohon</th>
+			<th class="c_status" ng-click="predicate='no_surat'; reverse=!reverse">Status Permohonan</th>
 			<th class="c_alamat" ng-click="predicate='a_pemohon'; reverse=!reverse">Alamat Pemohon</th>
 			<th class="c_kelurahan" ng-click="predicate='n_kelurahan'; reverse=!reverse">Kelurahan</th>
 		</tr>
