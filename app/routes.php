@@ -136,7 +136,7 @@ Route::get('monitoring/per_jenis_perizinan', ['as' => 'monitoring_per_jenis_peri
 
 Route::get('monitoring/per_jenis_perizinan/data', ['as' => 'monitoring_per_jenis_perizinan_data', 'uses' => 'MonitoringController@per_jenis_perizinan_data']);
 
-Route::get('monitoring/per_jenis_perizinan/data/{date_start}/{date_finish}/{id}', ['as' => 'monitoring_per_jenis_perizinan_data', 'uses' => 'MonitoringController@per_jenis_perizinan_data']);
+Route::get('monitoring/per_jenis_perizinan/data/{id}/{date_start}/{date_finish}', ['as' => 'monitoring_per_jenis_perizinan_data', 'uses' => 'MonitoringController@per_jenis_perizinan_data']);
 
 Route::get('monitoring/per_jenis_perizinan/datacombo', ['as' => 'monitoring_per_jenis_perizinan_datacombo', 'uses' => 'MonitoringController@per_jenis_perizinan_datacombo']);
 
@@ -153,6 +153,16 @@ Route::get('monitoring/per_jangka_waktu/data/{date_start}/{date_finish}', ['as' 
 Route::get('monitoring/per_desa_dan_kecamatan', ['as' => 'monitoring_per_desa_dan_kecamatan', 'uses' => 'MonitoringController@per_desa_dan_kecamatan']);
 
 Route::get('monitoring/per_desa_dan_kecamatan/data', ['as' => 'monitoring_per_desa_dan_kecamatan_data', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_data']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/data/{prop}/{kab}/{kec}/{kel}/{date_start}/{date_finish}', ['as' => 'monitoring_per_desa_dan_kecamatan_data', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_data']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/opsi/propinsi', ['as' => 'monitoring_per_desa_dan_kecamatan_opsi_propinsi', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_opsi_propinsi']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/opsi/kabupaten/{id}', ['as' => 'monitoring_per_desa_dan_kecamatan_opsi_kabupaten', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_opsi_kabupaten']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/opsi/kecamatan/{id}', ['as' => 'monitoring_per_desa_dan_kecamatan_opsi_kecamatan', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_opsi_kecamatan']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/opsi/kelurahan/{id}', ['as' => 'monitoring_per_desa_dan_kecamatan_opsi_kelurahan', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_opsi_kelurahan']);
 
 # Monitoring / Perizinan Belum Sudah Jadi Kadaluarsa (Filter Masih Belum Bekerja)
 
@@ -388,11 +398,11 @@ Route::get('konfigurasi/setting_wilayah/propinsi', ['as' => 'konfigurasi_setting
 
 Route::get('konfigurasi/setting_wilayah/propinsi/data', ['as' => 'konfigurasi_setting_wilayah_provinsi', 'uses' => 'KonfigurasiController@setting_wilayah_provinsi_data']);
 
-Route::get('konfigurasi/setting_wilayah/propinsi/insert', ['as' => 'konfigurasi_setting_wilayah_provinsi', 'uses' => 'KonfigurasiController@setting_wilayah_provinsi_insert']);
+Route::post('konfigurasi/setting_wilayah/provinsi/insert', ['uses' => 'KonfigurasiController@setting_wilayah_provinsi_insert']);
 
-Route::get('konfigurasi/setting_wilayah/propinsi/update', ['as' => 'konfigurasi_setting_wilayah_provinsi', 'uses' => 'KonfigurasiController@setting_wilayah_provinsi_update']);
+Route::post('konfigurasi/setting_wilayah/provinsi/edit', ['uses' => 'KonfigurasiController@setting_wilayah_provinsi_edit']);
 
-Route::get('konfigurasi/setting_wilayah/propinsi/update/data/{id}', ['as' => 'konfigurasi_setting_wilayah_provinsi', 'uses' => 'KonfigurasiController@setting_wilayah_provinsi_update_data']);
+Route::get('konfigurasi/setting_wilayah/provinsi/edit/data/{id}', ['as' => 'konfigurasi_setting_wilayah_provinsi_edit_data', 'uses' => 'KonfigurasiController@setting_wilayah_provinsi_edit_data']);
 
 Route::get('konfigurasi/setting_wilayah/propinsi/delete', ['as' => 'konfigurasi_setting_wilayah_provinsi', 'uses' => 'KonfigurasiController@setting_wilayah_provinsi_delete']);
 
@@ -404,11 +414,15 @@ Route::get('konfigurasi/setting_wilayah/kabupaten/data', ['as' => 'konfigurasi_s
 
 Route::get('konfigurasi/setting_wilayah/kabupaten/insert', ['as' => 'konfigurasi_setting_wilayah_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kabupaten_insert']);
 
-Route::get('konfigurasi/setting_wilayah/kabupaten/update', ['as' => 'konfigurasi_setting_wilayah_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kabupaten_update']);
+Route::get('konfigurasi/setting_wilayah/kabupaten/edit', ['as' => 'konfigurasi_setting_wilayah_kabupaten_edit', 'uses' => 'KonfigurasiController@setting_wilayah_kabupaten_edit']);
 
-Route::get('konfigurasi/setting_wilayah/kabupaten/update/data/{id}', ['as' => 'konfigurasi_setting_wilayah_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kabupaten_update_data']);
+Route::get('konfigurasi/setting_wilayah/kabupaten/edit/data/{id}', ['as' => 'konfigurasi_setting_wilayah_kabupaten_edit_data', 'uses' => 'KonfigurasiController@setting_wilayah_kabupaten_edit_data']);
 
 Route::get('konfigurasi/setting_wilayah/kabupaten/delete', ['as' => 'konfigurasi_setting_wilayah_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kabupaten_delete']);
+
+Route::get('konfigurasi/setting_wilayah/kabupaten/opsi/propinsi', ['as' => 'konfigurasi_setting_wilayah_kabupaten_opsi_propinsi', 'uses' => 'KonfigurasiController@setting_wilayah_kabupaten_opsi_propinsi']);
+
+Route::get('konfigurasi/setting_wilayah/kabupaten/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kabupaten_opsi_propinsi']);
 
 # Konfigurasi / Setting Wilayah / Kecamatan
 
@@ -418,11 +432,21 @@ Route::get('konfigurasi/setting_wilayah/kecamatan/data', ['as' => 'konfigurasi_s
 
 Route::get('konfigurasi/setting_wilayah/kecamatan/insert', ['as' => 'konfigurasi_setting_wilayah_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_insert']);
 
-Route::get('konfigurasi/setting_wilayah/kecamatan/update', ['as' => 'konfigurasi_setting_wilayah_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_update']);
+Route::get('konfigurasi/setting_wilayah/kecamatan/edit', ['as' => 'konfigurasi_setting_wilayah_kecamatan_edit', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_edit']);
 
-Route::get('konfigurasi/setting_wilayah/kecamatan/update/data/{id}', ['as' => 'konfigurasi_setting_wilayah_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_update_data']);
+Route::get('konfigurasi/setting_wilayah/kecamatan/edit/data/{id}', ['as' => 'konfigurasi_setting_wilayah_kecamatan_edit_data', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_edit_data']);
 
 Route::get('konfigurasi/setting_wilayah/kecamatan/delete', ['as' => 'konfigurasi_setting_wilayah_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_delete']);
+
+Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/propinsi', ['as' => 'konfigurasi_setting_wilayah_kecamatan_opsi_propinsi', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_propinsi']);
+
+Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/kabupaten', ['as' => 'konfigurasi_setting_wilayah_kecamatan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_kabupaten']);
+
+Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/kabupaten/{id}', ['as' => 'konfigurasi_setting_wilayah_kecamatan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_kabupaten']);
+
+Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_propinsi']);
+
+Route::get('konfigurasi/setting_wilayah/kecamatan/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kecamatan_opsi_kabupaten']);
 
 # Konfigurasi / Setting Wilayah / Kelurahan
 
@@ -432,11 +456,27 @@ Route::get('konfigurasi/setting_wilayah/kelurahan/data', ['as' => 'konfigurasi_s
 
 Route::get('konfigurasi/setting_wilayah/kelurahan/insert', ['as' => 'konfigurasi_setting_wilayah_kelurahan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_insert']);
 
-Route::get('konfigurasi/setting_wilayah/kelurahan/update', ['as' => 'konfigurasi_setting_wilayah_kelurahan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_update']);
+Route::get('konfigurasi/setting_wilayah/kelurahan/edit', ['as' => 'konfigurasi_setting_wilayah_kelurahan_edit', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_edit']);
 
-Route::get('konfigurasi/setting_wilayah/kelurahan/update/data/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_update_data']);
+Route::get('konfigurasi/setting_wilayah/kelurahan/edit/data/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan_edit_data', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_edit_data']);
 
 Route::get('konfigurasi/setting_wilayah/kelurahan/delete', ['as' => 'konfigurasi_setting_wilayah_kelurahan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_delete']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_propinsi', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
+
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id_kabupaten}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
 
 # Konfigurasi / Keamanan Data / Log Activity
 
@@ -552,7 +592,7 @@ Route::get('pelayanan/pendaftaran/data_pemohon', array('as' => 'pelayanan_pendaf
 
 Route::get('pelayanan/pendaftaran/data_pemohon/data', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_data'));
 
-Route::get('pelayanan/pendaftaran/data_pemohon/data/{id}', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_data'));
+Route::get('pelayanan/pendaftaran/data_pemohon/data/{id}', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_edit_data'));
 
 Route::get('pelayanan/pendaftaran/data_pemohon/edit', array('as' => 'pelayanan_pendaftaran_data_pemohon_edit', 'uses' => 'PelayananController@pendaftaran_data_pemohon_edit'));
 
@@ -650,7 +690,6 @@ Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/perusahaan_
 
 Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/opsi/perusahaan_propinsi/{id}', ['uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_opsi_perusahaan_propinsi']);
 
-
 Route::get('backoffice/pendataan/entry_data_perizinan/data_awal/data/{id}', ['as' => 'backoffice_pendataan_entry_data_perizinan_pendaftaran_edit_data', 'uses' => 'BackofficeController@pendataan_entry_data_perizinan_data_awal_data']);
 
 # Backoffice / Pendataan / Penjadwalan Tinjauan
@@ -660,6 +699,10 @@ Route::get('backoffice/pendataan/penjadwalan_tinjauan', array('as' => 'backoffic
 Route::get('backoffice/pendataan/penjadwalan_tinjauan/data', ['as' => 'backoffice_pendataan_penjadwalan_tinjauan_data', 'uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_data']);
 
 Route::get('backoffice/pendataan/penjadwalan_tinjauan/data/{date_start}/{date_finish}', ['as' => 'backoffice_pendataan_penjadwalan_tinjauan_data', 'uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_data']);
+
+Route::post('backoffice/pendataan/penjadwalan_tinjauan/edit', ['uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_edit']);
+
+Route::get('backoffice/pendataan/penjadwalan_tinjauan/edit/opsi/{name}', ['as' => 'backoffice_pendataan_penjadwalan_tinjauan_edit_data', 'uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_edit_opsi_penandatangan']);
 
 Route::get('backoffice/pendataan/penjadwalan_tinjauan/edit/data/{id}', ['as' => 'backoffice_pendataan_penjadwalan_tinjauan_edit_data', 'uses' => 'BackofficeController@pendataan_penjadwalan_tinjauan_edit_data']);
 

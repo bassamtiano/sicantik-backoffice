@@ -1,20 +1,10 @@
 $app = angular.module('sicantik_backoffice', []);
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 
 var fetch_limit = 15;
 ////////////////////////////////////KONFIGURASI START//////////////////////////////
-=======
-fetch_limit = 100;
-=======
 
-var fetch_limit = 15;
 ////////////////////////////////////KONFIGURASI START/////////////////////////////
->>>>>>> pr/9
 
-
->>>>>>> origin/master
 //////////////////////////////SETTING PERIZINAN/////////////////////
 function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 
@@ -23,14 +13,7 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 			$scope.pelayanan_pendaftaran_permohonan_sementara_data = ppps_data;
 		});
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
-=======
-
->>>>>>> pr/9
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -103,13 +86,7 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 	$scope.modal_edit_submit = function() {
 
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
-=======
->>>>>>> pr/9
 }
 
 function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
@@ -186,21 +163,11 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 			$scope.pelayanan_pendaftaran_permohonan_izin_baru_data = pppib_data;
 		});
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> pr/9
 
 	$scope.modal_edit_submit = function() {
 
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
-=======
->>>>>>> pr/9
 }
 
 function PelayananPendaftaranPermohonanPerubahanIzinCtrl($scope, $http) {
@@ -211,14 +178,6 @@ function PelayananPendaftaranPermohonanPerubahanIzinCtrl($scope, $http) {
 		});
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
-=======
-
->>>>>>> pr/9
 	$scope.opsi_kegiatan = function(){
 		$http.get('perubahan_izin/opsi_kegiatan').success(function(piok_data) {
 			$scope.perubahan_izin_opsi_kegiatan = piok_data;
@@ -310,14 +269,7 @@ function PelayananPendaftaranPermohonanPerpanjanganIzinCtrl($scope, $http) {
 			$scope.pelayanan_pendaftaran_permohonan_perpanjangan_izin_data = pppi_data;
 		});
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
-=======
-
->>>>>>> pr/9
 	$scope.opsi_kegiatan = function(){
 		$http.get('perpanjangan_izin/opsi_kegiatan').success(function(piok_data) {
 			$scope.perpanjangan_izin_opsi_kegiatan = piok_data;
@@ -344,13 +296,6 @@ function PelayananPendaftaranPermohonanPerpanjanganIzinCtrl($scope, $http) {
 
 	$scope.pelayanan_pendaftaran_permohonan_perpanjangan_izin_data;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
-=======
->>>>>>> pr/9
 	/* # Modal ==================================================================================================== */
 
 	/* Define Modal Name */
@@ -433,14 +378,7 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 
 	$scope.opsi_investasi();
 	$scope.opsi_kegiatan();
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
-=======
->>>>>>> pr/9
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -452,14 +390,7 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 	}
 
 	$scope.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_data;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
-=======
-
->>>>>>> pr/9
 	/* # Modal ==================================================================================================== */
 
 	/* Define Modal Name */
@@ -510,10 +441,7 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 	}
 
 	/* # Submit =================================================================================================== */
-<<<<<<< HEAD
 
-=======
->>>>>>> pr/9
 	$scope.filter_pelayanan = function(){
 		$http.get('daftar_ulang_izin/data/' + $scope.pelayanan_id).success(function(ppdui_data) {
 			$scope.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_data = ppdui_data;
@@ -532,6 +460,7 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 		});
 	}
 
+
 	$scope.opsi_pelayanan = function(){
 		$http.get('data_pemohon/opsi').success(function(ppdpo_data) {
 			$scope.pelayanan_pendaftaran_data_pemohon_opsi = ppdpo_data;
@@ -539,13 +468,7 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	}
 
 	$scope.opsi_pelayanan();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
-=======
->>>>>>> pr/9
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -557,32 +480,35 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	}
 
 	$scope.pelayanan_pendaftaran_data_pemohon_data;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
-=======
-
->>>>>>> pr/9
 	/* # Modal ==================================================================================================== */
 
 	/* Define Modal Name */
 
 	$scope.modal_edit = false;
-	$scope.modal_tambah = false;
+	$scope.modal_tambah_pemohon = false;
 
 	/* Define Open & Close Handler */
 
 	$scope.open_modal = function(modal_name, id) {
+		if(id == null) {
+			eval("$scope." + modal_name + "= true");
 
-		eval("$scope." + modal_name + "= true");
-		eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+		else {
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+
+
 	}
 
 	$scope.close_modal = function(modal_name) {
 		eval("$scope." + modal_name + "= false");
 	}
+
+	/* Prepare Opsi */
+
 
 	/*  Construct Modal Function */
 
@@ -592,6 +518,9 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 		});
 	}
 
+	$scope.modal_insert_data = function(id){
+
+	}
 
 	/* Define Tab Name */
 
@@ -611,21 +540,12 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	}
 
 	/* # Submit =================================================================================================== */
-<<<<<<< HEAD
-=======
 
 	$scope.filter_pelayanan = function(){
 		$http.get('data_pemohon/data/' + $scope.pelayanan_id).success(function(ppdp_data) {
 			$scope.pelayanan_pendaftaran_data_pemohon_data = ppdp_data;
 		});
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
-=======
->>>>>>> pr/9
 }
 
 

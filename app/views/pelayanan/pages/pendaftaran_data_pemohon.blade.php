@@ -50,17 +50,8 @@
 	<form ng-submit="filter_pelayanan()">
 		<div class="table-form-content">
 			<div class="form-item">
-				<button ng-click="open_modal('modal_tambah')" style="width='30px'">Tambah Pemohon</button>
+				<a class ng-click="open_modal('modal_tambah_pemohon', null)" style="width='30px'">Tambah Pemohon</a>
 			</div>
-			<!-- <div class="form-item wide">
-				<select class="form-option" ng-model="pengaduan_id" ng-options="pdpsop.sts_pesan_id as pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan">
-					<option value="">Pilih Opsi Pengaduan</option>
-				</select>
-			</div>
-			
-			<div class="form-item">
-				<input type="submit" value="Filter">
-			</div> -->
 		</div>
 	</form>
 @stop
@@ -95,7 +86,6 @@
 			<th class="c_n_pemohon" ng-click="predicate='n_pemohon'; reverse=!reverse">Pemohon</th>
 			<th class="c_a_pemohon" ng-click="predicate='a_pemohon'; reverse=!reverse">Alamat</th>
 			<th class="c_aksi">Aksi</th>
-			<th class="c_verifikasi">Verifikasi</th>
 		</tr>
 	</table>
 
@@ -110,10 +100,11 @@
 			<td class="c_n_pemohon">@{{ ppdp.n_pemohon }}</td>
 			<td class="c_a_pemohon">@{{ ppdp.a_pemohon }}</td>
 			<td class="c_aksi">
-				<a href ng-click="open_modal('modal_edit', ppdp.id)" class="row-item ya">Edit</a>
+				<span class="button-group group-1">
+					<a href ng-click="open_modal('modal_edit', ppdp.id)" class="edit">Edit</a>
+				</span>
+				
 			</td>
-			<td class="c_verifikasi">@{{  }}</td>
-			
 		</tr>
 		<tr>
 			<td colspan="12" style="text-align:center">
@@ -125,6 +116,6 @@
 @stop
 
 @section('modal-content')
-	@include('pelayanan.modals.pelayanan_pendaftaran_data_pemohon_modal_tambah', ['modal_name' => 'modal_tambah'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_data_pemohon_modal_tambah', ['modal_name' => 'modal_tambah_pemohon'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_data_pemohon_modal_edit', ['modal_name' => 'modal_edit'])
 @stop

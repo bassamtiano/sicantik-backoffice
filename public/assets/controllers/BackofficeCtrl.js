@@ -286,11 +286,20 @@ $app = angular.module('sicantik_backoffice', [])
 
 		$scope.modal_edit = false;
 
+		/* Opsi Modal Edit */
+
+		$scope.opsi_edit_penandatangan = function(nama_ttd) {
+			$http.get('penjadwalan_tinjauan/edit/opsi/' + nama_ttd).success(function(pteo) {
+				$scope.opsi_penandatangan = pteo;
+			});
+		}
+
 		/* Construct Modal Function */
 
 		$scope.modal_edit_data = function(id) {
 			$http.get('penjadwalan_tinjauan/edit/data/' + id).success(function(pted) {
 				$scope.peninjauan_tinjauan_edit_data = pted;
+				$scope.opsi_edit_penandatangan($scope.peninjauan_tinjauan_edit_data.nama_ttd)
 			});
 		}
 

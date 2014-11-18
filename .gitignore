@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /app/config/database.php
 /vendor
 composer.phar
@@ -11,3 +12,6 @@ composer.lock  # Remove this one after you create a project
 >>>>>>> pr/9
 .DS_Store
 Thumbs.db
+=======
+app/config/database.php
+>>>>>>> pr/11

@@ -95,11 +95,11 @@
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Tanggal Terima Berkas</div>
-                                <div class="content-form-input"><input type="text" name="d_terima_berkas" ng-model="entry_data_perizinan_data_awal_data.d_terima_berkas" /></div>
+                                <div class="content-form-input"><input type="text" data-provide="datepicker" class="tanggal_input" name="d_terima_berkas" ng-model="entry_data_perizinan_data_awal_data.d_terima_berkas" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Tanggal Peninjauan</div>
-                                <div class="content-form-input"><input type="text" name="d_survey" ng-model="entry_data_perizinan_data_awal_data.d_survey" /></div>
+                                <div class="content-form-input"><input type="text" data-provide="datepicker" class="tanggal_input" name="d_survey" ng-model="entry_data_perizinan_data_awal_data.d_survey" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Lokasi Izin</div>
