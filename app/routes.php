@@ -136,7 +136,7 @@ Route::get('monitoring/per_jenis_perizinan', ['as' => 'monitoring_per_jenis_peri
 
 Route::get('monitoring/per_jenis_perizinan/data', ['as' => 'monitoring_per_jenis_perizinan_data', 'uses' => 'MonitoringController@per_jenis_perizinan_data']);
 
-Route::get('monitoring/per_jenis_perizinan/data/{date_start}/{date_finish}/{id}', ['as' => 'monitoring_per_jenis_perizinan_data', 'uses' => 'MonitoringController@per_jenis_perizinan_data']);
+Route::get('monitoring/per_jenis_perizinan/data/{id}/{date_start}/{date_finish}', ['as' => 'monitoring_per_jenis_perizinan_data', 'uses' => 'MonitoringController@per_jenis_perizinan_data']);
 
 Route::get('monitoring/per_jenis_perizinan/datacombo', ['as' => 'monitoring_per_jenis_perizinan_datacombo', 'uses' => 'MonitoringController@per_jenis_perizinan_datacombo']);
 
@@ -153,6 +153,16 @@ Route::get('monitoring/per_jangka_waktu/data/{date_start}/{date_finish}', ['as' 
 Route::get('monitoring/per_desa_dan_kecamatan', ['as' => 'monitoring_per_desa_dan_kecamatan', 'uses' => 'MonitoringController@per_desa_dan_kecamatan']);
 
 Route::get('monitoring/per_desa_dan_kecamatan/data', ['as' => 'monitoring_per_desa_dan_kecamatan_data', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_data']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/data/{prop}/{kab}/{kec}/{kel}/{date_start}/{date_finish}', ['as' => 'monitoring_per_desa_dan_kecamatan_data', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_data']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/opsi/propinsi', ['as' => 'monitoring_per_desa_dan_kecamatan_opsi_propinsi', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_opsi_propinsi']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/opsi/kabupaten/{id}', ['as' => 'monitoring_per_desa_dan_kecamatan_opsi_kabupaten', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_opsi_kabupaten']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/opsi/kecamatan/{id}', ['as' => 'monitoring_per_desa_dan_kecamatan_opsi_kecamatan', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_opsi_kecamatan']);
+
+Route::get('monitoring/per_desa_dan_kecamatan/opsi/kelurahan/{id}', ['as' => 'monitoring_per_desa_dan_kecamatan_opsi_kelurahan', 'uses' => 'MonitoringController@per_desa_dan_kecamatan_opsi_kelurahan']);
 
 # Monitoring / Perizinan Belum Sudah Jadi Kadaluarsa (Filter Masih Belum Bekerja)
 
@@ -552,7 +562,7 @@ Route::get('pelayanan/pendaftaran/data_pemohon', array('as' => 'pelayanan_pendaf
 
 Route::get('pelayanan/pendaftaran/data_pemohon/data', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_data'));
 
-Route::get('pelayanan/pendaftaran/data_pemohon/data/{id}', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_data'));
+Route::get('pelayanan/pendaftaran/data_pemohon/data/{id}', array('as' => 'pelayanan_pendaftaran_data_pemohon_data', 'uses' => 'PelayananController@pendaftaran_data_pemohon_edit_data'));
 
 Route::get('pelayanan/pendaftaran/data_pemohon/edit', array('as' => 'pelayanan_pendaftaran_data_pemohon_edit', 'uses' => 'PelayananController@pendaftaran_data_pemohon_edit'));
 
