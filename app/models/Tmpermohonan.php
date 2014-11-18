@@ -492,11 +492,6 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 				->orderBy('tmpermohonan.d_terima_berkas', 'desc')
 				->get();
 			}
-<<<<<<< HEAD
-
-
-=======
->>>>>>> pr/10
 		}
 
 		public static function fetch_with_tmpermohonan_trperizinan_tmpemohon_trstspermohonan_trkelurahan_tmbap_filterby_jangka_waktu($date_start, $date_finish) {
@@ -702,7 +697,7 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 				->orderBy('tmpermohonan.d_terima_berkas', 'desc')
 				->get();
 			}
-			
+
 		}
 
 		public static function fetch_with_trstspermohonan_tmpemohon_trperizinan_trkelurahan_filterby_status_perizinan_for_per_status_perizinan($id, $date_start, $date_finish) {
