@@ -23,6 +23,9 @@
 @table-content-height: calc(~"100% - " @table-content-space);
 @table-content-font-size:15px;
 
+@table-content-double-space: (@table-nav-menu-height * 2) + @footer-height;
+@table-content-double-height: calc(~"100% - " @table-content-double-space);
+
 .table-wrapper {
 
 	float: left;
@@ -71,12 +74,15 @@
 
 						background-color: white;
 
-						input, button {
+						input, button, a {
 							width: 100%;
 							padding-top: @table-nav-vertical-padding / 2;
 							padding-bottom: @table-nav-vertical-padding / 2;
 							padding-left: @table-form-horizontal-padding / 2;
 							padding-right: @table-form-horizontal-padding / 2;
+
+							float:left;
+							text-align:center;
 
 							border-radius: 5px;
 							border: 0;
@@ -86,7 +92,7 @@
 							// color: white;
 						}
 
-						input[type='submit'], button {
+						input[type='submit'], button, a {
 							background-color: #00B240;
 							color: white;
 							cursor: pointer;
@@ -160,6 +166,9 @@
 
 	}
 
+
+
+
 	.table-content {
 		clear: both;
 		width: 100%;
@@ -182,6 +191,8 @@
 			th {
 
 				background-color: white;
+
+
 			}
 
 			td {
@@ -221,29 +232,76 @@
 
 					margin:auto;
 					float:left;
-					background-color:red;
 					text-align:center;
 
+					&.group-1 {
+						a {
+							width:calc(~"70% - 10px");
+
+							padding:5px;
+
+							margin-left:15%;
+							margin-right:15%;
+
+							float:left;
+
+							text-align:center;
+						}
+					}
+
+					&.group-2 {
+						a {
+
+							width:calc(~"50% - 10px");
+
+							margin-left:5px;
+							margin-right:5px;
+
+							float:left;
+
+						}
+					}
+
+
+				}
+
+				.group-1, .group-2, .group-3 {
 					a {
+						border-radius:5px;
 
-
-						width:auto;
 						text-decoration:none;
+						text-align:center;
 
 						padding-top:5px;
 						padding-bottom:5px;
 
-						padding-left:10px;
-						padding-right:10px;
-
 						&.edit {
-							background-color:yellow;
+							background-color:#FFB03B;
+							color:white;
 						}
 
-						float:left;
+						&.delete {
+							background-color:#DC3247;
+							color:white;
+						}
 
+						&.accept {
+							background-color:#A7BD5B;
+							color:white;
+						}
+
+						&.print {
+							background-color:#31353D;
+							color:white;
+						}
+
+						&.email {
+							background-color:#8DC7B8;
+							color:white;
+						}
 					}
 				}
+
 
 				.btn-load-more {
 

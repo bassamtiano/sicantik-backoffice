@@ -1,16 +1,31 @@
 <?php
-	
+
 	class Tmpemohon extends BaseModel {
 
 		protected $table = "tmpemohon";
-		protected $guarded = array('id');
-		protected $fillable = array('no_referensi', 'n_pemohon', 'telp_pemohon', 'a_pemohon', 'a_pemohon_luar', 'i_user', 'd_entry', 'cek_prop', 'source');
+		protected $guarded = ['id'];
+		protected $fillable = ['no_referensi', 'n_pemohon', 'telp_pemohon', 'a_pemohon', 'a_pemohon_luar', 'i_user', 'd_entry', 'cek_prop', 'source'];
 
 		// public static function get_test() {
 
 		// 	return tmpemohon::all();
 
 		// }
+
+        # Modul Backoffice =========================================================================================================================================================================================
+
+        // public static function edit_pemohon_for_pendataan_entry_data_perizinan_data_awal($id, $data) {
+
+
+            Tmpemohon::where('id', '=', $id)->update(['n_pemohon' => $data['n_pemohon']]);
+
+        //     'tmpemohon.source', 'tmpemohon.no_referensi', 'tmpemohon.n_pemohon', 'tmpemohon.telp_pemohon';
+
+        //     Tmpemohon::where('id', '=', $id)->update(['n_pemohon' => $data['n_pemohon']]);
+
+
+        // }
+
 
 		public static function fetch_data() {
 			return Tmpemohon::get();
@@ -54,12 +69,12 @@
 			->get();
 		}
 
-		
+
 //-------------------------------------------------------- FUNGSI INSERT -------------------------//
 
 		public static function insert_data($data) {
 			Tmpemohon::create($data);
-			
+
 		}
 
 		public static function update_data($id, $data){

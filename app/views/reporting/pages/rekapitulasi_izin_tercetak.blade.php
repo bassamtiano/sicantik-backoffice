@@ -44,23 +44,23 @@
 @stop
 
 @section('nav-menu-left')
-    {{ HTML::linkRoute('reporting_realisasi_penerimaan_cetak', 'Print', [1,1], ['class' => 'btn']) }}
-@stop
-
-@section('nav-menu-right')
-    <form>
+        <form ng-submit="filter_date()">
         <div class="table-form-content">
             <div class="form-item">
-                &nbsp;
+                <input type="text" data-provide="datepicker" class="tanggal_input" ng-model="date.start" placeholder="Tanggal Awal">
             </div>
             <div class="form-item">
-                &nbsp;
+                <input type="text" data-provide="datepicker" class="tanggal_input" ng-model="date.finish" placeholder="Tanggal Akhir">
             </div>
-            <div class="form-item wide">
-                <input type="text" placeholder="Kata Kunci" ng-model="search">
+            <div class="form-item">
+                <input type="submit" value="Filter">
             </div>
         </div>
     </form>
+@stop
+
+@section('nav-menu-right')
+   <a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_izin_tercetak/cetak') }}/@{{ date.start }}/@{{ date.finish }}" ng-if="date.start.length > 0 && date.finish.length > 0"> Print</a>
 @stop
 
 @section('table_nav')
@@ -87,7 +87,7 @@
             <td class="c_tanggal_penetapan"> @{{ ritd.tanggal_peninjauan }} </td>
             <td class="c_nama_dan_alamat_pemohon">@{{ ritd.n_pemohon }} <br> @{{ ritd.a_pemohon }}</td>
             <td class="c_nama_dan_lokasi_izin_perusahaan">@{{ ritd.n_perusahaan }} <br> @{{ ritd.a_izin }}</td>
-            <td class="c_dicetak"> @{{ ritd.c_cetak }}</td>
+            <td class="c_dicetak"> @{{ ritd.c_cetak }} kali</td>
             <td class="c_jenis_izin"> @{{ ritd.n_perizinan }}</td>
         </tr>
         <tr>

@@ -187,6 +187,8 @@ $scope.per_status_perizinan_datacombo();
 	}
 }
 
+
+
 function MonitoringPerNamaPemohonCtrl($http, $scope){
 	$scope.show_all = function() {
 	$http.get('per_nama_pemohon/data').success(function(mpnp_data){
@@ -225,9 +227,79 @@ function MonitoringPerNamaPemohonCtrl($http, $scope){
 }
 
 function MonitoringPerDesaKecamatanCtrl($http, $scope){
-	$http.get('per_desa_dan_kecamatan/data').success(function(mpdk_data){
-		$scope.monitoring_per_desa_dan_kecamatan_data = mpdk_data;
+	/* # Prepare Data ============================================================================================= */
+    $scope.date = [];
+
+    $scope.date.prop = "";
+    $scope.date.kab = "";
+    $scope.date.kec = "";
+    $scope.date.kel = "";
+	$scope.show_all = function() {
+		$http.get('per_desa_dan_kecamatan/data').success(function(mpdk_data){
+			$scope.monitoring_per_desa_dan_kecamatan_data = mpdk_data;
+		});
+	}
+
+	$scope.show_all();
+
+	/* # Filter Data ============================================================================================== */
+
+	$scope.opsi_cari = '$';
+	$scope.search = {};
+	$scope.displayed = fetch_limit;
+
+	$scope.loadMore = function() {
+		$scope.displayed += fetch_limit;
+	}
+
+	$scope.monitoring_per_desa_dan_kecamatan_data;
+
+	/* # Modal ==================================================================================================== */
+
+
+
+	/* # Submit =================================================================================================== */
+
+	$scope.get_propinsi = function() {
+		$scope.aaa = $scope.propinsi_pemohon;
+		$http.get('per_desa_dan_kecamatan/opsi/propinsi').success(function(pjp_data) {
+			$scope.portal_propinsi_data = pjp_data;
+		});
+	}
+
+	$scope.get_propinsi();
+
+	$scope.$watch('date.prop', function() {
+		$http.get('per_desa_dan_kecamatan/opsi/kabupaten/' + $scope.date.prop.id ).success(function(kab_data) {
+			$scope.portal_kabupaten_data = kab_data;
+		});
+		$scope.date.kec = "";
+		$scope.date.kel = "";
 	});
+
+	$scope.$watch('date.kab', function(){
+		$http.get('per_desa_dan_kecamatan/opsi/kecamatan/' + $scope.date.kab.id).success(function(kec_data){
+			$scope.portal_kecamatan_data = kec_data;
+		});
+		$scope.date.kel = "";		
+	});
+
+	$scope.$watch('date.kec', function(){
+		$http.get('per_desa_dan_kecamatan/opsi/kelurahan/' + $scope.date.kec.id).success(function(kel_data){
+			$scope.portal_kelurahan_data = kel_data;
+		});
+	});
+
+	$scope.filter_date = function() {
+		if($scope.date.prop == null || $scope.date.kab == null || $scope.date.kec == null || $scope.date.kel == null || $scope.date.start == null || $scope.date.finish == null){
+			alert("Isi Terlebih Dahulu Kolom");
+		}
+		else{
+			$http.get('per_desa_dan_kecamatan/data/' + $scope.date.prop + '/' + $scope.date.kab + '/' + $scope.date.kec + '/' + $scope.date.kel + '/' + $scope.date.start + '/' + $scope.date.finish).success(function(mpdk_data) {
+			$scope.monitoring_per_desa_dan_kecamatan_data = mpdk_data;
+		});			
+		}
+	}
 }
 
 function MonitoringPerNamaPerusahaanCtrl($http, $scope){
@@ -276,18 +348,16 @@ function MonitoringPerNamaPerusahaanCtrl($http, $scope){
 
 function MonitoringPerBelumSudahJadiKadaluarsaCtrl($http, $scope){
 
-	$scope.date = [];
-	
-	$scope.date.dt = "null";
-	
 	$scope.show_all = function() {
 		$http.get('perizinan_belum_sudah_jadi_kadaluarsa/data').success(function(mpbjk_data){
 			$scope.monitoring_per_belum_jadi_kadaluarsa_data = mpbjk_data;
 		});
 	}
-	
+
 
 	$scope.show_all();
+	$scope.date = [];
+	$scope.date.dt = "null";
 
 	/* # Filter Data ============================================================================================== */
 

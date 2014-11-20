@@ -8,7 +8,7 @@
 		}
 		.c_no_pendaftaran {
 			width: 10%;
-			text-align: center;			
+			text-align: center;
 		}
 		.c_pemohon {
 			width: 15%;
@@ -21,16 +21,16 @@
 			width: 15%;
 			text-align: center;
 		}
-		
+
 		.c_no_surat {
 			width: 10%;
 			text-align: center;
 		}
 		.c_status {
 			width: 5%;
-			text-align: center;	
+			text-align: center;
 		}
-		
+
 
 		.c_aksi {
 			width: 10%;
@@ -56,7 +56,7 @@
 	<form ng-submit="filter_date()">
 		<div class="table-form-content">
 			<div class="form-item">
-				&nbsp;	
+				&nbsp;
 			</div>
 			<div class="form-item">
 				<input type="text" data-provide="datepicker" class="tanggal_input" ng-model="date.start" placeholder="Tanggal Awal">
@@ -95,7 +95,7 @@
 @stop
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -122,7 +122,13 @@
 			<td class="c_jenis_izin"> @{{ pps.n_perizinan }} </td>
 			<td class="c_no_surat"> @{{ pps.no_surat }} </td>
 			<td class="c_status">@{{ pps.c_status_salinan }}</td>
-			<td class="c_aksi"> @{{ pps.id }} </td>
+			<td class="c_aksi">
+				 <!-- @{{ pps.id }}  -->
+				<span class="button-group group-2">
+					<a href ng-click="open_modal('modal_penyerahan', ppi.id)" class="accept">Penyerahan</a>
+					<a href ng-click="open_modal('modal_penyerahan', ppi.id)" class="print">Cetak</a>
+				</span>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="8" style="text-align:center">
