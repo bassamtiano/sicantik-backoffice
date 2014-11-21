@@ -1,11 +1,58 @@
 <?php
 
 class MonitoringController extends BaseController {
+
+	public function __construct() {
+		$this->auth_monitoring();
+	}
+
+	# Monitoring Authentication 	======================================================================================
+
+	private function auth_monitoring() {
+
+		$this->beforeFilter(function(){
+
+			$user_type = 'monitoring';
+
+			if(!empty(Auth::user()->id)) {
+				if(Session::get($user_type) == true || Session::get('administrator') == true) {
+					$id = Auth::user()->id;
+					$auth_id = UserUserAuth::where('user_id', '=', $id)->get(['user_auth_id']);
+
+					$status = '';
+
+					foreach($auth_id as $k => $v) {
+						$description = UserAuth::where('id', '=', $v->user_auth_id)->get(['description']);
+						foreach($description as $dk => $dv) {
+							if(strtolower($dv->description) == $user_type) {
+								$status = true;
+							}
+							else {
+
+							}
+						}
+					}
+
+					if(empty($status) && $status !== true) {
+						return Redirect::intended(Session::get('current_page'));
+					}
+				}
+				else {
+					return Redirect::intended(Session::get('current_page'));
+				}
+			}
+			else {
+				return Redirect::intended('login');
+			}
+		});
+
+	}
+
 	/* Bagian Per Jenis Perizinan */
 		public function per_jenis_perizinan() {
 			return View::make('monitoring.pages.monitoring_per_jenis_perizinan');
 		}
-		
+
 		public function per_jenis_perizinan_data($id = null, $date_start = null, $date_finish = null) {
 			return Tmpermohonan::fetch_with_tmpermohonan_trperizinan_tmpemohon_trstspermohonan_trkelurahan_tmbap_for_per_jenis_perizinan($date_start, $date_finish, $id);
 		}
@@ -95,7 +142,7 @@ class MonitoringController extends BaseController {
 		}
 
 		public function per_bulan_pengambilan_izin_data($id = null, $date_start = null, $date_finish = null) {
-			// BUGS 
+			// BUGS
 			return Tmpermohonan::fetch_with_tmpemohon_trperizinan_trkelurahan_filterby_bulan_pengambilan_izin_for_per_bulan_pengambilan_izin($id, $date_start, $date_finish);
 		}
 

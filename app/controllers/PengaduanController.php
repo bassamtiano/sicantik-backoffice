@@ -2,6 +2,53 @@
 
 	class PengaduanController extends BaseController {
 
+		public function __construct() {
+			$this->auth_pengaduan();
+		}
+
+		# Pengaduan Authentication 	==========================================================================================
+
+		private function auth_pengaduan() {
+
+			$this->beforeFilter(function(){
+
+				$user_type = 'pengaduan';
+
+				if(!empty(Auth::user()->id)) {
+					if(Session::get($user_type) == true || Session::get('administrator') == true) {
+						$id = Auth::user()->id;
+						$auth_id = UserUserAuth::where('user_id', '=', $id)->get(['user_auth_id']);
+
+						$status = '';
+
+						foreach($auth_id as $k => $v) {
+							$description = UserAuth::where('id', '=', $v->user_auth_id)->get(['description']);
+							foreach($description as $dk => $dv) {
+								if(strtolower($dv->description) == $user_type) {
+									$status = true;
+								}
+								else {
+
+								}
+							}
+						}
+
+						if(empty($status) && $status !== true) {
+							return Redirect::intended(Session::get('current_page'));
+						}
+					}
+					else {
+						return Redirect::intended(Session::get('current_page'));
+					}
+				}
+				else {
+					return Redirect::intended('login');
+				}
+			});
+
+		}
+
+
 		//===================================================================Daftar Pengaduan Saran===================================================================================//
 
 		public function daftar_pengaduan_saran() {
@@ -31,14 +78,14 @@
 					$result[$v] = $k;
 				}
 			}
-			
+
 			return $result;
 		}
 
 		//===================================================================Persetujuan Respon Pengaduan===================================================================================//
 
 		public function persetujuan_respon_pengaduan() {
-			return View::make('pengaduan.pages.persetujuan_respon_pengaduan');	
+			return View::make('pengaduan.pages.persetujuan_respon_pengaduan');
 		}
 
 		public function persetujuan_respon_pengaduan_data($id = null) {
@@ -59,11 +106,11 @@
 					$result[$v] = $k;
 				}
 			}
-			
+
 			return $result;
 		}
 
-		//===================================================================Pengiriman Respon Pengaduan===================================================================================//		
+		//===================================================================Pengiriman Respon Pengaduan===================================================================================//
 
 		public function pengiriman_respon_pengaduan() {
 			return View::make('pengaduan.pages.pengiriman_respon_pengaduan');
@@ -83,11 +130,11 @@
 					$result[$v] = $k;
 				}
 			}
-			
+
 			return $result;
 		}
 
-		//===================================================================Daftar Balasan Pengaduan===================================================================================//		
+		//===================================================================Daftar Balasan Pengaduan===================================================================================//
 
 		public function daftar_balasan() {
 			return View::make('pengaduan.pages.daftar_balasan');

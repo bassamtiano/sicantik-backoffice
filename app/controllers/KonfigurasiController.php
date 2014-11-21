@@ -2,10 +2,58 @@
 
 	class KonfigurasiController extends BaseController {
 
+		public function __construct() {
+			$this->auth_konfigurasi();
+		}
+
+		# Konfigurasi Authentication 	======================================================================================
+
+		private function auth_konfigurasi() {
+
+			$this->beforeFilter(function(){
+
+				$user_type = 'konfigurasi';
+
+				if(!empty(Auth::user()->id)) {
+					if(Session::get($user_type) == true || Session::get('administrator') == true) {
+						$id = Auth::user()->id;
+						$auth_id = UserUserAuth::where('user_id', '=', $id)->get(['user_auth_id']);
+
+						$status = '';
+
+						foreach($auth_id as $k => $v) {
+							$description = UserAuth::where('id', '=', $v->user_auth_id)->get(['description']);
+							foreach($description as $dk => $dv) {
+								if(strtolower($dv->description) == $user_type) {
+									$status = true;
+								}
+								else {
+
+								}
+							}
+						}
+
+						if(empty($status) && $status !== true) {
+							return Redirect::intended(Session::get('current_page'));
+						}
+					}
+					else {
+						return Redirect::intended(Session::get('current_page'));
+					}
+				}
+				else {
+					return Redirect::intended('login');
+				}
+			});
+
+
+		}
+
+
 		# Bagian Setting Perizinan / Jenis Perizinan
 
 		public function setting_perizinan_jenis_perizinan() {
-			return View::make('konfigurasi.pages.setting_perizinan_jenis_perizinan');	
+			return View::make('konfigurasi.pages.setting_perizinan_jenis_perizinan');
 		}
 
 		public function setting_perizinan_jenis_perizinan_data() {
@@ -26,7 +74,7 @@
 				'v_hari' => Input::get('v_hari'),
 				'c_tarif' => Input::get('c_tarif'),
 				'is_open',
-				
+
 				'v_berlaku_tahun',
 				'v_berlaku_satuan',
 				'v_perizinan',
@@ -49,13 +97,13 @@
 					$result[$v] = $k;
 				}
 			}
-			
+
 			return $result;
-			
+
 		}
 
 		public function setting_perizinan_jenis_perizinan_delete() {
-			
+
 		}
 
 
@@ -238,7 +286,7 @@
 			// 	'holiday_type' => 'Libur'
 			// ];
 
-			return Tmholiday::insert_data($data);			
+			return Tmholiday::insert_data($data);
 		 }
 
 		public function setting_umum_hari_libur_update() {
@@ -272,7 +320,7 @@
 		}
 
 		public function setting_umum_satuan_delete() {
-			
+
 		}
 
  		# Bagian Setting Umum / Web Service
@@ -426,7 +474,7 @@
 			$n_kabupaten = Input::get('n_kabupaten'),
 			$ibukota = Input::get('ibukota')
 			];
-			
+
 			$trkabupaten_id = Trkabupaten::insert_data($data);
 			TrkabupatenTrpropinsi::insert_data($trkabupaten_id, $trpropinsi_id);
 
@@ -723,7 +771,7 @@
 			}
 		}
 
-		
+
 
 
 		# Bagian Keamanan Data / Backup Database
@@ -746,7 +794,7 @@
 
 		public function report_report_generator_data() {
 			return ReportGenerators::fetch_data(['id', 'report_code', 'short_desc']);
-		}		
+		}
 
 		# Bagian Report / Report Component
 

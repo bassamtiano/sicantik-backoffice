@@ -2,11 +2,58 @@
 
 	class PelayananController extends BaseController {
 
+		public function __construct() {
+			$this->auth_pelayanan();
+		}
+
+		# Pelayanan Authentication 	==========================================================================================
+
+		private function auth_pelayanan() {
+
+			$this->beforeFilter(function(){
+
+				$user_type = 'pelayanan';
+
+				if(!empty(Auth::user()->id)) {
+					if(Session::get($user_type) == true || Session::get('administrator') == true) {
+						$id = Auth::user()->id;
+						$auth_id = UserUserAuth::where('user_id', '=', $id)->get(['user_auth_id']);
+
+						$status = '';
+
+						foreach($auth_id as $k => $v) {
+							$description = UserAuth::where('id', '=', $v->user_auth_id)->get(['description']);
+							foreach($description as $dk => $dv) {
+								if(strtolower($dv->description) == $user_type) {
+									$status = true;
+								}
+								else {
+
+								}
+							}
+						}
+
+						if(empty($status) && $status !== true) {
+							return Redirect::intended(Session::get('current_page'));
+						}
+					}
+					else {
+						return Redirect::intended(Session::get('current_page'));
+					}
+				}
+				else {
+					return Redirect::intended('login');
+				}
+			});
+
+		}
+
+
 	/*
 		Sub Modul Pendaftaran
 	*/
 
-		/* 
+		/*
 			Menu Permohonan Sementara
 		*/
 		public function pendaftaran_permohonan_sementara() {
@@ -47,11 +94,11 @@
 			}
 
 			$result['syarat'] = $data_syarat;
-			
+
 			return $result;
 		}
 
-		/* 
+		/*
 			Menu Permohonan Izin Baru
 		*/
 		public function pendaftaran_permohonan_izin_baru() {
@@ -92,11 +139,11 @@
 			}
 
 			$result['syarat'] = $data_syarat;
-			
+
 			return $result;
 		}
 
-		/* 
+		/*
 			Menu Perubahan Izin
 		*/
 		public function pendaftaran_perubahan_izin() {
@@ -146,13 +193,13 @@
 			}
 
 			$result['syarat'] = $data_syarat;
-			
+
 			return $result;
 		}
 
 
 
-		/* 
+		/*
 			Menu Perpanjangan Izin
 		*/
 		public function pendaftaran_perpanjangan_izin() {
@@ -181,7 +228,7 @@
 					$result[$v] = $k;
 				}
 			}
-			
+
 			$data_syarat = [];
 			$persyaratan = Trsyaratperizinan::fetch_with_tmperizinan_for_perpanjangan_izin_edit_data($result['perizinan_id']);
 
@@ -210,7 +257,7 @@
 
 		}
 
-		/* 
+		/*
 			Menu Daftar Ulang Izin
 		*/
 
@@ -260,11 +307,11 @@
 			}
 
 			$result['syarat'] = $data_syarat;
-			
+
 			return $result;
 		}
 
-		/* 
+		/*
 			Menu Data Pemohon
 		*/
 		public function pendaftaran_data_pemohon() {
@@ -285,13 +332,13 @@
 						$result[$v] = $k;
 					}
 				}
-				
+
 				return $result;
 			}
 
-		/* 
+		/*
 			Menu Data Perusahaan
-		*/	
+		*/
 
 		public function pendaftaran_data_perusahaan() {
 			return View::make('pelayanan.pages.pendaftaran_data_perusahaan');
@@ -319,7 +366,7 @@
 						$result[$v] = $k;
 					}
 				}
-				
+
 				return $result;
 			}
 
@@ -327,10 +374,10 @@
 		Sub Modul Customer Service
 	*/
 
-		/* 
+		/*
 			Menu Customer Service
 		*/
-		/* 
+		/*
 			Menu Data Informasi Perizinan
 		*/
 		public function customer_service_informasi_perizinan(){
@@ -354,20 +401,20 @@
 			$syarat_wrapper = [];
 			$syarat_wrapper1 = [];
 			$persyaratan = Trsyaratperizinan::fetch_with_trperizinan_trsyarat_perizinan_for_informasi_perizinan($result['perizinan_id']);
-			foreach ($persyaratan as $pkey => $pval) {	
+			foreach ($persyaratan as $pkey => $pval) {
 				foreach ($pval as $pv => $pk){
 					if ($pv == 'c_show_type') {
 						$c_biner = decbin($pk)."<br />";
 						$c_biner_split = str_split($c_biner);
 						$syarat_wrapper['izin_baru'] = $c_biner_split[0];
 						$syarat_wrapper['perpanjangan'] = $c_biner_split[1];
-						$syarat_wrapper['perubahan'] = $c_biner_split[2];	
+						$syarat_wrapper['perubahan'] = $c_biner_split[2];
 					}
 					else{
-						$syarat_wrapper1[$pv] = $pk;		
+						$syarat_wrapper1[$pv] = $pk;
 					}
-					$syarat_wrapper1 = $syarat_wrapper1 + $syarat_wrapper;					
-					
+					$syarat_wrapper1 = $syarat_wrapper1 + $syarat_wrapper;
+
 				}
 				array_push($result_persyaratan, $syarat_wrapper1);
 			}
@@ -377,7 +424,7 @@
 			return $result;
 		}
 
-		/* 
+		/*
 			Menu Informasi Tracking
 		*/
 		public function customer_service_informasi_tracking() {
@@ -398,7 +445,7 @@
 				}
 			}
 
-			
+
 			$statuspermohonan = Tmpermohonan::fetch_with_tmpermohonan_trstspermohonan_for_informasi_tracking_detail($result['id_permohonan']);
 			$result_status = [];
 			$status_wrapper = [];
@@ -410,7 +457,7 @@
 						$status_wrapper['span'] = $waktu;
 					}
 					else {
-						$status_wrapper[$pv] = $pk;	
+						$status_wrapper[$pv] = $pk;
 					}
 
 
@@ -422,7 +469,7 @@
 			return $result;
 		}
 
-		/* 
+		/*
 			Menu Informasi Masa Berlaku
 		*/
 		public function customer_service_informasi_masa_berlaku() {
@@ -455,7 +502,7 @@
 					}
 				}
 				array_push($result, $result_berlaku);
-			}		
-			return $result;	
+			}
+			return $result;
 		}
 	}

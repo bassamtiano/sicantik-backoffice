@@ -2,6 +2,52 @@
 
 	class ReportingController extends BaseController {
 
+		public function __construct() {
+			$this->auth_reporting();
+		}
+
+		# Reporting Authentication 	==========================================================================================
+
+		private function auth_reporting() {
+
+			$this->beforeFilter(function(){
+
+				$user_type = 'reporting';
+
+				if(!empty(Auth::user()->id)) {
+					if(Session::get($user_type) == true || Session::get('administrator') == true) {
+						$id = Auth::user()->id;
+						$auth_id = UserUserAuth::where('user_id', '=', $id)->get(['user_auth_id']);
+
+						$status = '';
+
+						foreach($auth_id as $k => $v) {
+							$description = UserAuth::where('id', '=', $v->user_auth_id)->get(['description']);
+							foreach($description as $dk => $dv) {
+								if(strtolower($dv->description) == $user_type) {
+									$status = true;
+								}
+								else {
+
+								}
+							}
+						}
+
+						if(empty($status) && $status !== true) {
+							return Redirect::intended(Session::get('current_page'));
+						}
+					}
+					else {
+						return Redirect::intended(Session::get('current_page'));
+					}
+				}
+				else {
+					return Redirect::intended('login');
+				}
+			});
+
+		}
+
 		# Realisasi Penerimaan 		====================================================================================================
 
 		public function realisasi_penerimaan() {
@@ -181,7 +227,7 @@
 			$header[$key['name']] = $key['value'];
 			}
 		$title_kabupaten = Trkabupaten::get_nama_kabupaten($header['app_city']);
-		
+
 		$data = [
 				'logo' => 'assets/img/logo.png',
 				'title_nama' => $header['app_kantor'],
@@ -345,7 +391,7 @@
 
 			fclose($fh);
 
-			
+
 
 			$pdf = PDF::loadView('reporting.dokumen.dokumen_wrapper',  ['result' => $result]);
 			return $pdf->setPaper('a4')->setOrientation('portrait')->download('bassam' . '.pdf');

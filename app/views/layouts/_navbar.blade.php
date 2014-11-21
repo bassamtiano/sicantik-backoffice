@@ -6,20 +6,26 @@
 			</li>
 		</a>
 
-		<a class="nav-item">
-			<li class="nav-item-sub">
-				</a>Reporting</a>
-				<ul class="sub-nav-item-wrapper">
-					<a class="sub-nav-item" href="{{ URL::to('reporting/realisasi_penerimaan') }}"><li>Realisasi Penerimaan</li></a>
-					<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_pendaftaran') }}"><li>Rekapitulasi Pendaftaran</li></a>
-					<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_perizinan') }}"><li>Rekapitulasi Perizinan</li></a>
-					<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_retribusi') }}"><li>Rekapitulasi Retribusi</li></a>
-					<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_tinjauan_lapangan') }}"><li>Rekapitulasi Tinjauan Lapangan</li></a>
-					<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_berkas_kembali') }}"><li>Rekapitulasi Berkas Kembali</li></a>
-					<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_izin_tercetak') }}"><li>Rekapitulasi Izin Tercetak</li></a>
-				</ul>
-			</li>
-		</a>
+		@if (Session::get('reporting') == true)
+
+			<a class="nav-item">
+				<li class="nav-item-sub">
+					</a>Reporting</a>
+					<ul class="sub-nav-item-wrapper">
+						<a class="sub-nav-item" href="{{ URL::to('reporting/realisasi_penerimaan') }}"><li>Realisasi Penerimaan</li></a>
+						<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_pendaftaran') }}"><li>Rekapitulasi Pendaftaran</li></a>
+						<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_perizinan') }}"><li>Rekapitulasi Perizinan</li></a>
+						<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_retribusi') }}"><li>Rekapitulasi Retribusi</li></a>
+						<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_tinjauan_lapangan') }}"><li>Rekapitulasi Tinjauan Lapangan</li></a>
+						<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_berkas_kembali') }}"><li>Rekapitulasi Berkas Kembali</li></a>
+						<a class="sub-nav-item" href="{{ URL::to('reporting/rekapitulasi_izin_tercetak') }}"><li>Rekapitulasi Izin Tercetak</li></a>
+					</ul>
+				</li>
+			</a>
+
+		@endif
+
+		@if (Session::get('monitoring') == true)
 
 		<a class="nav-item">
 			<li class="nav-item-sub">
@@ -36,6 +42,10 @@
 				</ul>
 			</li>
 		</a>
+
+		@endif
+
+		@if (Session::get('konfigurasi') == true)
 
 		<a class="nav-item">
 			<li class="nav-item-sub">
@@ -116,6 +126,10 @@
 			</li>
 		</a>
 
+		@endif
+
+		@if (Session::get('pelayanan') == true)
+
 		<a class="nav-item">
 			<li class="nav-item-sub">
 				<a>Pelayanan</a>
@@ -150,6 +164,10 @@
 				</ul>
 			</li>
 		</a>
+
+		@endif
+
+		@if (Session::get('backoffice') == true)
 
 		<a class="nav-item">
 			<li class="nav-item-sub">
@@ -193,6 +211,10 @@
 			</li>
 		</a>
 
+		@endif
+
+		@if (Session::get('kasir') == true)
+
 		<a class="nav-item">
 			<li class="nav-item-sub">
 				<a>Kasir</a>
@@ -201,6 +223,10 @@
 				</ul>
 			</li>
 		</a>
+
+		@endif
+
+		@if (Session::get('penyerahan') == true)
 
 		<a class="nav-item">
 			<li class="nav-item-sub">
@@ -212,6 +238,10 @@
 				</ul>
 			</li>
 		</a>
+
+		@endif
+
+		@if (Session::get('pengaduan') == true)
 
 		<a class="nav-item">
 			<li class="nav-item-sub">
@@ -225,7 +255,9 @@
 			</li>
 		</a>
 
-		<a class="nav-item" href="#">
+		@endif
+
+		<a class="nav-item" href="{{ URL::to('do_logout') }}">
 			<li>
 				Log Out
 			</li>

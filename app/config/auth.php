@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'table' => 'users',
+	'table' => 'user',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -60,11 +60,22 @@ return array(
 
 	'reminder' => array(
 
-		'email' => 'emails.auth.reminder',
+		'id' => 'id.auth.reminder',
+		'auth_id' => 'auth_id.auth.reminder',
 
-		'table' => 'password_reminders',
+		'reporting' => 'reporting.auth.reminder',
+		'monitoring' => 'monitoring.auth.reminder',
+		'konfigurasi' => 'konfigurasi.auth.reminder',
+		'pelayanan' => 'pelayanan.auth.reminder',
+		'backoffice' => 'backoffice.auth.reminder',
 
-		'expire' => 60,
+		'kasir' => 'kasir.auth.reminder',
+		'penyerahan' => 'penyerahan.auth.reminder',
+		'pengaduan' => 'pengaduan.auth.reminder',
+
+		'administrator' => 'administrator.auth.reminder',
+
+		'expire' => 60
 
 	),
 

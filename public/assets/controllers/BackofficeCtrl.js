@@ -248,7 +248,6 @@ $app = angular.module('sicantik_backoffice', [])
 
 			}, 1);
 			$scope.show_all();
-
 		}
 
 	}
@@ -424,6 +423,26 @@ $app = angular.module('sicantik_backoffice', [])
 			});
 		}
 
+		$scope.modal_edit_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_edit_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_edit_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_edit = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+
+		}
+
 
 	}
 ])
@@ -492,6 +511,26 @@ $app = angular.module('sicantik_backoffice', [])
 			$http.get('pembuatan_berita_acara_pemeriksaan/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(bttpbap_data) {
 				$scope.backoffice_tim_teknis_pembuatan_berita_acara_pemeriksaan = bttpbap_data;
 			});
+		}
+
+		$scope.modal_edit_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_edit_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_edit_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_edit = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+
 		}
 
 
@@ -715,7 +754,25 @@ $app = angular.module('sicantik_backoffice', [])
 			});
 		}
 
+		$scope.modal_edit_submit = function() {
 
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_edit_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_edit_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_edit = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+
+		}
 
 	}
 

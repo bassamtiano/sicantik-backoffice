@@ -2,9 +2,54 @@
 
 	class BackofficeController extends BaseController {
 
+		public function __construct() {
+			$this->auth_backoffice();
+		}
+
+		# Backoffice Authentication 	======================================================================================
+
+		private function auth_backoffice() {
+			$this->beforeFilter(function(){
+
+				$user_type = 'backoffice';
+
+				if(!empty(Auth::user()->id)) {
+					if(Session::get($user_type) == true || Session::get('administrator') == true) {
+						$id = Auth::user()->id;
+						$auth_id = UserUserAuth::where('user_id', '=', $id)->get(['user_auth_id']);
+
+						$status = '';
+
+						foreach($auth_id as $k => $v) {
+							$description = UserAuth::where('id', '=', $v->user_auth_id)->get(['description']);
+							foreach($description as $dk => $dv) {
+								if(strtolower($dv->description) == $user_type) {
+									$status = true;
+								}
+								else {
+
+								}
+							}
+						}
+
+						if(empty($status) && $status !== true) {
+							return Redirect::intended(Session::get('current_page'));
+						}
+					}
+					else {
+						return Redirect::intended(Session::get('current_page'));
+					}
+				}
+				else {
+					return Redirect::intended('login');
+				}
+			});
+		}
+
 		# Pendaftaran / Pendataan Entry Data Perizinan 	======================================================================
 
 		public function pendataan_entry_data_perizinan() {
+			Session::put('current_page', 'backoffice/pendataan/entry_data_perizinan');
 			return View::make('backoffice.pages.pendataan_entry_data_perizinan');
 		}
 
@@ -421,6 +466,7 @@
 		# Pendaftaran / Pendataan Penjadwalan Tinjauan 	======================================================================
 
 		public function pendataan_penjadwalan_tinjauan() {
+			Session::put('current_page', 'backoffice/pendataan/entry_data_perizinan');
 			return View::make('backoffice.pages.pendataan_penjadwalan_tinjauan');
 		}
 
@@ -486,6 +532,7 @@
 		# Tim Teknis / Entry Hasil Tinjauan 	==============================================================================
 
 		public function tim_teknis_entry_hasil_tinjauan() {
+			Session::put('current_page', 'backoffice/tim_teknis/entry_hasil_tinjauan');
 			return View::make('backoffice.pages.tim_teknis_entry_hasil_tinjauan');
 		}
 
@@ -494,6 +541,37 @@
 		}
 
 		# @ Bagian Modal =======================================================
+
+		public function tim_teknis_entry_hasil_tinjauan_edit() {
+			$property = Input::get('property_value');
+			$jenis = Input::get('jenis_id');
+			$property_id = Input::get('property_id');
+
+			$urutan_property = 0;
+
+			foreach($property as $k) {
+
+				if(!empty($property_id[$urutan_property]) || !empty($property_id[$urutan_property])) {
+					if($jenis[$urutan_property] == 26) {
+						$data = ['k_property' => $k];
+
+					}
+					else {
+						$data = ['v_property' => $k];
+
+					}
+
+					$action = Tmpropertyjenisperizinan::edit_data($property_id[$urutan_property], $data);
+				}
+
+				$urutan_property += 1;
+			}
+
+			echo 'isi';
+
+
+			# disini
+		}
 
 		public function tim_teknis_entry_hasil_tinjauan_edit_data($id) {
 
@@ -528,7 +606,8 @@
 						$nama_property = str_replace([' ', ')',  '_&'], '', $nama_property);
 
 						$property[$nama_property] = $property_value;
-
+						$property[$nama_property . '_id'] = $prkey->id;
+						$property[$nama_property . '_property'] = $k2->id;
 					}
 
 				}
@@ -543,6 +622,7 @@
 		# Tim Teknis / Pembuatan Berita Acara Pemeriksaan 	==================================================================
 
 		public function tim_teknis_pembuatan_berita_acara_pemeriksaan() {
+			Session::put('current_page', 'backoffice/tim_teknis/pembuatan_berita_acara_pemeriksaan');
 			return View::make('backoffice.pages.tim_teknis_pembuatan_berita_acara_pemerkisaan');
 		}
 
@@ -551,6 +631,16 @@
 		}
 
 		# @ Bagian Modal =======================================================
+
+		public function tim_teknis_pembuatan_berita_acara_pemeriksaan_edit() {
+			$id_permohonan = Input::get('id_permohonan');
+			$id_bap = Input::get('id_bap');
+			$action_pemohon = Tmpermohonan::where('id', '=', $id_permohonan)->update(['d_survey' => Input::get('d_survey')]);
+			$action_bap = Tmbap::where('id', '=', $id_bap)->update(['c_pesan' => Input::get('c_pesan')]);
+			if($action_pemohon == 1 || $action_bap == 1) {
+				echo 'isi';
+			}
+		}
 
 		public function tim_teknis_pembuatan_berita_acara_pemeriksaan_edit_data($id) {
 			$result = [];
@@ -608,6 +698,7 @@
 		# Tim Teknis / Hitung Retribusi 	==================================================================================
 
 		public function tim_teknis_hitung_retribusi() {
+			Session::put('current_page', 'backoffice/tim_teknis/hitung_retribusi');
 			return View::make('backoffice.pages.tim_teknis_hitung_retribusi');
 		}
 
@@ -618,6 +709,7 @@
 		# Tim Teknis / Rekomendasi 	==========================================================================================
 
 		public function tim_teknis_rekomendasi() {
+			Session::put('current_page', 'backoffice/tim_teknis/rekomendasi');
 			return View::make('backoffice.pages.tim_teknis_rekomendasi');
 		}
 
@@ -629,6 +721,7 @@
 		# Penetapan / Penetapan Izin 	======================================================================================
 
 		public function penetapan_penetapan_izin() {
+			Session::put('current_page', 'backoffice/penetapan/penetapan_izin');
 			return View::make('backoffice.pages.penetapan_penetapan_izin');
 		}
 
@@ -696,6 +789,7 @@
 		# Penetapan / Pembuatan SKRD 	======================================================================================
 
 		public function penetapan_pembuatan_skrd() {
+			Session::put('current_page', 'backoffice/penetapan/pembuatan_skrd');
 			return View::make('backoffice.pages.penetapan_pembuatan_skrd');
 		}
 
@@ -704,6 +798,24 @@
 		}
 
 		# @ Bagian Modal =======================================================
+
+		public function penetapan_pembuatan_skrd_edit() {
+			$data = [
+				'e_berdasarkan' => Input::get('e_berdasarkan'),
+				'e_surat' => Input::get('e_surat'),
+				'i_nomor_surat' => Input::get('i_nomor_surat'),
+				'n_pemohon' => Input::get('keringanan_n_pemohon'),
+				'v_prosentase_retribusi' => Input::get('v_prosentase_retribusi'),
+				'i_entry' => Input::get('i_entry')
+			];
+
+			$action = Tmkeringananretribusi::where('id', '=', Input::get('id_keringanan_retribusi'))->update($data);
+
+			if($action == 1) {
+				echo 'isi';
+			}
+
+		}
 
 		public function penetapan_pembuatan_skrd_edit_data($id) {
 			$result = [];
@@ -722,6 +834,7 @@
 		# Penetapan / Pembuatan Izin 	======================================================================================
 
 		public function penetapan_pembuatan_izin() {
+			Session::put('current_page', 'backoffice/penetapan/pembuatan_izin');
 			return View::make('backoffice.pages.penetapan_pembuatan_izin');
 		}
 
@@ -732,6 +845,7 @@
 		# Penetapan / Penetapan Layanan Ditolak 	==========================================================================
 
 		public function penetapan_layanan_ditolak() {
+			Session::put('current_page', 'backoffice/penetapan/layanan_ditolak');
 			return View::make('backoffice.pages.penetapan_layanan_ditolak');
 		}
 
@@ -742,6 +856,7 @@
 		# Penetapan / Pencabutan Izin 	======================================================================================
 
 		public function penetapan_pencabutan_izin() {
+			Session::put('current_page', 'backoffice/penetapan/pencabutan_izin');
 			return View::make('backoffice.pages.penetapan_pencabutan_izin');
 		}
 

@@ -206,7 +206,12 @@
             </div>
         </div>
         <div class="modal-footer">
-            as
+            <div class="modal-footer-left">
+                &nbsp;
+            </div>
+            <div class="modal-footer-right">
+                <a type="submit" class="btn button-red" ng-click="close_modal('modal_edit')">Batal</a>
+            </div>
         </div>
 
         <!-- Iframe for post -->

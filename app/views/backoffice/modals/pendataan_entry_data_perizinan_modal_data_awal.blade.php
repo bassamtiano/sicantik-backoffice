@@ -308,7 +308,6 @@
 
         </div>
 
-
         <div class="modal-footer">
             <div class="modal-footer-left">
                 &nbsp;
