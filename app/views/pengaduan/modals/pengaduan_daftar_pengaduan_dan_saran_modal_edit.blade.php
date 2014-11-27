@@ -8,13 +8,13 @@
             <div class="body-tab-wrapper">
                 <div class="tab-nav">
                     <ul class="tab-nav-wrapper">
-                        <li class="tab-nav-item enable" id="tab_nav_isi_biodata" ng-click="show_tab('tab.tambah_data_tab_isi_biodata', 'tab_nav_isi_biodata')">Isi Biodata</li>
-                        <li class="tab-nav-item" id="tab_nav_pesan_pengaduan" ng-click="show_tab('tab.tambah_data_tab_pesan_pengaduan', 'tab_nav_pesan_pengaduan')">Pesan Pengaduan</li>
-                        <li class="tab-nav-item" id="tab_nav_info_pengaduan" ng-click="show_tab('tab.tambah_data_tab_info_pengaduan', 'tab_nav_info_pengaduan')">Informasi Pengaduan</li>
+                        <li class="tab-nav-item enable" id="tab_edit_nav_isi_biodata" ng-click="show_tab('tab.edit_data_tab_isi_biodata', 'tab_edit_nav_isi_biodata')">Isi Biodata</li>
+                        <li class="tab-nav-item" id="tab_edit_nav_pesan_pengaduan" ng-click="show_tab('tab.edit_data_tab_pesan_pengaduan', 'tab_edit_nav_pesan_pengaduan')">Pesan Pengaduan</li>
+                        <li class="tab-nav-item" id="tab_edit_nav_info_pengaduan" ng-click="show_tab('tab.edit_data_tab_info_pengaduan', 'tab_edit_nav_info_pengaduan')">Informasi Pengaduan</li>
                     </ul>
                 </div>
                 <div class="tab-content-wrapper">
-                    <div class="tab-content" ng-show="tab.tambah_data_tab_isi_biodata">
+                    <div class="tab-content" ng-show="tab.edit_data_tab_isi_biodata">
                         <div class="tab-content-left">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama</div>
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div> <!--isi biodata-->
-                    <div class="tab-content" ng-show="tab.tambah_data_tab_pesan_pengaduan">
+                    <div class="tab-content" ng-show="tab.edit_data_tab_pesan_pengaduan">
                         <div class="tab-content-left">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Isi Pesan Pengaduan</div>
@@ -100,7 +100,7 @@
                             </div>
                         </div>
                     </div> <!--pesan pengaduan-->
-                    <div class="tab-content" ng-show="tab.tambah_data_tab_info_pengaduan">
+                    <div class="tab-content" ng-show="tab.edit_data_tab_info_pengaduan">
                         <div class="tab-content-left">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Sumber Pengaduan</div>

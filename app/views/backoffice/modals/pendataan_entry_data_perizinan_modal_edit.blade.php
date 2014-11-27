@@ -1,6 +1,7 @@
 <div class="modal" ng-show={{ $modal_name }}>
 
 <form target="target_edit" method="post" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/edit') }}">
+<!-- <form method="post" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/edit') }}"> -->
 
     <div class="modal-container large">
         <div class="modal-header update">
@@ -72,33 +73,68 @@
                         <div class="tab-content-left">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Perusahaan</div>
-                                <div class="content-form-input"><input type="text" name="nama" value="@{{ entry_data_perizinan_edit_data.nama_perusahaan }}" placeholder="Nama Perusahaan" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_perusahaan" placeholder="Nama Perusahaan" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_perusahaan_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="16"/>
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_perusahaan_old_id"/>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Alamat Perusahaan / Perorangan</div>
-                                <div class="content-form-input"><input type="text" name="alamat" value="@{{ entry_data_perizinan_edit_data.alamat_perusahaan_perorangan }}" placeholder="Alamat Perusahaan / Perorangan" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.alamat_perusahaan_perorangan" placeholder="Alamat Perusahaan / Perorangan" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.alamat_perusahaan_perorangan_id" /> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="17" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.alamat_perusahaan_perorangan_old_id" />
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Penanggung Jawab</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.nama_penanggung_jawab }}" placeholder="Nama Penanggung Jawab" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_penanggung_jawab" placeholder="Nama Penanggung Jawab" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_penanggung_jawab_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="18" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_penanggung_jawab_old_id"/>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Alamat Penanggung Jawab</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.alamat_penanggung_jawab }}" placeholder="Alamat Penanggung Jawab" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.alamat_penanggung_jawab" placeholder="Alamat Penanggung Jawab" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.alamat_penanggung_jawab_id" /> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="128" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.alamat_penanggung_jawab_old_id" />
+                                </div>
                             </div>
                         </div>
                         <div class="tab-content-right">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Jenis Usaha</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.jenis_usaha }}" placeholder="Jenis Usaha" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.jenis_usaha" placeholder="Jenis Usaha" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.jenis_usaha_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="20" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.jenis_usaha_old_id"/>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Pemilik</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.nama_pemilik }}" placeholder="Nama Pemilik" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_pemilik" placeholder="Nama Pemilik" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_pemilik_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="21" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nama_pemilik_old_id"/>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Letak Usaha</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.letak_usaha }}" placeholder="Letak Usaha" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.letak_usaha" placeholder="Letak Usaha" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.letak_usaha_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="22" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.letak_usaha_old_id"/>
+                                </div>
                             </div>
                         </div>
 
@@ -108,17 +144,32 @@
                         <div class="tab-content-left">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Tenaga Kerja (Orang)</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.tenaga_kerja_orang }}" placeholder="Tenaga Kerja (Orang)" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.tenaga_kerja_orang" placeholder="Tenaga Kerja (Orang)" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.tenaga_kerja_orang_id" /> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="24" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.tenaga_kerja_orang_old_id" />
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Luas Ruang Tempat Usaha</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.luas_ruang_tempat_usaha }}" placeholder="Luas Ruang Tempat Usaha" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.luas_ruang_tempat_usaha" placeholder="Luas Ruang Tempat Usaha" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.luas_ruang_tempat_usaha_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="25" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.luas_ruang_tempat_usaha_old_id"/>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-content-right">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Indeks Gangguan</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.indeks_gangguan }}" placeholder="Indeks Gangguan" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.indeks_gangguan" placeholder="Indeks Gangguan" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.indeks_gangguan_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="26" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.indeks_gangguan_old_id"/>
+                                </div>
                             </div>
                         </div>
 
@@ -128,13 +179,23 @@
                         <div class="tab-content-left">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nilai Retribusi</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.nilai_retribusi }}" placeholder="Nilai Retribusi" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nilai_retribusi" placeholder="Nilai Retribusi" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nilai_retribusi_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="45" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nilai_retribusi_old_id"/>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-content-right">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Rumus Perhitungan</div>
-                                <div class="content-form-input"><input type="text" name="" value="@{{ entry_data_perizinan_edit_data.rumus_perhitungan }}" placeholder="Rumus Perhitungan" /></div>
+                                <div class="content-form-input">
+                                    <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.rumus_perhitungan" placeholder="Rumus Perhitungan" />
+                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.rumus_perhitungan_id"/> -->
+                                    <input type="text" style="display:none" name="id_property_perizinan[]" value="414" />
+                                    <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.rumus_perhitungan_old_id"/>
+                                </div>
                             </div>
                         </div>
 
@@ -143,16 +204,18 @@
             </div>
         </div>
         <div class="modal-footer">
-            <input type="submit" value="Save" ng-click="close_modal('modal_edit')">
+            <div class="modal-footer-left">
+                &nbsp;
+            </div>
+            <div class="modal-footer-right">
+                <input type="submit" value="Simpan" class="btn button-green" ng-click="modal_edit_submit()">
+                <a class="btn button-red" ng-click="close_modal('modal_edit')">Batal</a>
+            </div>
         </div>
-
-        <!-- Iframe for post -->
-
-
     </div>
 
 </form>
 
-</div>
+<iframe id="target_edit" name="target_edit" style="width:100; height:100; visibility:hidden; background:#fff;"></iframe>
 
-<iframe src="#" id="target_edit" name="target_edit" style="width:0; height:0; position:relative; background:#fff;"></iframe>
+</div>

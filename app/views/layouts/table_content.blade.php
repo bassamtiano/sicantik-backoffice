@@ -18,7 +18,8 @@
 		<div class="table-wrapper" @yield('angular_controller')>
 
 			<!-- Nambah Konten Modal -->
-
+			<!-- <div class="loading-dialog"></div> -->
+			<div class="loading-dialog" ng-show="loading_dialog"></div>
 			@yield('modal-content')
 
 			<div class="table-nav">

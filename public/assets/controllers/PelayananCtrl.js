@@ -1,6 +1,8 @@
 $app = angular.module('sicantik_backoffice', []);
 
 var fetch_limit = 15;
+////////////////////////////////////KONFIGURASI START//////////////////////////////
+
 ////////////////////////////////////KONFIGURASI START/////////////////////////////
 
 //////////////////////////////SETTING PERIZINAN/////////////////////
@@ -84,6 +86,7 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 	$scope.modal_edit_submit = function() {
 
 	}
+
 }
 
 function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
@@ -161,10 +164,10 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 		});
 	}
 
-
 	$scope.modal_edit_submit = function() {
 
 	}
+
 }
 
 function PelayananPendaftaranPermohonanPerubahanIzinCtrl($scope, $http) {
@@ -174,7 +177,6 @@ function PelayananPendaftaranPermohonanPerubahanIzinCtrl($scope, $http) {
 			$scope.pelayanan_pendaftaran_permohonan_perubahan_izin_data = pppi_data;
 		});
 	}
-
 
 	$scope.opsi_kegiatan = function(){
 		$http.get('perubahan_izin/opsi_kegiatan').success(function(piok_data) {
@@ -376,6 +378,7 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 
 	$scope.opsi_investasi();
 	$scope.opsi_kegiatan();
+
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -438,6 +441,7 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 	}
 
 	/* # Submit =================================================================================================== */
+
 	$scope.filter_pelayanan = function(){
 		$http.get('daftar_ulang_izin/data/' + $scope.pelayanan_id).success(function(ppdui_data) {
 			$scope.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_data = ppdui_data;
@@ -455,6 +459,15 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 			$scope.pelayanan_pendaftaran_data_pemohon_data = ppdp_data;
 		});
 	}
+
+
+	$scope.opsi_pelayanan = function(){
+		$http.get('data_pemohon/opsi').success(function(ppdpo_data) {
+			$scope.pelayanan_pendaftaran_data_pemohon_opsi = ppdpo_data;
+		});
+	}
+
+	$scope.opsi_pelayanan();
 
 	$scope.show_all();
 
@@ -480,14 +493,14 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	$scope.open_modal = function(modal_name, id) {
 		if(id == null) {
 			eval("$scope." + modal_name + "= true");
-			
+
 		}
 		else {
 			eval("$scope." + modal_name + "= true");
-			eval("$scope." + modal_name + "_data(" + id + ")");	
+			eval("$scope." + modal_name + "_data(" + id + ")");
 		}
 
-		
+
 	}
 
 	$scope.close_modal = function(modal_name) {
