@@ -151,7 +151,7 @@
 		}
 
 		public function pendaftaran_perubahan_izin_data($id = null) {
-			return tmpermohonan::fetch_with_tmpermohonan_perubahan_izin_for_pendaftaran_perubahan_izin($id);
+			return Tmpermohonan::fetch_with_tmpermohonan_perubahan_izin_for_pendaftaran_perubahan_izin($id);
 
 		}
 

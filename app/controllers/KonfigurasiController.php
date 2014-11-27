@@ -796,6 +796,174 @@
 			return ReportGenerators::fetch_data(['id', 'report_code', 'short_desc']);
 		}
 
+		public function report_report_generator_edit_data($id) {
+			$report_generator = ReportGenerators::find_data($id);
+			$report_group_data = ReportGroupDatas::find_data($id);
+
+			foreach($report_generator as $repgenk) {
+				$result_report_generator = $repgenk;
+			}
+
+			$result_report_generator['report_group_data'] = $report_group_data;
+			return $result_report_generator;
+		}
+
+		public function report_report_generator_opsi_trperizinan($id = null) {
+			if(empty($id)) {
+				return Trperizinan::fetch_data_opsi();
+			}
+			else {
+				$trperizinan = Trperizinan::fetch_data_opsi();
+
+				$result = [];
+
+				foreach($trperizinan as $tperk => $tperv) {
+					if($tperv['id'] == $id) {
+						$tperv['selected'] = true;
+					}
+					else {
+						$tperv['selected'] = false;
+					}
+
+					array_push($result, $tperv);
+				}
+
+				return $result;
+			}
+		}
+
+		public function report_report_generator_opsi_report_types($id = null) {
+			if(empty($id)) {
+				return ReportTypes::fetch_data_opsi();
+			}
+			else {
+				$report_types = ReportTypes::fetch_data_opsi();;
+				$result = [];
+
+				foreach($report_types as $reptk => $reptv) {
+					if($reptv['report_type_code'] == $id) {
+						$reptv['selected'] = true;
+					}
+					else {
+						$reptv['selected'] = false;
+					}
+
+					array_push($result, $reptv);
+				}
+
+				return $result;
+			}
+		}
+
+		public function report_report_generator_edit_group_data() {
+
+			$data = [
+				'report_group_code' => Input::get('report_group_code'),
+				'report_generator_id' => Input::get('report_generator_id'),
+				'short_desc' => Input::get('short_desc'),
+				'type' => Input::get('type'),
+				'group_query' => Input::get('group_query')
+			];
+
+			ReportGroupDatas::create($data);
+
+
+		}
+
+		public function report_report_generator_delete_group_data() {
+			ReportGroupDatas::where('id', '=', Input::get('id'))->delete();
+		}
+
+		public function report_report_generator_insert() {
+			$file_name = Input::file('layout')->getClientOriginalName();
+			Input::file('layout')->move('assets/dokumen', $name);
+
+			$data = [
+				'report_code' => Input::get('report_code'),
+				'short_desc' => Input::get('short_desc'),
+				'long_desc' => Input::get('long_desc'),
+				'layout' => $file_name,
+				'trperizinan_id' => Input::get('trperizinan_id'),
+				'report_type' => Input::get('report_type')
+			];
+
+			ReportGenerators::create($data);
+		}
+
+		public function report_report_generator_edit() {
+			/*disini */
+
+			$data = [];
+			$report_group_id = Input::get('report_group_id');
+			$report_group_code = Input::get('report_group_code');
+			$report_group_short_desc = Input::get('report_group_short_desc');
+			$report_group_type = Input::get('report_group_type');
+
+
+			$id1 = 0;
+			$id2 = 0;
+			$id3 = 0;
+			$id4 = 0;
+
+			foreach($report_group_type as $rgtk => $rgtv) {
+				$wrapper[$id1]['type'] = $rgtv;
+				$id1 +=1;
+			}
+			foreach($report_group_short_desc as $rgsdk => $rgsdv) {
+				$wrapper[$id2]['short_desc'] = $rgsdv;
+				$id2 +=1;
+			}
+
+			foreach($report_group_code as $rgck => $rgcv) {
+				$wrapper[$id3]['report_group_code'] = $rgcv;
+				$id3 +=1;
+			}
+
+			foreach($report_group_id as $rgik => $rgiv) {
+				$wrapper[$id4]['id'] = $rgiv;
+				$id4 +=1;
+			}
+
+			$report_generator = [
+				'report_code' => Input::get('report_code'),
+				'short_desc' => Input::get('short_desc'),
+				'long_desc' => Input::get('long_desc'),
+				'layout' => Input::get('layout'),
+				'trperizinan_id' => Input::get('trperizinan_id'),
+				'report_type' => Input::get('report_type')
+			];
+
+			ReportGenerators::where('id', '=', Input::get('id'))->update($report_generator);
+
+			foreach($wrapper as $wk => $wv) {
+				ReportGroupDatas::where('id', '=', $wv['id'])->update($wv);
+			}
+
+			echo 'isi';
+		}
+
+		public function report_report_generator_ganda() {
+
+			$file_name = Input::file('layout')->getClientOriginalName();
+			Input::file('layout')->move('assets/dokumen', $name);
+
+			$data = [
+				'report_code' => Input::get('report_code'),
+				'short_desc' => Input::get('short_desc'),
+				'long_desc' => Input::get('long_desc'),
+				'layout' => $file_name,
+				'trperizinan_id' => Input::get('trperizinan_id'),
+				'report_type' => Input::get('report_type')
+			];
+
+			ReportGenerators::create($data);
+		}
+
+		public function report_report_generator_delete() {
+			return ReportGenerators::where('id', '=', Input::get('id'))->delete();
+		}
+
+
 		# Bagian Report / Report Component
 
 		public function report_report_component() {
@@ -804,5 +972,122 @@
 
 		public function report_report_component_data() {
 			return ReportComponents::fetch_data(['report_component_code', 'short_desc', 'id']);
+		}
+
+		public function report_report_component_edit_data($id) {
+			$report_component = ReportComponents::find_data($id);
+
+			$result = [];
+
+			foreach($report_component as $rcomk => $rcomv) {
+				foreach($rcomv as $rck => $rcv) {
+					$result[$rck] = $rcv;
+				}
+			}
+
+			return $result;
+
+		}
+
+		public function report_report_component_opsi_trperizinan($id = null) {
+			if(empty($id)) {
+				return Trperizinan::fetch_data_opsi();
+			}
+			else {
+				$trperizinan = Trperizinan::fetch_data_opsi();
+
+				$result = [];
+
+				foreach($trperizinan as $tperk => $tperv) {
+					if($tperv['id'] == $id) {
+						$tperv['selected'] = true;
+					}
+					else {
+						$tperv['selected'] = false;
+					}
+
+					array_push($result, $tperv);
+				}
+
+				return $result;
+			}
+		}
+
+		public function report_report_component_opsi_report_types($id = null) {
+			if(empty($id)) {
+				return ReportTypes::fetch_data_opsi();
+			}
+			else {
+				$report_types = ReportTypes::fetch_data_opsi();;
+
+				$result = [];
+
+				foreach($report_types as $reptk => $reptv) {
+					if($reptv['report_type_code'] == $id) {
+						$reptv['selected'] = true;
+					}
+					else {
+						$reptv['selected'] = false;
+					}
+
+					array_push($result, $reptv);
+				}
+
+				return $result;
+			}
+		}
+		public function report_report_edit() {
+			$data = [
+				'report_component_code' => Input::get('report_component_code'),
+				'short_desc' => Input::get('short_desc'),
+				'format_nomor' => Input::get('format_nomor'),
+				'last_num_seq' => Input::get('last_num_seq'),
+				'trperizinan_id' => Input::get('trperizinan_id'),
+				'report_type' => Input::get('report_type'),
+				'nama_penandatangan' => Input::get('nama_penandatangan'),
+				'jabatan' => Input::get('jabatan'),
+				'nip' => Input::get('nip'),
+				'nama_kantor' => Input::get('nama_kantor')
+			];
+
+			return ReportComponents::where('id', '=', Input::get('id'))->update($data);
+		}
+
+		public function report_report_ganda() {
+			$data = [
+				'report_component_code' => Input::get('report_component_code'),
+				'short_desc' => Input::get('short_desc'),
+				'format_nomor' => Input::get('format_nomor'),
+				'last_num_seq' => Input::get('last_num_seq'),
+				'trperizinan_id' => Input::get('trperizinan_id'),
+				'report_type' => Input::get('report_type'),
+				'nama_penandatangan' => Input::get('nama_penandatangan'),
+				'jabatan' => Input::get('jabatan'),
+				'nip' => Input::get('nip'),
+				'nama_kantor' => Input::get('nama_kantor')
+			];
+
+			return ReportComponents::create($data);
+		}
+
+		public function report_report_delete() {
+			return ReportComponents::where('id', '=', Input::get('id'))->delete();
+		}
+
+		public function report_report_insert() {
+			$data = [
+				'report_component_code' => Input::get('report_component_code'),
+				'short_desc' => Input::get('short_desc'),
+				'format_nomor' => Input::get('format_nomor'),
+				'last_num_seq' => Input::get('last_num_seq'),
+				'trperizinan_id' => Input::get('trperizinan_id'),
+				'report_type' => Input::get('report_type'),
+				'nama_penandatangan' => Input::get('nama_penandatangan'),
+				'jabatan' => Input::get('jabatan'),
+				'nip' => Input::get('nip'),
+				'nama_kantor' => Input::get('nama_kantor')
+			];
+
+			return ReportComponents::create($data);
 		}
 	}

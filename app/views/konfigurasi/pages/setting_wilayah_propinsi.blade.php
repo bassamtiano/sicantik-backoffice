@@ -39,7 +39,7 @@
 			</div>
 		</div>
 	</form>
-	
+
 @stop
 
 @section('nav-menu-right')
@@ -59,15 +59,13 @@
 @stop
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
-<<<<<<< HEAD
-			<th class="c_nama_propinsi">Nama Provinsi</th>
-=======
+			
 			<th class="c_nama_propinsi" ng-click="predicate='n_propinsi'; reverse=!reverse">Nama Propinsi</th>
->>>>>>> pr/13
+
 			<th class="c_aksi">Aksi</th>
 		</tr>
 	</table>
@@ -77,11 +75,9 @@
 @section('table_content')
 
 	<table role="table-fluid">
-<<<<<<< HEAD
-		<tr ng-repeat="swp in setting_wilayah_propinsi| orderBy:predicate:reverse | filter:search | limitTo:displayed">
-=======
+
 		<tr ng-repeat="swp in setting_wilayah_propinsi_data | orderBy:predicate:reverse | filter:search | limitTo:displayed">
->>>>>>> pr/13
+
 			<td class="c_no">@{{ $index+1 }}</td>
 			<td class="c_nama_propinsi">@{{ swp.n_propinsi }}</td>
 			<td class="c_aksi">

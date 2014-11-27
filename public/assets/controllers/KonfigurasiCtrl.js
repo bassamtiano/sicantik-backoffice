@@ -12,7 +12,7 @@ $app = angular.module('sicantik_backoffice', [])
 
 //////////////////////////////SETTING PERIZINAN/////////////////////
 
-.controller('KonfigurasiSettingPerizinanJenisPerizinanCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingPerizinanJenisPerizinanCtrl', ['$scope', '$http',
 
 	function ($scope, $http) {
 		/* # Prepare Data ============================================================================================= */
@@ -22,14 +22,14 @@ $app = angular.module('sicantik_backoffice', [])
 			});
 		}
 
-		$scope.opsi_kelompok = function(){ 
-			$http.get('jenis_perizinan/opsi_kelompok').success(function(jpok_data) { 
+		$scope.opsi_kelompok = function(){
+			$http.get('jenis_perizinan/opsi_kelompok').success(function(jpok_data) {
 				$scope.jenis_perizinan_opsi_kelompok = jpok_data;
 			});
 		}
 
-		$scope.opsi_unitkerja = function(){ 
-			$http.get('jenis_perizinan/opsi_unitkerja').success(function(jpou_data) { 
+		$scope.opsi_unitkerja = function(){
+			$http.get('jenis_perizinan/opsi_unitkerja').success(function(jpou_data) {
 				$scope.jenis_perizinan_opsi_unitkerja = jpou_data;
 			});
 		}
@@ -120,9 +120,9 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingPerizinanPerizinanParalelCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingPerizinanPerizinanParalelCtrl', ['$scope', '$http',
 	function ($scope, $http) {
-		
+
 		$scope.show_all = function(){
 			$http.get('perizinan_paralel/data').success(function(sppp_data) {
 				$scope.setting_perizinan_perizinan_paralel_data = sppp_data;
@@ -149,7 +149,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingPerizinanPersyaratanIzinCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingPerizinanPersyaratanIzinCtrl', ['$scope', '$http',
 	function ($scope, $http) {
 
 		$scope.show_all = function(){
@@ -178,7 +178,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingPerizinanPropertyPendataanCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingPerizinanPropertyPendataanCtrl', ['$scope', '$http',
 	function ($scope, $http) {
 
 		$scope.show_all = function(){
@@ -207,7 +207,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingPerizinanNilaiRetribusiCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingPerizinanNilaiRetribusiCtrl', ['$scope', '$http',
 	function ($scope, $http) {
 
 		$scope.show_all = function(){
@@ -236,7 +236,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingPerizinanKoefisienTarifCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingPerizinanKoefisienTarifCtrl', ['$scope', '$http',
 	function ($scope, $http) {
 
 		$scope.show_all = function(){
@@ -266,7 +266,7 @@ $app = angular.module('sicantik_backoffice', [])
 ])
 
 ///////////////////////////////////SETTING UMUM/////////////////////////////////////////
-.controller('KonfigurasiSettingUmumHariLiburCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingUmumHariLiburCtrl', ['$scope', '$http',
 	function ($scope, $http){
 
 		$scope.show_all = function(){
@@ -295,7 +295,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingUmumInstansiCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingUmumInstansiCtrl', ['$scope', '$http',
 	function ($scope, $http) {
 
 		$http.get('instansi/opsi/wilayah/data').success(function(suiowd_data){
@@ -305,7 +305,7 @@ $app = angular.module('sicantik_backoffice', [])
 ])
 
 //////////////////////////////SETTING USER///////////////////////////////////////
-.controller('KonfigurasiSettingUserPegawaiCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingUserPegawaiCtrl', ['$scope', '$http',
 	function ($scope, $http){
 
 		$scope.show_all = function(){
@@ -334,9 +334,9 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingUserUnitKerjaCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingUserUnitKerjaCtrl', ['$scope', '$http',
 	function ($scope, $http){
-		
+
 		$scope.show_all = function(){
 			$http.get('unit_kerja/data').success(function(suuk_data){
 				$scope.setting_user_unit_kerja_data = suuk_data;
@@ -363,7 +363,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingUserPenggunaCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingUserPenggunaCtrl', ['$scope', '$http',
 	function ($scope, $http){
 
 		$scope.show_all = function(){
@@ -393,13 +393,13 @@ $app = angular.module('sicantik_backoffice', [])
 ])
 
 /////////////////////////////////SETTING WILAYAH/////////////////////////////////////////////
-.controller('KonfigurasiSettingWilayahPropinsi', ['$scope', '$http', 
+.controller('KonfigurasiSettingWilayahPropinsi', ['$scope', '$http',
 	function ($scope, $http) {
 
 		$scope.show_all = function() {
 			$http.get('propinsi/data').success(function(swp_data) {
 				$scope.setting_wilayah_propinsi = swp_data;
-			});	
+			});
 		}
 
 		$scope.show_all();
@@ -440,7 +440,7 @@ $app = angular.module('sicantik_backoffice', [])
 
 		}
 
-		
+
 		/*  Construct Modal Function */
 
 		$scope.modal_edit_data = function(id) {
@@ -460,7 +460,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingWilayahKabupaten', ['$scope', '$http', 
+.controller('KonfigurasiSettingWilayahKabupaten', ['$scope', '$http',
 	function ($scope, $http) {
 		$http.get('kabupaten/data').success(function(swk_data) {
 			$scope.setting_wilayah_kabupaten = swk_data;
@@ -501,7 +501,7 @@ $app = angular.module('sicantik_backoffice', [])
 				$scope.opsi_prop = prop;
 			});
 		}
-		
+
 		/*  Construct Modal Function */
 
 		$scope.modal_edit_data = function(id) {
@@ -523,7 +523,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingWilayahKecamatanCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingWilayahKecamatanCtrl', ['$scope', '$http',
 	function ($scope, $http){
 		$http.get('kecamatan/data').success(function(swkc_data){
 			$scope.setting_wilayah_kecamatan = swkc_data;
@@ -556,7 +556,7 @@ $app = angular.module('sicantik_backoffice', [])
 		$scope.close_modal = function(modal_name) {
 			eval("$scope." + modal_name + "= false");
 		}
-		
+
 		/*  Construct Modal Function */
 
 		$scope.modal_edit_data = function(id) {
@@ -603,7 +603,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('KonfigurasiSettingWilayahKelurahanCtrl', ['$scope', '$http', 
+.controller('KonfigurasiSettingWilayahKelurahanCtrl', ['$scope', '$http',
 	function ($scope, $http){
 		$http.get('kelurahan/data').success(function(swkl_data){
 			$scope.setting_wilayah_kelurahan = swkl_data;
@@ -636,7 +636,7 @@ $app = angular.module('sicantik_backoffice', [])
 		$scope.close_modal = function(modal_name) {
 			eval("$scope." + modal_name + "= false");
 		}
-		
+
 		/*  Construct Modal Function */
 
 		$scope.modal_edit_data = function(id) {
@@ -692,13 +692,13 @@ $app = angular.module('sicantik_backoffice', [])
 			$http.get('kelurahan/opsi/kecamatan/' + $scope.kabupaten_id.id).success(function(kec_data){
 				$scope.kecamatan_data = kec_data;
 			});
-			$scope.kecamatan_data = "";		
+			$scope.kecamatan_data = "";
 		});
 
 	}
 ])
 
-.controller('KonfigurasiKeamananDataLogActivity', ['$scope', '$http', 
+.controller('KonfigurasiKeamananDataLogActivity', ['$scope', '$http',
 	function ($scope, $http) {
 
 		/* # Prepare Data ============================================================================================= */
@@ -741,7 +741,7 @@ $app = angular.module('sicantik_backoffice', [])
 
 ])
 
-.controller('KonfigurasiReportReportGenerator', ['$http', '$scope', 
+.controller('KonfigurasiReportReportGenerator', ['$http', '$scope',
 	function ($http, $scope) {
 		/* # Prepare Data ============================================================================================= */
 
@@ -762,10 +762,237 @@ $app = angular.module('sicantik_backoffice', [])
 		}
 
 		$scope.report_generator_data;
+
+		$scope.opsi_insert_report_type = function() {
+			$http.get('report_generator/opsi_report_types').success(function(ort) {
+				$scope.report_types_insert = ort;
+			});
+		}
+
+		$scope.opsi_insert_trperizinan = function() {
+			$http.get('report_generator/opsi_trperizinan').success(function(otp) {
+				$scope.trperizinan_insert = otp;
+			});
+		}
+
+		$scope.opsi_report_type = function(id) {
+			$http.get('report_generator/opsi_report_types/' + id).success(function(ort) {
+				$scope.report_types = ort;
+			});
+		}
+
+		$scope.opsi_trperizinan = function(id) {
+			$http.get('report_generator/opsi_trperizinan/' + id).success(function(otp) {
+				$scope.trperizinan = otp;
+			});
+		}
+
+		/* # Modal =================================================================== */
+
+		/* Define Modal Name */
+
+		$scope.modal_edit = false;
+		$scope.modal_delete = false;
+		$scope.modal_ganda = false;
+		$scope.modal_insert = false;
+
+		/*  Construct Modal Function */
+
+		$scope.modal_insert_data = function(id) {
+			$scope.opsi_insert_trperizinan();
+			$scope.opsi_insert_report_type();
+		}
+
+		$scope.modal_edit_data = function(id) {
+			$http.get('report_generator/edit/data/' + id).success(function(ped) {
+				$scope.report_generator_edit_data = ped;
+
+				$scope.opsi_report_type($scope.report_generator_edit_data.report_type);
+				$scope.opsi_trperizinan($scope.report_generator_edit_data.trperizinan_id);
+			});
+		}
+
+		$scope.modal_delete_data = function(id) {
+			$scope.delete_id = id;
+		}
+
+		$scope.modal_ganda_data = function(id) {
+			$http.get('report_generator/edit/data/' + id).success(function(ped) {
+				$scope.report_generator_edit_data = ped;
+
+				$scope.opsi_report_type($scope.report_generator_edit_data.report_type);
+				$scope.opsi_trperizinan($scope.report_generator_edit_data.trperizinan_id);
+			});
+		}
+
+		/* Define Open & Close Handler */
+
+		$scope.open_modal = function(modal_name, id) {
+
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+
+		$scope.close_modal = function(modal_name) {
+
+			$scope.show_all();
+
+			setTimeout(function() {
+				$scope.show_all();
+			}, 100);
+
+			eval("$scope." + modal_name + "= false");
+
+		}
+
+		/* Define Tab Name */
+
+		$scope.tab = [];
+
+		$scope.tab.insert_tab_report_generator = true;
+		$scope.tab.insert_tab_report_group_data = false;
+
+		$scope.tab.edit_tab_report_generator = true;
+		$scope.tab.edit_tab_report_group_data = false;
+
+		$scope.tab.ganda_tab_report_generator = true;
+		$scope.tab.ganda_tab_report_group_data = false;
+
+		$scope.show_insert_tab = function(tab_name, button_id) {
+
+			$scope.tab.insert_tab_report_generator = true;
+			$scope.tab.insert_tab_report_group_data = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+
+		$scope.show_edit_tab = function(tab_name, button_id) {
+
+			$scope.tab.edit_tab_report_generator = false;
+			$scope.tab.edit_tab_report_group_data = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+
+		$scope.show_ganda_tab = function(tab_name, button_id) {
+
+			$scope.tab.ganda_tab_report_generator = true;
+			$scope.tab.ganda_tab_report_group_data = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+
+		$scope.edit_add_group_data = function(id) {
+			$http.post('report_generator/edit/group_data', {
+				report_group_code: $scope.edit_add_group_code,
+				report_generator_id: id,
+				short_desc: $scope.edit_add_deskripsi_singkat,
+				type: $scope.edit_add_type,
+				group_query: $scope.edit_add_query
+			}).success(function(data) {
+				$scope.modal_edit_data(id);
+			});
+		}
+
+		$scope.delete_group_data = function(report_generator_id, group_data_id) {
+			$http.post('report_generator/delete/group_data', {
+				id: group_data_id
+			}).success(function(data) {
+				$scope.modal_edit_data(report_generator_id);
+			})
+		}
+
+		$scope.modal_insert_submit = function() {
+			setTimeout(function() {
+				result = $('#target_insert').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_insert_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_insert_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_insert = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+		}
+
+
+
+		$scope.modal_ganda_submit = function() {
+			setTimeout(function() {
+				result = $('#target_ganda').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_ganda_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_ganda_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_ganda = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+		}
+
+		$scope.modal_delete_submit = function() {
+			setTimeout(function() {
+				result = $('#target_delete').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_delete_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_delete_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_delete = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+		}
+
+		$scope.modal_edit_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_edit_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_edit_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_edit = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+		}
+
 	}
 ])
 
-.controller('KonfigurasiReportReportComponent', ['$http', '$scope', 
+.controller('KonfigurasiReportReportComponent', ['$http', '$scope',
 	function ($http, $scope) {
 		/* # Prepare Data ============================================================================================= */
 
@@ -786,6 +1013,197 @@ $app = angular.module('sicantik_backoffice', [])
 		}
 
 		$scope.report_component_data;
+
+		$scope.opsi_insert_report_type = function() {
+			$http.get('report_component/opsi_report_types').success(function(ort) {
+				$scope.report_types_insert = ort;
+			});
+		}
+
+		$scope.opsi_insert_trperizinan = function() {
+			$http.get('report_component/opsi_trperizinan').success(function(otp) {
+				$scope.trperizinan_insert = otp;
+			});
+		}
+
+		$scope.opsi_report_type = function(id) {
+			$http.get('report_component/opsi_report_types/' + id).success(function(ort) {
+				$scope.report_types = ort;
+			});
+		}
+
+		$scope.opsi_trperizinan = function(id) {
+			$http.get('report_component/opsi_trperizinan/' + id).success(function(otp) {
+				$scope.trperizinan = otp;
+			});
+		}
+
+		/* # Modal =================================================================== */
+
+		/* Define Modal Name */
+
+		$scope.modal_edit = false;
+		$scope.modal_delete = false;
+		$scope.modal_ganda = false;
+		$scope.modal_insert = false;
+
+		/*  Construct Modal Function */
+
+		$scope.modal_insert_data = function(id) {
+			$scope.opsi_insert_report_type();
+			$scope.opsi_insert_trperizinan();
+		}
+
+		$scope.modal_edit_data = function(id) {
+			$http.get('report_component/edit/data/' + id).success(function(ped) {
+				$scope.report_component_edit_data = ped;
+
+				$scope.opsi_report_type($scope.report_component_edit_data.report_type);
+				$scope.opsi_trperizinan($scope.report_component_edit_data.trperizinan_id);
+			});
+		}
+
+		$scope.modal_delete_data = function(id) {
+			$scope.delete_id = id;
+		}
+
+		$scope.modal_ganda_data = function(id) {
+			$http.get('report_component/edit/data/' + id).success(function(ped) {
+				$scope.report_component_edit_data = ped;
+
+				$scope.opsi_report_type($scope.report_component_edit_data.report_type);
+				$scope.opsi_trperizinan($scope.report_component_edit_data.trperizinan_id);
+			});
+		}
+
+		/* Define Open & Close Handler */
+
+		$scope.open_modal = function(modal_name, id) {
+
+			eval("$scope." + modal_name + "= true");
+			eval("$scope." + modal_name + "_data(" + id + ")");
+		}
+
+		$scope.close_modal = function(modal_name) {
+
+			$scope.show_all();
+
+			setTimeout(function() {
+				$scope.show_all();
+			}, 100);
+
+			eval("$scope." + modal_name + "= false");
+
+		}
+
+		/* Define Tab Name */
+
+		$scope.tab = [];
+
+		$scope.tab.insert_tab_report_generator = true;
+		$scope.tab.insert_tab_report_group_data = false;
+
+		$scope.tab.edit_tab_report_generator = true;
+		$scope.tab.edit_tab_report_group_data = false;
+
+		$scope.tab.ganda_tab_report_generator = true;
+		$scope.tab.ganda_tab_report_group_data = false;
+
+		$scope.show_insert_tab = function(tab_name, button_id) {
+
+			$scope.tab.insert_tab_report_generator = true;
+			$scope.tab.insert_tab_report_group_data = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+
+		$scope.show_edit_tab = function(tab_name, button_id) {
+
+			$scope.tab.edit_tab_report_generator = false;
+			$scope.tab.edit_tab_report_group_data = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+
+		$scope.show_ganda_tab = function(tab_name, button_id) {
+
+			$scope.tab.ganda_tab_report_generator = true;
+			$scope.tab.ganda_tab_report_group_data = false;
+
+			eval('$scope.' + tab_name + "= true");
+
+			$('.tab-nav-item').removeClass('enable');
+			$('#' + button_id).addClass('enable');
+
+		}
+
+		$scope.modal_edit_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_edit_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_edit_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_edit = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+		}
+
+		$scope.modal_ganda_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_ganda').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_ganda_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_ganda_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_ganda = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+		}
+
+		$scope.modal_insert_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_insert').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_insert_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_insert_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_insert = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+		}
+
+
+
 	}
 ])
 ////////////////////////////////////KONFIGURASI END////////////////////////////////

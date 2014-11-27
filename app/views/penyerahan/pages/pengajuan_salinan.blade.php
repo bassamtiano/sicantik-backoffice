@@ -124,7 +124,6 @@
 				<span class="button-group group-1">
 					<a href ng-click="open_modal('modal_penyerahan', ppi.id)" class="accept">Setujui</a>
 				</span>
-				<!-- @{{ pps.id }} -->
 			</td>
 		</tr>
 		<tr>

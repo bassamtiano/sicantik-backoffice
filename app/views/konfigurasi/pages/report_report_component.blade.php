@@ -14,7 +14,7 @@
 			width: 40%;
 		}
 		.c_aksi {
-			width: 10%;
+			width: 15%;
 			text-align: center;
 		}
 	</style>
@@ -22,7 +22,7 @@
 @stop
 
 @section('page_name')
-	Report / Report Generator
+	Report / Report Component
 @stop
 
 @section('angular_controller_script')
@@ -34,7 +34,11 @@
 @stop
 
 @section('nav-menu-left')
-	
+	<div class="table-form-content">
+		<div class="form-item">
+			<button ng-click="open_modal('modal_insert', '')" class="row-item ya">Tambah Report</button>
+		</div>
+	</div>
 @stop
 
 @section('nav-menu-right')
@@ -54,7 +58,7 @@
 @stop
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -73,8 +77,24 @@
 			<td class="c_no">@{{ $index+1 }}</td>
 			<td class="c_id_laporan">@{{ rcd.report_component_code }}</td>
 			<td class="c_deskripsi_singkat">@{{ rcd.short_desc }}</td>
-			<td class="c_aksi">@{{ rcd.id }}</td>
+			<td class="c_aksi">
+				<span class="button-group group-3">
+					<a href ng-click="open_modal('modal_edit', rcd.id)" class="edit">Edit</a>
+					<a href ng-click="open_modal('modal_delete', rcd.id)" class="delete">Delete</a>
+					<a href ng-click="open_modal('modal_ganda', rcd.id)" class="edit">Gandakan</a>
+				</span>
+			</td>
+		</tr>
+		<tr>
+
 		</tr>
 	</table>
 
+@stop
+
+@section('modal-content')
+	@include('konfigurasi.modals.report_report_component_modal_edit', ['modal_name' => 'modal_edit'])
+	@include('konfigurasi.modals.report_report_component_modal_ganda', ['modal_name' => 'modal_ganda'])
+	@include('konfigurasi.modals.report_report_component_modal_insert', ['modal_name' => 'modal_insert'])
+	@include('konfigurasi.modals.report_report_component_modal_delete', ['modal_name' => 'modal_delete'])
 @stop

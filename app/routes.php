@@ -502,11 +502,53 @@ Route::group(['before' => 'auth'], function() {
 
 	Route::get('konfigurasi/report/report_generator/data', ['as' => 'konfigurasi_report_report_generator_data', 'uses' => 'KonfigurasiController@report_report_generator_data']);
 
+	Route::get('konfigurasi/report/report_generator/opsi_trperizinan', ['as' => 'konfigurasi_report_report_generator_opsi_trperizinan/{id}', 'uses' => 'KonfigurasiController@report_report_generator_opsi_trperizinan']);
+
+	Route::get('konfigurasi/report/report_generator/edit/data/{id}', ['as' => 'konfigurasi_report_report_generator_edit_data', 'uses' => 'KonfigurasiController@report_report_generator_edit_data']);
+
+	Route::get('konfigurasi/report/report_generator/opsi_trperizinan', ['uses' => 'KonfigurasiController@report_report_generator_opsi_trperizinan']);
+
+	Route::get('konfigurasi/report/report_generator/opsi_trperizinan/{id}', ['uses' => 'KonfigurasiController@report_report_generator_opsi_trperizinan']);
+
+	Route::get('konfigurasi/report/report_generator/opsi_report_types', ['uses' => 'KonfigurasiController@report_report_generator_opsi_report_types']);
+
+	Route::get('konfigurasi/report/report_generator/opsi_report_types/{id}', ['uses' => 'KonfigurasiController@report_report_generator_opsi_report_types']);
+
+	Route::post('konfigurasi/report/report_generator/edit/group_data', ['uses' => 'KonfigurasiController@report_report_generator_edit_group_data']);
+
+	Route::post('konfigurasi/report/report_generator/delete/group_data', ['uses' => 'KonfigurasiController@report_report_generator_delete_group_data']);
+
+	Route::post('konfigurasi/report/report_generator/insert', ['uses' => 'KonfigurasiController@report_report_generator_insert']);
+
+	Route::post('konfigurasi/report/report_generator/ganda', ['uses' => 'KonfigurasiController@report_report_generator_ganda']);
+
+	Route::post('konfigurasi/report/report_generator/delete', ['uses' => 'KonfigurasiController@report_report_generator_delete']);
+
+	Route::post('konfigurasi/report/report_generator/edit', ['uses' => 'KonfigurasiController@report_report_generator_edit']);
+
 	# Konfigurasi / Keamanan Data / Report Component
 
 	Route::get('konfigurasi/report/report_component', ['as' => 'konfigurasi_report_report_component', 'uses' => 'KonfigurasiController@report_report_component']);
 
 	Route::get('konfigurasi/report/report_component/data', ['as' => 'konfigurasi_report_report_component_data', 'uses' => 'KonfigurasiController@report_report_component_data']);
+
+	Route::get('konfigurasi/report/report_component/edit/data/{id}', ['as' => 'konfigurasi_report_report_component_edit_data', 'uses' => 'KonfigurasiController@report_report_component_edit_data']);
+
+	Route::get('konfigurasi/report/report_component/opsi_trperizinan', ['uses' => 'KonfigurasiController@report_report_component_opsi_trperizinan']);
+
+	Route::get('konfigurasi/report/report_component/opsi_trperizinan/{id}', ['uses' => 'KonfigurasiController@report_report_component_opsi_trperizinan']);
+
+	Route::get('konfigurasi/report/report_component/opsi_report_types', ['uses' => 'KonfigurasiController@report_report_component_opsi_report_types']);
+
+	Route::get('konfigurasi/report/report_component/opsi_report_types/{id}', ['uses' => 'KonfigurasiController@report_report_component_opsi_report_types']);
+
+	Route::post('konfigurasi/report/report_component/edit', ['uses' => 'KonfigurasiController@report_report_edit']);
+
+	Route::post('konfigurasi/report/report_component/ganda', ['uses' => 'KonfigurasiController@report_report_ganda']);
+
+	Route::post('konfigurasi/report/report_component/delete', ['uses' => 'KonfigurasiController@report_report_delete']);
+
+	Route::post('konfigurasi/report/report_component/insert', ['uses' => 'KonfigurasiController@report_report_insert']);
 
 	/*
 

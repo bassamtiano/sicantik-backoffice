@@ -371,6 +371,34 @@
 							float:right;
 						}
 
+						.tab-content-button {
+							width:100%;
+							float:left;
+
+							padding: 10px 0 10px 0;
+
+							a {
+								padding:5px 20px 5px 20px;
+								margin:0 5px 0 5px;
+								float:right;
+
+								cursor:pointer;
+
+								border-radius:5px;
+
+								&.green {
+									background-color:#00B240;
+									color:white;
+								}
+
+								&.yellow {
+									background-color:#FFB03B;
+									color:white;
+								}
+							}
+
+						}
+
 						.tab-content-table {
 							width:100%;
 							float:left;
@@ -379,12 +407,13 @@
 
 							table {
 								width:100%;
-
+								float:left;
 								font-size:15px;
 
 								border-collapse: collapse;
 
 								tr {
+
 
 									width:100%;
 
@@ -410,6 +439,105 @@
 
 										padding-left:10px;
 										padding-right:10px;
+
+										input,textarea,select {
+											padding: 10px;
+											width:100%;
+
+											border-radius:5px;
+											border: solid gray 1px;
+										}
+
+										.button-group {
+											width:100%;
+
+											float:left;
+											text-align:center;
+
+											&.group-1 {
+												a {
+													width:calc(~"70% - 10px");
+
+													padding:5px;
+
+													margin-left:15%;
+													margin-right:15%;
+
+													float:left;
+
+													text-align:center;
+												}
+											}
+
+											&.group-2 {
+												a {
+
+													width:calc(~"50% - 10px");
+
+													margin-left:5px;
+													margin-right:5px;
+
+													float:left;
+
+												}
+											}
+
+											&.group-3 {
+												a {
+
+													width:calc(~"33% - 10px");
+
+													margin-left:5px;
+													margin-right:5px;
+
+													float:left;
+
+												}
+											}
+
+
+										}
+
+										.group-1, .group-2, .group-3 {
+											a {
+
+
+
+												border-radius:5px;
+
+												text-decoration:none;
+												text-align:center;
+
+												padding-top:5px;
+												padding-bottom:5px;
+
+												&.edit {
+													background-color:#FFB03B;
+													color:white;
+												}
+
+												&.delete {
+													background-color:#DC3247;
+													color:white;
+												}
+
+												&.accept {
+													background-color:#A7BD5B;
+													color:white;
+												}
+
+												&.print {
+													background-color:#31353D;
+													color:white;
+												}
+
+												&.email {
+													background-color:#8DC7B8;
+													color:white;
+												}
+											}
+										}
+
 									}
 								}
 
