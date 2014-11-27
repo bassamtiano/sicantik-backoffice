@@ -357,16 +357,26 @@
 			foreach ($persyaratan as $pkey => $pval) {	
 				foreach ($pval as $pv => $pk){
 					if ($pv == 'c_show_type') {
-						$c_biner = decbin($pk)."<br />";
+						$syarat_wrapper1[$pv] = $pk;
+
+						$c_biner = decbin($pk);
+						if (strlen($c_biner) < 4){
+							$len = 4 - strlen($c_biner);
+							$c_biner = str_repeat("0",$len) . $c_biner;
+						}
 						$c_biner_split = str_split($c_biner);
-						$syarat_wrapper['izin_baru'] = $c_biner_split[0];
-						$syarat_wrapper['perpanjangan'] = $c_biner_split[1];
-						$syarat_wrapper['perubahan'] = $c_biner_split[2];	
+						$syarat_wrapper1['daftar_ulang'] = $c_biner_split[0];
+						$syarat_wrapper1['izin_baru'] = $c_biner_split[1];
+						$syarat_wrapper1['perpanjangan'] = $c_biner_split[2];
+						$syarat_wrapper1['perubahan'] = $c_biner_split[3];	
+
 					}
 					else{
 						$syarat_wrapper1[$pv] = $pk;		
 					}
-					$syarat_wrapper1 = $syarat_wrapper1 + $syarat_wrapper;					
+					// $syarat_wrapper1[$pv] = $pk;		
+
+					$syarat_wrapper1 = $syarat_wrapper1 + $syarat_wrapper;
 					
 				}
 				array_push($result_persyaratan, $syarat_wrapper1);
@@ -374,6 +384,7 @@
 
 			$data_persyaratan['persyaratan'] = $result_persyaratan;
 			$result = $result + $data_persyaratan;
+			//print_r($c_biner);
 			return $result;
 		}
 
