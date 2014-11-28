@@ -14,7 +14,7 @@
 			width: 15%;
 		}
 		.c_jenis_izin {
-			width: 20%;
+			width: 18%;
 			text-align: center;
 		}
 		.c_jenis_permohonan {
@@ -36,7 +36,7 @@
 			text-align: center;
 		}
 		.c_aksi {
-			width: 10%;
+			width: 12%;
 			text-align: center;
 		}
 	</style>
@@ -128,8 +128,9 @@
 			<td class="c_tanggal_peninjauan"> @{{ bppskrd.d_survey }} </td>
 			<td class="c_status">@{{ bppskrd.c_skrd }}</td>
 			<td class="c_aksi">
-				<span class="button-group group-1">
+				<span class="button-group group-2">
 					<a href ng-click="open_modal('modal_edit', bppskrd.id)" class="edit">Edit</a>
+					<a ng-href="pembuatan_skrd/cetak/skrd/@{{bppskrd.trperizinan_id}}/@{{bppskrd.id}}" target="_blank" class="edit">Cetak</a>
 				</span>
 			</td>
 		</tr>

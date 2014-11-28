@@ -797,6 +797,135 @@
 			return Tmpermohonan::fetch_with_tmpemohon_trperizinan_trjenis_perizinan_tmbap_for_pembuatan_skrd($date_start, $date_finish);
 		}
 
+		public function penetapan_pembuatan_skrd_cetak_skrd($id_perizinan, $id_permohonan) {
+			$query = ReportGenerators::fetch_with_report_group_datas($id_perizinan, 'SKRD');
+
+			foreach($query as $quk) {
+				eval('$' . $quk->report_group_code . ' = DB::select("' . $quk->group_query . '", [' . $id_permohonan . ']);');
+				$layout = $quk->layout;
+			}
+
+			$content = '';
+			$url = URL::to('uploads/dokumen/' . $layout);
+
+			$fh = fopen($url, 'r');
+			while ($line = fgets($fh)) {
+
+				$result = substr($line, 0,13);
+				if($result == '<data-source>') {
+					$output = substr($line, 13, -15);
+					eval($output . ';');
+
+					if($item['type' ] === 'table') {
+						eval( '$send = $' . $item['source'] . ';');
+						$result = $this->dokumen_list_item($send);
+					}
+					else if($item['type' === 'text']) {
+
+					}
+					else if($item['type'] === 'list' ) {
+						$send = 'ini list';
+					}
+					else if($item['type'] === 'list-number') {
+
+					}
+					else if($item['type'] === 'list-bullet') {
+
+					}
+					else {
+
+					}
+				}
+				else if($result == '<data-header>') {
+					$result = $this->dokumen_header();
+				}
+				else {
+					$result = $line;
+				}
+
+				$content .= $result;
+			}
+
+			fclose($fh);
+
+			// echo $content;
+
+			$pdf = App::make('dompdf');
+			$pdf->loadHTML($content);
+			return $pdf->setPaper('a4')->setOrientation('portrait')->download('test' . '.pdf');
+		}
+
+		public function dokumen_header() {
+
+			// HTML::style('assets/css/document.css');
+			$result = '';
+			$result .= '<link rel="stylesheet" href="' . URL::to("assets/css/document.css") . '"/>';
+
+			$settings = Settings::get_data_cetak();
+			$header = [];
+
+			foreach ($settings as $key) {
+				$header[$key['name']] = $key['value'];
+			}
+
+			$title_kabupaten = Trkabupaten::get_nama_kabupaten($header['app_city']);
+
+			$data = [
+				'logo' => 'assets/img/logo.png',
+				'title_nama' => $header['app_kantor'],
+				'title_kabupaten' => $title_kabupaten,
+				'title_alamat' => $header['app_alamat'],
+				'title_tlp' => $header['app_tlp'],
+				'title_fax' => $header['app_fax']
+				// 'surat_title' => $surat_title
+
+			];
+
+
+
+			$result .= '<div class="header-surat">';
+				$result .= '<table>';
+					$result .= '<tr>';
+						$result .= '<td class="header-logo">';
+
+							$result .= HTML::image($data['logo'], 'logo') ;
+
+						$result .= '</td>';
+						$result .= '<td class="header-title">';
+
+							$result .= '<div class="title-nama">';
+								$result .= '<h3>' . $data['title_nama'] . '</h3>';
+								$result .= '<p>' . $data['title_kabupaten'] . '</p>';
+							$result .= '</div>';
+							$result .= '<div class="title-alamat">';
+								$result .= '<p class="alamat-jalan">' . $data['title_alamat'] . ' - ' . $data['title_kabupaten'] . '</p>';
+								$result .= '<p  class="alamat-telp"> Telp. ' . $data['title_tlp'] . ' Fax ' . $data['title_fax'] . '</p>';
+							$result .= '</div>';
+
+						$result .= '</td>';
+					$result .= '<tr>';
+				$result .= '</table>';
+			$result .= '</div>';
+
+			return $result;
+		}
+
+		public function dokumen_list_item($data) {
+			$result = '';
+
+			foreach($data as $dk => $dv) {
+				$result .= '<table style="width:100%;">';
+				foreach($dv as $k => $v) {
+					$result .= '<tr>';
+						$result .= '<td style="width:40%;" >' . $k . '</td>';
+						$result .= '<td style="width:50%;" >' . $v . '</td>';
+					$result .= '</tr>';
+				}
+				$result .= '</table>';
+			}
+			return $result;
+		}
+
 		# @ Bagian Modal =======================================================
 
 		public function penetapan_pembuatan_skrd_edit() {

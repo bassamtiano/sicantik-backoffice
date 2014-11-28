@@ -894,16 +894,20 @@
 			/*disini */
 
 			$data = [];
+
+
 			$report_group_id = Input::get('report_group_id');
 			$report_group_code = Input::get('report_group_code');
 			$report_group_short_desc = Input::get('report_group_short_desc');
 			$report_group_type = Input::get('report_group_type');
+			$report_group_query = Input::get('report_group_query');
 
 
 			$id1 = 0;
 			$id2 = 0;
 			$id3 = 0;
 			$id4 = 0;
+			$id5 = 0;
 
 			foreach($report_group_type as $rgtk => $rgtv) {
 				$wrapper[$id1]['type'] = $rgtv;
@@ -922,6 +926,11 @@
 			foreach($report_group_id as $rgik => $rgiv) {
 				$wrapper[$id4]['id'] = $rgiv;
 				$id4 +=1;
+			}
+
+			foreach($report_group_query as $rgqk => $rgqv) {
+				$wrapper[$id5]['group_query'] = $rgqv;
+				$id5 +=1;
 			}
 
 			$report_generator = [

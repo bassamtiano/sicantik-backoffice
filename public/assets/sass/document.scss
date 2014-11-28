@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, p {
 .print-page {
 	height: 267mm;
 	width: 100%;
-		
+
 	float: left;
 
 	.header-surat {
@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, p {
 				width: 170mm;
 
 				.title-nama {
-				
+
 					width: 100%;
 					float: right;
 					h3 {
@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, p {
 					p {
 						text-align: center;
 						padding-bottom: 10px;
-					}	
+					}
 				}
 
 				.title-alamat {
@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5, p {
 				}
 			}
 		}
-		
+
 	}
 
 	.isi-surat {
@@ -80,8 +80,16 @@ h1, h2, h3, h4, h5, p {
 			padding-bottom: 5px;
 		}
 
+		p {
+			padding: 10px 0 10px 0;
+			word-wrap:break-word;
+			text-align:justify;
+		}
+
 		table {
 			border-collapse: collapse;
+			table-layout:fixed;
+			word-wrap:break-word;
 			width: 100%;
 			tr {
 				th, td {

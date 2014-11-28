@@ -811,6 +811,8 @@ Route::group(['before' => 'auth'], function() {
 
 	Route::get('backoffice/penetapan/pembuatan_skrd/edit/data/{id}', array('as' => 'backoffice_penetapan_pembuatan_skrd_edit_data', 'uses' => 'BackofficeController@penetapan_pembuatan_skrd_edit_data'));
 
+	Route::get('backoffice/penetapan/pembuatan_skrd/cetak/skrd/{id_perizinan}/{id_permohonan}', array('as' => 'backoffice_penetapan_pembuatan_skrd', 'uses' => 'BackofficeController@penetapan_pembuatan_skrd_cetak_skrd'));
+
 	# Backoffice / Penetapan / Pembuatan Izin
 
 	Route::get('backoffice/penetapan/pembuatan_izin', array('as' => 'backoffice_penetapan_pembuatan_izin', 'uses' => 'BackofficeController@penetapan_pembuatan_izin'));

@@ -1671,7 +1671,7 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 				->leftjoin('tmkeringananretribusi_tmpermohonan', 'tmpermohonan.id', '=', 'tmkeringananretribusi_tmpermohonan.tmpermohonan_id')
 				->leftjoin('tmkeringananretribusi', 'tmkeringananretribusi_tmpermohonan.tmkeringananretribusi_id', '=', 'tmkeringananretribusi.id')
 
-				->select(DB::raw('tmpermohonan.id, tmpermohonan.pendaftaran_id, tmpemohon.n_pemohon, trperizinan.n_perizinan, trjenis_permohonan.n_permohonan, tmpermohonan.d_terima_berkas, tmpermohonan.d_survey, tmbap.c_skrd'))
+				->select(DB::raw('tmpermohonan.id, trperizinan.id as trperizinan_id, tmpermohonan.pendaftaran_id, tmpemohon.n_pemohon, trperizinan.n_perizinan, trjenis_permohonan.n_permohonan, tmpermohonan.d_terima_berkas, tmpermohonan.d_survey, tmbap.c_skrd'))
 
 				->orderBy('tmpermohonan.d_terima_berkas', 'desc')
 				->where('tmpermohonan.c_pendaftaran', '=', '1')
@@ -1699,7 +1699,7 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 				->leftjoin('tmkeringananretribusi_tmpermohonan', 'tmpermohonan.id', '=', 'tmkeringananretribusi_tmpermohonan.tmpermohonan_id')
 				->leftjoin('tmkeringananretribusi', 'tmkeringananretribusi_tmpermohonan.tmkeringananretribusi_id', '=', 'tmkeringananretribusi.id')
 
-				->select(DB::raw('tmpermohonan.id, tmpermohonan.pendaftaran_id, tmpemohon.n_pemohon, trperizinan.n_perizinan, trjenis_permohonan.n_permohonan, tmpermohonan.d_terima_berkas, tmpermohonan.d_survey, tmbap.c_skrd'))
+				->select(DB::raw('tmpermohonan.id, trperizinan.id as trperizinan_id, tmpermohonan.pendaftaran_id, tmpemohon.n_pemohon, trperizinan.n_perizinan, trjenis_permohonan.n_permohonan, tmpermohonan.d_terima_berkas, tmpermohonan.d_survey, tmbap.c_skrd'))
 
 				->orderBy('tmpermohonan.d_terima_berkas', 'desc')
 				->where('tmpermohonan.c_pendaftaran', '=', '1')

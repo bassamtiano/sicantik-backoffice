@@ -42,7 +42,7 @@
                     // echo $item['source'];
 
                     if($item['type' ] === 'table') {
-                        $send = 'ini as';
+                        echo $item['source'];
                     }
                     else if($item['type' === 'text']) {
 

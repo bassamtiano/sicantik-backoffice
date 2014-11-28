@@ -122,19 +122,19 @@
                                     text-align:center;
                                 }
                                 .c_modal_group_code {
-                                    width:20%;
+                                    width:15%;
                                 }
                                 .c_modal_short_desc {
-                                    width:20%;
+                                    width:15%;
                                 }
                                 .c_modal_type {
-                                    width:10%;
+                                    width:15%;
                                 }
                                 .c_modal_query {
-                                    width:10%;
+                                    width:35%;
                                 }
                                 .c_modal_aksi {
-                                    width:35%;
+                                    width:15%;
                                 }
                             </style>
 
@@ -168,7 +168,7 @@
                                         </select>
                                     </td>
                                     <td class="c_modal_query" >
-                                        <textarea name="report_group_query[]">@{{ rgd.group_query }}</textarea>
+                                        <textarea name="report_group_query[]" rows="5">@{{ rgd.group_query }}</textarea>
                                     </td>
                                     <td class="c_modal_aksi" >
                                         <span class="button-group group-1">
