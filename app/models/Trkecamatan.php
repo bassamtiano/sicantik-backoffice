@@ -10,7 +10,7 @@
 			return Trkecamatan::get();
 		}
 
-		public static function fetch_with_kabupaten_propinsi() {
+		public static function fetch_with_trkabupaten_propinsi() {
 			return DB::table('trkecamatan')
 			->join('trkabupaten_trkecamatan', 'trkecamatan.id', '=', 'trkabupaten_trkecamatan.trkecamatan_id')
 			->join('trkabupaten', 'trkabupaten_trkecamatan.trkabupaten_id', '=', 'trkabupaten.id')
@@ -35,10 +35,17 @@
 			return Trkecamatan::where('id', '=', $id_kecamatan);
 		}
 
-		public static function fetch_with_kabupaten_by_id($id) {
+		public static function fetch_with_trkabupaten_by_id($id) {
 			return DB::table('trkecamatan')
 			->leftjoin('trkabupaten_trkecamatan', 'trkecamatan.id', '=', 'trkabupaten_trkecamatan.trkecamatan_id')
 			->where('trkabupaten_trkecamatan.trkabupaten_id', '=', $id)
+			->orderBy('trkecamatan.id')
+			->get(['trkecamatan.id', 'trkecamatan.n_kecamatan']);
+		}
+
+		public static function fetch_with_trkabupaten() {
+			return DB::table('trkecamatan')
+			->leftjoin('trkabupaten_trkecamatan', 'trkecamatan.id', '=', 'trkabupaten_trkecamatan.trkecamatan_id')
 			->orderBy('trkecamatan.id')
 			->get(['trkecamatan.id', 'trkecamatan.n_kecamatan']);
 		}

@@ -13,7 +13,6 @@
                     <ul>
                 </div>
                 <div class="tab-content-wrapper">
-
                     <div class="tab-content" ng-show="tab.data_awal_tab_data_pemohon">
 
                         <div class="tab-content-left">

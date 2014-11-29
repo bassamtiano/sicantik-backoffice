@@ -288,13 +288,53 @@
 				
 				return $result;
 			}
-
 		/* 
 			Menu Data Perusahaan
 		*/	
 
 		public function pendaftaran_data_perusahaan() {
 			return View::make('pelayanan.pages.pendaftaran_data_perusahaan');
+		}
+
+		public function pendaftaran_data_perusahaan_insert(){
+			$data_perusahaan = [
+			'no_reg_perusahaan' => Input::get('no_reg'),
+			'npwp' => Input::get('i_npwp'),
+			'n_perusahaan' => Input::get('perusahaan'),
+			'i_telp_perusahaan' => Input::get('tel'),
+			'a_perusahaan' => Input::get('al_perusahaan')
+			];
+
+			$tmperusahaan_id = Tmperusahaan::insert_data($data_perusahaan);
+
+			$trkelurahan_id = Input::get("kelurahan");
+			TmperusahaanTrkelurahan::insert_data($tmperusahaan_id[0]['id'], $trkelurahan_id);
+			
+			$trinvestasi_id = Input::get("investasi");
+			TmperusahaanTrinvestasi::insert_data($tmperusahaan_id[0]['id'], $trinvestasi_id);
+			
+			$trkegiatan_id = Input::get("kegiatan");
+			TmperusahaanTrkegiatan::insert_data($tmperusahaan_id[0]['id'], $trkegiatan_id);		
+		}
+
+		public function pendaftaran_data_perusahaan_edit(){
+			$id = Input::get('id_perusahaan');
+			$data_edit_perusahaan = [
+			'no_reg_perusahaan' => Input::get('no_reg'),
+			'npwp' => Input::get('i_npwp'),
+			'n_perusahaan' => Input::get('perusahaan'),
+			'i_telp_perusahaan' => Input::get('tel'),
+			'a_perusahaan' => Input::get('al_perusahaan')
+			];
+
+			$trkelurahan_id = ['trkelurahan_id' => Input::get("kelurahan")];
+			$trinvestasi_id = ['trinvestasi_id' => Input::get("investasi")];
+			$trkegiatan_id = ['trkegiatan_id' => Input::get("kegiatan")];
+
+			Tmperusahaan::where('id', '=', $id)->update($data_edit_perusahaan);
+			TmperusahaanTrkelurahan::where('tmperusahaan_id','=', $id)->update($trkelurahan_id);
+			TmperusahaanTrkegiatan::where('tmperusahaan_id', '=', $id)->update($trkegiatan_id);
+			TmperusahaanTrinvestasi::where('tmperusahaan_id', '=', $id)->update($trinvestasi_id);
 		}
 
 		public function pendaftaran_data_perusahaan_data($id = null) {
@@ -305,23 +345,160 @@
 				return Trkegiatan::fetch_data();
 			}
 
-			public function pendaftaran_data_perusahaan_opsi_investasi(){
-				return Trinvestasi::fetch_data();
-			}
+		public function pendaftaran_data_perusahaan_opsi_investasi(){
+			return Trinvestasi::fetch_data();
+		}
 
-			public function pendaftaran_data_perusahaan_edit_data($id) {
-				$data_perusahaan = Tmperusahaan::fetch_data_perusahaan_edit_data($id);
+		public function pendaftaran_data_perusahaan_edit_data($id) {
+			$data_perusahaan = Tmperusahaan::fetch_data_perusahaan_edit_data($id);
+
+			$result = [];
+
+			foreach($data_perusahaan as $val => $key) {
+				foreach($key as $v => $k) {
+					$result[$v] = $k;
+				}
+			}
+			
+			return $result;
+		}
+
+		public function pendaftaran_data_perusahaan_opsi_perusahaan_propinsi($id = null){
+			//return Trpropinsi::fetch_data();
+			if(!empty($id)) {
+				$prop = Trpropinsi::fetch_data();
+				$result = [];
+				foreach ($prop as $key => $value) {
+					if($value->id == $id) {
+						$wrapper = [
+							'id' => $value->id,
+							'n_propinsi' => $value->n_propinsi,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $value->id,
+							'n_propinsi' => $value->n_propinsi,
+							'selected' => false
+						];
+					}
+					array_push($result, $wrapper);
+				}
+
+				return $result;
+
+			}
+			else {
+				return Trpropinsi::fetch_data();
+			}
+		}
+
+		public function pendaftaran_data_perusahaan_opsi_perusahaan_kabupaten($id_propinsi = null, $id = null){
+			if(!empty($id) || !empty($id_propinsi)) {
+				$kab = Trkabupaten::fetch_with_propinsi_by_id($id_propinsi);
 
 				$result = [];
 
-				foreach($data_perusahaan as $val => $key) {
-					foreach($key as $v => $k) {
-						$result[$v] = $k;
+				foreach($kab as $kabk => $kabv) {
+					if($kabv->id == $id) {
+						$wrapper = [
+							'id' => $kabv->id,
+							'n_kabupaten' => $kabv->n_kabupaten,
+							'selected' => true
+						];
 					}
+					else {
+						$wrapper = [
+							'id' => $kabv->id,
+							'n_kabupaten' => $kabv->n_kabupaten,
+							'selected' => false
+						];
+					}
+
+					array_push($result, $wrapper);
 				}
 				
+				 return $result;
+
+			}
+
+			else {
+				return Trkabupaten::fetch_with_propinsi();
+				
+			}
+		}
+		public function pendaftaran_data_perusahaan_opsi_perusahaan_kecamatan($id_kabupaten = null, $id = null) {
+			if(!empty($id) || !empty($id_kabupaten)){
+
+				$kec = Trkecamatan::fetch_with_trkabupaten_by_id($id_kabupaten);
+
+				$result = [];
+
+				foreach($kec as $keck => $kecv) {
+					if($kecv->id == $id) {
+						$wrapper = [
+							'id' => $kecv->id,
+							'n_kecamatan' => $kecv->n_kecamatan,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $kecv->id,
+							'n_kecamatan' => $kecv->n_kecamatan,
+							'selected' => false
+						];
+					}
+
+					array_push($result, $wrapper);
+				}
+				//echo "lo";
 				return $result;
 			}
+
+			else {
+				//echo "li";
+				return Trkecamatan::fetch_with_trkabupaten();
+			}
+		}
+
+		public function pendaftaran_data_perusahaan_opsi_perusahaan_kelurahan($id_kecamatan = null, $id = null) {
+			if(!empty($id) || !empty($id_kecamatan)){
+
+				$kel = Trkelurahan::fetch_with_trkecamatan_by_id($id_kecamatan);
+
+				$result = [];
+
+				foreach($kel as $kelk => $kelv) {
+					if($kelv->id == $id) {
+						$wrapper = [
+							'id' => $kelv->id,
+							'n_kelurahan' => $kelv->n_kelurahan,
+							'selected' => true
+						];
+					}
+					else {
+						$wrapper = [
+							'id' => $kelv->id,
+							'n_kelurahan' => $kelv->n_kelurahan,
+							'selected' => false
+						];
+					}
+
+					array_push($result, $wrapper);
+				}
+
+				return $result;
+			}
+
+			else {
+				return Trkelurahan::fetch_with_trkecamatan();
+			}
+		}
+
+
+
 
 	/*
 		Sub Modul Customer Service

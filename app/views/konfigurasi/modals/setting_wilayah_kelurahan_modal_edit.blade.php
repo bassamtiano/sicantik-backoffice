@@ -34,7 +34,7 @@
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kecamatan</div>
-                                    <select name="kabupaten">
+                                    <select name="kecamatan">
                                         <option ng-repeat="okec in opsi_kec"  ng-if="okec.selected == true" selected value="@{{ okec.id }}" >@{{ okec.n_kecamatan }}</option>
                                         <option ng-repeat="okec in opsi_kec"  ng-if="okec.selected == false" value="@{{ okec.id }}" >@{{ okec.n_kecamatan }}</option>
                                     </select>

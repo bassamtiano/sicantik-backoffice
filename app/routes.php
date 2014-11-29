@@ -464,17 +464,17 @@ Route::get('konfigurasi/setting_wilayah/kelurahan/delete', ['as' => 'konfigurasi
 
 Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_propinsi', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
 
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
+
 Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
 
 Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
 
+Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
+
 Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
 
 Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
-
-Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
-
-Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
 
 Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id_kabupaten}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
 
@@ -613,6 +613,38 @@ Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_investasi', array('as' =>
 Route::get('pelayanan/pendaftaran/data_perusahaan/edit', array('as' => 'pelayanan_pendaftaran_data_perusahaan_edit', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_edit'));
 
 Route::get('pelayanan/pendaftaran/data_perusahaan/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_data_perusahaan_edit_data', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_edit_data'));
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_propinsi', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_propinsi']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_propinsi/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_propinsi']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_kabupaten', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kabupaten']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_kabupaten/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kabupaten']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_edit/perusahaan_kabupaten/{id_propinsi}/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kabupaten']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_kecamatan', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kecamatan']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_kecamatan/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kecamatan']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_edit/perusahaan_kecamatan/{id_kabupaten}/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kecamatan']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_kelurahan', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kelurahan']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_kelurahan/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kelurahan']);
+
+Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_edit/perusahaan_kelurahan/{id_kecamatan}/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kelurahan']);
+
+// Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_edit/perusahaan_kabupaten/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kabupaten']);
+
+// Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_edit/perusahaan_kecamatan/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kecamatan']);
+
+// Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_edit/perusahaan_kelurahan/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kelurahan']);
+
+Route::post('pelayanan/pendaftaran/data_perusahaan/tambah', array('as' => 'pelayanan_pendaftaran_data_perusahaan_tambah', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_insert')); 
+
+Route::post('pelayanan/pendaftaran/data_perusahaan/ubah', array('as' => 'pelayanan_pendaftaran_data_perusahaan_ubah', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_edit')); 
 
 # Customer Service / Informasi Perizinan
 

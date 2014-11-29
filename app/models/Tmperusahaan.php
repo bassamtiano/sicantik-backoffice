@@ -52,7 +52,7 @@
 			->leftjoin('tmperusahaan_trinvestasi', 'tmperusahaan.id', '=', 'tmperusahaan_trinvestasi.tmperusahaan_id')
 			->leftjoin('trinvestasi', 'trinvestasi.id', '=', 'tmperusahaan_trinvestasi.trinvestasi_id')
 
-			->select(DB::raw('tmperusahaan.id, tmperusahaan.n_perusahaan, perusahaan_kelurahan.n_kelurahan as perusahaan_kelurahan, perusahaan_kecamatan.n_kecamatan as perusahaan_kecamatan, perusahaan_kabupaten.n_kabupaten as perusahaan_kabupaten, perusahaan_propinsi.n_propinsi as perusahaan_propinsi, tmperusahaan.npwp, tmperusahaan.i_telp_perusahaan, tmperusahaan.a_perusahaan, trkegiatan.n_kegiatan, trinvestasi.n_investasi'))
+			->select(DB::raw('tmperusahaan.id, tmperusahaan.n_perusahaan, perusahaan_kelurahan.n_kelurahan, perusahaan_kelurahan.id as perusahaan_kelurahan, perusahaan_kecamatan.id as perusahaan_kecamatan, perusahaan_kecamatan.n_kecamatan, perusahaan_propinsi.n_propinsi, perusahaan_kabupaten.n_kabupaten, perusahaan_kabupaten.id as perusahaan_kabupaten, perusahaan_propinsi.id as perusahaan_propinsi, tmperusahaan.npwp, tmperusahaan.i_telp_perusahaan, tmperusahaan.no_reg_perusahaan, tmperusahaan.a_perusahaan, trkegiatan.n_kegiatan, trinvestasi.n_investasi'))
 
 			->where('tmperusahaan.id', '=', $id)
 			->groupBy('tmperusahaan.id')
@@ -86,11 +86,7 @@
 
 		public static function insert_data($data) {
 			Tmperusahaan::create($data);
+			return Tmperusahaan::where('no_reg_perusahaan', '=', $data['no_reg_perusahaan'])->where('n_perusahaan', '=', $data['n_perusahaan'])->get(['id']);
 
 		}
-
-		public static function update_data($id, $data){
-			Tmperusahaan::where('id', '=', $id) -> update($data);
-		}
-
 	}
