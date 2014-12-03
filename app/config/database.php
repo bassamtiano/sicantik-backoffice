@@ -57,11 +57,8 @@ return array(
 			'host'      => 'localhost',
 
 			// 'database'  => 'tot_masterbo',
-<<<<<<< HEAD
-			'database'  => 'tot_masterbo',
-=======
 			'database'  => 'sicantik_backoffice',
->>>>>>> pr/13
+
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',

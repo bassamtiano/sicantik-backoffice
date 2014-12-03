@@ -63,8 +63,15 @@
 @section('nav-menu-left')
 	<form ng-submit="filter_pelayanan()">
 		<div class="table-form-content">
+            <div class="form-item wide">
+				<!-- <input type="text" placeholder="Status Perizinan" ng-model="date.id"> -->
+				<select class="form-option" ng-model="perizinan_id" ng-options="pibop.id as pibop.n_perizinan for pibop in permohonan_izin_baru_opsi_perizinan">
+					
+				</select>
+			</div>
 			<div class="form-item">
-				<button ng-click="" style="width='30px'">Tambah Pemohon</button>
+				
+				<button ng-click="open_modal('modal_tambah')" style="width='30px'">Tambah Pemohon</button>
 			</div>
 			<!-- <div class="form-item wide">
 				<select class="form-option" ng-model="pengaduan_id" ng-options="pdpsop.sts_pesan_id as pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan">
@@ -149,4 +156,5 @@
 
 @section('modal-content')
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_edit', ['modal_name' => 'modal_edit'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_tambah', ['modal_name' => 'modal_tambah'])
 @stop

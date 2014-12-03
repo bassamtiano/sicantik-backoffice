@@ -17,7 +17,7 @@
         // public static function edit_pemohon_for_pendataan_entry_data_perizinan_data_awal($id, $data) {
 
 
-            Tmpemohon::where('id', '=', $id)->update(['n_pemohon' => $data['n_pemohon']]);
+            // Tmpemohon::where('id', '=', $id)->update(['n_pemohon' => $data['n_pemohon']]);
 
         //     'tmpemohon.source', 'tmpemohon.no_referensi', 'tmpemohon.n_pemohon', 'tmpemohon.telp_pemohon';
 
@@ -73,8 +73,10 @@
 //-------------------------------------------------------- FUNGSI INSERT -------------------------//
 
 		public static function insert_data($data) {
+
 			Tmpemohon::create($data);
 
+			return Tmpemohon::where('no_referensi', '=', $data['no_referensi'])->where('n_pemohon', '=', $data['n_pemohon'])->get(['id']);
 		}
 
 		public static function update_data($id, $data){

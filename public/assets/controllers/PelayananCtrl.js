@@ -97,6 +97,14 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 		});
 	}
 
+	$scope.opsi_perizinan = function(){
+		$http.get('permohonan_izin_baru/opsi_perizinan').success(function(pibop_data) {
+			$scope.permohonan_izin_baru_opsi_perizinan = pibop_data;
+		});
+	}
+
+	$scope.opsi_perizinan();
+
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -105,16 +113,25 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 
 	$scope.loadMore = function(){
 		$scope.displayed += fetch_limit;
+		$scope.pelayanan_pendaftaran_permohonan_izin_baru_data.length - 5;
 	}
 
 	$scope.pelayanan_pendaftaran_permohonan_izin_baru_data;
+
+	$scope.select_iseng = 'KTP';
+
+		$scope.items = [
+		   {source: 'KTP', Title: 'KTP', selected: true},
+		   {source: 'SIM', Title: 'SIM', selected: false},
+		   {source: 'PASSPORT', Title: 'PASSPORT', selected:false},
+		];
 
 	/* # Modal ==================================================================================================== */
 
 	/* Define Modal Name */
 
 	$scope.modal_edit = false;
-	$scope.modal_data_awal = false;
+	$scope.modal_tambah = false;
 
 	/* Define Open & Close Handler */
 
@@ -130,26 +147,180 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 
 	/*  Construct Modal Function */
 
-	$scope.modal_edit_data = function(id) {
-		$http.get('permohonan_izin_baru/edit/data/' + id).success(function(pibed) {
+		$scope.modal_tambah_data = function() {
+			
+			$http.get('permohonan_izin_baru/tambah/data/' + $scope.perizinan_id).success(function(pibtd) {
+				$scope.permohonan_izin_baru_tambah_data = pibtd;
+			});
+		}
+
+		$scope.modal_edit_data = function(id) {
+
+			$scope.loading_dialog = true;
+
+			$http.get('permohonan_izin_baru/edit/data/' + id).success(function(pibed) {
 			$scope.permohonan_izin_baru_edit_data = pibed;
+
+				$scope.opsi_pemohon_propinsi($scope.permohonan_izin_baru_edit_data.propinsi_pemohon);
+				$scope.opsi_pemohon_kabupaten($scope.permohonan_izin_baru_edit_data.propinsi_pemohon, $scope.permohonan_izin_baru_edit_data.kabupaten_pemohon);
+				$scope.opsi_pemohon_kecamatan($scope.permohonan_izin_baru_edit_data.kabupaten_pemohon, $scope.permohonan_izin_baru_edit_data.kecamatan_pemohon);
+				$scope.opsi_pemohon_kelurahan($scope.permohonan_izin_baru_edit_data.kecamatan_pemohon, $scope.permohonan_izin_baru_edit_data.kelurahan_pemohon);
+
+				$scope.opsi_perusahaan_propinsi($scope.permohonan_izin_baru_edit_data.propinsi_perusahaan);
+				$scope.opsi_perusahaan_kabupaten($scope.permohonan_izin_baru_edit_data.propinsi_perusahaan, $scope.permohonan_izin_baru_edit_data.kabupaten_perusahaan);
+				$scope.opsi_perusahaan_kecamatan($scope.permohonan_izin_baru_edit_data.kabupaten_perusahaan, $scope.permohonan_izin_baru_edit_data.kecamatan_perusahaan);
+				$scope.opsi_perusahaan_kelurahan($scope.permohonan_izin_baru_edit_data.kecamatan_perusahaan, $scope.permohonan_izin_baru_edit_data.kelurahan_perusahaan);
+
+			}).success(function() {
+				$scope.loading_dialog = false;
+			});
+
+		}
+
+	/* Prepare Opsi */
+
+		$scope.opsi_pemohon_kelurahan = function(id_kecamatan, id) {
+			$http.get('permohonan_izin_baru/edit/opsi/pemohon_kelurahan/' + id_kecamatan + '/' + id).success(function(kel_pemohon) {
+				$scope.opsi_kel_pemohon = kel_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_kecamatan = function(id_kabupaten, id) {
+			$http.get('permohonan_izin_baru/edit/opsi/pemohon_kecamatan/' + id_kabupaten + '/' + id).success(function(kec_pemohon) {
+				$scope.opsi_kec_pemohon = kec_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_kabupaten = function(id_propinsi, id) {
+			$http.get('permohonan_izin_baru/edit/opsi/pemohon_kabupaten/' + id_propinsi + '/' + id).success(function(kab_pemohon) {
+				$scope.opsi_kab_pemohon = kab_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_propinsi = function(id) {
+			$http.get('permohonan_izin_baru/edit/opsi/pemohon_propinsi/' + id).success(function(prop_pemohon) {
+				$scope.opsi_prop_pemohon = prop_pemohon;
+			});
+		}
+
+		$scope.opsi_perusahaan_kelurahan = function(id_kecamatan, id) {
+			$http.get('permohonan_izin_baru/edit/opsi/perusahaan_kelurahan/' + id_kecamatan + '/' + id).success(function(kel_perusahaan) {
+				$scope.opsi_kel_perusahaan = kel_perusahaan;
+			});
+		}
+
+		$scope.opsi_perusahaan_kecamatan = function(id_kabupaten, id) {
+			$http.get('permohonan_izin_baru/edit/opsi/perusahaan_kecamatan/' + id_kabupaten + '/' + id).success(function(kec_perusahaan) {
+				$scope.opsi_kec_perusahaan = kec_perusahaan;
+			});
+		}
+
+		$scope.opsi_perusahaan_kabupaten = function(id_propinsi, id) {
+			$http.get('permohonan_izin_baru/edit/opsi/perusahaan_kabupaten/' + id_propinsi + '/' + id).success(function(kab_perusahaan) {
+				$scope.opsi_kab_perusahaan = kab_perusahaan;
+			});
+		}
+
+		$scope.opsi_perusahaan_propinsi = function(id) {
+			$http.get('permohonan_izin_baru/edit/opsi/perusahaan_propinsi/' + id).success(function(prop_perusahaan) {
+				$scope.opsi_prop_perusahaan = prop_perusahaan;
+			});
+		}
+
+		$scope.get_pemohon_propinsi = function() {
+			$http.get('permohonan_izin_baru/edit/opsi/pemohon_propinsi').success(function(prop_pemohon_data) {
+				$scope.pemohon_propinsi_data = prop_pemohon_data;
+			});
+		}
+
+		$scope.get_pemohon_propinsi();
+
+		$scope.$watch('pemohon_propinsi_id', function() { //alert($scope.pemohon_propinsi_id.id);
+			$http.get('permohonan_izin_baru/edit/opsi/pemohon_kabupaten/' + $scope.pemohon_propinsi_id.id ).success(function(kab_pemohon_data) {
+				$scope.pemohon_kabupaten_data = kab_pemohon_data;
+			});
+
+			$scope.pemohon_kecamatan_data = "";
+			$scope.pemohon_kelurahan_data = "";
 		});
-	}
+
+		$scope.$watch('pemohon_kabupaten_id', function(){
+			$http.get('permohonan_izin_baru/edit/opsi/pemohon_kecamatan/' + $scope.pemohon_kabupaten_id.id).success(function(kec_pemohon_data){
+				$scope.pemohon_kecamatan_data = kec_pemohon_data;
+			});
+			
+			$scope.pemohon_kelurahan_data = "";		
+		});
+
+		$scope.$watch('pemohon_kecamatan_id', function(){
+			$http.get('permohonan_izin_baru/edit/opsi/pemohon_kelurahan/' + $scope.pemohon_kecamatan_id.id).success(function(kel_pemohon_data){
+				$scope.pemohon_kelurahan_data = kel_pemohon_data;
+			});
+				
+		});
+
+		$scope.get_perusahaan_propinsi = function() {
+			$http.get('permohonan_izin_baru/edit/opsi/perusahaan_propinsi').success(function(prop_perusahaan_data) {
+				$scope.perusahaan_propinsi_data = prop_perusahaan_data;
+			});
+		}
+
+		$scope.get_perusahaan_propinsi();
+
+		$scope.$watch('perusahaan_propinsi_id', function() { 
+			$http.get('permohonan_izin_baru/edit/opsi/perusahaan_kabupaten/' + $scope.perusahaan_propinsi_id.id ).success(function(kab_perusahaan_data) {
+				$scope.perusahaan_kabupaten_data = kab_perusahaan_data;
+			});
+
+			$scope.perusahaan_kecamatan_data = "";
+			$scope.perusahaan_kelurahan_data = "";
+		});
+
+		$scope.$watch('perusahaan_kabupaten_id', function(){
+			$http.get('permohonan_izin_baru/edit/opsi/perusahaan_kecamatan/' + $scope.perusahaan_kabupaten_id.id).success(function(kec_perusahaan_data){
+				$scope.perusahaan_kecamatan_data = kec_perusahaan_data;
+			});
+			
+			$scope.perusahaan_kelurahan_data = "";		
+		});
+
+		$scope.$watch('perusahaan_kecamatan_id', function(){
+			$http.get('permohonan_izin_baru/edit/opsi/perusahaan_kelurahan/' + $scope.perusahaan_kecamatan_id.id).success(function(kel_perusahaan_data){
+				$scope.perusahaan_kelurahan_data = kel_perusahaan_data;
+			});
+				
+		});
+
+		$scope.get_perizinan = function() {
+			$http.get('permohonan_izin_baru/opsi_perizinan').success(function(perizinan_data) {
+				$scope.opsi_perizinan_data = perizinan_data;
+			});
+		}
+
+		
+
+	
+
+	// $scope.modal_edit_data = function(id) {
+	// 	$http.get('permohonan_izin_baru/edit/data/' + id).success(function(pibed) {
+	// 		$scope.permohonan_izin_baru_edit_data = pibed;
+	// 	});
+	// }
 
 
 	/* Define Tab Name */
 
 	$scope.tab = [];
 
-	$scope.tab.data_awal_tab_data_pemohon = true;
-	$scope.tab.data_awal_tab_data_perusahaan = false;
-	$scope.tab.data_awal_tab_persyaratan = false;
+	$scope.tab.izin_baru_tab_data_pemohon = true;
+	$scope.tab.izin_baru_tab_data_perusahaan = false;
+	$scope.tab.izin_baru_tab_persyaratan = false;
 
 	$scope.show_tab = function(tab_name, button_id) {
 
-		$scope.tab.data_awal_tab_data_pemohon = false;
-		$scope.tab.data_awal_tab_data_perusahaan = false;
-		$scope.tab.data_awal_tab_persyaratan = false;
+		$scope.tab.izin_baru_tab_data_pemohon = false;
+		$scope.tab.izin_baru_tab_data_perusahaan = false;
+		$scope.tab.izin_baru_tab_persyaratan = false;
 
 		eval('$scope.' + tab_name + "= true");
 
@@ -164,9 +335,47 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 		});
 	}
 
+	$scope.modal_tambah_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_tambah').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_tambah_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_tambah_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_tambah = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+
+		}
+
 	$scope.modal_edit_submit = function() {
 
-	}
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_edit_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_edit_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_edit = false;
+				}
+
+			}, 1);
+
+			$scope.show_all();
+		}
+
 
 }
 
@@ -460,15 +669,6 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 		});
 	}
 
-
-	$scope.opsi_pelayanan = function(){
-		$http.get('data_pemohon/opsi').success(function(ppdpo_data) {
-			$scope.pelayanan_pendaftaran_data_pemohon_opsi = ppdpo_data;
-		});
-	}
-
-	$scope.opsi_pelayanan();
-
 	$scope.show_all();
 
 	$scope.opsi_cari = '$';
@@ -480,6 +680,14 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 	}
 
 	$scope.pelayanan_pendaftaran_data_pemohon_data;
+
+	$scope.select_iseng = 'KTP';
+
+		$scope.items = [
+		   {source: 'KTP', Title: 'KTP', selected: true},
+		   {source: 'SIM', Title: 'SIM', selected: false},
+		   {source: 'PASSPORT', Title: 'PASSPORT', selected:false},
+		];
 
 	/* # Modal ==================================================================================================== */
 
@@ -499,28 +707,137 @@ function PelayananPendaftaranDataPemohonCtrl($scope, $http) {
 			eval("$scope." + modal_name + "= true");
 			eval("$scope." + modal_name + "_data(" + id + ")");
 		}
-
-
 	}
 
 	$scope.close_modal = function(modal_name) {
 		eval("$scope." + modal_name + "= false");
 	}
 
+	/*  Construct Modal Function */
+
+		$scope.modal_edit_data = function(id) {
+
+			$scope.loading_dialog = true;
+
+			$http.get('data_pemohon/edit/data/' + id).success(function(pibed) {
+			$scope.data_pemohon_edit_data = pibed;
+
+				$scope.opsi_pemohon_propinsi($scope.data_pemohon_edit_data.propinsi_pemohon);
+				$scope.opsi_pemohon_kabupaten($scope.data_pemohon_edit_data.propinsi_pemohon, $scope.data_pemohon_edit_data.kabupaten_pemohon);
+				$scope.opsi_pemohon_kecamatan($scope.data_pemohon_edit_data.kabupaten_pemohon, $scope.data_pemohon_edit_data.kecamatan_pemohon);
+				$scope.opsi_pemohon_kelurahan($scope.data_pemohon_edit_data.kecamatan_pemohon, $scope.data_pemohon_edit_data.kelurahan_pemohon);
+
+				// $scope.opsi_perusahaan_propinsi($scope.permohonan_izin_baru_edit_data.propinsi_perusahaan);
+				// $scope.opsi_perusahaan_kabupaten($scope.permohonan_izin_baru_edit_data.propinsi_perusahaan, $scope.permohonan_izin_baru_edit_data.kabupaten_perusahaan);
+				// $scope.opsi_perusahaan_kecamatan($scope.permohonan_izin_baru_edit_data.kabupaten_perusahaan, $scope.permohonan_izin_baru_edit_data.kecamatan_perusahaan);
+				// $scope.opsi_perusahaan_kelurahan($scope.permohonan_izin_baru_edit_data.kecamatan_perusahaan, $scope.permohonan_izin_baru_edit_data.kelurahan_perusahaan);
+
+			}).success(function() {
+				$scope.loading_dialog = false;
+			});
+
+		}
+
 	/* Prepare Opsi */
 
+		$scope.opsi_pemohon_propinsi = function(id) {
+			$http.get('data_pemohon/opsi/propinsi/' + id).success(function(prop_pemohon) {
+				$scope.opsi_prop_pemohon = prop_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_kabupaten = function(id_propinsi, id) {
+			$http.get('data_pemohon/opsi/kabupaten/' + id_propinsi + '/' + id).success(function(kab_pemohon) {
+				$scope.opsi_kab_pemohon = kab_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_kecamatan = function(id_kabupaten, id) {
+			$http.get('data_pemohon/opsi/kecamatan/' + id_kabupaten + '/' + id).success(function(kec_pemohon) {
+				$scope.opsi_kec_pemohon = kec_pemohon;
+			});
+		}
+
+		$scope.opsi_pemohon_kelurahan = function(id_kecamatan, id) {
+			$http.get('data_pemohon/opsi/kelurahan/' + id_kecamatan + '/' + id).success(function(kel_pemohon) {
+				$scope.opsi_kel_pemohon = kel_pemohon;
+			});
+		}
+
+
+		$scope.get_pemohon_propinsi = function() {
+			$http.get('data_pemohon/opsi/propinsi').success(function(prop_pemohon_data) {
+				$scope.pemohon_propinsi_data = prop_pemohon_data;
+			});
+		}
+
+		$scope.get_pemohon_propinsi();
+
+		$scope.$watch('pemohon_propinsi_id', function() { 
+			$http.get('data_pemohon/opsi/kabupaten/' + $scope.pemohon_propinsi_id.id ).success(function(kab_pemohon_data) {
+				$scope.pemohon_kabupaten_data = kab_pemohon_data;
+			});
+
+			$scope.pemohon_kecamatan_data = "";
+			$scope.pemohon_kelurahan_data = "";
+		});
+
+		$scope.$watch('pemohon_kabupaten_id', function(){
+			$http.get('data_pemohon/opsi/kecamatan/' + $scope.pemohon_kabupaten_id.id).success(function(kec_pemohon_data){
+				$scope.pemohon_kecamatan_data = kec_pemohon_data;
+			});
+			
+			$scope.pemohon_kelurahan_data = "";		
+		});
+
+		$scope.$watch('pemohon_kecamatan_id', function(){
+			$http.get('data_pemohon/opsi/kelurahan/' + $scope.pemohon_kecamatan_id.id).success(function(kel_pemohon_data){
+				$scope.pemohon_kelurahan_data = kel_pemohon_data;
+			});
+				
+		});
 
 	/*  Construct Modal Function */
 
-	$scope.modal_edit_data = function(id) {
-		$http.get('data_pemohon/edit/data/' + id).success(function(dped) {
-			$scope.data_pemohon_edit_data = dped;
-		});
-	}
+	$scope.modal_tambah_submit = function() {
 
-	$scope.modal_insert_data = function(id){
+			setTimeout(function() {
+				result = $('#target_tambah').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_tambah_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_tambah_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_tambah = false;
+				}
 
-	}
+			}, 1);
+			$scope.show_all();
+
+		}
+
+	$scope.modal_edit_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_edit_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_edit_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_edit = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+
+		}
 
 	/* Define Tab Name */
 

@@ -146,7 +146,6 @@
 
 		}
 
-
 		public static function fetch_with_trkelompok_perizinan_trproperty() {
 
 			#not finished

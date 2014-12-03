@@ -8,7 +8,6 @@
 
 		public static function get_test() {
 
-
 			return tmpermohonan::all();
 
 		}
@@ -1105,16 +1104,16 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 					'tmpemohon.n_pemohon',
 					'tmpemohon.telp_pemohon',
 					'tmpermohonan.d_terima_berkas',
-					'tmpermohonan.d_survey',
+					'tmpermohonan.d_survey as tanggal_peninjauan',
 					'tmpermohonan.d_perubahan',
 					'tmpermohonan.d_perpanjangan',
 					'tmpermohonan.d_daftarulang',
 					'tmpermohonan.a_izin',
 					'tmpermohonan.keterangan',
-					'trpropinsi.n_propinsi as propinsi_pemohon',
-					'trkabupaten.n_kabupaten as kabupaten_pemohon',
-					'trkecamatan.n_kecamatan as kecamatan_pemohon',
-					'trkelurahan.n_kelurahan as kelurahan_pemohon',
+					'trpropinsi.id as propinsi_pemohon',
+					'trkabupaten.id as kabupaten_pemohon',
+					'trkecamatan.id as kecamatan_pemohon',
+					'trkelurahan.id as kelurahan_pemohon',
 					'tmpemohon.a_pemohon',
 					'tmpemohon.a_pemohon_luar',
 					'tmperusahaan.npwp',
@@ -1122,11 +1121,11 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 					'tmperusahaan.i_telp_perusahaan as telp_perusahaan',
 					'tmperusahaan.fax as fax_perusahaan',
 					'tmperusahaan.email as email_perusahaan',
-					'perusahaan_propinsi.n_propinsi as propinsi_perusahaan',
-					'perusahaan_kabupaten.n_kabupaten as kabupaten_perusahaan',
-					'perusahaan_kecamatan.n_kecamatan as kecamatan_perusahaan',
-					'perusahaan_kelurahan.n_kelurahan as kelurahan_perusahaan',
-					'tmperusahaan.a_perusahaan as alamat_perusahaan',
+					'perusahaan_propinsi.id as propinsi_perusahaan',
+					'perusahaan_kabupaten.id as kabupaten_perusahaan',
+					'perusahaan_kecamatan.id as kecamatan_perusahaan',
+					'perusahaan_kelurahan.id as kelurahan_perusahaan',
+					'tmperusahaan.a_perusahaan',
 					'trinvestasi.n_investasi',
 					'trkegiatan.n_kegiatan'
 					])
@@ -1138,6 +1137,25 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 		}
 
+		public static function fetch_with_trjenis_permohonan_trkelompok_perizinan($trperizinan_id){
+			return DB::table('tmpermohonan')			
+
+			->leftjoin('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
+			->leftjoin('trperizinan', 'tmpermohonan_trperizinan.trperizinan_id', '=', 'trperizinan.id')
+
+			->leftjoin('tmpermohonan_trjenis_permohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trjenis_permohonan.tmpermohonan_id')
+			->leftjoin('trjenis_permohonan', 'tmpermohonan_trjenis_permohonan.trjenis_permohonan_id', '=', 'trjenis_permohonan.id')
+
+			->leftjoin('trkelompok_perizinan_trperizinan', 'trperizinan.id', '=', 'trkelompok_perizinan_trperizinan.trperizinan_id')
+			->leftjoin('trkelompok_perizinan', 'trkelompok_perizinan_trperizinan.trkelompok_perizinan_id', '=', 'trkelompok_perizinan.id')
+
+			->select(['trperizinan.id as perizinan_id', 'trjenis_permohonan.id as jenis_permohonan_id ', 'trperizinan.n_perizinan', 'trkelompok_perizinan.n_kelompok', 'trjenis_permohonan.n_permohonan'])
+			->where('trperizinan.id', '=', $trperizinan_id)
+			->groupBy('trperizinan.id')
+			->orderBy('trperizinan.id')
+			->get();
+		}
+		
 		public static function fetch_tracking_for_customer_service_informasi_tracking(){
 			return DB::table('tmpermohonan')
 			->leftjoin('tmpermohonan_trperizinan','tmpermohonan.id','=','tmpermohonan_trperizinan.tmpermohonan_id')
@@ -2272,12 +2290,18 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 		# Modul Portal =============================================================================================================================================================================================
 
-		public static function generate_id_for_layanan_online_pendaftaran_online() {
+		public static function generate_id_for_layanan_online_pendaftaran_online($date) {
 
 			return DB::table('tmpermohonan')
-			->where('d_terima_berkas', '=', '2015-11-20')
+			->where('d_terima_berkas', '=', $date)
 			->select(DB::raw('count(id) as records'))
 			->get();
+
+		}
+
+		public static function insert_data($data) {
+			Tmpermohonan::create($data);
+			return Tmpermohonan::where('pendaftaran_id', '=', $data['pendaftaran_id'])->where('d_terima_berkas', '=', $data['d_terima_berkas'])->get(['id']);
 
 		}
 

@@ -1,0 +1,21 @@
+<?php
+
+	class TmpermohonanTrperizinan extends BaseModel {
+
+		protected $table = 'tmpermohonan_trperizinan';
+		protected $guarded = ['id'];
+		protected $fillable = ['trperizinan_id', 'tmpermohonan_id'];
+
+		public static function insert_data($trperizinan_id, $ttmpermohonan_id) {
+			TmpermohonanTrperizinan::create(['trperizinan_id' => $trperizinan_id, 'tmpermohonan_id' => $tmpermohonan_id]);
+		}
+
+		// public static function update_data($id, $data){
+		// 	return TmperusahaanTrkelurahan::where('tmperusahaan_id', '=', $id)->update($data);
+		// }
+
+		// public static function delete_data($id){
+		// 	return TmperusahaanTrkelurahan::where('tmperusahaan_id', '=', $id)->delete();
+		// }
+
+	}

@@ -10,7 +10,6 @@
 
 		public function daftar_pengaduan_saran_data($id=null) {
 			return Tmpesan::fetch_with_tmpesan_trsts_pesan_trsumber_pesan($id);
-
 		}
 
 		public function daftar_pengaduan_saran_opsi_pengaduan(){
@@ -19,6 +18,26 @@
 
 		public function daftar_pengaduan_saran_opsi_sumber_pengaduan(){
 			return Trsumberpesan::fetch_data();
+		}
+
+		public function daftar_pengaduan_saran_tambah_opsi_propinsi(){
+			return Trpropinsi::fetch_data();
+		}
+
+		public function daftar_pengaduan_saran_tambah_opsi_kabupaten(){
+			return Trkabupaten::fetch_data();
+		}
+
+		public function daftar_pengaduan_saran_tambah_opsi_kecamatan(){
+			return Trkecamatan::fetch_data();
+		}
+
+		public function daftar_pengaduan_saran_tambah_opsi_keluarahan(){
+			return Trkelurahan::fetch_data();
+		}
+
+		public function daftar_pengaduan_saran_tambah(){
+
 		}
 
 		public function daftar_pengaduan_saran_edit_data($id) {

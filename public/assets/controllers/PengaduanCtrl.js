@@ -27,6 +27,36 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 		});
 	}
 
+	$scope.get_opsi_propinsi = function() {
+		$http.get('daftar_pengaduan_saran/tambah/opsi/propinsi').success(function(prop_data) {
+			$scope.propinsi_data = prop_data;
+		});
+	}
+
+	$scope.get_opsi_propinsi();
+
+		$scope.$watch('propinsi_id', function() {
+			$http.get('daftar_pengaduan_saran/tambah/opsi/kabupaten/' + $scope.propinsi_id.id).success(function(kab_data) {
+				$scope.kabupaten_data = kab_data;
+			});
+
+			$scope.kecamatan_data = "";
+			$scope.kelurahan_data = "";
+		});
+
+		$scope.$watch('kabupaten_id', function(){
+			$http.get('daftar_pengaduan_saran/tambah/opsi/kecamatan/' + $scope.kabupaten_id.id).success(function(kec_data){
+				$scope.kecamatan_data = kec_data;
+			});
+			$scope.kecamatan_data = "";		
+		});
+
+		$scope.$watch('kecamatan_id', function(){
+			$http.get('daftar_pengaduan_saran/tambah/opsi/kelurahan/' + $scope.kecamatan_id.id).success(function(kel_data){
+				$scope.kelurahan_data = kel_data;
+			});	
+		});
+
 	$scope.opsi_pengaduan();
 	$scope.opsi_sumber_pengaduan();
 	$scope.show_all();
@@ -53,6 +83,7 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 
 	/* Define Open & Close Handler */
 
+
 	$scope.open_modal = function(modal_name, id) {
 		if(id == null) {
 			eval("$scope." + modal_name + "= true");
@@ -75,11 +106,54 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 	// 	});
 	// }
 
-	$scope.modal_edit_data = function(id) { 
-		$http.get('daftar_pengaduan_saran/edit/data/' + id).success(function(dpsed) {
-			$scope.daftar_pengaduan_saran_edit_data = dpsed;
-		});
-	}
+
+		$scope.opsi_pengaduan_kelurahan = function(id) {
+			$http.get('daftar_pengaduan_saran/tambah/opsi/kelurahan/' + id).success(function(kel_pengaduan) {
+				$scope.opsi_kel_pengaduan = kel_pengaduan;
+			});
+		}
+
+		$scope.opsi_pengaduan_kecamatan = function(id) {
+			$http.get('daftar_pengaduan_saran/tambah/opsi/kecamatan/' + id).success(function(kec_pengaduan) {
+				$scope.opsi_kec_pengaduan = kec_pengaduan;
+			});
+		}
+
+		$scope.opsi_pengaduan_kabupaten = function(id) {
+			$http.get('daftar_pengaduan_saran/tambah/opsi/kabupaten/' + id).success(function(kab_pengaduan) {
+				$scope.opsi_kab_pengaduan = kab_pengaduan;
+			});
+		}
+
+		$scope.opsi_pengaduan_propinsi = function(id) {
+			$http.get('daftar_pengaduan_saran/tambah/opsi/propinsi/' + id).success(function(prop_pengaduan) {
+				$scope.opsi_prop_pengaduan = prop_pengaduan;
+			});
+		}
+
+		$scope.modal_edit_data = function(id) { 
+			$http.get('daftar_pengaduan_saran/edit/data/' + id).success(function(dpsed) {
+				$scope.daftar_pengaduan_saran_edit_data = dpsed;
+			});
+		}
+
+		$scope.modal_tambah_pengaduan_data = function(id) {
+
+			$scope.loading_dialog = true;
+
+			$http.get('pengaduan/daftar_pengaduan_saran/data/' + id).success(function(dpdses) {
+				$scope.daftar_pengaduan_dan_saran_edit_data = dpdsed;
+
+				$scope.opsi_pemohon_propinsi($scope.entry_data_perizinan_data_awal_data.propinsi_pemohon);
+				$scope.opsi_pemohon_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_pemohon);
+				$scope.opsi_pemohon_kabupaten($scope.entry_data_perizinan_data_awal_data.kabupaten_pemohon);
+				$scope.opsi_pemohon_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_pemohon);
+
+			}).success(function() {
+				$scope.loading_dialog = false;
+			});
+
+		}
 
 	/* Define Tab Name */
 
