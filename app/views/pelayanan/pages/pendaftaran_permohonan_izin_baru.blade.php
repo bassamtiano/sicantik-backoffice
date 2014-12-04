@@ -140,9 +140,11 @@
 			<td class="c_status">@{{ pppib.c_paralel}}</td>
 			<td class="c_d_terima_berkas">@{{ pppib.d_terima_berkas }}</td>
 			<td class="c_aksi">
-				<a href ng-click="open_modal('modal_edit', pppib.id)" class="row-item ya">Edit</a>
+				<a href ng-click="open_modal('modal_edit', pppib.id)" class="row-item ya">Edit</a> 
 			</td>
-			<td class="c_verifikasi">@{{  }}</td>
+			<td class="c_verifikasi">
+				<a href ng-click="open_modal('modal_setujui', pppib.id)" class="row-item ya">Setujui</a>
+			</td>
 			
 		</tr>
 		<tr>
@@ -157,4 +159,5 @@
 @section('modal-content')
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_edit', ['modal_name' => 'modal_edit'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_tambah', ['modal_name' => 'modal_tambah'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_setujui', ['modal_name' => 'modal_setujui'])
 @stop

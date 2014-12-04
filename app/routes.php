@@ -540,7 +540,15 @@ Route::get('pelayanan/pendaftaran/permohonan_izin_baru/tambah/data', array('as' 
 
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru/tambah/data/{id}', array('as' => 'pelayanan_pendaftaran_permohonan_izin_tambah_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_tambah_data'));
 
+Route::post('pelayanan/pendaftaran/permohonan_izin_baru/setujui', array('as' => 'pelayanan_pendaftaran_permohonan_izin_setujui', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_setujui'));
+
+Route::get('pelayanan/pendaftaran/permohonan_izin_baru/setujui/data', array('as' => 'pelayanan_pendaftaran_permohonan_izin_setujui_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_setujui_data'));
+
+Route::get('pelayanan/pendaftaran/permohonan_izin_baru/setujui/data/{id}', array('as' => 'pelayanan_pendaftaran_permohonan_izin_setujui_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_setujui_data'));
+
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru/edit', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit'));
+
+Route::get('pelayanan/pendaftaran/permohonan_izin_baru/edit/data', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit_data'));
 
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit_data'));
 

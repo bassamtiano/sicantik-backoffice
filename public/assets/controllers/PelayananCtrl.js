@@ -132,6 +132,7 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 
 	$scope.modal_edit = false;
 	$scope.modal_tambah = false;
+	$scope.modal_setujui = false;
 
 	/* Define Open & Close Handler */
 
@@ -154,12 +155,19 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 			});
 		}
 
+		$scope.modal_setujui_data = function(id) {
+
+			$http.get('permohonan_izin_baru/setujui/data/' + id).success(function(pibsd) {
+				$scope.permohonan_izin_baru_setujui_data = pibsd;
+			});
+		}
+
 		$scope.modal_edit_data = function(id) {
 
 			$scope.loading_dialog = true;
 
 			$http.get('permohonan_izin_baru/edit/data/' + id).success(function(pibed) {
-			$scope.permohonan_izin_baru_edit_data = pibed;
+				$scope.permohonan_izin_baru_edit_data = pibed;
 
 				$scope.opsi_pemohon_propinsi($scope.permohonan_izin_baru_edit_data.propinsi_pemohon);
 				$scope.opsi_pemohon_kabupaten($scope.permohonan_izin_baru_edit_data.propinsi_pemohon, $scope.permohonan_izin_baru_edit_data.kabupaten_pemohon);
@@ -374,6 +382,26 @@ function PelayananPendaftaranPermohonanIzinBaruCtrl($scope, $http) {
 			}, 1);
 
 			$scope.show_all();
+		}
+
+	$scope.modal_setujui_submit = function() {
+
+			setTimeout(function() {
+				result = $('#target_setujui').contents().find('body').html(); // Nama Iframe
+				if(result == '') {
+					$scope.modal_setujui_submit();
+				}
+				else if(result === undefined) {
+					$scope.modal_setujui_submit();
+				}
+				else {
+					clear_iframe();
+					$scope.modal_setujui = false;
+				}
+
+			}, 1);
+			$scope.show_all();
+
 		}
 
 

@@ -2305,4 +2305,12 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 		}
 
+		public static function edit_data($data) {
+			Tmpermohonan::create($data);
+			return Tmpermohonan::where('d_selesai_proses', '=', $data['d_selesai_proses'])->where('c_pendaftaran', '=', $data['c_pendaftaran'])->get(['id']);
+
+		}
+
+
+
 	}

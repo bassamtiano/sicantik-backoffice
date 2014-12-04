@@ -316,7 +316,7 @@
                     &nbsp;
                 </div>
                 <div class="modal-footer-right">
-                    <button type="submit" class="button-red" >Simpan</button>
+                    <input type="submit" value="Simpan" class="button-green" ng-click="modal_edit_submit()"/>
                     <button type="submit" class="button-yellow" >Batal</button>
                 </div>
             </div>

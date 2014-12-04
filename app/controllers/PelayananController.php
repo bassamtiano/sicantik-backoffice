@@ -223,6 +223,61 @@
 			return $result;
 		}
 
+		public function pendaftaran_permohonan_izin_baru_setujui(){
+
+			// $data_permohonan = [
+			// 	'd_selesai_proses' => '2014-12-31',
+			// 	'c_pendaftaran' => '1'
+			// ];
+
+			// $tmpermohonan_id = Tmpermohonan::edit_data($data_permohonan);
+
+			Tmpermohonan::where('id', '=', Input::get('permohonan_id'))->update(['c_pendaftaran' => '1']);
+			// $tmpermohonan_id = Input::get('id');
+
+			// $tmpermohonan = Tmpermohonan::where('id', '=', $tmpermohonan_id)->update($data_permohonan);
+
+			// if($tmpermohonan == '1') {
+			// 	echo 'isi';
+			// }
+
+		}
+
+		public function pendaftaran_permohonan_izin_baru_setujui_data($id){
+			// return Tmpermohonan::fetch_with_tmpemohon_for_coba_data($id);
+			$data_permohonan_izin_baru = Tmpermohonan::fetch_with_tmpemohon_for_coba_data($id);
+
+			$result = [];
+
+			foreach($data_permohonan_izin_baru as $val => $key) {
+				foreach($key as $v => $k) {
+					$result[$v] = $k;
+				}
+			}
+
+			$data_syarat = [];
+			$persyaratan = Trsyaratperizinan::fetch_with_tmperizinan_for_izin_baru_edit_data($result['perizinan_id']);
+
+			foreach($persyaratan as $key => $pval) {
+
+				$terpenuhi = Trsyaratperizinan::fetch_with_tmpermohonan_for_izin_baru_edit_data($id, $pval->id);
+				if($pval->status == '1') {
+					$status = 'Wajib';
+				}
+				else if($pval->status == '2') {
+					$status = 'Tidak Wajib';
+				}
+
+				$wrapper = ['id_persyaratan' => $pval->id, 'persyaratan' => $pval->v_syarat, 'urut' => $pval->i_urut, 'status' => $status, 'terpenuhi' => $terpenuhi];
+
+				array_push($data_syarat, $wrapper);
+			}
+
+			$result['syarat'] = $data_syarat;
+			
+			return $result;
+		}
+
 		public function pendaftaran_permohonan_izin_baru_edit() {
 
 			$data_permohonan = [
