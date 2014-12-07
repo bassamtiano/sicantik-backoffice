@@ -2,7 +2,7 @@
     <div class="modal" ng-show={{ $modal_name }}>
 
         <div class="modal-container large">
-            <div class="modal-header update">
+            <div class="modal-header insert">
                 <h2>Input Data Perusahaan</h2><a class="button-close" href ng-click="close_modal('modal_tambah_perusahaan')">X</a>
             </div>
 
@@ -23,7 +23,7 @@
 
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Nomor Registrasi</div>
-                                    <div class="content-form-input"><input name="no_reg"type="text" value="" /></div>
+                                    <div class="content-form-input"><input name="no_reg"type="text" value=""/></div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">NPWP</div>
@@ -31,11 +31,11 @@
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Nama Perusahaan</div>
-                                    <div class="content-form-input"><input name="perusahaan" type="text" value="" /></div>
+                                    <div class="content-form-input"><input name="perusahaan" type="text" value=""/></div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Nomor Telepon</div>
-                                    <div class="content-form-input"><input name="tel" type="text" value="" /></div>
+                                    <div class="content-form-input"><input name="tel" type="text" value=""/></div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Jenis Kegiatan</div>

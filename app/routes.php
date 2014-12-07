@@ -574,6 +574,10 @@ Route::get('pelayanan/pendaftaran/perpanjangan_izin/edit/data/{id}', array('as' 
 
 Route::get('pelayanan/pendaftaran/daftar_ulang_izin', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin'));
 
+Route::get('pelayanan/pendaftaran/daftar_ulang_izin/daftar/data', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_data_daftar', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_daftar_data'));
+
+Route::get('pelayanan/pendaftaran/daftar_ulang_izin/daftar/data/{id}', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_data_daftar', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_insert_data'));
+
 Route::get('pelayanan/pendaftaran/daftar_ulang_izin/data', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_table_daftar_ulang_izin', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_data'));
 
 Route::get('pelayanan/pendaftaran/daftar_ulang_izin/data/{id}', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_data', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_data'));
@@ -585,6 +589,14 @@ Route::get('pelayanan/pendaftaran/daftar_ulang_izin/opsi_investasi', array('as' 
 Route::get('pelayanan/pendaftaran/daftar_ulang_izin/edit', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_edit', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_edit'));
 
 Route::get('pelayanan/pendaftaran/daftar_ulang_izin/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_edit_data'));
+
+Route::post('pelayanan/pendaftaran/daftar_ulang_izin/ubah', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_ubah', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_edit')); 
+
+Route::post('pelayanan/pendaftaran/daftar_ulang_izin/tambah', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_tambah', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_insert'));
+
+Route::post('pelayanan/pendaftaran/daftar_ulang_izin/selesai', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_selesai', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_finish'));
+
+Route::post('pelayanan/pendaftaran/daftar_ulang_izin/hapus', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_hapus', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_delete'));
 
 # Pelayanan / Pendaftaran / Data Pemohon (Belum)
 

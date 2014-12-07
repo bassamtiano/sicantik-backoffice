@@ -1,10 +1,82 @@
-<div class="modal" ng-show={{ $modal_name }}>
 
+<div class="modal" ng-show={{ $modal_name }}>
+    
+    <form id="form_insert" method="post" action="{{ URL::to('pelayanan/pendaftaran/daftar_ulang_izin/tambah')}}">
     <div class="modal-container large">
-        <div class="modal-header update">
-            <h2>Data Awal</h2><a class="button-close" href ng-click="close_modal('modal_tambah')">X</a>
+        <div class="modal-header insert">
+            <h2>Input Daftar Ulang Izin</h2><a ng-show="tab.data_awal_tab_data_pemohon" class="button-close" href ng-click="close_modal('modal_daftar')">X</a>
         </div>
         <div class="modal-body">
+            <div class="body-summary">
+                
+                <div class="summary-title">
+                    <h3>Data Perizinan</h3>
+                </div>
+                <div class="body-summary-left">
+                    <div class="summary-item">
+                        <div class="summary-item-label">
+                            Nama Izin
+                        </div>
+                        <div class="summary-item-value">
+                            @{{ daftar_ulang_izin_daftar_data.n_perizinan }}
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-item-label">
+                            Kelompok Izin
+                        </div>
+                        <div class="summary-item-value">
+                            @{{ daftar_ulang_izin_daftar_data.n_kelompok }}
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-item-label">
+                            No Pendaftaran Lama
+                        </div>
+                        <div class="summary-item-value">
+                            @{{ daftar_ulang_izin_daftar_data.pendaftaran_id }}
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-item-label">
+                            No Pendaftaran Baru
+                        </div>
+                        <div class="summary-item-value">
+                            @{{ daftar_ulang_izin_daftar_data.pendaftaran_id }}
+                        </div>
+                    </div>
+                </div>
+                <div class="body-summary-right">
+                    <div class="summary-item">
+                        <div class="summary-item-label">
+                            Jenis Permohonan
+                        </div>
+                        <div class="summary-item-value">
+                            @{{ daftar_ulang_izin_daftar_data.n_permohonan }}
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-item-label">
+                            Tanggal Daftar Ulang Izin
+                        </div>
+                        <div class="summary-item-value">
+                            <input type="text" name="d_daful" data-provide="datepicker" class="tanggal_input" ng-model=" daftar_ulang_izin_daftar_data.d_daftarulang " />
+                            <!-- <input type="date" value="@{{ daftar_ulang_izin_edit_data.d_daftarulang }}" /> -->
+                        </div>
+                    </div>
+                     <div class="summary-item">
+                        <div class="summary-item-label">
+                            No Surat Izin Lama
+                        </div>
+                        <div class="summary-item-value">
+                            @{{ daftar_ulang_izin_daftar_data.no_surat }}
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+            </div>
 
             <div class="body-tab-wrapper">
                 <div class="tab-nav">
@@ -19,34 +91,46 @@
                     <div class="tab-content" ng-show="tab.data_awal_tab_data_pemohon">
 
                         <div class="tab-content-left">
+                            <input type="hidden" name="id_izin" type="text" value="@{{ daftar_ulang_izin_daftar_data.perizinan_id }}" />
+                            <input type="hidden" name="id_lama" type="text" value="@{{ daftar_ulang_izin_daftar_data.permohonan_id }}" />
+                            <input type="hidden" name="id_pemohon" type="text" value="@{{ daftar_ulang_izin_daftar_data.id_pemohon }}" />
+                            <input type="hidden" name="id_perusahaan" type="text" value="@{{ daftar_ulang_izin_daftar_data.id_perusahaan }}" />
+                            
                             <div class="tab-content-form">
                                 <div class="content-form-label">Sumber Identitas</div>
-                                <div class="content-form-input">@{{ daftar_ulang_izin_edit_data.sumber_identitas }}</div>
+                                <div class="content-form-input">                                    
+                                    <select name="source" >
+                                        <option ng-repeat="a in items"  ng-if="a.selected == true" selected ng-value="a.source" >@{{ a.Title }}</option>
+                                        <option ng-repeat="a in items"  ng-if="a.selected == false" ng-value="a.source" >@{{ a.Title }}</option>
+                                   </select>
+                                </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">ID</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.no_referensi }}" /></div>
+                                <div class="content-form-input"><input name="ref_pemohon" type="text" value="@{{ daftar_ulang_izin_daftar_data.no_referensi }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Pemohon</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.n_pemohon }}" /></div>
+                                <div class="content-form-input"><input name="nama_pemohon"type="text" value="@{{ daftar_ulang_izin_daftar_data.n_pemohon }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">No Telp / HP</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.telp_pemohon }}" /></div>
+                                <div class="content-form-input"><input name="telpon" type="text" value="@{{ daftar_ulang_izin_daftar_data.telp_pemohon }}" /></div>
                             </div>
                             <div class="tab-content-form">
-                                <div class="content-form-label">Tanggal Terima Berkas</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.d_terima_berkas }}" /></div>
-                            </div>
-                            <div class="tab-content-form">
-                                <div class="content-form-label">Tanggal Peninjauan</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.tanggal_peninjauan }}" /></div>
+                                <div class="content-form-label">Tanggal Survey</div>
+                                <input type="text" name="d_surveys" data-provide="datepicker" class="tanggal_input"/>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Lokasi Izin</div>
                                 <div class="content-form-input">
-                                    <textarea rows="4">@{{ daftar_ulang_izin_edit_data.a_izin }}</textarea>
+                                    <textarea name="lokasi" rows="4">@{{ daftar_ulang_izin_daftar_data.a_izin }}</textarea>
+                                </div>
+                            </div>
+                            <div class="tab-content-form">
+                                <div class="content-form-label">Keterangan</div>
+                                <div class="content-form-input">
+                                    <textarea name="keterangan" rows="4">@{{ daftar_ulang_izin_daftar_data.keterangan }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -54,37 +138,49 @@
                             <div class="tab-content-form">
                                 <div class="content-form-label">Propinsi</div>
                                 <div class="content-form-input">
-                                    @{{ daftar_ulang_izin_edit_data.propinsi_pemohon }}
+                                    <select name="propinsi_pemohon" ng-model="prohon" ng-options="pmp.n_propinsi for pmp in portal_propinsi_pemohon_data track by pmp.id">
+                                        <option selected value="">@{{ daftar_ulang_izin_daftar_data.propinsi_pemohon }}</option>
+                                    </select>
+                                    
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kabupaten</div>
                                 <div class="content-form-input">
-                                    @{{ daftar_ulang_izin_edit_data.kabupaten_pemohon }}
+                                    <select name="kabupaten_pemohon" ng-model="kahon" ng-options="pkp.n_kabupaten for pkp in portal_kabupaten_pemohon_data track by pkp.id">
+                                        <option selected value="">@{{ daftar_ulang_izin_daftar_data.kabupaten_pemohon }}</option>
+                                    </select>
+                                    
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kecamatan</div>
                                 <div class="content-form-input">
-                                    @{{ daftar_ulang_izin_edit_data.kecamatan_pemohon }}
+                                    <select name="kecamatan_pemohon" ng-model="kecon" ng-options="pcp.n_kecamatan for pcp in portal_kecamatan_pemohon_data track by pcp.id">
+                                        <option selected value="">@{{ daftar_ulang_izin_daftar_data.kecamatan_pemohon }}</option>
+                                    </select>
+                                    
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kelurahan</div>
                                 <div class="content-form-input">
-                                    @{{ daftar_ulang_izin_edit_data.kelurahan_pemohon }}
+                                    <select name="kelurahan_pemohon" ng-model="kebon" ng-options="plp.n_kelurahan for plp in portal_kelurahan_pemohon_data track by plp.id">
+                                        <option selected value="">@{{ daftar_ulang_izin_daftar_data.kelurahan_pemohon }}</option>
+                                    </select>
+                                 
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Alamat Pemohon</div>
                                 <div class="content-form-input">
-                                    <textarea rows="4">@{{ daftar_ulang_izin_edit_data.a_pemohon }}</textarea>
+                                    <textarea name="al_pemohon" rows="4">@{{ daftar_ulang_izin_daftar_data.a_pemohon }}</textarea>
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Alamat Pemohon di Luar Negeri (Isikan jika ada)</div>
                                 <div class="content-form-input">
-                                    <textarea rows="4">@{{ daftar_ulang_izin_edit_data.a_pemohon_luar }}</textarea>
+                                    <textarea name="al_pemohon_luar" rows="4">@{{ daftar_ulang_izin_daftar_data.a_pemohon_luar }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -97,66 +193,75 @@
 
                             <div class="tab-content-form">
                                 <div class="content-form-label">NPWP</div>
-                                <div class="content-form-input">@{{ daftar_ulang_izin_edit_data.npwp }}</div>
+                                <div class="content-form-input"><input name="npwp_per" type="text" value="@{{ daftar_ulang_izin_daftar_data.npwp }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nama Perusahaan</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.nama_perusahaan }}" /></div>
+                                <div class="content-form-input"><input name="nama_per" type="text" value="@{{ daftar_ulang_izin_daftar_data.nama_perusahaan }}" /></div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Telp Perusahaan</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.i_telp_perusahaan }}" /></div>
+                                <div class="content-form-input"><input name="tel_per" type="text" value="@{{ daftar_ulang_izin_daftar_data.telp_perusahaan }}" /></div>
                             </div>
                             <div class="tab-content-form">
-                                <div class="content-form-label">Fax</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.fax_perusahaan }}" /></div>
+                                <div class="content-form-label">Alamat Perusahaan</div>
+                                <div class="content-form-input">
+                                    <textarea name="al_per" rows="4">@{{ daftar_ulang_izin_daftar_data.alamat_perusahaan }}</textarea>
+                                </div>
                             </div>
-                            <div class="tab-content-form">
-                                <div class="content-form-label">Email</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.email_perusahaan }}" /></div>
-                            </div>
-                            <div class="tab-content-form">
-                                <div class="content-form-label">Jenis Kegiatan</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.n_kegiatan }}" /></div>
-                            </div>
-                            <div class="tab-content-form">
-                                <div class="content-form-label">Jenis Investasi</div>
-                                <div class="content-form-input"><input type="text" value="@{{ daftar_ulang_izin_edit_data.n_investasi }}" /></div>
-                            </div>
-
                         </div>
 
                         <div class="tab-content-right">
                             <div class="tab-content-form">
-                                <div class="content-form-label">Propinsi</div>
+                                <div class="content-form-label">Provinsi</div>
                                 <div class="content-form-input">
-                                    @{{ daftar_ulang_izin_edit_data.propinsi_perusahaan }}
+                                    <select name="propinsi" ng-model="prope" ng-options="pjp.n_propinsi for pjp in portal_propinsi_data track by pjp.id">
+                                        <option selected value="">@{{daftar_ulang_izin_daftar_data.propinsi_perusahaan}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kabupaten</div>
                                 <div class="content-form-input">
-                                    @{{ daftar_ulang_izin_edit_data.kabupaten_perusahaan }}
+                                    <select name="kabupaten" ng-model="kabe" ng-options="kkp.n_kabupaten for kkp in portal_kabupaten_data track by kkp.id">
+                                        <option selected value=""> @{{ daftar_ulang_izin_daftar_data.kabupaten_perusahaan }}</option>
+                                    </select>
+                                   
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kecamatan</div>
                                 <div class="content-form-input">
-                                    @{{ daftar_ulang_izin_edit_data.kecamatan_perusahaan }}
+                                    <select name="kecamatan" ng-model="kece" ng-options="kkc.n_kecamatan for kkc in portal_kecamatan_data track by kkc.id">
+                                    <option selected value="">@{{ daftar_ulang_izin_daftar_data.kecamatan_perusahaan }}</option>                                
+                                    </select>
                                 </div>
                             </div>
                             <div class="tab-content-form">
                                 <div class="content-form-label">Kelurahan</div>
                                 <div class="content-form-input">
-                                    @{{ daftar_ulang_izin_edit_data.kelurahan_perusahaan }}
+                                    <select name="kelurahan" ng-model="kele" ng-options="kkl.n_kelurahan for kkl in portal_kelurahan_data track by kkl.id">
+                                        <option selected value="">@{{ daftar_ulang_izin_daftar_data.kelurahan_perusahaan }}</option>
+                                    </select>
+                                    
                                 </div>
                             </div>
                             <div class="tab-content-form">
-                                <div class="content-form-label">Alamat Perusahaan</div>
+                                <div class="content-form-label">Jenis Kegiatan</div>
                                 <div class="content-form-input">
-                                    <textarea rows="4">@{{ daftar_ulang_izin_edit_data.a_perusahaan }}</textarea>
+                                    <select name="kegiatan" class="form-option" ng-model="kegiatan_id" ng-options="duiok.id as duiok.n_kegiatan for duiok in daftar_ulang_izin_opsi_kegiatan">
+                                        <option value=""> @{{ daftar_ulang_izin_daftar_data.n_kegiatan }}</option>
+                                    </select>
                                 </div>
                             </div>
+                            <div class="tab-content-form">
+                                <div class="content-form-label">Jenis Investasi</div>
+                                <div class="content-form-input">
+                                    <select name="investasi" class="form-option" ng-model="investasi_id" ng-options="duioi.id as duioi.n_investasi for duioi in daftar_ulang_izin_opsi_investasi">
+                                        <option value=""> @{{ daftar_ulang_izin_daftar_data.n_investasi }}</option>
+                                    </select>
+                                </div>
+                            </div> 
                         </div>
 
                     </div>
@@ -192,11 +297,11 @@
                                     <th class="c_modal_status" >Status</th>
                                 </tr>
 
-                                <tr ng-repeat="syarat in entry_data_perizinan_data_awal_data.syarat">
+                                <tr ng-repeat="syarat in daftar_ulang_izin_daftar_data.syarat">
                                     <td class="c_modal_no" >@{{$index+1}}</td>
                                     <td class="c_modal_syarat" >@{{ syarat.persyaratan }}</td>
                                     <td class="c_modal_terpenuhi" >
-                                        <input type="checkbox" ng-model="syarat.terpenuhi">
+                                        <input type="checkbox" name="syarat_perizinan_id[]" ng-value="@{{ syarat.id_persyaratan }}" ng-model="syarat.id_persyaratan">
                                     </td>
                                     <td class="c_modal_status" >@{{ syarat.status }}</td>
                                 </tr>
@@ -206,21 +311,19 @@
 
                 </div>
             </div>
-
-            <!-- <ul ng-repeat="syarat in entry_data_perizinan_data_awal_data.syarat">
-                <li>@{{ syarat.persyaratan }} , @{{ syarat.status }}, @{{ syarat.terpenuhi }}, urutan @{{ syarat.urut }}</li>
-            </ul> -->
-
         </div>
+
         <div class="modal-footer">
             <div class="modal-footer-left">
                 &nbsp;
             </div>
             <div class="modal-footer-right">
-                <button type="submit" class="button-red" >Simpan</button>
-                <button type="submit" class="button-yellow" >Batal</button>
+                <button ng-show="tab.data_awal_tab_data_pemohon" ng-click="modal_data_daftar_ulang_tambah_submit()" type="submit" class="button-green" >Simpan</button>
+                <a ng-show="tab.data_awal_tab_data_pemohon" class="btn button-red" href ng-click="close_modal('modal_daftar')" >Batal</a>
             </div>
         </div>
 
     </div>
+</form>
+    <iframe id="target_insert" name="target_insert" style="visibility:hidden; width:100; height:100; background:#fff;"></iframe>
 </div>

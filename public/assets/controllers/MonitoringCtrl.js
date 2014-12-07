@@ -1,4 +1,4 @@
-var fetch_limit = 15;
+var fetch_limit = 10;
 $app = angular.module('sicantik_backoffice',[])
 
 .controller('MonitoringPerJenisPerizinanCtrl', ['$scope', '$http',

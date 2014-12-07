@@ -1,9 +1,9 @@
-<div class="modal" ng-show={{ $modal_name }}>
-    <form method="post" action="{{ URL::to('pelayanan/pendaftaran/data_perusahaan/ubah') }}">
-
-    <div class="modal-container large">
-        <div class="modal-header update">
-            <h2>Data Awal</h2><a class="button-close" href ng-click="close_modal('modal_edit')">X</a>
+<form id="form_edit" method="post" target="target_ubah_perusahaan" action="{{ URL::to('pelayanan/pendaftaran/data_perusahaan/ubah') }}">
+    <div class="modal" ng-show={{ $modal_name }}>
+            
+        <div class="modal-container large">
+            <div class="modal-header update">
+            <h2>Edit Data Perusahaan</h2><a class="button-close" href ng-click="close_modal('modal_edit')">X</a>
         </div>
         <div class="modal-body">
 
@@ -18,7 +18,7 @@
                     <div class="tab-content" ng-show="tab.data_awal_tab_data_perusahaan">
 
                         <div class="tab-content-left">
-    <input type="hidden" name="id_perusahaan" value="@{{ data_perusahaan_edit_data.id }}">
+                            <input type="hidden" name="id_perusahaan" value="@{{ data_perusahaan_edit_data.id }}">
                             <div class="tab-content-form">
                                 <div class="content-form-label">Nomor Registrasi</div>
                                 <div class="content-form-input"><input name="no_reg" type="text" value="@{{ data_perusahaan_edit_data.no_reg_perusahaan}}" /></div>
@@ -48,7 +48,7 @@
                                 <div class="content-form-label">Propinsi</div>
                                 <div class="content-form-input">
                                     <select name="propinsi" ng-model="prope" ng-options="pjp.n_propinsi for pjp in portal_propinsi_data track by pjp.id">
-                                        <option selected value="@{{ data_perusahaan_edit_data.perusahaan_propinsi }}">@{{ data_perusahaan_edit_data.n_propinsi }}</option>
+                                        <option selected value="">@{{ data_perusahaan_edit_data.n_propinsi }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                 <div class="content-form-label">Kabupaten</div>
                                 <div class="content-form-input">
                                     <select name="kabupaten" ng-model="kabe" ng-options="kkp.n_kabupaten for kkp in portal_kabupaten_data track by kkp.id">
-                                        <option selected value="@{{ data_perusahaan_edit_data.perusahaan_kabupaten }}">@{{ data_perusahaan_edit_data.n_kabupaten }}</option>
+                                        <option selected value="">@{{ data_perusahaan_edit_data.n_kabupaten }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                 <div class="content-form-label">Kecamatan</div>
                                 <div class="content-form-input">
                                     <select name="kecamatan" ng-model="kece" ng-options="kkc.n_kecamatan for kkc in portal_kecamatan_data track by kkc.id">
-                                    <option selected value="@{{ data_perusahaan_edit_data.perusahaan_kecamatan }}">@{{ data_perusahaan_edit_data.n_kecamatan }}</option>
+                                    <option selected value="">@{{ data_perusahaan_edit_data.n_kecamatan }}</option>
 <!--                                         <option ng-repeat="okec in opsi_kecer"  ng-if="okec.selected == true" selected value="@{{ okec.id }}" >@{{ okec.n_kecamatan }}</option>
                                         <option ng-repeat="okec in opsi_kecer"  ng-if="okec.selected == false" value="@{{ okec.id }}" >@{{ okec.n_kecamatan }}</option> -->
                                     </select>
@@ -74,7 +74,7 @@
                                 <div class="content-form-label">Kelurahan</div>
                                 <div class="content-form-input">
                                     <select name="kelurahan" ng-model="kele" ng-options="kkl.n_kelurahan for kkl in portal_kelurahan_data track by kkl.id">
-                                        <option selected value="@{{ data_perusahaan_edit_data.perusahaan_kelurahan }}">@{{ data_perusahaan_edit_data.n_kelurahan }}</option>
+                                        <option selected value="">@{{ data_perusahaan_edit_data.n_kelurahan }}</option>
                                         <!--  <option ng-repeat="okel in opsi_keler"  ng-if="okel.selected == true" selected value="@{{ okel.id }}" >@{{ okel.n_kelurahan }}</option>
                                         <option ng-repeat="okel in opsi_keler"  ng-if="okel.selected == false" value="@{{ okel.id }}" >@{{ oke.n_kelurahan }}</option>
  -->                                    </select>
@@ -106,23 +106,17 @@
 
                 </div>
             </div>
-
-            <!-- <ul ng-repeat="syarat in entry_data_perizinan_data_awal_data.syarat">
-                <li>@{{ syarat.persyaratan }} , @{{ syarat.status }}, @{{ syarat.terpenuhi }}, urutan @{{ syarat.urut }}</li>
-            </ul> -->
-
         </div>
         <div class="modal-footer">
             <div class="modal-footer-left">
                 &nbsp;
             </div>
             <div class="modal-footer-right">
-                 <button type="submit" class="button-green" >Simpan</button>
+                 <button type="submit" class="button-green" ng-click="modal_data_perusahaan_ubah_submit()">Simpan</button>
                 <a class="btn button-red" href ng-click="close_modal('modal_edit')">Batal</a>
             </div>
         </div>
-
+            <iframe id="target_ubah_perusahaan" name="target_ubah_perusahaan" style="visibility:hidden; width:100; height:100; background:#fff;"></iframe> 
         </div>
-    </form>
- <iframe id="target_post" name="target_edit" style="visibility:hidden; width:100; height:100; background:#fff;"></iframe> 
-</div>
+    </div>
+</form>

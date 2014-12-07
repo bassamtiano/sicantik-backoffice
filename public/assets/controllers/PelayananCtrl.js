@@ -359,9 +359,31 @@ $app = angular.module('sicantik_backoffice', [])
 
 .controller('PelayananPendaftaranPermohonanDaftarUlangIzinCtrl', ['$scope', '$http',
 	function ($scope, $http){
+			$scope.prope = "";
+		    $scope.kabe = "";
+		    $scope.kece = "";
+		    $scope.kele = "";
+
+		    $scope.prohon = "";
+		    $scope.kahon = "";
+		    $scope.kecon = "";
+		    $scope.kebon = "";
+
+		    $scope.items = [
+		   {source: 'KTP', Title: 'KTP', selected: true},
+		   {source: 'SIM', Title: 'SIM', selected: false},
+	   	   {source: 'PASSPORT', Title: 'PASSPORT', selected:false},
+			];
+
 				$scope.show_all = function(){
 					$http.get('daftar_ulang_izin/data').success(function(ppdui_data){
 						$scope.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_data = ppdui_data;
+					});
+				}
+
+				$scope.show_daftar = function() {
+					$http.get('daftar_ulang_izin/daftar/data').success(function(df_data){
+						$scope.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_daftar_data = df_data;
 					});
 				}
 
@@ -393,29 +415,136 @@ $app = angular.module('sicantik_backoffice', [])
 				$scope.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_data;
 
 				/* # Modal ==================================================================================================== */
+			$scope.get_propinsi = function() {
+				$scope.aaa = $scope.propinsi_perusahaan;
+				$http.get('data_perusahaan/opsi/perusahaan_propinsi').success(function(pjp_data) {
+					$scope.portal_propinsi_data = pjp_data;
+				});
+			}
 
+			$scope.get_propinsi();
+
+
+			$scope.$watch('prope', function() {
+				$http.get('data_perusahaan/opsi/perusahaan_kabupaten/' + $scope.prope.id ).success(function(kab_data) {
+					$scope.portal_kabupaten_data = kab_data;
+				});
+				$scope.kabe = "Pilih Kabupaten";
+				$scope.kece = "Pilih Kecamatan";
+			});
+
+			$scope.$watch('kabe', function(){
+				$http.get('data_perusahaan/opsi/perusahaan_kecamatan/' + $scope.kabe.id).success(function(kec_data){
+					$scope.portal_kecamatan_data = kec_data;
+				});
+				$scope.kece = "Pilih Kecamatan";		
+			});
+
+			$scope.$watch('kece', function(){
+				$http.get('data_perusahaan/opsi/perusahaan_kelurahan/' + $scope.kece.id).success(function(kel_data){
+					$scope.portal_kelurahan_data = kel_data;
+				});
+			});
+
+			$scope.get_propinsi_pemohon = function() {
+				$scope.aaa = $scope.propinsi_perusahaan;
+				$http.get('data_perusahaan/opsi/perusahaan_propinsi').success(function(pjp_data) {
+					$scope.portal_propinsi_pemohon_data = pjp_data;
+				});
+			}
+
+			$scope.get_propinsi_pemohon();
+
+
+			$scope.$watch('prohon', function() {
+				$http.get('data_perusahaan/opsi/perusahaan_kabupaten/' + $scope.prohon.id ).success(function(kab_data) {
+					$scope.portal_kabupaten_pemohon_data = kab_data;
+				});
+				$scope.kabe = "Pilih Kabupaten";
+				$scope.kece = "Pilih Kecamatan";
+			});
+
+			$scope.$watch('kahon', function(){
+				$http.get('data_perusahaan/opsi/perusahaan_kecamatan/' + $scope.kahon.id).success(function(kec_data){
+					$scope.portal_kecamatan_pemohon_data = kec_data;
+				});
+				$scope.kece = "Pilih Kecamatan";		
+			});
+
+			$scope.$watch('kecon', function(){
+				$http.get('data_perusahaan/opsi/perusahaan_kelurahan/' + $scope.kecon.id).success(function(kel_data){
+					$scope.portal_kelurahan_pemohon_data = kel_data;
+				});
+			});
 				/* Define Modal Name */
 
 				$scope.modal_edit = false;
-				$scope.modal_data_awal = false;
-
+				$scope.modal_pilih = false;
+				$scope.modal_daftar = false;
+				$scope.modal_selesai = false;
+				$scope.modal_hapus = false;
 				/* Define Open & Close Handler */
 
-				$scope.open_modal = function(modal_name, id) {
-
-					eval("$scope." + modal_name + "= true");
-					eval("$scope." + modal_name + "_data(" + id + ")");
+				$scope.modal_pilih_data = function() {
+					$scope.show_daftar();
 				}
 
+				$scope.open_modal = function(modal_name, id) {
+					if(id == null) {
+						eval("$scope." + modal_name + "= true");
+						// $scope.close_modal_pilih();
+					}
+					else {
+						eval("$scope." + modal_name + "= true");
+						eval("$scope." + modal_name + "_data(" + id + ")");
+					}
+				}
+
+				$scope.open_modal_pilih = function(id){
+					if(id == null) {
+						eval("$scope.modal_daftar= false");
+						// $scope.close_modal_pilih();
+					}
+					else {
+						eval("$scope.modal_daftar= true");
+						eval("$scope.modal_daftar_data(" + id + ")");
+						eval("$scope.modal_pilih= false");
+					}
+				} 
+
+
+				// $scope.close_modal_pilih = function(){
+				// 	eval("$scope.modal_pilih= false");
+				// }
 				$scope.close_modal = function(modal_name) {
 					eval("$scope." + modal_name + "= false");
 				}
+
+
 
 				/*  Construct Modal Function */
 
 				$scope.modal_edit_data = function(id) {
 					$http.get('daftar_ulang_izin/edit/data/' + id).success(function(duied) {
 						$scope.daftar_ulang_izin_edit_data = duied;
+					});
+				}
+
+				$scope.modal_daftar_data = function(id){
+					$http.get('daftar_ulang_izin/daftar/data/' + id).success(function(m){
+						$scope.daftar_ulang_izin_daftar_data = m;
+					});
+				}
+
+				$scope.modal_selesai_data = function(id){
+					$http.get('daftar_ulang_izin/edit/data/' + id).success(function(duid) {
+						$scope.daftar_ulang_izin_edit_data = duid;
+					});
+				}
+
+				$scope.modal_hapus_data = function(id){
+					$http.get('daftar_ulang_izin/edit/data/' + id).success(function(dued) {
+						$scope.daftar_ulang_izin_edit_data = dued;
 					});
 				}
 
@@ -448,6 +577,78 @@ $app = angular.module('sicantik_backoffice', [])
 						$scope.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_data = ppdui_data;
 					});
 				}
+
+				$scope.modal_data_daftar_ulang_ubah_submit = function() {
+					setTimeout(function() {
+						result = $('#target_edit').contents().find('body').html(); // Nama Iframe
+						if(result == '') {
+							$scope.modal_data_daftar_ulang_ubah_submit();
+						}
+						else if(result === undefined) {
+							$scope.modal_data_daftar_ulang_ubah_submit();
+						}
+						else {
+							clear_iframe('target_edit');
+							$scope.modal_edit = false;
+							$scope.show_all();
+						}
+
+					}, 1);
+				}
+				
+				$scope.modal_data_daftar_ulang_tambah_submit = function() {
+					setTimeout(function() {
+						result = $('#target_insert').contents().find('body').html(); // Nama Iframe
+						if(result == '') {
+							$scope.modal_data_daftar_ulang_tambah_submit();
+						}
+						else if(result === undefined) {
+							$scope.modal_data_daftar_ulang_tambah_submit();
+						}
+						else {
+							clear_iframe('target_insert');
+							$scope.modal_daftar = false;
+							$scope.show_all();
+						}
+
+					}, 1);
+				}
+
+				$scope.modal_data_daftar_ulang_selesai_submit = function() {
+					setTimeout(function() {
+						result = $('#target_selesai').contents().find('body').html(); // Nama Iframe
+						if(result == '') {
+							$scope.modal_data_daftar_ulang_selesai_submit();
+						}
+						else if(result === undefined) {
+							$scope.modal_data_daftar_ulang_selesai_submit();
+						}
+						else {
+							clear_iframe();
+							$scope.modal_selesai = false;
+						}
+						$scope.show_all();
+					}, 1);
+				}
+
+				$scope.modal_data_daftar_ulang_hapus_submit = function() {
+					setTimeout(function() {
+						result = $('#target_delete').contents().find('body').html(); // Nama Iframe
+						if(result == '') {
+							$scope.modal_data_daftar_ulang_hapus_submit();
+						}
+						else if(result === undefined) {
+							$scope.modal_data_daftar_ulang_hapus_submit();
+						}
+						else {
+							clear_iframe();
+							$scope.modal_hapus = false;
+							
+						}
+					$scope.show_all();
+					}, 1);
+				}
+
 	}
 ])
 
@@ -600,7 +801,7 @@ $app = angular.module('sicantik_backoffice', [])
 			/* # Modal ==================================================================================================== */
 			
 			$scope.get_propinsi = function() {
-				$scope.aaa = $scope.propinsi_pemohon;
+				$scope.aaa = $scope.propinsi_perusahaan;
 				$http.get('data_perusahaan/opsi/perusahaan_propinsi').success(function(pjp_data) {
 					$scope.portal_propinsi_data = pjp_data;
 				});
@@ -653,7 +854,7 @@ $app = angular.module('sicantik_backoffice', [])
 			/* Define Modal Name */
 
 			$scope.modal_edit = false;
-			$scope.modal_tambah = false;
+			$scope.modal_tambah_perusahaan = false;
 
 			/* Define Open & Close Handler */
 
@@ -748,11 +949,28 @@ $app = angular.module('sicantik_backoffice', [])
 						else {
 							clear_iframe('target_tambah_perusahaan');
 							$scope.modal_tambah_perusahaan = false;
+							$scope.show_all();
+						}
+
+					}, 1);	
+			}
+
+			$scope.modal_data_perusahaan_ubah_submit = function() {
+					setTimeout(function() {
+						result = $('#target_ubah_perusahaan').contents().find('body').html(); // Nama Iframe
+						if(result == '') {
+							$scope.modal_data_perusahaan_ubah_submit();
+						}
+						else if(result === undefined) {
+							$scope.modal_data_perusahaan_ubah_submit();
+						}
+						else {
+							clear_iframe('target_ubah_perusahaan');
+							$scope.modal_edit = false;
+							$scope.show_all();
 						}
 
 					}, 1);
-
-					$scope.show_all();
 			}
 	}
 ])

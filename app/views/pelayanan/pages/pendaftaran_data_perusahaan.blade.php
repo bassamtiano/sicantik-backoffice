@@ -26,7 +26,6 @@
 			width: 15%;
 			text-align: center;
 		}
-
 	</style>
 
 @stop
@@ -49,15 +48,6 @@
 			<div class="form-item">
 				<button ng-click="open_modal('modal_tambah_perusahaan')" style="width='30px'">Tambah Perusahaan</button>
 			</div>
-			<!-- <div class="form-item wide">
-				<select class="form-option" ng-model="pengaduan_id" ng-options="pdpsop.sts_pesan_id as pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan">
-					<option value="">Pilih Opsi Pengaduan</option>
-				</select>
-			</div>
-			
-			<div class="form-item">
-				<input type="submit" value="Filter">
-			</div> -->
 		</div>
 	</form>
 @stop
