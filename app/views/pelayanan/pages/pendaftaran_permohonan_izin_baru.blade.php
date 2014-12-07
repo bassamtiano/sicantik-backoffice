@@ -36,7 +36,12 @@
 		}
 
 		.c_aksi {
-			width: 10%;
+			width: 5%;
+			text-align: center;
+		}
+
+		.c_aksi1 {
+			width: 5%;
 			text-align: center;
 		}
 
@@ -64,7 +69,7 @@
 	<form ng-submit="filter_pelayanan()">
 		<div class="table-form-content">
             <div class="form-item wide">
-				<!-- <input type="text" placeholder="Status Perizinan" ng-model="date.id"> -->
+				
 				<select class="form-option" ng-model="perizinan_id" ng-options="pibop.id as pibop.n_perizinan for pibop in permohonan_izin_baru_opsi_perizinan">
 					
 				</select>
@@ -121,8 +126,9 @@
 			<th class="c_n_perizinan" ng-click="predicate='n_perizinan'; reverse=!reverse">Jenis Izin</th>
 			<th class="c_status" ng-click="predicate='status'; reverse=!reverse">Status</th>
 			<th class="c_d_terima_berkas" ng-click="predicate='d_terima_berkas'; reverse=!reverse">Tgl Permohonan</th>
-			<th class="c_aksi">Aksi</th>
-			<th class="c_verifikasi">Verifikasi</th>
+			<th class="c_aksi">Edit</th>
+			<th class="c_aksi1">Hapus</th>
+			<th class="c_verifikasi">Setujui</th>
 		</tr>
 	</table>
 
@@ -140,7 +146,10 @@
 			<td class="c_status">@{{ pppib.c_paralel}}</td>
 			<td class="c_d_terima_berkas">@{{ pppib.d_terima_berkas }}</td>
 			<td class="c_aksi">
-				<a href ng-click="open_modal('modal_edit', pppib.id)" class="row-item ya">Edit</a> 
+				<a href ng-click="open_modal('modal_edit', pppib.id)" class="row-item ya">Edit</a>
+			</td>
+			<td class="c_aksi1">
+				<a href ng-click="open_modal('modal_hapus', pppib.id)" class="row-item tidak">Hapus</a>
 			</td>
 			<td class="c_verifikasi">
 				<a href ng-click="open_modal('modal_setujui', pppib.id)" class="row-item ya">Setujui</a>
@@ -160,4 +169,5 @@
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_edit', ['modal_name' => 'modal_edit'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_tambah', ['modal_name' => 'modal_tambah'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_setujui', ['modal_name' => 'modal_setujui'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_izin_baru_modal_hapus', ['modal_name' => 'modal_hapus'])
 @stop

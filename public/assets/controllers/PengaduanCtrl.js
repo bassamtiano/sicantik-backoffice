@@ -15,51 +15,22 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 		});
 	}
 
-	$scope.opsi_pengaduan = function(){ 
-		$http.get('daftar_pengaduan_saran/opsi').success(function(pdpsop_data) { 
+	$scope.opsi_status_pengaduan = function(){ 
+		$http.get('daftar_pengaduan_saran/opsi_status_pengaduan').success(function(pdpsop_data) { 
 			$scope.pengaduan_daftar_pengaduan_saran_opsi_pengaduan = pdpsop_data;
 		});
 	}
 
-	$scope.opsi_sumber_pengaduan = function(){ 
+	$scope.opsi_sumber_pengaduan = function(){
 		$http.get('daftar_pengaduan_saran/opsi_sumber_pengaduan').success(function(pdpsosp_data) { 
 			$scope.pengaduan_daftar_pengaduan_saran_opsi_sumber_pengaduan = pdpsosp_data;
 		});
 	}
 
-	$scope.get_opsi_propinsi = function() {
-		$http.get('daftar_pengaduan_saran/tambah/opsi/propinsi').success(function(prop_data) {
-			$scope.propinsi_data = prop_data;
-		});
-	}
-
-	$scope.get_opsi_propinsi();
-
-		$scope.$watch('propinsi_id', function() {
-			$http.get('daftar_pengaduan_saran/tambah/opsi/kabupaten/' + $scope.propinsi_id.id).success(function(kab_data) {
-				$scope.kabupaten_data = kab_data;
-			});
-
-			$scope.kecamatan_data = "";
-			$scope.kelurahan_data = "";
-		});
-
-		$scope.$watch('kabupaten_id', function(){
-			$http.get('daftar_pengaduan_saran/tambah/opsi/kecamatan/' + $scope.kabupaten_id.id).success(function(kec_data){
-				$scope.kecamatan_data = kec_data;
-			});
-			$scope.kecamatan_data = "";		
-		});
-
-		$scope.$watch('kecamatan_id', function(){
-			$http.get('daftar_pengaduan_saran/tambah/opsi/kelurahan/' + $scope.kecamatan_id.id).success(function(kel_data){
-				$scope.kelurahan_data = kel_data;
-			});	
-		});
-
-	$scope.opsi_pengaduan();
-	$scope.opsi_sumber_pengaduan();
 	$scope.show_all();
+	$scope.opsi_status_pengaduan();
+	$scope.opsi_sumber_pengaduan();
+	
 
 	/* # Filter Data ============================================================================================== */
 	
@@ -68,11 +39,22 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 	$scope.displayed = fetch_limit;
 	
 
-	$scope.loadMore = function() {
+	// $scope.loadMore = function() {
+	// 	$scope.displayed += fetch_limit;
+	// }
+	$scope.loadMore = function(){
 		$scope.displayed += fetch_limit;
+		$scope.pengaduan_daftar_pengaduan_saran_data.length - 5;
 	}
 
 	$scope.pengaduan_daftar_pengaduan_saran_data;
+
+	$scope.select_iseng = 'KTP';
+
+		$scope.items = [
+		   {source: 'Ya', Title: 'Ya', selected: true},
+		   {source: 'Belum', Title: 'Belum', selected: false},
+		];
 
 	/* # Modal ==================================================================================================== */
 
@@ -84,14 +66,19 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 	/* Define Open & Close Handler */
 
 
+	// $scope.open_modal = function(modal_name, id) {
+	// 	if(id == null) {
+	// 		eval("$scope." + modal_name + "= true");
+	// 	}
+	// 	else {
+	// 		eval("$scope." + modal_name + "= true");
+	// 		eval("$scope." + modal_name + "_data(" + id + ")");	
+	// 	}
+	// }
 	$scope.open_modal = function(modal_name, id) {
-		if(id == null) {
-			eval("$scope." + modal_name + "= true");
-		}
-		else {
-			eval("$scope." + modal_name + "= true");
-			eval("$scope." + modal_name + "_data(" + id + ")");	
-		}
+
+		eval("$scope." + modal_name + "= true");
+		eval("$scope." + modal_name + "_data(" + id + ")");
 	}
 
 	$scope.close_modal = function(modal_name) {
@@ -106,28 +93,9 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 	// 	});
 	// }
 
-
-		$scope.opsi_pengaduan_kelurahan = function(id) {
-			$http.get('daftar_pengaduan_saran/tambah/opsi/kelurahan/' + id).success(function(kel_pengaduan) {
-				$scope.opsi_kel_pengaduan = kel_pengaduan;
-			});
-		}
-
-		$scope.opsi_pengaduan_kecamatan = function(id) {
-			$http.get('daftar_pengaduan_saran/tambah/opsi/kecamatan/' + id).success(function(kec_pengaduan) {
-				$scope.opsi_kec_pengaduan = kec_pengaduan;
-			});
-		}
-
-		$scope.opsi_pengaduan_kabupaten = function(id) {
-			$http.get('daftar_pengaduan_saran/tambah/opsi/kabupaten/' + id).success(function(kab_pengaduan) {
-				$scope.opsi_kab_pengaduan = kab_pengaduan;
-			});
-		}
-
-		$scope.opsi_pengaduan_propinsi = function(id) {
-			$http.get('daftar_pengaduan_saran/tambah/opsi/propinsi/' + id).success(function(prop_pengaduan) {
-				$scope.opsi_prop_pengaduan = prop_pengaduan;
+		$scope.modal_tambah_data = function(id) { 
+			$http.get('daftar_pengaduan_saran/tambah/data/' + id).success(function(dpstd) {
+				$scope.daftar_pengaduan_saran_tambah_data = dpstd;
 			});
 		}
 
@@ -135,25 +103,75 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 			$http.get('daftar_pengaduan_saran/edit/data/' + id).success(function(dpsed) {
 				$scope.daftar_pengaduan_saran_edit_data = dpsed;
 			});
+			// $scope.loading_dialog = true;
+
+			// $http.get('daftar_pengaduan_saran/edit/data/' + id).success(function(dpsed) {
+			// 	$scope.daftar_pengaduan_saran_edit_data = dpsed;
+
+			// 	$scope.opsi_pengaduan_propinsi($scope.daftar_pengaduan_saran_edit_data.propinsi);
+			// 	$scope.opsi_pengaduan_kecamatan($scope.daftar_pengaduan_saran_edit_data.kecamatan);
+			// 	$scope.opsi_pengaduan_kabupaten($scope.daftar_pengaduan_saran_edit_data.kabupaten);
+			// 	$scope.opsi_pengaduan_kelurahan($scope.daftar_pengaduan_saran_edit_data.kelurahan);
+
+			// }).success(function() {
+			// 	$scope.loading_dialog = false;
+			
+
 		}
 
-		$scope.modal_tambah_pengaduan_data = function(id) {
+		$scope.opsi_pengaduan_propinsi = function(id) {
+			$http.get('daftar_pengaduan_saran/opsi/propinsi/' + id).success(function(prop_pengaduan) {
+				$scope.opsi_prop_pengaduan = prop_pengaduan;
+			});
+		}
 
-			$scope.loading_dialog = true;
+		$scope.opsi_pengaduan_kabupaten = function(id, id_propinsi) {
+			$http.get('daftar_pengaduan_saran/opsi/kabupaten/' + id_propinsi + '/' + id).success(function(kab_pengaduan) {
+				$scope.opsi_kab_pengaduan = kab_pengaduan;
+				});
+		}
 
-			$http.get('pengaduan/daftar_pengaduan_saran/data/' + id).success(function(dpdses) {
-				$scope.daftar_pengaduan_dan_saran_edit_data = dpdsed;
+		$scope.opsi_pengaduan_kecamatan = function(id, id_kabupaten) {
+			$http.get('daftar_pengaduan_saran/opsi/kecamatan/' + id_kabupaten + '/' + id).success(function(kec_pengaduan) {
+				$scope.opsi_kec_pengaduan = kec_pengaduan;
+			});
+		}
 
-				$scope.opsi_pemohon_propinsi($scope.entry_data_perizinan_data_awal_data.propinsi_pemohon);
-				$scope.opsi_pemohon_kecamatan($scope.entry_data_perizinan_data_awal_data.kecamatan_pemohon);
-				$scope.opsi_pemohon_kabupaten($scope.entry_data_perizinan_data_awal_data.kabupaten_pemohon);
-				$scope.opsi_pemohon_kelurahan($scope.entry_data_perizinan_data_awal_data.kelurahan_pemohon);
+		$scope.opsi_pengaduan_kelurahan = function(id, id_kecamatan) {
+			$http.get('daftar_pengaduan_saran/opsi/kelurahan/' + id_kecamatan + '/' + id).success(function(kel_pengaduan) {
+				$scope.opsi_kel_pengaduan = kel_pengaduan;
+			});
+		}
 
-			}).success(function() {
-				$scope.loading_dialog = false;
+		$scope.get_opsi_propinsi = function() {
+			$http.get('daftar_pengaduan_saran/opsi/propinsi').success(function(prop_data) {
+				$scope.propinsi_data = prop_data;
+			});
+		}
+
+		$scope.get_opsi_propinsi();
+
+		$scope.$watch('propinsi_id', function() {
+			$http.get('daftar_pengaduan_saran/opsi/kabupaten/' + $scope.propinsi_id.id).success(function(kab_data) {
+				$scope.kabupaten_data = kab_data;
 			});
 
-		}
+			$scope.kecamatan_data = "";
+			$scope.kelurahan_data = "";
+		});
+
+		$scope.$watch('kabupaten_id', function(){
+			$http.get('daftar_pengaduan_saran/opsi/kecamatan/' + $scope.kabupaten_id.id).success(function(kec_data){
+				$scope.kecamatan_data = kec_data;
+			});
+			$scope.kecamatan_data = "";		
+		});
+
+		$scope.$watch('kecamatan_id', function(){
+			$http.get('daftar_pengaduan_saran/opsi/kelurahan/' + $scope.kecamatan_id.id).success(function(kel_data){
+				$scope.kelurahan_data = kel_data;
+			});	
+		});
 
 	/* Define Tab Name */
 
@@ -163,9 +181,9 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 	$scope.tab.tambah_data_tab_pesan_pengaduan = false;
 	$scope.tab.tambah_data_tab_info_pengaduan = false;
 
-	$scope.tab.edit_data_tab_isi_biodata = true;
-	$scope.tab.edit_data_tab_pesan_pengaduan = false;
-	$scope.tab.edit_data_tab_info_pengaduan = false;
+	// $scope.tab.edit_data_tab_isi_biodata = true;
+	// $scope.tab.edit_data_tab_pesan_pengaduan = false;
+	// $scope.tab.edit_data_tab_info_pengaduan = false;
 
 	$scope.show_tab = function(tab_name, button_id) {
 
@@ -173,9 +191,9 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 		$scope.tab.tambah_data_tab_pesan_pengaduan = false;
 		$scope.tab.tambah_data_tab_info_pengaduan = false;
 
-		$scope.tab.edit_data_tab_isi_biodata = false;
-		$scope.tab.edit_data_tab_pesan_pengaduan = false;
-		$scope.tab.edit_data_tab_info_pengaduan = false;
+		// $scope.tab.edit_data_tab_isi_biodata = false;
+		// $scope.tab.edit_data_tab_pesan_pengaduan = false;
+		// $scope.tab.edit_data_tab_info_pengaduan = false;
 
 		eval('$scope.' + tab_name + "= true");
 
@@ -184,7 +202,7 @@ function PengaduanDaftarPengaduanSaranCtrl($scope, $http) {
 
 	}
 
-	$scope.filter_pengaduan = function(){
+	$scope.filter_pengaduan = function(){ 
 		$http.get('daftar_pengaduan_saran/data/' + $scope.pengaduan_id).success(function(pdps_data) {
 			$scope.pengaduan_daftar_pengaduan_saran_data = pdps_data;
 		});

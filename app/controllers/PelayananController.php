@@ -68,38 +68,39 @@
 
 		public function pendaftaran_permohonan_izin_baru_tambah(){
 
-			$date = date('yyyy-mm-dd');
-			$id_permohonan = Tmpermohonan::generate_id_for_layanan_online_pendaftaran_online($date);
+			// $date = date('yyyy-mm-dd');
 
-			foreach ($id_permohonan as $pk) {
-				$records = $pk->records;
-			}
+			// $id_permohonan = Tmpermohonan::generate_id_for_layanan_online_pendaftaran_online($date);
 
-			if($records == 0){
-				$records = 1;
-			}
+			// foreach ($id_permohonan as $pk) {
+			// 	$records = $pk->records;
+			// }
 
-			$urutan = '';
-			for($i = strlen($records) + 1; $i <= 5; ++$i) {
-				$urutan = $urutan . '0';
-			}
+			// if($records == 0){
+			// 	$records = 1;
+			// }
 
-			$trperizinan_id = Input::get('perizinan_id');
-			$perizinan = '';
-			for($i = strlen($trperizinan_id) + 1; $i <= 3; ++$i){
-				$perizinan = $perizinan . '0';
-			}
+			// $urutan = '';
+			// for($i = strlen($records) + 1; $i <= 5; ++$i) {
+			// 	$urutan = $urutan . '0';
+			// }
 
-			$id_jenis_perizinan = '1';
-			$jenis_perizinan = '';
-			for($i = strlen($id_jenis_perizinan) + 1; $i <=2; ++$i){
-				$jenis_perizinan = $jenis_perizinan .'0';
-			}
+			// $trperizinan_id = Input::get('perizinan_id');
+			// $perizinan = '';
+			// for($i = strlen($trperizinan_id) + 1; $i <= 3; ++$i){
+			// 	$perizinan = $perizinan . '0';
+			// }
 
-			$pendaftaran_id = $urutan .$records . $perizinan . $trperizinan_id . $jenis_perizinan .$id_jenis_perizinan . date('mY');
+			// $id_jenis_perizinan = '1';
+			// $jenis_perizinan = '';
+			// for($i = strlen($id_jenis_perizinan) + 1; $i <=2; ++$i){
+			// 	$jenis_perizinan = $jenis_perizinan .'0';
+			// }
+
+			// $pendaftaran_id = $urutan .$records . $perizinan . $trperizinan_id . $jenis_perizinan .$id_jenis_perizinan . date('mY');
 
 			$data_permohonan = [
-				'pendaftaran_id' => $pendaftaran_id,
+				'pendaftaran_id' => Input::get('pendaftaran_id'),
 				'd_terima_berkas' => Input::get('d_terima_berkas'),
 				'd_survey' => Input::get('tanggal_peninjauan'),
 				'd_selesai_proses' => Input::get('d_selesai_proses'),
@@ -165,6 +166,8 @@
 
 			$trjenis_permohonan_id = Input::get('jenis_permohonan_id');
 
+			$trperizinan_id = Input::get('perizinan_id');
+
 			$trsyarat_perizinan_id = Input::get('syarat_perizinan_id');
 
 			$tmpermohonan_id = Tmpermohonan::insert_data($data_permohonan);
@@ -182,8 +185,10 @@
 		
 			Tmpemohontmpermohonan::insert_data($tmpermohonan_id[0]['id'], $tmpemohon_id[0]['id']);
 			Tmpermohonantmperusahaan::insert_data($tmpermohonan_id[0]['id'], $tmperusahaan_id[0]['id']);
+
 			TmpemohonTrkelurahan::insert_data($tmpemohon_id[0]['id'], $trkelurahan_pemohon_id);
 			TmperusahaanTrkelurahan::insert_data($tmperusahaan_id[0]['id'], $trkelurahan_perusahaan_id);
+			
 			TmpermohonanTrperizinan::insert_data($tmpermohonan_id[0]['id'], $trperizinan_id);
 			TmpermohonanTrjenispermohonan::insert_data($tmpermohonan_id[0]['id'], $trjenis_permohonan_id);
 		
@@ -278,67 +283,122 @@
 			return $result;
 		}
 
+		public static function pendaftaran_permohonan_izin_baru_hapus(){
+			$id_permohonan = Input::get('id_permohonan');			
+			Tmpermohonan::where('id','=',$id_permohonan)->delete();
+			
+			echo "isi";
+		}
+
+		
+
 		public function pendaftaran_permohonan_izin_baru_edit() {
 
-			$data_permohonan = [
-				'd_terima_berkas' => Input::get('d_terima_berkas'),
-				'd_survey' => Input::get('d_survey'),
-				'a_izin' => Input::get('a_izin'),
+			Tmpermohonan::where('pendaftaran_id', '=', Input::get('pendaftaran_id'))->update([
+				'd_survey' => Input::get('d_survey'), 
+				'a_izin' => Input::get('a_izin'), 
 				'keterangan' => Input::get('keterangan')
-			];
+				]);
 
-			$data_pemohon = [
-				'source' => Input::get('source'),
-				'no_referensi' => Input::get('no_referensi'),
-				'n_pemohon' => Input::get('n_pemohon'),
-				'telp_pemohon' => Input::get('telp_pemohon'),
-				'a_pemohon' => Input::get('alamat_pemohon'),
-				'a_pemohon_luar' => Input::get('alamat_luar_pemohon')
-			];
+			Tmpemohon::where('id', "=", Input::get('tmpemohon_id'))->update([
+				'source' => Input::get('sumber_identitas'), 
+				'no_referensi' => Input::get('no_referensi'), 
+				'n_pemohon' => Input::get('n_pemohon'), 
+				'telp_pemohon' => Input::get('telp_pemohon'), 
+				'a_pemohon' => Input::get('a_pemohon'),
+				'a_pemohon_luar' => Input::get('a_pemohon_luar')
+				]);
 
-			$kelurahan_pemohon = [
-				'trkelurahan_id' => Input::get('kelurahan_pemohon')
-			];
-
-			$data_perusahaan =  [
+			Tmperusahaan::where('id', '=', Input::get('tmperusahaan_id'))->update([
 				'npwp' => Input::get('npwp'),
-				'n_perusahaan' => Input::get('n_perusahaan'),
+				'n_perusahaan' => Input::get('nama_perusahaan'),
 				'i_telp_perusahaan' => Input::get('telp_perusahaan'),
-				'fax' => Input::get('fax_perusahaan'),
-				'email' => Input::get('email_perusahaan'),
-				'a_perusahaan' => Input::get('alamat_perusahaan')
-			];
+				'a_perusahaan' => Input::get('a_perusahaan')
+				]);
 
-			$kelurahan_perusahaan = [
-				'trkelurahan_id' => Input::get('kelurahan_perusahaan')
-			];
+			$trsyarat_perizinan_id = Input::get('syarat_perizinan_id');
+			
+			foreach ($trsyarat_perizinan_id as $k => $v) {
+				
+				echo $v;				
 
-			$tmpermohonan_id = Input::get('id');
-
-			$tmpemohon = Tmpemohontmpermohonan::get_tmpemohon_id($tmpermohonan_id);
-			$tmperusahaan = Tmpermohonantmperusahaan::get_tmperusahaan_id($tmpermohonan_id);
-
-			foreach($tmpemohon as $pem_k => $pem_v) {
-				$tmpemohon_id = $pem_v->tmpemohon_id;
+				TmpermohonanTrpersyaratanperizinan::create(['tmpermohonan_id' => Input::get('tmpermohonan_id'), 'trsyarat_perizinan_id' => $v]);
 			}
 
-			foreach($tmperusahaan as $per_k => $per_v) {
-				$tmperusahaan_id = $per_v->tmperusahaan_id;
-			}
+			TmpemohonTrkelurahan::where('tmpemohon_id', '=', Input::get('tmpemohon_id'))->update(['trkelurahan_id' => Input::get('kelurahan_pemohon')]);
+			TmperusahaanTrkelurahan::where('tmperusahaan_id', '=', Input::get('tmperusahaan_id'))->update(['trkelurahan_id' => Input::get('kelurahan_perusahaan')]);
+			// TmperusahaanTrkegiatan::where('tmperusahaan_id', '=', Input::get('tmperusahaan_id'))->update(['trkegiatan_id' => Input::get('trkegiatan_id')]);
+			// TmperusahaanTrinvestasi::where('tmperusahaan_id', '=', Input::get('tmperusahaan_id'))->update(['trinvestasi_id' => Input::get('trinvestasi_id')]);
 
-			$tmpemohon = Tmpemohon::where('id', '=', $tmpemohon_id)->update($data_pemohon);
+			
+			// $persyaratan_izin = Input::get('persyaratan_izin');
 
-			$tmpermohonan = Tmpermohonan::where('id', '=', $tmpermohonan_id)->update($data_permohonan);
-			$tmperusahaan = Tmperusahaan::where('id', '=', $tmperusahaan_id)->update($data_perusahaan);
+			// TmpermohonanTrpersyaratanperizinan::where('tmpermohonan_id', '=', Input::get('tmpermohonan_id'))->delete();
+			// foreach ($persyaratan_izin as $k => $v) {
+			// 	echo $v;
 
-			$tmpemohon_trkelurahan = Tmpemohontrkelurahan::where('tmpemohon_id', '=', $tmpemohon_id)->update($kelurahan_pemohon);
-			$tmperusahaan_trkelurahan = Tmperusahaantrkelurahan::where('tmperusahaan_id', '=', $tmperusahaan_id)->update($kelurahan_perusahaan);
+			// 	TmpermohonanTrpersyaratanperizinan::create(['tmpermohonan_id' => Input::get('tmpermohonan_id'), 'trsyarat_perizinan_id' => $v]);
+			// }
+
+			// $data_permohonan = [
+			// 	'd_terima_berkas' => Input::get('d_terima_berkas'),
+			// 	'd_survey' => Input::get('d_survey'),
+			// 	'a_izin' => Input::get('a_izin'),
+			// 	'keterangan' => Input::get('keterangan')
+			// ];
+
+			// $data_pemohon = [
+			// 	'source' => Input::get('source'),
+			// 	'no_referensi' => Input::get('no_referensi'),
+			// 	'n_pemohon' => Input::get('n_pemohon'),
+			// 	'telp_pemohon' => Input::get('telp_pemohon'),
+			// 	'a_pemohon' => Input::get('alamat_pemohon'),
+			// 	'a_pemohon_luar' => Input::get('alamat_luar_pemohon')
+			// ];
+
+			// $kelurahan_pemohon = [
+			// 	'trkelurahan_id' => Input::get('kelurahan_pemohon')
+			// ];
+
+			// $data_perusahaan =  [
+			// 	'npwp' => Input::get('npwp'),
+			// 	'n_perusahaan' => Input::get('n_perusahaan'),
+			// 	'i_telp_perusahaan' => Input::get('telp_perusahaan'),
+			// 	'fax' => Input::get('fax_perusahaan'),
+			// 	'email' => Input::get('email_perusahaan'),
+			// 	'a_perusahaan' => Input::get('alamat_perusahaan')
+			// ];
+
+			// $kelurahan_perusahaan = [
+			// 	'trkelurahan_id' => Input::get('kelurahan_perusahaan')
+			// ];
+
+			// $tmpermohonan_id = Input::get('id');
+
+			// $tmpemohon = Tmpemohontmpermohonan::get_tmpemohon_id($tmpermohonan_id);
+			// $tmperusahaan = Tmpermohonantmperusahaan::get_tmperusahaan_id($tmpermohonan_id);
+
+			// foreach($tmpemohon as $pem_k => $pem_v) {
+			// 	$tmpemohon_id = $pem_v->tmpemohon_id;
+			// }
+
+			// foreach($tmperusahaan as $per_k => $per_v) {
+			// 	$tmperusahaan_id = $per_v->tmperusahaan_id;
+			// }
+
+			// $tmpemohon = Tmpemohon::where('id', '=', $tmpemohon_id)->update($data_pemohon);
+
+			// $tmpermohonan = Tmpermohonan::where('id', '=', $tmpermohonan_id)->update($data_permohonan);
+			// $tmperusahaan = Tmperusahaan::where('id', '=', $tmperusahaan_id)->update($data_perusahaan);
+
+			// $tmpemohon_trkelurahan = Tmpemohontrkelurahan::where('tmpemohon_id', '=', $tmpemohon_id)->update($kelurahan_pemohon);
+			// $tmperusahaan_trkelurahan = Tmperusahaantrkelurahan::where('tmperusahaan_id', '=', $tmperusahaan_id)->update($kelurahan_perusahaan);
 
 
 
-			if($tmpemohon == '1' || $tmpermohonan == '1' || $tmperusahaan == '1' || $tmpemohon_trkelurahan == '1' || $tmperusahaan_trkelurahan = '1') {
-				echo 'isi';
-			}
+			// if($tmpemohon == '1' || $tmpermohonan == '1' || $tmperusahaan == '1' || $tmpemohon_trkelurahan == '1' || $tmperusahaan_trkelurahan = '1') {
+			// 	echo 'isi';
+			// }
 		}
 
 		public function pendaftaran_permohonan_izin_baru_edit_data($id) {
@@ -405,7 +465,7 @@
 			}
 
 			else {
-				return Trkabupaten::fetch_with_kecamatan_by_id($id);
+				return Trkelurahan::fetch_with_kecamatan_by_id($id);
 			}
 
 		}
@@ -440,7 +500,7 @@
 			}
 
 			else {
-				return Trkabupaten::fetch_with_kabupaten_by_id($id);
+				return Trkecamatan::fetch_with_kabupaten_by_id($id);
 			}
 		}
 

@@ -72,10 +72,10 @@
                         <div class="tab-content" ng-show="tab.izin_baru_tab_data_pemohon">
 
                             <div class="tab-content-left">
-                                <!-- <div class="tab-content-form">
+                                <div class="tab-content-form">
                                     <div class="content-form-label">Pendaftaran ID</div>
                                     <div class="content-form-input"><input type="text" name="pendaftaran_id" value="" /></div>
-                                </div> -->
+                                </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Sumber Identitas</div>
                                     <div class="content-form-input">
@@ -299,28 +299,20 @@
 
                     </div>
                 </div>
-
-                <!-- <ul ng-repeat="syarat in entry_data_perizinan_data_awal_data.syarat">
-                    <li>@{{ syarat.persyaratan }} , @{{ syarat.status }}, @{{ syarat.terpenuhi }}, urutan @{{ syarat.urut }}</li>
-                </ul> -->
-
             </div>
             <div class="modal-footer">
                 <div class="modal-footer-left">
                     &nbsp;
                 </div>
                 <div class="modal-footer-right">
-                    <!-- <button type="submit" class="button-red" >Simpan</button> -->
                     <input type="submit" value="Simpan" class="button-green" ng-click="modal_tambah_submit()"/>
-                    <!-- <button type="submit" class="button-yellow" >Batal</button> -->
-                    <button class="button-red" href ng-click="close_modal('modal_tambah_pemohon')">Keluar</button>
-
+                    <button class="button-red" href ng-click="close_modal('modal_tambah')">Keluar</button>
                 </div>
             </div>
 
         </div>
-       <!--  <iframe id="target_tambah" name="target_tambah" style="width:100; height:100; visibility:hidden; position:relative; background:#fff;">
+        <iframe id="target_tambah" name="target_tambah" style="width:100; height:100; visibility:hidden; position:relative; background:#fff;">
 
-        </iframe> -->
+        </iframe>
     </div>
 </form>

@@ -892,7 +892,7 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			->where('tmpermohonan.c_pendaftaran','=', '0')
 			->where('trjenis_permohonan.id','=', '1')
 			// ->groupBy('tmpemohon.id')
-			->orderBy('tmpermohonan.id')
+			->orderBy('tmpermohonan.d_terima_berkas', 'dsc')
 			->groupBy('tmpermohonan.id')
 			->get();
 
@@ -1099,10 +1099,13 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 					'tmpermohonan.pendaftaran_id',
 					'trperizinan.n_perizinan',
 					'tmsk.no_surat',
+					'tmpemohon.id as pemohon_id',
 					'tmpemohon.source as sumber_identitas',
 					'tmpemohon.no_referensi',
 					'tmpemohon.n_pemohon',
 					'tmpemohon.telp_pemohon',
+					'tmpemohon.a_pemohon',
+					'tmpemohon.a_pemohon_luar',
 					'tmpermohonan.d_terima_berkas',
 					'tmpermohonan.d_survey as tanggal_peninjauan',
 					'tmpermohonan.d_perubahan',
@@ -1114,8 +1117,11 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 					'trkabupaten.id as kabupaten_pemohon',
 					'trkecamatan.id as kecamatan_pemohon',
 					'trkelurahan.id as kelurahan_pemohon',
-					'tmpemohon.a_pemohon',
-					'tmpemohon.a_pemohon_luar',
+					'trpropinsi.n_propinsi as n_propinsi_pemohon',
+					'trkabupaten.n_kabupaten as n_kabupaten_pemohon',
+					'trkecamatan.n_kecamatan as n_kecamatan_pemohon',
+					'trkelurahan.n_kelurahan as n_kelurahan_pemohon',
+					'tmperusahaan.id as perusahaan_id',
 					'tmperusahaan.npwp',
 					'tmperusahaan.n_perusahaan as nama_perusahaan',
 					'tmperusahaan.i_telp_perusahaan as telp_perusahaan',
@@ -1125,6 +1131,10 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 					'perusahaan_kabupaten.id as kabupaten_perusahaan',
 					'perusahaan_kecamatan.id as kecamatan_perusahaan',
 					'perusahaan_kelurahan.id as kelurahan_perusahaan',
+					'perusahaan_propinsi.n_propinsi as n_propinsi_perusahaan',
+					'perusahaan_kabupaten.n_kabupaten as n_kabupaten_perusahaan',
+					'perusahaan_kecamatan.n_kecamatan as n_kecamatan_perusahaan',
+					'perusahaan_kelurahan.n_kelurahan as n_kelurahan_perusahaan',
 					'tmperusahaan.a_perusahaan',
 					'trinvestasi.n_investasi',
 					'trkegiatan.n_kegiatan'
@@ -2310,7 +2320,6 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 			return Tmpermohonan::where('d_selesai_proses', '=', $data['d_selesai_proses'])->where('c_pendaftaran', '=', $data['c_pendaftaran'])->get(['id']);
 
 		}
-
 
 
 	}

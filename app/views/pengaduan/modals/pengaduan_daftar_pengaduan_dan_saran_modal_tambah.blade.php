@@ -1,4 +1,4 @@
-<form id="form_data_awal" method="post" target="target_edit" action="{{ URL::to('backoffice/pendataan/entry_data_perizinan/data_awal') }}">
+<form method="post" target="target_tambah" action="{{ URL::to('pengaduan/daftar_pengaduan_saran/tambah') }}">
     <div class="modal" ng-show={{ $modal_name }}>
 
         <div class="modal-container large">
@@ -20,25 +20,25 @@
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Nama</div>
                                     <div class="content-form-input">
-                                        <input type="text" name="nama" value="" />
+                                        <input type="text" name="nama" value="" placeholder="Nama Lengkap"/>
                                     </div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Alamat Email</div>
                                     <div class="content-form-input">
-                                        <input type="email" name="email" value="" />
+                                        <input type="text" name="email" value="" placeholder="Alamat Email"/>
                                     </div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">No Telp</div>
                                     <div class="content-form-input">
-                                        <input type="text" name="telp" value="" />
+                                        <input type="text" name="telp" value="" placeholder="No Telepon"/>
                                     </div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Alamat</div>
                                     <div class="content-form-input">
-                                        <textarea class="form-control" rows="4" cols="15" id="alamat" name="alamat" placeholder="Alamat"></textarea>
+                                        <textarea class="form-control" rows="4" cols="15" name="alamat" placeholder="Alamat"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -49,34 +49,46 @@
                                         <!-- <select class="form-option" ng-model="propinsi_id" ng-options="">
                                             <option value="">Propinsi</option>
                                         </select> -->
-                                    <select name="propinsi_pengaduan" >
+                                    <!-- <select name="propinsi_pengaduan" >
                                         <option ng-repeat="prop_data in propinsi_data"  ng-if="prop_data.selected == true" selected ng-value="prop_data.id" >@{{ prop_data.n_propinsi }}</option>
                                         <option ng-repeat="prop_data in propinsi_data"  ng-if="prop_data.selected == false" ng-value="prop_data.id" >@{{ prop_data.n_propinsi }}</option>
+                                    </select> -->
+                                    <select name="propinsi" ng-model="propinsi_id" ng-options="prop.n_propinsi for prop in propinsi_data track by prop.id">
+                                        <option value="">Pilih Propinsi</option>
                                     </select>
                                     </div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Kabupaten</div>
                                     <div class="content-form-input">                                    
-                                        <select class="form-option" ng-model="kabupaten_id" ng-options="">
+                                        <!-- <select class="form-option" ng-model="kabupaten_id" ng-options="">
                                             <option value="">Kabupaten</option>
-                                        </select>
+                                        </select> -->
+                                    <select name="kabupaten" ng-model="kabupaten_id" ng-options="kab.n_kabupaten for kab in kabupaten_data track by kab.id">
+                                        <option value="">Pilih Kabupaten</option>
+                                    </select>
                                     </div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Kecamatan</div>
                                     <div class="content-form-input">                                    
-                                        <select class="form-option" ng-model="kecamatan_id" ng-options="">
+                                        <!-- <select class="form-option" ng-model="kecamatan_id" ng-options="">
                                             <option value="">Kecamatan</option>
-                                        </select>
+                                        </select> -->
+                                    <select name="kecamatan" ng-model="kecamatan_id" ng-options="kec.n_kecamatan for kec in kecamatan_data track by kec.id">
+                                        <option value="">Pilih Kecamatan</option>
+                                    </select>
                                     </div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Kelurahan</div>
                                     <div class="content-form-input">                                    
-                                        <select class="form-option" ng-model="kelurahan_id" ng-options="">
+                                        <!-- <select class="form-option" ng-model="kelurahan_id" ng-options="">
                                             <option value="">Kelurahan</option>
-                                        </select>
+                                        </select> -->
+                                    <select name="kelurahan" ng-model="kelurahan_id" ng-options="kel.n_kelurahan for kel in kelurahan_data track by kel.id">
+                                        <option value="">Pilih Propinsi</option>
+                                    </select>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +108,7 @@
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Sumber Pengaduan</div>
                                     <div class="content-form-input">
-                                        <select class="form-option" ng-model="sumber_id" ng-options="pdpsosp.id as pdpsosp.name for pdpsosp in pengaduan_daftar_pengaduan_saran_opsi_sumber_pengaduan">
+                                        <select class="form-option" name="sumber_pesan_pengaduan" ng-model="sumber_id" ng-options="pdpsosp.name for pdpsosp in pengaduan_daftar_pengaduan_saran_opsi_sumber_pengaduan track by pdpsosp.id">
                                             <option value="">Sumber Pengaduan</option>
                                         </select>
                                     </div>
@@ -104,14 +116,14 @@
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Status Pengaduan</div>
                                     <div class="content-form-input">
-                                        <select class="form-option" ng-model="status_id" ng-options="pdpsop.sts_pesan_id as pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan">
+                                        <select class="form-option" name="status_pesan" ng-model="status_id" ng-options="pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan track by pdpsop.id">
                                             <option value="">Status Pengaduan</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="tab-content-form">
-                                    <div class="content-form-label">Tindak Lanjut</div>
-                                    <div class="content-form-input"><input type="text" data-provide="datepicker" class="tanggal_input" name="d_entry"/></div>
+                                    <div class="content-form-label">Tanggal Penulisan</div>
+                                    <div class="content-form-input"><input type="date" name="d_entry"/></div>
                                 </div>
                             </div>
                         </div> <!--info pengaduan-->
@@ -125,8 +137,8 @@
                     &nbsp;
                 </div>
                 <div class="modal-footer-right">
-                    <input type="submit" value="Simpan" class="btn button-green" ng-click="modal_data_awal_submit()"/>
-                    <a class="btn button-red" ng-click="close_modal('modal_data_awal')">Batal</a>
+                    <input type="submit" value="Simpan" class="btn button-green" ng-click="modal_tambah_submit()"/>
+                    <a class="btn button-red" ng-click="close_modal('modal_tambah')">Batal</a>
                 </div>
             </div>
         </div>

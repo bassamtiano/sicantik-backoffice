@@ -1,5 +1,9 @@
-<form id="form_data_awal" method="post" target="target_edit" action="{{ URL::to('pelayanan/pendaftaran/permohonan_izin_baru/edit') }}">
+<form method="post" target="target_edit" action="{{ URL::to('pelayanan/pendaftaran/permohonan_izin_baru/edit') }}">
     <div class="modal" ng-show={{ $modal_name }}>
+
+        <input type="hidden" value="@{{ permohonan_izin_baru_edit_data.permohonan_id }}" name="tmpermohonan_id">
+        <input type="hidden" value="@{{ permohonan_izin_baru_edit_data.pemohon_id }}" name="tmpemohon_id">
+        <input type="hidden" value="@{{ permohonan_izin_baru_edit_data.perusahaan_id }}" name="tmperusahaan_id">
 
         <div class="modal-container large">
             <div class="modal-header update">
@@ -66,7 +70,12 @@
                             <div class="tab-content-left">
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Sumber Identitas</div>
-                                    <div class="content-form-input">@{{ permohonan_izin_baru_edit_data.sumber_identitas }}</div>
+                                    <div class="content-form-input"><input type="text" name="sumber_identitas" value="@{{ permohonan_izin_baru_edit_data.sumber_identitas }}" />
+                                    <!-- <select name="sumber_identitas" >
+                                        <option ng-repeat="a in items"  ng-if="a.selected == true" selected ng-value="a.source" >@{{ permohonan_izin_baru_edit_data.sumber_identitas }}</option>
+                                        <option ng-repeat="a in items"  ng-if="a.selected == false" ng-value="a.source" >@{{ a.Title }}</option>
+                                    </select> -->
+                                    </div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">ID</div>
@@ -86,7 +95,7 @@
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Tanggal Peninjauan</div>
-                                    <div class="content-form-input"><input type="text" name="d_survey" data-provide="datepicker" value="@{{ permohonan_izin_baru_edit_data.d_survey }}" /></div>
+                                    <div class="content-form-input"><input type="text" name="tanggal_peninjauan" data-provide="datepicker" value="@{{ permohonan_izin_baru_edit_data.tanggal_peninjauan }}" /></div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Lokasi Izin</div>
@@ -108,9 +117,11 @@
                                         @{{ permohonan_izin_baru_edit_data.propinsi_pemohon }}
                                     </div> -->
                                     <div class="content-form-input">
-                                        <select name="propinsi_pemohon">
-                                            <option ng-model="propinsi_pemohon" ng-repeat="oprop_pemohon in opsi_prop_pemohon"  ng-if="oprop_pemohon.selected == true" selected ng-value="oprop_pemohon.id" >@{{ oprop_pemohon.n_propinsi }}</option>
-                                            <option ng-repeat="oprop_pemohon in opsi_prop_pemohon"  ng-if="oprop_pemohon.selected == false" ng-value="oprop_pemohon.id" >@{{ oprop_pemohon.n_propinsi }}</option>
+                                        <select name="propinsi_pemohon" ng-model="pemohon_propinsi_id" ng-options="prop.n_propinsi for prop in pemohon_propinsi_data track by prop.id">
+                                            <option  value="" ng-model="permohonan_izin_baru_edit_data.propinsi_pemohon">@{{ permohonan_izin_baru_edit_data.n_propinsi_pemohon }}</option>
+                                            <!-- <option ng-repeat="prop in prop_pemohon_data" ng-model="prop.pemohon_propinsi_id" ng-if="prop.selected == true" ng-value="prop.id" selected>@{{ prop.n_propinsi_pemohon }}</option>
+                                            <option ng-repeat="oprop_pemohon in opsi_prop_pemohon" ng-model="oprop_pemohon.propinsi_pemohon" ng-if="oprop_pemohon.selected == false" ng-value="oprop_pemohon.id" >@{{ oprop_pemohon.propinsi_pemohon }}</option> -->
+                                            <!-- <option ng-repeat="oprop_pemohon in opsi_prop_pemohon"  ng-if="oprop_pemohon.selected == false" ng-value="oprop_pemohon.id">@{{ permohonan_izin_baru_edit_data.n_propinsi_pemohon }}</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -120,9 +131,9 @@
                                         @{{ permohonan_izin_baru_edit_data.kabupaten_pemohon }}
                                     </div> -->
                                     <div class="content-form-input">
-                                        <select name="kabupaten_pemohon">
-                                            <option ng-model="kabupaten_pemohon" ng-repeat="okab_pemohon in opsi_kab_pemohon"  ng-if="okab_pemohon.selected == true" selected ng-value="okab_pemohon.id" >@{{ okab_pemohon.n_kabupaten }}</option>
-                                            <option ng-repeat="okab_pemohon in opsi_kab_pemohon"  ng-if="okab_pemohon.selected == false" ng-value="okab_pemohon.id" >@{{ okab_pemohon.n_kabupaten }}</option>
+                                        <select name="kabupaten_pemohon" ng-model="pemohon_kabupaten_id" ng-options="kab.n_kabupaten for kab in pemohon_kabupaten_data track by kab.id">
+                                            <option value="" ng-model="permohonan_izin_baru_edit_data.kabupaten_pemohon">@{{ permohonan_izin_baru_edit_data.n_kabupaten_pemohon }}</option>
+                                            <!-- <option ng-repeat="okab_pemohon in opsi_kab_pemohon"  ng-if="okab_pemohon.selected == false" ng-value="okab_pemohon.id" >@{{ okab_pemohon.n_kabupaten }}</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -132,9 +143,9 @@
                                         @{{ permohonan_izin_baru_edit_data.kecamatan_pemohon }}
                                     </div> -->
                                     <div class="content-form-input">
-                                        <select name="kecamatan_pemohon">
-                                            <option ng-model="kecamatan_pemohon" ng-repeat="okec_pemohon in opsi_kec_pemohon"  ng-if="okec_pemohon.selected == true" selected ng-value="okec_pemohon.id" >@{{ okec_pemohon.n_kecamatan }}</option>
-                                            <option ng-repeat="okec_pemohon in opsi_kec_pemohon"  ng-if="okec_pemohon.selected == false" ng-value="okec_pemohon.id" >@{{ okec_pemohon.n_kecamatan }}</option>
+                                        <select name="kecamatan_pemohon" ng-model="pemohon_kecamatan_id" ng-options="kec.n_kecamatan for kec in pemohon_kecamatan_data track by kec.id">
+                                            <option value="" ng-model="permohonan_izin_baru_edit_data.kecamatan_pemohon">@{{ permohonan_izin_baru_edit_data.n_kecamatan_pemohon }}</option>
+                                            <!-- <option ng-repeat="okec_pemohon in opsi_kec_pemohon"  ng-if="okec_pemohon.selected == false" ng-value="okec_pemohon.id" >@{{ okec_pemohon.n_kecamatan }}</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -144,9 +155,9 @@
                                         @{{ permohonan_izin_baru_edit_data.kelurahan_pemohon }}
                                     </div> -->
                                     <div class="content-form-input">
-                                        <select name="kelurahan_pemohon">
-                                            <option ng-model="kelurahan_pemohon" ng-repeat="okel_pemohon in opsi_kel_pemohon"  ng-if="okel_pemohon.selected == true" selected ng-value="okel_pemohon.id" >@{{ okel_pemohon.n_kelurahan }}</option>
-                                            <option ng-repeat="okel_pemohon in opsi_kel_pemohon"  ng-if="okel_pemohon.selected == false" ng-value="okel_pemohon.id" >@{{ okel_pemohon.n_kelurahan }}</option>
+                                        <select name="kelurahan_pemohon" ng-model="pemohon_kelurahan_id" ng-options="kel.n_kelurahan for kel in pemohon_kelurahan_data track by kel.id">
+                                            <option value="" ng-model="permohonan_izin_baru_edit_data.kelurahan_pemohon">@{{ permohonan_izin_baru_edit_data.n_kelurahan_pemohon }}</option>
+                                            <!-- <option ng-repeat="okel_pemohon in opsi_kel_pemohon"  ng-if="okel_pemohon.selected == false" ng-value="okel_pemohon.id" >@{{ okel_pemohon.n_kelurahan }}</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -172,7 +183,7 @@
 
                                 <div class="tab-content-form">
                                     <div class="content-form-label">NPWP</div>
-                                    <div class="content-form-input">@{{ permohonan_izin_baru_edit_data.npwp }}</div>
+                                    <div class="content-form-input"><input type="text" name="npwp" value="@{{ permohonan_izin_baru_edit_data.npwp }}" /></div>
                                 </div>
                                 <div class="tab-content-form">
                                     <div class="content-form-label">Nama Perusahaan</div>
@@ -205,9 +216,9 @@
                                         @{{ permohonan_izin_baru_edit_data.propinsi_perusahaan }}
                                     </div> -->
                                     <div class="content-form-input">
-                                        <select name="propinsi_perusahaan">
-                                            <option ng-model="propinsi_perusahaan" ng-repeat="oprop_perusahaan in opsi_prop_perusahaan"  ng-if="oprop_perusahaan.selected == true" selected ng-value="oprop_perusahaan.id">@{{ oprop_perusahaan.n_propinsi }}</option>
-                                            <option ng-repeat="oprop_perusahaan in opsi_prop_perusahaan"  ng-if="oprop_perusahaan.selected == false" ng-value="oprop_perusahaan.id" >@{{ oprop_perusahaan.n_propinsi }}</option>
+                                        <select name="propinsi_perusahaan" ng-model="perusahaan_propinsi_id" ng-options="prop.n_propinsi for prop in perusahaan_propinsi_data track by prop.id">
+                                            <option  value="" ng-model="permohonan_izin_baru_edit_data.propinsi_perusahaan">@{{ permohonan_izin_baru_edit_data.n_propinsi_perusahaan }}</option>
+                                            <!-- <option ng-repeat="oprop_perusahaan in opsi_prop_perusahaan"  ng-if="oprop_perusahaan.selected == false" ng-value="oprop_perusahaan.id" >@{{ oprop_perusahaan.n_propinsi }}</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -217,9 +228,9 @@
                                         @{{ permohonan_izin_baru_edit_data.kabupaten_perusahaan }}
                                     </div> -->
                                     <div class="content-form-input">
-                                        <select name="kabupaten_perusahaan">
-                                            <option ng-model="kabupaten_perusahaan" ng-repeat="okab_perusahaan in opsi_kab_perusahaan"  ng-if="okab_perusahaan.selected == true" selected ng-value="okab_perusahaan.id">@{{ okab_perusahaan.n_kabupaten }}</option>
-                                            <option ng-repeat="okab_perusahaan in opsi_kab_perusahaan"  ng-if="okab_perusahaan.selected == false" ng-value="okab_perusahaan.id" >@{{ okab_perusahaan.n_kabupaten }}</option>
+                                        <select name="kabupaten_perusahaan" ng-model="perusahaan_kabupaten_id" ng-options="kab.n_kabupaten for kab in perusahaan_kabupaten_data track by kab.id">
+                                            <option value="" ng-model="permohonan_izin_baru_edit_data.kabupaten_perusahaan">@{{ permohonan_izin_baru_edit_data.n_kabupaten_perusahaan }}</option>
+                                            <!-- <option ng-repeat="okab_perusahaan in opsi_kab_perusahaan"  ng-if="okab_perusahaan.selected == false" ng-value="okab_perusahaan.id" >@{{ okab_perusahaan.n_kabupaten }}</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -229,9 +240,9 @@
                                         @{{ permohonan_izin_baru_edit_data.kecamatan_perusahaan }}
                                     </div> -->
                                     <div class="content-form-input">
-                                        <select name="kecamatan_perusahaan">
-                                            <option ng-model="kecamatan_perusahaan" ng-repeat="okec_perusahaan in opsi_kec_perusahaan"  ng-if="okec_perusahaan.selected == true" selected ng-value="okec_perusahaan.id">@{{ okec_perusahaan.n_kecamatan }}</option>
-                                            <option ng-repeat="okec_perusahaan in opsi_kec_perusahaan"  ng-if="okec_perusahaan.selected == false" ng-value="okec_perusahaan.id" >@{{ okec_perusahaan.n_kecamatan }}</option>
+                                        <select name="kecamatan_perusahaan" ng-model="perusahaan_kecamatan_id" ng-options="kec.n_kecamatan for kec in perusahaan_kecamatan_data track by kec.id">
+                                            <option value="" ng-model="permohonan_izin_baru_edit_data.kecamatan_perusahaan">@{{ permohonan_izin_baru_edit_data.n_kecamatan_perusahaan }}</option>
+                                            <!-- <option ng-repeat="okec_perusahaan in opsi_kec_perusahaan"  ng-if="okec_perusahaan.selected == false" ng-value="okec_perusahaan.id" >@{{ okec_perusahaan.n_kecamatan }}</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -241,9 +252,9 @@
                                         @{{ permohonan_izin_baru_edit_data.kelurahan_perusahaan }}
                                     </div> -->
                                     <div class="content-form-input">
-                                        <select name="keluarahan_perusahaan" >
-                                            <option ng-model="kelurahan_perusahaan" ng-repeat="okel_perusahaan in opsi_kel_perusahaan"  ng-if="okel_perusahaan.selected == true" selected ng-value="okel_perusahaan.id">@{{ okel_perusahaan.n_kelurahan }}</option>
-                                            <option ng-repeat="okel_perusahaan in opsi_kel_perusahaan"  ng-if="okel_perusahaan.selected == false" ng-value="okel_perusahaan.id" >@{{ okel_perusahaan.n_kelurahan }}</option>
+                                        <select name="kelurahan_perusahaan" ng-model="pemohon_kelurahan_id" ng-options="kel.n_kelurahan for kel in perusahaan_kelurahan_data track by kel.id">
+                                            <option value="" ng-model="permohonan_izin_baru_edit_data.kelurahan_perusahaan">@{{ permohonan_izin_baru_edit_data.n_kelurahan_perusahaan }}</option>
+                                            <!-- <option ng-repeat="okel_perusahaan in opsi_kel_perusahaan"  ng-if="okel_perusahaan.selected == false" ng-value="okel_perusahaan.id" >@{{ okel_perusahaan.n_kelurahan }}</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -295,7 +306,7 @@
                                         <td class="c_modal_no" >@{{$index+1}}</td>
                                         <td class="c_modal_syarat" >@{{ syarat.persyaratan }}</td>
                                         <td class="c_modal_terpenuhi" >
-                                            <input type="checkbox" ng-model="syarat.terpenuhi">
+                                            <input type="checkbox" name="syarat_perizinan_id[]" ng-value="@{{ syarat.id_persyaratan }}" ng-model="syarat.terpenuhi">
                                         </td>
                                         <td class="c_modal_status" >@{{ syarat.status }}</td>
                                     </tr>
@@ -317,10 +328,12 @@
                 </div>
                 <div class="modal-footer-right">
                     <input type="submit" value="Simpan" class="button-green" ng-click="modal_edit_submit()"/>
-                    <button type="submit" class="button-yellow" >Batal</button>
+                    <a class="btn button-red" ng-click="close_modal('modal_edit')">Batal</a>
+                 
+                    
                 </div>
             </div>
-
+            <iframe src="#" id="target_edit" name="target_edit" style="width:0; height:0; visibility:hidden; position:relative; background:#fff;"></iframe>
         </div>
     </div>
 </form>

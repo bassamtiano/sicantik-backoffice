@@ -47,7 +47,7 @@
 		}
 
 		.c_alamat {
-			width: 10%;
+			width: 17%;
 			text-align: center;
 		}
 
@@ -56,10 +56,10 @@
 			text-align: center;
 		}
 
-		.c_verifikasi {
+		/*.c_verifikasi {
 			width: 7%;
 			text-align: center;
-		}
+		}*/
 	</style>
 
 @stop
@@ -136,7 +136,7 @@
 			<th class="c_d_entry" ng-click="predicate='d_entry'; reverse=!reverse">Tgl Pengiriman</th>
 			<th class="c_sumber_pesan" ng-click="predicate='name'; reverse=!reverse">Sumber Pengaduan</th>
 			<th class="c_aksi">Aksi</th>
-			<th class="c_verifikasi">Verifikasi</th>
+			<!-- <th class="c_verifikasi">Verifikasi</th> -->
 		</tr>
 	</table>
 
@@ -150,8 +150,8 @@
 			<td class="c_e_pesan">@{{ pdps.e_pesan }}</td>
 			<td class="c_nama">@{{ pdps.nama }}</td>
 			<td class="c_alamat">@{{ pdps.alamat }}</td>
-			<td class="c_kelurahan">@{{ pdps.kelurahan }}</td>
-			<td class="c_kecamatan">@{{ pdps.kecamatan }}</td>
+			<td class="c_kelurahan">@{{ pdps.n_kelurahan }}</td>
+			<td class="c_kecamatan">@{{ pdps.n_kecamatan }}</td>
 			<td class="c_n_sts_pesan">@{{ pdps.n_sts_pesan }}</td>
 			<td class="c_tindak_lanjut">@{{ pdps.c_tindak_lanjut }}</td>
 			<td class="c_d_entry">@{{ pdps.d_entry }}</td>
@@ -161,7 +161,7 @@
 					<a href ng-click="open_modal('modal_edit', pdps.id)" class="row-item ya">Edit</a>
 				</span>
 			</td>
-			<td class="c_verifikasi"> </td>
+			<!-- <td class="c_verifikasi"> </td> -->
 			
 		</tr>
 		<tr>

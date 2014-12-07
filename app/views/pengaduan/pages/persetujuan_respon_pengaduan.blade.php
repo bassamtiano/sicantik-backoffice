@@ -27,7 +27,7 @@
 		}
 
 		.c_n_sts_pesan {
-			width: 10%;
+			width: 14%;
 			text-align: center;
 		}
 
@@ -42,12 +42,12 @@
 		}
 
 		.c_sumber_pesan {
-			width: 9%;
+			width: 10%;
 			text-align: center;
 		}
 
 		.c_alamat {
-			width: 10%;
+			width: 15%;
 			text-align: center;
 		}
 
@@ -56,10 +56,10 @@
 			text-align: center;
 		}
 
-		.c_verifikasi {
+		/*.c_verifikasi {
 			width: 10%;
 			text-align: center;
-		}
+		}*/
 	</style>
 
 @stop
@@ -133,7 +133,7 @@
 			<th class="c_d_entry" ng-click="predicate='d_entry'; reverse=!reverse">Tgl Pengiriman</th>
 			<th class="c_sumber_pesan" ng-click="predicate='name'; reverse=!reverse">Sumber Pengaduan</th>
 			<th class="c_aksi">Aksi</th>
-			<th class="c_verifikasi">Verifikasi</th>
+			<!-- <th class="c_verifikasi">Verifikasi</th> -->
 		</tr>
 	</table>
 
@@ -157,7 +157,7 @@
 					<a href ng-click="open_modal('modal_edit', pprp.id)" class="row-item ya">Edit</a>
 				</span>
 			</td>
-			<td class="c_verifikasi"> </td>	
+			<!-- <td class="c_verifikasi"> </td>	 -->
 		</tr>
 		<tr>
 			<td colspan="11" style="text-align:center">

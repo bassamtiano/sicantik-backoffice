@@ -546,11 +546,15 @@ Route::get('pelayanan/pendaftaran/permohonan_izin_baru/setujui/data', array('as'
 
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru/setujui/data/{id}', array('as' => 'pelayanan_pendaftaran_permohonan_izin_setujui_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_setujui_data'));
 
-Route::get('pelayanan/pendaftaran/permohonan_izin_baru/edit', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit'));
+Route::post('pelayanan/pendaftaran/permohonan_izin_baru/edit', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit'));
 
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru/edit/data', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit_data'));
 
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru/edit/data/{id}', array('as' => 'pelayanan_pendaftaran_permohonan_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_edit_data'));
+
+Route::post('pelayanan/pendaftaran/permohonan_izin_baru/hapus', array('as' => 'pelayanan_pendaftaran_permohonan_izin_hapus', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_hapus'));
+
+Route::post('pelayanan/pendaftaran/permohonan_izin_baru/hapus/data/{id}', array('as' => 'pelayanan_pendaftaran_permohonan_izin_hapus_data', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_hapus_data'));
 
 Route::get('pelayanan/pendaftaran/permohonan_izin_baru/opsi_perizinan', array('as' => 'pelayanan_pendaftaran_perubahan_izin_opsi_perizinan', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru_opsi_perizinan'));
 
@@ -944,23 +948,37 @@ Route::get('pengaduan/daftar_pengaduan_saran/data', array('as' => 'pengaduan_daf
 
 Route::get('pengaduan/daftar_pengaduan_saran/data/{id}', array('as' => 'pengaduan_daftar_pengaduan_saran_data', 'uses' => 'PengaduanController@daftar_pengaduan_saran_data'));
 
-Route::get('pengaduan/daftar_pengaduan_saran/opsi', array('as' => 'pengaduan_daftar_pengaduan_saran_opsi_pengaduan', 'uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_pengaduan'));
+Route::get('pengaduan/daftar_pengaduan_saran/opsi_status_pengaduan', array('as' => 'pengaduan_daftar_pengaduan_saran_opsi_status_pengaduan', 'uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_status_pengaduan'));
+
+Route::get('pengaduan/daftar_pengaduan_saran/opsi_status_pengaduan/{id}', array('as' => 'pengaduan_daftar_pengaduan_saran_opsi_status_pengaduan', 'uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_status_pengaduan'));
 
 Route::get('pengaduan/daftar_pengaduan_saran/opsi_sumber_pengaduan', array('as' => 'pengaduan_daftar_pengaduan_saran_opsi_sumber_pengaduan', 'uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_sumber_pengaduan'));
 
-Route::get('pengaduan/daftar_pengaduan_saran/tambah', array('as' => 'pengaduan_daftar_pengaduan_saran_tambah', 'uses' => 'PengaduanController@daftar_pengaduan_saran_tambah'));
+Route::get('pengaduan/daftar_pengaduan_saran/opsi_sumber_pengaduan/{id}', array('as' => 'pengaduan_daftar_pengaduan_saran_opsi_sumber_pengaduan', 'uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_sumber_pengaduan'));
 
-Route::get('pengaduan/daftar_pengaduan_saran/tambah/opsi/kelurahan/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_tambah_opsi_kelurahan']);
+Route::post('pengaduan/daftar_pengaduan_saran/tambah', array('as' => 'pengaduan_daftar_pengaduan_saran_tambah', 'uses' => 'PengaduanController@daftar_pengaduan_saran_tambah'));
 
-Route::get('pengaduan/daftar_pengaduan_saran/tambah/opsi/kecamatan/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_tambah_opsi_kecamatan']);
+Route::get('pengaduan/daftar_pengaduan_saran/opsi/kelurahan/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_kelurahan']);
 
-Route::get('pengaduan/daftar_pengaduan_saran/tambah/opsi/kabupaten/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_tambah_opsi_kabupaten']);
+Route::get('pengaduan/daftar_pengaduan_saran/opsi/kelurahan/{id_kecamatan}/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_kelurahan']);
 
-Route::get('pengaduan/daftar_pengaduan_saran/tambah/opsi/propinsi', ['uses' => 'PengaduanController@daftar_pengaduan_saran_tambah_opsi_propinsi']);
+Route::get('pengaduan/daftar_pengaduan_saran/opsi/kecamatan/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_kecamatan']);
 
-Route::get('pengaduan/daftar_pengaduan_saran/edit', array('as' => 'pengaduan_daftar_pengaduan_saran_edit', 'uses' => 'PengaduanController@daftar_pengaduan_saran_edit'));
+Route::get('pengaduan/daftar_pengaduan_saran/opsi/kecamatan/{id_kabupaten}/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_kecamatan']);
+
+Route::get('pengaduan/daftar_pengaduan_saran/opsi/kabupaten/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_kabupaten']);
+
+Route::get('pengaduan/daftar_pengaduan_saran/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_kabupaten']);
+
+Route::get('pengaduan/daftar_pengaduan_saran/opsi/propinsi', ['uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_propinsi']);
+
+Route::get('pengaduan/daftar_pengaduan_saran/opsi/propinsi/{id}', ['uses' => 'PengaduanController@daftar_pengaduan_saran_opsi_propinsi']);
+
+Route::post('pengaduan/daftar_pengaduan_saran/edit', array('as' => 'pengaduan_daftar_pengaduan_saran_edit', 'uses' => 'PengaduanController@daftar_pengaduan_saran_edit'));
 
 Route::get('pengaduan/daftar_pengaduan_saran/edit/data/{id}', array('as' => 'pengaduan_daftar_pengaduan_saran_edit_data', 'uses' => 'PengaduanController@daftar_pengaduan_saran_edit_data'));
+
+
 
 # Pengaduan / Persetujuan Respon Pengaduan
 
@@ -968,7 +986,9 @@ Route::get('pengaduan/persetujuan_respon_pengaduan', array('as' => 'pengaduan_pe
 
 Route::get('pengaduan/persetujuan_respon_pengaduan/data', array('as' => 'pengaduan_persetujuan_respon_pengaduan_data', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_data'));
 
-Route::get('pengaduan/persetujuan_respon_pengaduan/edit', array('as' => 'persetujuan_respon_pengaduan_edit', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_edit'));
+Route::post('pengaduan/persetujuan_respon_pengaduan/edit', array('as' => 'persetujuan_respon_pengaduan_edit', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_edit'));
+
+Route::get('pengaduan/persetujuan_respon_pengaduan/edit/data', array('as' => 'persetujuan_respon_pengaduan_edit_data', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_edit_data'));
 
 Route::get('pengaduan/persetujuan_respon_pengaduan/edit/data/{id}', array('as' => 'persetujuan_respon_pengaduan_edit_data', 'uses' => 'PengaduanController@persetujuan_respon_pengaduan_edit_data'));
 
@@ -982,7 +1002,7 @@ Route::get('pengaduan/pengiriman_respon_pengaduan/data', array('as' => 'pengadua
 
 Route::get('pengaduan/pengiriman_respon_pengaduan/data/{id}', array('as' => 'pengaduan_pengiriman_respon_pengaduan_data', 'uses' => 'PengaduanController@pengiriman_respon_pengaduan_data'));
 
-Route::get('pengaduan/pengiriman_respon_pengaduan/edit', array('as' => 'pengaduan_pengiriman_respon_pengaduan_edit', 'uses' => 'PengaduanController@pengiriman_respon_pengaduan_edit'));
+Route::post('pengaduan/pengiriman_respon_pengaduan/edit', array('as' => 'pengaduan_pengiriman_respon_pengaduan_edit', 'uses' => 'PengaduanController@pengiriman_respon_pengaduan_edit'));
 
 Route::get('pengaduan/pengiriman_respon_pengaduan/edit/data/{id}', array('as' => 'pengaduan_pengiriman_respon_pengaduan_edit_data', 'uses' => 'PengaduanController@pengiriman_respon_pengaduan_edit_data'));
 
