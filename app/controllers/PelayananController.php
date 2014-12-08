@@ -447,14 +447,14 @@
 
 		public function pendaftaran_daftar_ulang_izin_daftar_data(){
 			return Tmpermohonan::fetch_with_tmsk_for_pilih_daftar_ulang_izin();
-			
+
 		}
 
 		public function pendaftaran_daftar_ulang_izin_insert_data($id){
 			$data_daftarulang = Tmpermohonan::fetch_for_pilih_daftar_ulang_izin_data_insert($id);
 
 			$result = [];
-			
+
 			foreach($data_daftarulang as $val => $key) {
 				foreach($key as $v => $k) {
 					$result[$v] = $k;
@@ -480,7 +480,7 @@
 			}
 
 			$result['syarat'] = $data_syarat;
-			
+
 			return $result;
 		}
 
@@ -519,9 +519,6 @@
 			return $result;
 		}
 
-<<<<<<< HEAD
-		/*
-=======
 		public function pendaftaran_data_daftar_ulang_izin_edit(){
 			$data_edit_tmpermohonan = [
 			'a_izin' => Input::get('lokasi'),
@@ -540,7 +537,7 @@
 
 			$kelurahan_perusahaan =['trkelurahan_id' => Input::get('per_kelurahan')];
 			$kelurahan_pemohon = ['trkelurahan_id' => Input::get('kelurahan_pemohon')];
-			
+
 			$idd_perusahaan = Input::get('id_perusahaan');
 			$idd_permohonan = Input::get('id_permohonan');
 			$idd_pemohon = Input::get('id_pemohon');
@@ -551,7 +548,7 @@
 			'i_telp_perusahaan' => Input::get('per_tel'),
 			'a_perusahaan' => Input::get('per_al')
 			];
-			
+
 			$trkelurahan_id = ['trkelurahan_id' => Input::get("per_kelurahan")];
 			$trinvestasi_id = ['trinvestasi_id' => Input::get("investasi")];
 			$trkegiatan_id = ['trkegiatan_id' => Input::get("kegiatan")];
@@ -560,7 +557,7 @@
 				TmpermohonanTrpersyaratanperizinan::insert_data($v,$idd_permohonan);
 
 			}
-			
+
 
 			Tmpermohonan::where('id', '=', $idd_perusahaan)->update($data_edit_tmpermohonan);
 			Tmpemohon::where('id', '=', $idd_pemohon)->update($data_edit_tab_pemohon);
@@ -574,12 +571,12 @@
 			}
 			else{
 			Tmperusahaan::where('id', '=', $idd_perusahaan)->update($data_edit_tab_perusahaan);
-			TmperusahaanTrkelurahan::where('tmperusahaan_id','=', $idd_perusahaan)->update($trkelurahan_id);		
+			TmperusahaanTrkelurahan::where('tmperusahaan_id','=', $idd_perusahaan)->update($trkelurahan_id);
 			}
 
 			echo "isi";
 
-			/* disini */		
+			/* disini */
 		}
 
 		public function pendaftaran_data_daftar_ulang_izin_insert(){
@@ -655,25 +652,25 @@
 				TmpermohonanTrpersyaratanperizinan::insert_data($v,$tmpermohonan_id[0]['id']);
 
 			}
-			
-			
-			TmpermohonanTrperizinan::create(['tmpermohonan_id' => $tmpermohonan_id[0]['id'], 'trperizinan_id' => $id_izin]);  
-			
-			TmpermohonanTrjenispermohonan::insert_data($tmpermohonan_id[0]['id'], '4');			 
-			
+
+
+			TmpermohonanTrperizinan::create(['tmpermohonan_id' => $tmpermohonan_id[0]['id'], 'trperizinan_id' => $id_izin]);
+
+			TmpermohonanTrjenispermohonan::insert_data($tmpermohonan_id[0]['id'], '4');
+
 
 
 			Tmpemohon::where('id','=',$tmpemohon_id)->update($data_pemohon_du);
-			
+
 			Tmperusahaan::where('id','=',$tmperusahaan_id)->update($data_perusahaan_du);
-			
-			TmperusahaanTrkelurahan::where('tmperusahaan_id','=',$tmperusahaan_id)->update($trkelurahan_perusahaan_id);		
+
+			TmperusahaanTrkelurahan::where('tmperusahaan_id','=',$tmperusahaan_id)->update($trkelurahan_perusahaan_id);
 			Tmpemohontmpermohonan::create(['tmpermohonan_id' => $tmpermohonan_id[0]['id'], 'tmpemohon_id' => $tmpemohon_id]);
 			Tmpermohonantmperusahaan::create(['tmpermohonan_id' => $tmpermohonan_id[0]['id'], 'tmperusahaan_id' => $tmperusahaan_id]);
-			
+
 
 			TmpemohonTrkelurahan::where('tmpemohon_id','=',$tmpemohon_id)->update($trkelurahan_pemohon_id);
-			
+
 			echo "isi";
 		}
 
@@ -687,14 +684,13 @@
 		}
 
 		public static function pendaftaran_data_daftar_ulang_izin_delete(){
-			$id_permohonan = Input::get('id_permohonan');			
+			$id_permohonan = Input::get('id_permohonan');
 			Tmpermohonan::where('id','=',$id_permohonan)->delete();
-			
+
 			echo "isi";
 		}
 
-		/* 
->>>>>>> pr/16
+		/*
 			Menu Data Pemohon
 		*/
 
@@ -707,7 +703,7 @@
 		}
 
 		public function pendaftaran_data_pemohon_opsi_propinsi() {
-			
+
 		}
 
 		public function pendaftaran_data_pemohon_opsi_kabupaten() {
@@ -735,14 +731,10 @@
 
 				return $result;
 			}
-<<<<<<< HEAD
 
 		/*
 			Menu Data Perusahaan
 		*/
-=======
-		/* Menu Data Perusahaan */	
->>>>>>> pr/16
 
 		public function pendaftaran_data_perusahaan() {
 			return View::make('pelayanan.pages.pendaftaran_data_perusahaan');
@@ -761,15 +753,15 @@
 
 			$trkelurahan_id = Input::get("kelurahan");
 			TmperusahaanTrkelurahan::insert_data($tmperusahaan_id[0]['id'], $trkelurahan_id);
-			
+
 			$trinvestasi_id = Input::get("investasi");
 			TmperusahaanTrinvestasi::insert_data($tmperusahaan_id[0]['id'], $trinvestasi_id);
-			
+
 			$trkegiatan_id = Input::get("kegiatan");
-			TmperusahaanTrkegiatan::insert_data($tmperusahaan_id[0]['id'], $trkegiatan_id);		
-			
+			TmperusahaanTrkegiatan::insert_data($tmperusahaan_id[0]['id'], $trkegiatan_id);
+
 			echo "isi";
-			
+
 		}
 
 		public function pendaftaran_data_perusahaan_edit(){
@@ -790,7 +782,7 @@
 			TmperusahaanTrkelurahan::where('tmperusahaan_id','=', $id)->update($trkelurahan_id);
 			TmperusahaanTrkegiatan::where('tmperusahaan_id', '=', $id)->update($trkegiatan_id);
 			TmperusahaanTrinvestasi::where('tmperusahaan_id', '=', $id)->update($trinvestasi_id);
-			
+
 			echo "isi";
 		}
 
@@ -816,7 +808,7 @@
 					$result[$v] = $k;
 				}
 			}
-			
+
 			return $result;
 		}
 
@@ -875,16 +867,12 @@
 
 					array_push($result, $wrapper);
 				}
-<<<<<<< HEAD
-=======
-				
 				 return $result;
-
 			}
 
 			else {
 				return Trkabupaten::fetch_with_propinsi();
-				
+
 			}
 		}
 		public function pendaftaran_data_perusahaan_opsi_perusahaan_kecamatan($id_kabupaten = null, $id = null) {
@@ -947,8 +935,6 @@
 
 					array_push($result, $wrapper);
 				}
->>>>>>> pr/16
-
 				return $result;
 			}
 
@@ -1002,30 +988,22 @@
 							$c_biner = str_repeat("0",$len) . $c_biner;
 						}
 						$c_biner_split = str_split($c_biner);
-<<<<<<< HEAD
 						$syarat_wrapper['izin_baru'] = $c_biner_split[0];
 						$syarat_wrapper['perpanjangan'] = $c_biner_split[1];
 						$syarat_wrapper['perubahan'] = $c_biner_split[2];
-=======
 						$syarat_wrapper1['daftar_ulang'] = $c_biner_split[0];
 						$syarat_wrapper1['izin_baru'] = $c_biner_split[1];
 						$syarat_wrapper1['perpanjangan'] = $c_biner_split[2];
-						$syarat_wrapper1['perubahan'] = $c_biner_split[3];	
+						$syarat_wrapper1['perubahan'] = $c_biner_split[3];
 
->>>>>>> pr/16
 					}
 					else{
 						$syarat_wrapper1[$pv] = $pk;
 					}
-<<<<<<< HEAD
 					$syarat_wrapper1 = $syarat_wrapper1 + $syarat_wrapper;
-
-=======
-					// $syarat_wrapper1[$pv] = $pk;		
+					// $syarat_wrapper1[$pv] = $pk;
 
 					$syarat_wrapper1 = $syarat_wrapper1 + $syarat_wrapper;
-					
->>>>>>> pr/16
 				}
 				array_push($result_persyaratan, $syarat_wrapper1);
 			}

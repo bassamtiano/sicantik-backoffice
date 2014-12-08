@@ -456,35 +456,29 @@ Route::group(['before' => 'auth'], function() {
 
 	Route::get('konfigurasi/setting_wilayah/kelurahan/data', ['as' => 'konfigurasi_setting_wilayah_kelurahan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_data']);
 
-<<<<<<< HEAD
 	Route::get('konfigurasi/setting_wilayah/kelurahan/insert', ['as' => 'konfigurasi_setting_wilayah_kelurahan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_insert']);
-=======
-Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
 
-Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
->>>>>>> pr/16
+    Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
+
+	Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
 
 	Route::get('konfigurasi/setting_wilayah/kelurahan/edit', ['as' => 'konfigurasi_setting_wilayah_kelurahan_edit', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_edit']);
 
-<<<<<<< HEAD
 	Route::get('konfigurasi/setting_wilayah/kelurahan/edit/data/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan_edit_data', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_edit_data']);
-=======
-Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
 
-Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
->>>>>>> pr/16
+    Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id_propinsi}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
+
+	Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
 
 	Route::get('konfigurasi/setting_wilayah/kelurahan/delete', ['as' => 'konfigurasi_setting_wilayah_kelurahan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_delete']);
 
-<<<<<<< HEAD
 	Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/propinsi', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_propinsi', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_propinsi']);
 
 	Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
 
 	Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kabupaten/{id}', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kabupaten', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kabupaten']);
-=======
-Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id_kabupaten}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
->>>>>>> pr/16
+
+	Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id_kabupaten}/{id}', ['uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
 
 	Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan', ['as' => 'konfigurasi_setting_wilayah_kelurahan_opsi_kecamatan', 'uses' => 'KonfigurasiController@setting_wilayah_kelurahan_opsi_kecamatan']);
 
@@ -583,15 +577,13 @@ Route::get('konfigurasi/setting_wilayah/kelurahan/opsi/kecamatan/{id_kabupaten}/
 
 	Route::get('pelayanan/pendaftaran/permohonan_sementara/edit/data/{id}', ['as' => 'pelayanan_pendaftaran_pelayanan_sementara_edit_data', 'uses' => 'PelayananController@pendaftaran_permohonan_sementara_edit_data']);
 
-<<<<<<< HEAD
 	Route::get('pelayanan/pendaftaran/permohonan_sementara/opsi/propinsi/{id}', ['uses' => 'PelayananController@pendaftaran_opsi_propinsi_selected']);
-=======
-Route::get('pelayanan/pendaftaran/daftar_ulang_izin/daftar/data', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_data_daftar', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_daftar_data'));
 
-Route::get('pelayanan/pendaftaran/daftar_ulang_izin/daftar/data/{id}', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_data_daftar', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_insert_data'));
+	Route::get('pelayanan/pendaftaran/daftar_ulang_izin/daftar/data', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_data_daftar', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_daftar_data'));
 
-Route::get('pelayanan/pendaftaran/daftar_ulang_izin/data', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_table_daftar_ulang_izin', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_data'));
->>>>>>> pr/16
+	Route::get('pelayanan/pendaftaran/daftar_ulang_izin/daftar/data/{id}', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_data_daftar', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_insert_data'));
+
+	Route::get('pelayanan/pendaftaran/daftar_ulang_izin/data', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_table_daftar_ulang_izin', 'uses' => 'PelayananController@pendaftaran_daftar_ulang_izin_data'));
 
 	Route::get('pelayanan/pendaftaran/permohonan_sementara/opsi/kabupaten/{id}/{id_propinsi}', ['uses' => 'PelayananController@pendaftaran_opsi_kabupaten_selected']);
 
@@ -603,19 +595,16 @@ Route::get('pelayanan/pendaftaran/daftar_ulang_izin/data', array('as' => 'pelaya
 
 	Route::post('pelayanan/pendaftaran/permohonan_sementara/hapus', ['uses' => 'PelayananController@pendaftaran_permohonan_sementara_hapus']);
 
-<<<<<<< HEAD
 	# Pelayanan / Pendaftaran / Permohonan Izin Baru ( Belum )
-=======
-Route::post('pelayanan/pendaftaran/daftar_ulang_izin/ubah', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_ubah', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_edit')); 
+	Route::post('pelayanan/pendaftaran/daftar_ulang_izin/ubah', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_ubah', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_edit'));
 
-Route::post('pelayanan/pendaftaran/daftar_ulang_izin/tambah', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_tambah', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_insert'));
+	Route::post('pelayanan/pendaftaran/daftar_ulang_izin/tambah', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_tambah', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_insert'));
 
-Route::post('pelayanan/pendaftaran/daftar_ulang_izin/selesai', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_selesai', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_finish'));
+	Route::post('pelayanan/pendaftaran/daftar_ulang_izin/selesai', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_selesai', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_finish'));
 
-Route::post('pelayanan/pendaftaran/daftar_ulang_izin/hapus', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_hapus', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_delete'));
+	Route::post('pelayanan/pendaftaran/daftar_ulang_izin/hapus', array('as' => 'pelayanan_pendaftaran_daftar_ulang_izin_hapus', 'uses' => 'PelayananController@pendaftaran_data_daftar_ulang_izin_delete'));
 
 # Pelayanan / Pendaftaran / Data Pemohon (Belum)
->>>>>>> pr/16
 
 	Route::get('pelayanan/pendaftaran/permohonan_izin_baru', ['as' => 'pelayanan_pendaftaran_permohonan_izin', 'uses' => 'PelayananController@pendaftaran_permohonan_izin_baru']);
 
@@ -643,9 +632,7 @@ Route::post('pelayanan/pendaftaran/daftar_ulang_izin/hapus', array('as' => 'pela
 
 	Route::get('pelayanan/pendaftaran/perubahan_izin/edit/data/{id}', ['as' => 'pelayanan_pendaftaran_perubahan_izin_edit_data', 'uses' => 'PelayananController@pendaftaran_perubahan_izin_edit_data']);
 
-<<<<<<< HEAD
 	# Pelayanan / Pendaftaran / Perpanjangan Izin
-=======
 Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_propinsi', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_propinsi']);
 
 Route::get('pelayanan/pendaftaran/data_perusahaan/opsi/perusahaan_propinsi/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_propinsi']);
@@ -674,13 +661,11 @@ Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_edit/perusahaan_kelurahan
 
 // Route::get('pelayanan/pendaftaran/data_perusahaan/opsi_edit/perusahaan_kelurahan/{id}', ['uses' => 'PelayananController@pendaftaran_data_perusahaan_opsi_perusahaan_kelurahan']);
 
-Route::post('pelayanan/pendaftaran/data_perusahaan/tambah', array('as' => 'pelayanan_pendaftaran_data_perusahaan_tambah', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_insert')); 
+Route::post('pelayanan/pendaftaran/data_perusahaan/tambah', array('as' => 'pelayanan_pendaftaran_data_perusahaan_tambah', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_insert'));
 
-Route::post('pelayanan/pendaftaran/data_perusahaan/ubah', array('as' => 'pelayanan_pendaftaran_data_perusahaan_ubah', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_edit')); 
+Route::post('pelayanan/pendaftaran/data_perusahaan/ubah', array('as' => 'pelayanan_pendaftaran_data_perusahaan_ubah', 'uses' => 'PelayananController@pendaftaran_data_perusahaan_edit'));
 
 # Customer Service / Informasi Perizinan
->>>>>>> pr/16
-
 	Route::get('pelayanan/pendaftaran/perpanjangan_izin', ['as' => 'pelayanan_pendaftaran_perpanjanan_izin', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin']);
 
 	Route::get('pelayanan/pendaftaran/perpanjangan_izin/data', ['as' => 'pelayanan_pendaftaran_perpanjanan_izin_table_perpanjangan_izin', 'uses' => 'PelayananController@pendaftaran_perpanjangan_izin_data']);

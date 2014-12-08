@@ -1,14 +1,9 @@
 var fetch_limit = 100;
 $app = angular.module('sicantik_backoffice', [])
 //////////////////////////////SETTING PERIZINAN/////////////////////
-<<<<<<< HEAD
-.controller('PengaduanDaftarPengaduanSaranCtrl', ['$scope', '$http',
-	function($scope, $http) {
 
-=======
 .controller('PengaduanDaftarPengaduanSaranCtrl',['$scope', '$http',
 	function ($scope, $http){
->>>>>>> pr/16
 		/* # Prepare Data ============================================================================================= */
 
 		$scope.show_all = function(){
@@ -16,7 +11,6 @@ $app = angular.module('sicantik_backoffice', [])
 				$scope.pengaduan_daftar_pengaduan_saran_data = pdps_data;
 			});
 		}
-<<<<<<< HEAD
 
 		$scope.opsi_pengaduan = function(){
 			$http.get('daftar_pengaduan_saran/opsi').success(function(pdpsop_data) {
@@ -66,16 +60,14 @@ $app = angular.module('sicantik_backoffice', [])
 			}
 		}
 
-=======
-
-		$scope.opsi_pengaduan = function(){ 
-			$http.get('daftar_pengaduan_saran/opsi').success(function(pdpsop_data) { 
+		$scope.opsi_pengaduan = function(){
+			$http.get('daftar_pengaduan_saran/opsi').success(function(pdpsop_data) {
 				$scope.pengaduan_daftar_pengaduan_saran_opsi_pengaduan = pdpsop_data;
 			});
 		}
 
-		$scope.opsi_sumber_pengaduan = function(){ 
-			$http.get('daftar_pengaduan_saran/opsi_sumber_pengaduan').success(function(pdpsosp_data) { 
+		$scope.opsi_sumber_pengaduan = function(){
+			$http.get('daftar_pengaduan_saran/opsi_sumber_pengaduan').success(function(pdpsosp_data) {
 				$scope.pengaduan_daftar_pengaduan_saran_opsi_sumber_pengaduan = pdpsosp_data;
 			});
 		}
@@ -85,11 +77,11 @@ $app = angular.module('sicantik_backoffice', [])
 		$scope.show_all();
 
 		/* # Filter Data ============================================================================================== */
-		
+
 		$scope.opsi_cari = '$';
 		$scope.search = {};
 		$scope.displayed = fetch_limit;
-		
+
 
 		$scope.loadMore = function() {
 			$scope.displayed += fetch_limit;
@@ -112,11 +104,10 @@ $app = angular.module('sicantik_backoffice', [])
 			}
 			else {
 				eval("$scope." + modal_name + "= true");
-				eval("$scope." + modal_name + "_data(" + id + ")");	
+				eval("$scope." + modal_name + "_data(" + id + ")");
 			}
 		}
 
->>>>>>> pr/16
 		$scope.close_modal = function(modal_name) {
 			eval("$scope." + modal_name + "= false");
 		}
@@ -129,11 +120,7 @@ $app = angular.module('sicantik_backoffice', [])
 		// 	});
 		// }
 
-<<<<<<< HEAD
 		$scope.modal_edit_data = function(id) {
-=======
-		$scope.modal_edit_data = function(id) { 
->>>>>>> pr/16
 			$http.get('daftar_pengaduan_saran/edit/data/' + id).success(function(dpsed) {
 				$scope.daftar_pengaduan_saran_edit_data = dpsed;
 			});
@@ -179,7 +166,6 @@ $app = angular.module('sicantik_backoffice', [])
 		}
 
 		$scope.modal_edit_submit = function() {
-<<<<<<< HEAD
 
 		}
 
@@ -386,14 +372,10 @@ $app = angular.module('sicantik_backoffice', [])
 		}
 
 		$scope.pengaduan_daftar_balasan_data;
-
-=======
-
-		}
 	}
 ])
 
-.controller('PengaduanPersetujuanResponPengaduanCtrl',['$scope', '$http', 
+.controller('PengaduanPersetujuanResponPengaduanCtrl',['$scope', '$http',
 	function ($scope, $http){
 		$scope.show_all = function(){
 			$http.get('persetujuan_respon_pengaduan/data').success(function(pprp_data) {
@@ -401,8 +383,8 @@ $app = angular.module('sicantik_backoffice', [])
 			});
 		}
 
-		$scope.opsi_dinas = function(){ 
-			$http.get('persetujuan_respon_pengaduan/opsi_dinas').success(function(pprpod_data) { 
+		$scope.opsi_dinas = function(){
+			$http.get('persetujuan_respon_pengaduan/opsi_dinas').success(function(pprpod_data) {
 				$scope.pengaduan_persetujuan_respon_pengaduan_opsi_dinas = pprpod_data;
 			});
 		}
@@ -413,7 +395,7 @@ $app = angular.module('sicantik_backoffice', [])
 		$scope.opsi_cari = '$';
 		$scope.search = {};
 		$scope.displayed = fetch_limit;
-		
+
 
 		$scope.loadMore = function() {
 			$scope.displayed += fetch_limit;
@@ -448,7 +430,7 @@ $app = angular.module('sicantik_backoffice', [])
 		// 	});
 		// }
 
-		$scope.modal_edit_data = function(id) { 
+		$scope.modal_edit_data = function(id) {
 			$http.get('persetujuan_respon_pengaduan/edit/data/' + id).success(function(prped) {
 				$scope.persetujuan_respon_pengaduan_edit_data = prped;
 			});
@@ -479,7 +461,7 @@ $app = angular.module('sicantik_backoffice', [])
 	}
 ])
 
-.controller('PengaduanPengirimanResponPengaduanCtrl',['$scope', '$http', 
+.controller('PengaduanPengirimanResponPengaduanCtrl',['$scope', '$http',
 	function ($scope, $http){
 			$scope.show_all = function(){
 				$http.get('pengiriman_respon_pengaduan/data').success(function(pprp_data) {
@@ -487,8 +469,8 @@ $app = angular.module('sicantik_backoffice', [])
 				});
 			}
 
-			// $scope.opsi_pengaduan = function(){ 
-			// 	$http.get('pengiriman_respon_pengaduan/opsi').success(function(pprpop_data) { 
+			// $scope.opsi_pengaduan = function(){
+			// 	$http.get('pengiriman_respon_pengaduan/opsi').success(function(pprpop_data) {
 			// 		$scope.pengaduan_pengiriman_respon_pengaduan_opsi_pengaduan = pprpop_data;
 			// 	});
 			// }
@@ -499,7 +481,7 @@ $app = angular.module('sicantik_backoffice', [])
 			$scope.opsi_cari = '$';
 			$scope.search = {};
 			$scope.displayed = fetch_limit;
-			
+
 
 			$scope.loadMore = function() {
 				$scope.displayed += fetch_limit;
@@ -534,7 +516,7 @@ $app = angular.module('sicantik_backoffice', [])
 			// 	});
 			// }
 
-			$scope.modal_edit_data = function(id) { 
+			$scope.modal_edit_data = function(id) {
 				$http.get('pengiriman_respon_pengaduan/edit/data/' + id).success(function(prped) {
 					$scope.pengiriman_respon_pengaduan_edit_data = prped;
 				});
@@ -577,8 +559,8 @@ $app = angular.module('sicantik_backoffice', [])
 			});
 		}
 
-		// $scope.opsi_pengaduan = function(){ 
-		// 	$http.get('daftar_balasan/opsi').success(function(pdbo_data) { 
+		// $scope.opsi_pengaduan = function(){
+		// 	$http.get('daftar_balasan/opsi').success(function(pdbo_data) {
 		// 		$scope.pengaduan_daftar_balasan_opsi = pdbo_data;
 		// 	});
 		// }
@@ -589,7 +571,7 @@ $app = angular.module('sicantik_backoffice', [])
 		$scope.opsi_cari = '$';
 		$scope.search = {};
 		$scope.displayed = 100;
-		
+
 
 		$scope.loadMore = function() {
 			$scope.displayed += 100;
@@ -597,17 +579,10 @@ $app = angular.module('sicantik_backoffice', [])
 
 		$scope.pengaduan_daftar_balasan_data;
 
->>>>>>> pr/16
 		$scope.filter_date = function(){
 			$http.get('daftar_balasan/data/' + $scope.date.start + '/' + $scope.date.finish).success(function(pdb_data) {
 				$scope.pengaduan_daftar_balasan_data = pdb_data;
 			});
-<<<<<<< HEAD
 		}
 	}
 ])
-=======
-		}		
-	}
-])
->>>>>>> pr/16

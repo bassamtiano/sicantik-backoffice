@@ -43,9 +43,6 @@
 			->get(['trkecamatan.id', 'trkecamatan.n_kecamatan']);
 		}
 
-<<<<<<< HEAD
-	}
-=======
 		public static function fetch_with_trkabupaten() {
 			return DB::table('trkecamatan')
 			->leftjoin('trkabupaten_trkecamatan', 'trkecamatan.id', '=', 'trkabupaten_trkecamatan.trkecamatan_id')
@@ -54,4 +51,3 @@
 		}
 
 	}
->>>>>>> pr/16

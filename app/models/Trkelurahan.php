@@ -44,9 +44,6 @@ class Trkelurahan extends BaseModel {
 		->get(['trkelurahan.id', 'trkelurahan.n_kelurahan']);
 	}
 
-<<<<<<< HEAD
-}
-=======
 	public static function fetch_with_trkecamatan() {
 		return DB::table('trkelurahan')
 		->join('trkecamatan_trkelurahan', 'trkelurahan.id', '=', 'trkecamatan_trkelurahan.trkelurahan_id')
@@ -55,4 +52,3 @@ class Trkelurahan extends BaseModel {
 	}
 
 }
->>>>>>> pr/16

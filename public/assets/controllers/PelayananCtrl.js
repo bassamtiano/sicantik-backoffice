@@ -28,7 +28,6 @@ $app = angular.module('sicantik_backoffice', [])
 
 			$scope.pelayanan_pendaftaran_permohonan_sementara_data;
 
-<<<<<<< HEAD
 	/* # Opsi ===================================================================================================== */
 
 	$scope.opsi_pemohon_propinsi = '';
@@ -60,23 +59,14 @@ $app = angular.module('sicantik_backoffice', [])
 	$scope.aw = function() {
 		alert('aw');
 	}
-=======
 			/* # Modal ==================================================================================================== */
->>>>>>> pr/16
 
 			/* Define Modal Name */
 
 			$scope.modal_edit = false;
 			$scope.modal_data_awal = false;
 
-<<<<<<< HEAD
-	$scope.modal_edit = false;
-	$scope.modal_tambah = false;
-
-=======
 			/* Define Open & Close Handler */
->>>>>>> pr/16
-
 			$scope.open_modal = function(modal_name, id) {
 
 				eval("$scope." + modal_name + "= true");
@@ -89,7 +79,6 @@ $app = angular.module('sicantik_backoffice', [])
 
 			/*  Construct Modal Function */
 
-<<<<<<< HEAD
 	$scope.modal_edit_data = function(id) {
 		$http.get('permohonan_sementara/edit/data/' + id).success(function(psed) {
 			$scope.permohonan_sementara_edit_data = psed;
@@ -100,13 +89,6 @@ $app = angular.module('sicantik_backoffice', [])
 			$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_kelurahan_selected($scope.permohonan_sementara_edit_data.kelurahan_pemohon, $scope.permohonan_sementara_edit_data.kecamatan_pemohon);
 		});
 	}
-=======
-			$scope.modal_edit_data = function(id) {
-				$http.get('permohonan_sementara/edit/data/' + id).success(function(psed) {
-					$scope.permohonan_sementara_edit_data = psed;
-				});
-			}
->>>>>>> pr/16
 
 	$scope.modal_delete_data = function(id) {
 		$scope.delete_id = id;
@@ -456,7 +438,6 @@ $app = angular.module('sicantik_backoffice', [])
 					});
 				}
 
-<<<<<<< HEAD
 	$scope.modal_tambah_data = function() {
 
 	}
@@ -466,11 +447,8 @@ $app = angular.module('sicantik_backoffice', [])
 			$scope.daftar_ulang_izin_edit_data = duied;
 		});
 	}
-=======
 				$scope.opsi_investasi();
 				$scope.opsi_kegiatan();
->>>>>>> pr/16
-
 				$scope.show_all();
 
 				$scope.opsi_cari = '$';
@@ -506,7 +484,7 @@ $app = angular.module('sicantik_backoffice', [])
 				$http.get('data_perusahaan/opsi/perusahaan_kecamatan/' + $scope.kabe.id).success(function(kec_data){
 					$scope.portal_kecamatan_data = kec_data;
 				});
-				$scope.kece = "Pilih Kecamatan";		
+				$scope.kece = "Pilih Kecamatan";
 			});
 
 			$scope.$watch('kece', function(){
@@ -537,7 +515,7 @@ $app = angular.module('sicantik_backoffice', [])
 				$http.get('data_perusahaan/opsi/perusahaan_kecamatan/' + $scope.kahon.id).success(function(kec_data){
 					$scope.portal_kecamatan_pemohon_data = kec_data;
 				});
-				$scope.kece = "Pilih Kecamatan";		
+				$scope.kece = "Pilih Kecamatan";
 			});
 
 			$scope.$watch('kecon', function(){
@@ -579,7 +557,7 @@ $app = angular.module('sicantik_backoffice', [])
 						eval("$scope.modal_daftar_data(" + id + ")");
 						eval("$scope.modal_pilih= false");
 					}
-				} 
+				}
 
 
 				// $scope.close_modal_pilih = function(){
@@ -664,7 +642,7 @@ $app = angular.module('sicantik_backoffice', [])
 
 					}, 1);
 				}
-				
+
 				$scope.modal_data_daftar_ulang_tambah_submit = function() {
 					setTimeout(function() {
 						result = $('#target_insert').contents().find('body').html(); // Nama Iframe
@@ -712,7 +690,7 @@ $app = angular.module('sicantik_backoffice', [])
 						else {
 							clear_iframe();
 							$scope.modal_hapus = false;
-							
+
 						}
 					$scope.show_all();
 					}, 1);
@@ -749,7 +727,7 @@ $app = angular.module('sicantik_backoffice', [])
 			$scope.pelayanan_pendaftaran_data_pemohon_data;
 
 			/* # Modal ==================================================================================================== */
-			
+
 			/*  Construct Modal Function */
 				$scope.modal_edit_data = function(id) {
 					$http.get('data_pemohon/edit/data/' + id).success(function(ped) {
@@ -868,7 +846,7 @@ $app = angular.module('sicantik_backoffice', [])
 			$scope.pelayanan_pendaftaran_data_perusahaan_data;
 
 			/* # Modal ==================================================================================================== */
-			
+
 			$scope.get_propinsi = function() {
 				$scope.aaa = $scope.propinsi_perusahaan;
 				$http.get('data_perusahaan/opsi/perusahaan_propinsi').success(function(pjp_data) {
@@ -890,7 +868,7 @@ $app = angular.module('sicantik_backoffice', [])
 				$http.get('data_perusahaan/opsi/perusahaan_kecamatan/' + $scope.kabba.id).success(function(kec_data){
 					$scope.portal_kecamatan_data = kec_data;
 				});
-				$scope.kelba = "";		
+				$scope.kelba = "";
 			});
 
 			$scope.$watch('kecba', function(){
@@ -911,7 +889,7 @@ $app = angular.module('sicantik_backoffice', [])
 				$http.get('data_perusahaan/opsi/perusahaan_kecamatan/' + $scope.kabe.id).success(function(kec_data){
 					$scope.portal_kecamatan_data = kec_data;
 				});
-				$scope.kece = "Pilih Kecamatan";		
+				$scope.kece = "Pilih Kecamatan";
 			});
 
 			$scope.$watch('kece', function(){
@@ -1021,7 +999,7 @@ $app = angular.module('sicantik_backoffice', [])
 							$scope.show_all();
 						}
 
-					}, 1);	
+					}, 1);
 			}
 
 			$scope.modal_data_perusahaan_ubah_submit = function() {
@@ -1172,7 +1150,7 @@ $app = angular.module('sicantik_backoffice', [])
 				$scope.displayed += fetch_limit;
 			}
 	}
-])	
+])
 
 .controller('PelayananCustomerServiceInformasiMasaBerlakuCtrl', ['$scope', '$http',
 	function ($scope, $http){
@@ -1192,4 +1170,4 @@ $app = angular.module('sicantik_backoffice', [])
 			$scope.displayed += fetch_limit;
 		}
 	}
-])	
+])

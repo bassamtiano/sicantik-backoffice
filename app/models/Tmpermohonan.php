@@ -13,12 +13,6 @@
 
 		}
 
-
-		public static function insert_data($data) {
-			Tmpermohonan::create($data);
-			return Tmpermohonan::where('pendaftaran_id', '=', $data['pendaftaran_id'])->where('d_terima_berkas', '=', $data['d_terima_berkas'])->get(['id']);
-		}
-
 		public static function fetch_with_trperizinan_trkelompok_perizinan_tmbap_tmkeringanan_retribusi() {
 
 			#not finished
@@ -948,10 +942,10 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 			->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
 			->join('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
-			
+
 			->join('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
 			->join('trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
-			
+
 			->join('tmpermohonan_trjenis_permohonan', 'tmpermohonan.id', '=', 'tmpermohonan_trjenis_permohonan.tmpermohonan_id')
 			->join('trjenis_permohonan', 'tmpermohonan_trjenis_permohonan.trjenis_permohonan_id', '=', 'trjenis_permohonan.id')
 
@@ -970,11 +964,11 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 			->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
 			->join('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
-			
+
 			->join('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
 			->join('trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
-			
-			->select(DB::raw('tmpermohonan.d_daftarulang,tmpermohonan.id,tmpermohonan.id_lama,tmsk.no_surat, tmpemohon.n_pemohon, trperizinan.n_perizinan, trperizinan.id as perizinan_id'))		
+
+			->select(DB::raw('tmpermohonan.d_daftarulang,tmpermohonan.id,tmpermohonan.id_lama,tmsk.no_surat, tmpemohon.n_pemohon, trperizinan.n_perizinan, trperizinan.id as perizinan_id'))
 			->where('tmpermohonan.c_izin_selesai', '=', '1')
 			->orderBy('tmsk.no_surat')
 			->groupBy('tmpermohonan.id')
@@ -988,10 +982,10 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 			->join('tmpemohon_tmpermohonan', 'tmpermohonan.id', '=', 'tmpemohon_tmpermohonan.tmpermohonan_id')
 			->join('tmpemohon', 'tmpemohon_tmpermohonan.tmpemohon_id', '=', 'tmpemohon.id')
-			
+
 			->join('tmpermohonan_trperizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trperizinan.tmpermohonan_id')
 			->join('trperizinan', 'trperizinan.id', '=', 'tmpermohonan_trperizinan.trperizinan_id')
-			
+
 			->leftjoin('tmpermohonan_trsyarat_perizinan', 'tmpermohonan.id', '=', 'tmpermohonan_trsyarat_perizinan.tmpermohonan_id')
 			->leftjoin('trsyarat_perizinan', 'tmpermohonan_trsyarat_perizinan.trsyarat_perizinan_id', '=', 'trsyarat_perizinan.id')
 
@@ -1083,7 +1077,7 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 					'tmperusahaan.a_perusahaan as alamat_perusahaan',
 					'trinvestasi.n_investasi',
 					'trkegiatan.n_kegiatan'
-				])		
+				])
 			->where('tmpermohonan.c_izin_selesai', '=', '1')
 			->where('tmpermohonan.id','=', $id)
 			->groupBy('tmpermohonan.id')
@@ -2436,11 +2430,7 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 		public static function generate_id_for_layanan_online_pendaftaran_online($date) {
 
 			return DB::table('tmpermohonan')
-<<<<<<< HEAD
-			->where('d_terima_berkas', '=', $date)
-=======
 			->where('d_tahun', '=', $date)
->>>>>>> pr/16
 			->select(DB::raw('count(id) as records'))
 			->get();
 

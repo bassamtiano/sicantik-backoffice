@@ -60,9 +60,6 @@
 	<form ng-submit="filter_pelayanan()">
 		<div class="table-form-content">
 			<div class="form-item">
-<<<<<<< HEAD
-				<button ng-click="open_modal('modal_tambah', 1)" style="width='30px'">Daftar</button>
-			</div>
 			<!-- <div class="form-item wide">
 				<select class="form-option" ng-model="pengaduan_id" ng-options="pdpsop.sts_pesan_id as pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan">
 					<option value="">Pilih Opsi Pengaduan</option>
@@ -72,10 +69,8 @@
 			<div class="form-item">
 				<input type="submit" value="Filter">
 			</div> -->
-=======
 				<button ng-click="open_modal('modal_pilih', '')" class="row-item ya" style="width='30px'">Tambah Daftar Ulang Izin</button>
 			</div>
->>>>>>> pr/16
 		</div>
 	</form>
 @stop
@@ -133,19 +128,15 @@
 					Izin Paralel
 				</p>
 			</td>
-<<<<<<< HEAD
-			<td class="c_verifikasi">@{{  }}</td>
 
-=======
 			<td class="c_aksi">
 				<span class="button-group group-3">
 					<a href ng-click="open_modal('modal_edit', ppdui.id)" class="edit">Edit</a>
 					<a href ng-click="open_modal('modal_selesai', ppdui.id)" class="print">Selesai</a>
 					<a href ng-click="open_modal('modal_hapus', ppdui.id)" class="delete">Delete</a>
 				</span>
-				
-			</td>	
->>>>>>> pr/16
+
+			</td>
 		</tr>
 
 		<tr>
@@ -154,18 +145,13 @@
 			</td>
 		</tr>
 	</table>
-
 @stop
 
 @section('modal-content')
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_tambah', ['modal_name' => 'modal_tambah'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_edit', ['modal_name' => 'modal_edit'])
-<<<<<<< HEAD
-@stop
-=======
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_daftar', ['modal_name' => 'modal_pilih'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_tambah', ['modal_name' => 'modal_daftar'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_selesai', ['modal_name' => 'modal_selesai'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_hapus', ['modal_name' => 'modal_hapus'])
 @stop
->>>>>>> pr/16

@@ -55,8 +55,6 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-<<<<<<< HEAD
-
 			// 'database'  => 'tot_masterbo',
 			'database'  => 'tot_masterbo',
 

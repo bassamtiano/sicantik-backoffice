@@ -86,7 +86,6 @@
 
 		public static function insert_data($data) {
 			Tmperusahaan::create($data);
-<<<<<<< HEAD
 			return Tmperusahaan::where('n_perusahaan', '=', $data['n_perusahaan'])->where('npwp','=', $data['npwp'])->get(['id']);
 
 		}
@@ -96,9 +95,3 @@
 		}
 
 	}
-=======
-			return Tmperusahaan::where('no_reg_perusahaan', '=', $data['no_reg_perusahaan'])->where('n_perusahaan', '=', $data['n_perusahaan'])->get(['id']);
-
-		}
-	}
->>>>>>> pr/16
