@@ -2,7 +2,7 @@
 
     <div class="modal-container large">
         <div class="modal-header update">
-            <h2>Data Awal</h2><a class="button-close" href ng-click="close_modal('modal_edit')">X</a>
+            <h2>Edit Daftar Ulang Perizinan</h2><a class="button-close" href ng-click="close_modal('modal_edit')">X</a>
         </div>
         <div class="modal-body">
             <div class="body-summary">

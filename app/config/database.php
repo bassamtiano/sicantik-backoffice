@@ -55,10 +55,14 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
+<<<<<<< HEAD
 
 			// 'database'  => 'tot_masterbo',
 			'database'  => 'tot_masterbo',
 
+=======
+			'database'  => 'backoffice',
+>>>>>>> pr/16
 			'username'  => 'root',
 			'password'  => 'admin',
 			'charset'   => 'utf8',

@@ -740,7 +740,7 @@
 		public function setting_wilayah_kelurahan_opsi_kecamatan($id_kabupaten = null, $id = null) {
 			if(!empty($id) && !empty($id_kabupaten)){
 
-				$kec = Trkecamatan::fetch_with_kabupaten_by_id($id_kabupaten);
+				$kec = Trkecamatan::fetch_with_trkabupaten_by_id($id_kabupaten);
 
 				$result = [];
 
@@ -767,7 +767,7 @@
 			}
 
 			else {
-				return Trkecamatan::fetch_with_kabupaten_by_id($id_kabupaten);
+				return Trkecamatan::fetch_with_trkabupaten_by_id($id_kabupaten);
 			}
 		}
 

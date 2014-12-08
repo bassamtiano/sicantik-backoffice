@@ -9,6 +9,7 @@
 		
 		.c_n_perusahaan {
 			width: 25%;
+			text-align: center;
 		}
 
 		.c_npwp {
@@ -17,16 +18,11 @@
 		}
 
 		.c_a_perusahaan {
-			width: 22%;
+			width: 20%;
 			text-align: center;
 		}
 
 		.c_aksi {
-			width: 15%;
-			text-align: center;
-		}
-
-		.c_verifikasi {
 			width: 15%;
 			text-align: center;
 		}
@@ -50,17 +46,8 @@
 	<form ng-submit="filter_pelayanan()">
 		<div class="table-form-content">
 			<div class="form-item">
-				<button ng-click="open_modal('modal_tambah')" style="width='30px'">Tambah Perusahaan</button>
+				<button ng-click="open_modal('modal_tambah_perusahaan')" style="width='30px'">Tambah Perusahaan</button>
 			</div>
-			<!-- <div class="form-item wide">
-				<select class="form-option" ng-model="pengaduan_id" ng-options="pdpsop.sts_pesan_id as pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan">
-					<option value="">Pilih Opsi Pengaduan</option>
-				</select>
-			</div>
-			
-			<div class="form-item">
-				<input type="submit" value="Filter">
-			</div> -->
 		</div>
 	</form>
 @stop
@@ -95,7 +82,6 @@
 			<th class="c_npwp" ng-click="predicate='npwp'; reverse=!reverse">NPWP</th>
 			<th class="c_a_perusahaan" ng-click="predicate='a_perusahaan'; reverse=!reverse">Alamat</th>
 			<th class="c_aksi">Aksi</th>
-			<th class="c_verifikasi">Verifikasi</th>
 		</tr>
 	</table>
 
@@ -111,9 +97,7 @@
 			<td class="c_a_perusahaan">@{{ ppdp.a_perusahaan }}</td>
 			<td class="c_aksi">
 				<a href ng-click="open_modal('modal_edit', ppdp.id)" class="row-item ya">Edit</a>
-			</td>
-			<td class="c_verifikasi">@{{  }}</td>
-			
+			</td>			
 		</tr>
 		<tr>
 			<td colspan="12" style="text-align:center">
@@ -125,6 +109,6 @@
 @stop
 
 @section('modal-content')
-	@include('pelayanan.modals.pelayanan_pendaftaran_data_perusahaan_modal_tambah', ['modal_name' => 'modal_tambah'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_data_perusahaan_modal_tambah', ['modal_name' => 'modal_tambah_perusahaan'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_data_perusahaan_modal_edit', ['modal_name' => 'modal_edit'])
 @stop

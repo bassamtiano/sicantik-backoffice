@@ -4,6 +4,6 @@
 
         protected $table = 'tmpemohon_trkelurahan';
         protected $guarded = ['id'];
-        protected $fillable = [];
+        protected $fillable = ['tmpemohon_id','trkelurahan_id'];
 
     }

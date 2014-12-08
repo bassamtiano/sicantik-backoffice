@@ -60,6 +60,7 @@
 	<form ng-submit="filter_pelayanan()">
 		<div class="table-form-content">
 			<div class="form-item">
+<<<<<<< HEAD
 				<button ng-click="open_modal('modal_tambah', 1)" style="width='30px'">Daftar</button>
 			</div>
 			<!-- <div class="form-item wide">
@@ -71,6 +72,10 @@
 			<div class="form-item">
 				<input type="submit" value="Filter">
 			</div> -->
+=======
+				<button ng-click="open_modal('modal_pilih', '')" class="row-item ya" style="width='30px'">Tambah Daftar Ulang Izin</button>
+			</div>
+>>>>>>> pr/16
 		</div>
 	</form>
 @stop
@@ -78,9 +83,6 @@
 @section('nav-menu-right')
 	<form>
 		<div class="table-form-content">
-			<!-- <div class="form-item">
-				<button ng-click="show_all()" style="width='30px'">Tampilkan Semua</button>
-			</div> -->
 			<div class="form-item wide">
 				<select ng-model="opsi_cari" class="form-option">
 					<option value="$">Semua</option>
@@ -109,7 +111,6 @@
 			<th class="c_a_pemohon" ng-click="predicate='a_pemohon'; reverse=!reverse">Alamat</th>
 			<th class="c_status" ng-click="predicate='status'; reverse=!reverse">Status</th>
 			<th class="c_aksi">Aksi</th>
-			<th class="c_verifikasi">Verifikasi</th>
 		</tr>
 	</table>
 
@@ -124,12 +125,27 @@
 			<td class="c_n_perizinan">@{{ ppdui.n_perizinan }}</td>
 			<td class="c_n_pemohon">@{{ ppdui.n_pemohon }}</td>
 			<td class="c_a_pemohon">@{{ ppdui.a_pemohon }}</td>
-			<td class="c_status">@{{ ppdui.c_paralel }}</td>
-			<td class="c_aksi">
-				<a href ng-click="open_modal('modal_edit', ppdui.id)" class="row-item ya">Edit</a>
+			<td class="c_status">
+				<p ng-if="ppdui.c_paralel == 1">
+					Satu Izin
+				</p>
+				<p ng-if="ppdui.c_paralel == 0">
+					Izin Paralel
+				</p>
 			</td>
+<<<<<<< HEAD
 			<td class="c_verifikasi">@{{  }}</td>
 
+=======
+			<td class="c_aksi">
+				<span class="button-group group-3">
+					<a href ng-click="open_modal('modal_edit', ppdui.id)" class="edit">Edit</a>
+					<a href ng-click="open_modal('modal_selesai', ppdui.id)" class="print">Selesai</a>
+					<a href ng-click="open_modal('modal_hapus', ppdui.id)" class="delete">Delete</a>
+				</span>
+				
+			</td>	
+>>>>>>> pr/16
 		</tr>
 
 		<tr>
@@ -144,4 +160,12 @@
 @section('modal-content')
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_tambah', ['modal_name' => 'modal_tambah'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_edit', ['modal_name' => 'modal_edit'])
+<<<<<<< HEAD
 @stop
+=======
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_daftar', ['modal_name' => 'modal_pilih'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_tambah', ['modal_name' => 'modal_daftar'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_selesai', ['modal_name' => 'modal_selesai'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_hapus', ['modal_name' => 'modal_hapus'])
+@stop
+>>>>>>> pr/16

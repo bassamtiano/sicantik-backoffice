@@ -1,8 +1,8 @@
 
 var fetch_limit = 100;
 
-function clear_iframe() {
-	$('#target_edit').attr('src','');
+function clear_iframe(iframe_id) {
+	$('#' + iframe_id ).attr('src', '');
 }
 
 $app = angular.module('sicantik_backoffice', [])
@@ -608,6 +608,10 @@ $app = angular.module('sicantik_backoffice', [])
 		$http.get('kelurahan/data').success(function(swkl_data){
 			$scope.setting_wilayah_kelurahan = swkl_data;
 		});
+
+		$scope.propinsi_id = "";
+		$scope.kabupaten_id = "";
+		$scope.kelurahan_id = "";
 
 		/* # Filter Data ============================================================================================== */
 
