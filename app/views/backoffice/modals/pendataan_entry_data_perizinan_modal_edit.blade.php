@@ -181,7 +181,6 @@
                                 <div class="content-form-label">Nilai Retribusi</div>
                                 <div class="content-form-input">
                                     <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nilai_retribusi" placeholder="Nilai Retribusi" />
-                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nilai_retribusi_id"/> -->
                                     <input type="text" style="display:none" name="id_property_perizinan[]" value="45" />
                                     <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.nilai_retribusi_old_id"/>
                                 </div>
@@ -192,7 +191,6 @@
                                 <div class="content-form-label">Rumus Perhitungan</div>
                                 <div class="content-form-input">
                                     <input type="text" name="property_perizinan[]" ng-model="entry_data_perizinan_edit_data.rumus_perhitungan" placeholder="Rumus Perhitungan" />
-                                    <!-- <input type="text" name="id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.rumus_perhitungan_id"/> -->
                                     <input type="text" style="display:none" name="id_property_perizinan[]" value="414" />
                                     <input type="text" style="display:none" name="old_id_property_perizinan[]" ng-model="entry_data_perizinan_edit_data.rumus_perhitungan_old_id"/>
                                 </div>

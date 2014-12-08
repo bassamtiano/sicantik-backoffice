@@ -48,6 +48,130 @@
 
 		}
 
+		# Pelayanan Opsi 	==========================================================================================
+
+		public function pendaftaran_opsi_propinsi_selected($id) {
+			$propinsi = Trpropinsi::fetch_data();
+
+			$result = [];
+
+			foreach($propinsi as $propk => $propv) {
+				if($propv->id == $id) {
+					$wrapper = [
+						'id' => $propv->id,
+						'n_propinsi' => $propv->n_propinsi,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $propv->id,
+						'n_propinsi' => $propv->n_propinsi,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendaftaran_opsi_kabupaten_selected($id, $id_propinsi) {
+			$kabupaten = Trkabupaten::fetch_with_propinsi_by_id($id_propinsi);
+
+			$result = [];
+
+			foreach($kabupaten as $kabk => $kabv) {
+				if($kabv->id == $id) {
+					$wrapper = [
+						'id' => $kabv->id,
+						'n_kabupaten' => $kabv->n_kabupaten,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kabv->id,
+						'n_kabupaten' => $kabv->n_kabupaten,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendaftaran_opsi_kecamatan_selected($id, $id_kabupaten) {
+			$kecamatan = Trkecamatan::fetch_with_kabupaten_by_id($id_kabupaten);
+
+			$result = [];
+
+			foreach($kecamatan as $keck => $kecv) {
+				if($kecv->id == $id) {
+					$wrapper = [
+						'id' => $kecv->id,
+						'n_kecamatan' => $kecv->n_kecamatan,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kecv->id,
+						'n_kecamatan' => $kecv->n_kecamatan,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendaftaran_opsi_kelurahan_selected($id, $id_kecamatan) {
+			$kelurahan = Trkelurahan::fetch_with_trkecamatan_by_id($id_kecamatan);
+			$result = [];
+
+			foreach($kelurahan as $kelk => $kelv) {
+				if($kelv->id == $id) {
+					$wrapper = [
+						'id' => $kelv->id,
+						'n_kelurahan' => $kelv->n_kelurahan,
+						'selected' => true
+					];
+				}
+				else {
+					$wrapper = [
+						'id' => $kelv->id,
+						'n_kelurahan' => $kelv->n_kelurahan,
+						'selected' => false
+					];
+				}
+
+				array_push($result, $wrapper);
+			}
+
+			return $result;
+		}
+
+		public function pendaftaran_opsi_propinsi($id) {
+
+		}
+
+		public function pendaftaran_opsi_kabupaten($id) {
+
+		}
+
+		public function pendaftaran_opsi_kecamatan($id) {
+
+		}
+
+		public function pendaftaran_opsi_kelurahan($id) {
+			return Trkelurahan::fetch_with_trkecamatan_by_id($id);
+		}
 
 	/*
 		Sub Modul Pendaftaran
@@ -96,6 +220,50 @@
 			$result['syarat'] = $data_syarat;
 
 			return $result;
+		}
+
+		/* Disini */
+
+		public function pendaftaran_permohonan_sementara_edit() {
+			$date = date('Y-m-d');
+			$id_permohonan = Tmpermohonan::generate_id_for_layanan_online_pendaftaran_online($date);
+
+
+			foreach($id_permohonan as $pk) {
+				$records = $pk->records;
+			}
+
+			if($records == 0) {
+				$records = 1;
+			}
+
+			$urutan = '';
+			for($i = strlen($records) + 1; $i <= 5; ++$i) {
+				$urutan = $urutan . '0';
+
+			}
+
+			$id_perizinan = Input::get('jenis_perizinan');
+			$perizinan = '';
+			for($i = strlen($id_perizinan) + 1; $i <= 3; ++$i) {
+				$perizinan = $perizinan . '0';
+			}
+
+
+			$id_jenis_perizinan = '1';
+			$jenis_perizinan = '';
+			for($i = strlen($id_jenis_perizinan) + 1; $i <= 2; ++$i) {
+				$jenis_perizinan = $jenis_perizinan . '0';
+			}
+
+			$pendaftaran_id = $urutan . $records . $perizinan . $id_perizinan . $jenis_perizinan . $id_jenis_perizinan . date('mY');
+			echo $pendaftaran_id;
+		}
+
+		public function pendaftaran_permohonan_sementara_hapus() {
+			$id = Input::get('id');
+
+			echo 'ini' . $id;
 		}
 
 		/*
@@ -314,12 +482,29 @@
 		/*
 			Menu Data Pemohon
 		*/
+
 		public function pendaftaran_data_pemohon() {
 			return View::make('pelayanan.pages.pendaftaran_data_pemohon');
 		}
 
 		public function pendaftaran_data_pemohon_data($id = null) {
 			return Tmpemohon::fetch_data_pemohon($id);
+		}
+
+		public function pendaftaran_data_pemohon_opsi_propinsi() {
+			
+		}
+
+		public function pendaftaran_data_pemohon_opsi_kabupaten() {
+
+		}
+
+		public function pendaftaran_data_pemohon_opsi_kecamatan() {
+
+		}
+
+		public function pendaftaran_data_pemohon_opsi_kelurahan() {
+
 		}
 
 		public function pendaftaran_data_pemohon_edit_data($id) {

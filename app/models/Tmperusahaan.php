@@ -1,5 +1,5 @@
 <?php
-	
+
 	class Tmperusahaan extends BaseModel {
 
 		protected $table = "tmperusahaan";
@@ -86,6 +86,7 @@
 
 		public static function insert_data($data) {
 			Tmperusahaan::create($data);
+			return Tmperusahaan::where('n_perusahaan', '=', $data['n_perusahaan'])->where('npwp','=', $data['npwp'])->get(['id']);
 
 		}
 

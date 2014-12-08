@@ -6,7 +6,7 @@
 			width: 3%;
 			text-align: center;
 		}
-		
+
 		.c_pendaftaran_id {
 			width: 15%;
 		}
@@ -60,14 +60,14 @@
 	<form ng-submit="filter_pelayanan()">
 		<div class="table-form-content">
 			<div class="form-item">
-				<button ng-click="" style="width='30px'">Tambah Pemohon</button>
+				<button ng-click="open_modal('modal_tambah', 1)" style="width='30px'">Daftar</button>
 			</div>
 			<!-- <div class="form-item wide">
 				<select class="form-option" ng-model="pengaduan_id" ng-options="pdpsop.sts_pesan_id as pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan">
 					<option value="">Pilih Opsi Pengaduan</option>
 				</select>
 			</div>
-			
+
 			<div class="form-item">
 				<input type="submit" value="Filter">
 			</div> -->
@@ -99,7 +99,7 @@
 @stop
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -129,7 +129,7 @@
 				<a href ng-click="open_modal('modal_edit', ppdui.id)" class="row-item ya">Edit</a>
 			</td>
 			<td class="c_verifikasi">@{{  }}</td>
-			
+
 		</tr>
 
 		<tr>
@@ -142,5 +142,6 @@
 @stop
 
 @section('modal-content')
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_tambah', ['modal_name' => 'modal_tambah'])
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_daftar_ulang_izin_modal_edit', ['modal_name' => 'modal_edit'])
 @stop

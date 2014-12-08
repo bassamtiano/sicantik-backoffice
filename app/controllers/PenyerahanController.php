@@ -58,6 +58,14 @@
 			return Tmpermohonan::fetch_with_tmpemohon_trperizinan_trjenis_permohonan_tmsk_tmbap_trkelompok_perizinan_for_penyerahan_izin($date_start, $date_finish);
 		}
 
+		public function penyerahan_izin_penyerahan_cetak() {
+			echo 'cetak';
+		}
+
+		public function penyerahan_izin_email() {
+			echo 'email to';
+		}
+
 		# Pengajuan Izin 	==================================================================================================
 
 		public function pengajuan_salinan() {
@@ -66,6 +74,10 @@
 
 		public function pengajuan_salinan_data($date_start = null, $date_finish = null) {
 			return Tmpermohonan::fetch_with_tmpemohon_trperizinan_trjenis_permohonan_tmsk_tmbap_trkelompok_perizinan_for_pengajuan_salinan($date_start, $date_finish);
+		}
+
+		public function pengajuan_salinan_setujui() {
+
 		}
 
 		# Penyerahan Salinan 	==============================================================================================
@@ -78,5 +90,8 @@
 			return Tmpermohonan::fetch_with_tmpemohon_trperizinan_trjenis_permohonan_tmsk_tmbap_trkelompok_perizinan_for_penyerahan_salinan($date_start, $date_finish);
 		}
 
+		public function penyerahan_salinan_cetak() {
+
+		}
 
 	}

@@ -24,14 +24,45 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 		$scope.displayed += fetch_limit;
 	}
 
-	$scope.pelayanan_pendaftaran_permohonan_sementara_data;
+	/* # Opsi ===================================================================================================== */
+
+	$scope.opsi_pemohon_propinsi = '';
+
+	$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_kelurahan_selected = function(id, id_kecamatan) {
+		$http.get('permohonan_sementara/opsi/kelurahan/' + id + '/' + id_kecamatan).success(function(psokel_data) {
+			$scope.permohonan_sementara_opsi_kelurahan_data = psokel_data;
+		});
+	}
+
+	$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_kecamatan_selected = function(id, id_kabupaten) {
+		$http.get('permohonan_sementara/opsi/kecamatan/' + id + '/' + id_kabupaten).success(function(psokec_data) {
+			$scope.permohonan_sementara_opsi_kecamatan_data = psokec_data;
+		});
+	}
+
+	$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_kabupaten_selected = function(id, id_propinsi) {
+		$http.get('permohonan_sementara/opsi/kabupaten/' + id + '/' + id_propinsi).success(function(psokab_data) {
+			$scope.permohonan_sementara_opsi_kabupaten_data = psokab_data;
+		});
+	}
+
+	$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_propinsi_selected = function(id) {
+		$http.get('permohonan_sementara/opsi/propinsi/' + id).success(function(psop_data) {
+			$scope.permohonan_sementara_opsi_propinsi_data = psop_data;
+		});
+	}
+
+	$scope.aw = function() {
+		alert('aw');
+	}
 
 	/* # Modal ==================================================================================================== */
 
 	/* Define Modal Name */
 
 	$scope.modal_edit = false;
-	$scope.modal_data_awal = false;
+	$scope.modal_tambah = false;
+
 
 	/* Define Open & Close Handler */
 
@@ -50,7 +81,16 @@ function PelayananPendaftaranPermohonanSementaraCtrl($scope, $http) {
 	$scope.modal_edit_data = function(id) {
 		$http.get('permohonan_sementara/edit/data/' + id).success(function(psed) {
 			$scope.permohonan_sementara_edit_data = psed;
+
+			$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_propinsi_selected($scope.permohonan_sementara_edit_data.propinsi_pemohon);
+			$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_kabupaten_selected($scope.permohonan_sementara_edit_data.kabupaten_pemohon, $scope.permohonan_sementara_edit_data.propinsi_pemohon);
+			$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_kecamatan_selected($scope.permohonan_sementara_edit_data.kecamatan_pemohon, $scope.permohonan_sementara_edit_data.kabupaten_pemohon);
+			$scope.pelayanan_pendaftaran_permohonan_sementara_opsi_kelurahan_selected($scope.permohonan_sementara_edit_data.kelurahan_pemohon, $scope.permohonan_sementara_edit_data.kecamatan_pemohon);
 		});
+	}
+
+	$scope.modal_delete_data = function(id) {
+		$scope.delete_id = id;
 	}
 
 
@@ -411,6 +451,10 @@ function PelayananPendaftaranPermohonanDaftarUlangIzinCtrl($scope, $http) {
 	}
 
 	/*  Construct Modal Function */
+
+	$scope.modal_tambah_data = function() {
+
+	}
 
 	$scope.modal_edit_data = function(id) {
 		$http.get('daftar_ulang_izin/edit/data/' + id).success(function(duied) {

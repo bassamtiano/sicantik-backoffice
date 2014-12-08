@@ -1,5 +1,5 @@
 <!-- <form enctype="multipart/form-data" method="post" target="target_insert" action="{{ URL::to('konfigurasi/report/report_generator/insert') }}"> -->
-<form enctype="multipart/form-data" method="post" action="{{ URL::to('konfigurasi/report/report_generator/insert') }}">
+<form enctype="multipart/form-data" method="post" target="target_insert" action="{{ URL::to('konfigurasi/report/report_generator/insert') }}">
 
 
 <input type="hidden" name="id" value="@{{entry_data_perizinan_data_awal_data.id}}">

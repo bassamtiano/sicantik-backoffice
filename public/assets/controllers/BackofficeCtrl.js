@@ -152,8 +152,6 @@ $app = angular.module('sicantik_backoffice', [])
 		}
 
 
-
-
 		/* Define Tab Name */
 
 		$scope.tab = [];

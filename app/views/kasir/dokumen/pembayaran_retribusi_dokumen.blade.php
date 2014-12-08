@@ -47,7 +47,32 @@
             </div>
 
             <div class="surat-item">
-
+                <table>
+                    <tr>
+                        <td><b>ID Pendaftaran</b></td>
+                        <td>{{ $pendaftaran_id }}</td>
+                        <td><b>Nama Pemohon</b></td>
+                        <td>{{ $n_pemohon }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>No Surat</b></td>
+                        <td>{{ $no_surat }}</td>
+                        <td><b>Nama Perizinan</b></td>
+                        <td>{{ $n_perizinan }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Nilai Awal BAP</b></td>
+                        <td>{{ $nilai_bap_awal }}</td>
+                        <td><b>Jumlah Rasio Retribusi</b></td>
+                        <td>{{ $v_prosentase_retribusi }}</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td><b>Total Nilai Retribusi</b></td>
+                        <td>{{ $nilai_retribusi }}</td>
+                    </tr>
+                </table>
             </div>
 
         </div>

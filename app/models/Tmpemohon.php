@@ -61,7 +61,7 @@
 			->leftjoin('trkabupaten_trpropinsi', 'trkabupaten.id', '=', 'trkabupaten_trpropinsi.trkabupaten_id')
 			->leftjoin('trpropinsi', 'trpropinsi.id', '=', 'trkabupaten_trpropinsi.trpropinsi_id')
 
-			->select(DB::raw('tmpemohon.id, tmpemohon.no_referensi, trkelurahan.n_kelurahan as kelurahan_pemohon, trkecamatan.n_kecamatan as kecamatan_pemohon, trkabupaten.n_kabupaten as kabupaten_pemohon, trpropinsi.n_propinsi as propinsi_pemohon, tmpemohon.telp_pemohon, tmpemohon.source, tmpemohon.n_pemohon, tmpemohon.a_pemohon, tmpemohon.a_pemohon_luar'))
+			->select(DB::raw('tmpemohon.id, tmpemohon.no_referensi, trkelurahan.id as id_kelurahan_pemohon, trkelurahan.n_kelurahan as kelurahan_pemohon, trkecamatan.id as id_kecamatan_pemohon,trkecamatan.n_kecamatan as kecamatan_pemohon, trkabupaten.id as id_kabupaten_pemohon, trkabupaten.n_kabupaten as kabupaten_pemohon, trpropinsi.id as id_propinsi_pemohon, trpropinsi.n_propinsi as propinsi_pemohon, tmpemohon.telp_pemohon, tmpemohon.source, tmpemohon.n_pemohon, tmpemohon.a_pemohon, tmpemohon.a_pemohon_luar'))
 
 			->where('tmpemohon.id', '=', $id)
 			->groupBy('tmpemohon.id')
@@ -74,7 +74,7 @@
 
 		public static function insert_data($data) {
 			Tmpemohon::create($data);
-
+			return Tmpemohon::where('n_pemohon', '=', $data['n_pemohon'])->where('no_referensi', '=', $data['no_referensi'])->get(['id']);
 		}
 
 		public static function update_data($id, $data){

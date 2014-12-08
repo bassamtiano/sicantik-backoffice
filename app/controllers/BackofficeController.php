@@ -824,15 +824,12 @@
 
 					}
 					else if($item['type'] === 'list' ) {
-						$send = 'ini list';
+
 					}
 					else if($item['type'] === 'list-number') {
 
 					}
 					else if($item['type'] === 'list-bullet') {
-
-					}
-					else {
 
 					}
 				}
@@ -853,6 +850,19 @@
 			$pdf = App::make('dompdf');
 			$pdf->loadHTML($content);
 			return $pdf->setPaper('a4')->setOrientation('portrait')->download('test' . '.pdf');
+		}
+
+		public function penetapan_pembuatan_skrd_cetak_lampiran_skrd($id_perizinan, $id_permohonan) {
+			echo $this->dokumen_header();
+
+			$query = ReportGenerators::fetch_with_report_group_datas($id_perizinan, 'Lampiran SKRD');
+			foreach($query as $quk) {
+				eval('$' . $quk->report_group_code . ' = DB::select("' . $quk->group_query . '", [' . $id_permohonan . ']);');
+				$layout = $quk->layout;
+			}
+
+
+
 		}
 
 		public function dokumen_header() {
@@ -878,7 +888,6 @@
 				'title_tlp' => $header['app_tlp'],
 				'title_fax' => $header['app_fax']
 				// 'surat_title' => $surat_title
-
 			];
 
 
@@ -980,6 +989,10 @@
 
 		public function penetapan_layanan_ditolak_data($date_start = null, $date_finish = null) {
 			return Tmpermohonan::fetch_with_tmpemohon_trperizinan_for_layanan_ditolak($date_start, $date_finish);
+		}
+
+		public function penetapan_layanan_ditolak_cetak() {
+
 		}
 
 		# Penetapan / Pencabutan Izin 	======================================================================================

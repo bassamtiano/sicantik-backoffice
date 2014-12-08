@@ -28,7 +28,7 @@
 			->join('trpropinsi', 'trkabupaten_trpropinsi.trpropinsi_id', '=', 'trpropinsi.id')
 			->select(DB::raw('trkecamatan.id, trkecamatan.n_kecamatan, trkabupaten.id as trkabupaten_id, trpropinsi.id as trpropinsi_id'))
 			->where('trkecamatan.id', '=', $id)
-			->get();	
+			->get();
 		}
 
 		public static function search_data($id_kecamatan) {

@@ -13,6 +13,12 @@
 
 		}
 
+
+		public static function insert_data($data) {
+			Tmpermohonan::create($data);
+			return Tmpermohonan::where('pendaftaran_id', '=', $data['pendaftaran_id'])->where('d_terima_berkas', '=', $data['d_terima_berkas'])->get(['id']);
+		}
+
 		public static function fetch_with_trperizinan_trkelompok_perizinan_tmbap_tmkeringanan_retribusi() {
 
 			#not finished
@@ -1002,7 +1008,9 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 					'trperizinan.id as perizinan_id',
 					'trperizinan.n_perizinan',
 					'trkelompok_perizinan.n_kelompok',
+					'trkelompok_perizinan.id as trkelompok_perizinan_id',
 					'trjenis_permohonan.n_permohonan',
+					'trjenis_permohonan.id as trjenis_permohonan_id',
 					'tmpermohonan.pendaftaran_id',
 					'trperizinan.n_perizinan',
 					'tmpemohon_sementara.source',
@@ -2283,10 +2291,10 @@ public static function fetch_with_tmbap_trperizinan_for_rekapitulasi_retribusi($
 
 		# Modul Portal =============================================================================================================================================================================================
 
-		public static function generate_id_for_layanan_online_pendaftaran_online() {
+		public static function generate_id_for_layanan_online_pendaftaran_online($date) {
 
 			return DB::table('tmpermohonan')
-			->where('d_terima_berkas', '=', '2015-11-20')
+			->where('d_terima_berkas', '=', $date)
 			->select(DB::raw('count(id) as records'))
 			->get();
 

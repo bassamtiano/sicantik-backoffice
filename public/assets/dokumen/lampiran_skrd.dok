@@ -1,0 +1,22 @@
+<div class="print-page">
+
+<data-header></data-header>
+
+<div class="isi-surat">
+
+<data-source> $item = ['type' => 'table', 'source' => 'data_permohonan'] </data-source>
+
+<p>
+    Lampiran SKRD
+</p>
+
+<data-source> $item = ['type' => 'table', 'source' => 'data_pemohon'] </data-source>
+<data-source> $item = ['type' => 'table', 'source' => 'data_perizinan'] </data-source>
+
+<p>
+    Tutup Ah
+</p>
+
+</div>
+
+</div>

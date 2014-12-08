@@ -4,7 +4,7 @@
 
 <div class="isi-surat">
 
-<data-source> $item = ['type' => 'table', 'source' => 'data_permohonan'] </data-source>
+<data-source> $item = ['type' => 'table', 'source' => 'data_pemohon'] </data-source>
 
 <p>
     Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame Hai Ame
@@ -12,6 +12,8 @@
 
 <data-source> $item = ['type' => 'table', 'source' => 'data_pemohon'] </data-source>
 <data-source> $item = ['type' => 'table', 'source' => 'data_perizinan'] </data-source>
+
+<data-source> $item = ['type' => 'table', 'source' => 'data_ame'] </data-source>
 
 <p>
     Tutup Ah

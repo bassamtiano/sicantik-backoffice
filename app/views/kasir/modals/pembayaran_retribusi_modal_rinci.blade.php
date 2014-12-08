@@ -66,8 +66,8 @@
                 &nbsp;
             </div>
             <div class="modal-footer-right">
-                <button type="submit" class="button-red" >Cetak</button>
-                <button type="submit" class="button-yellow" >Batal</button>
+                <a target="_blank" ng-href="pembayaran_retribusi/dokumen/@{{ pembayaran_retribusi_rincian_data.id }}" class="btn button-yellow" >Cetak</button>
+                <a class="btn button-red" >Batal</button>
             </div>
         </div>
 

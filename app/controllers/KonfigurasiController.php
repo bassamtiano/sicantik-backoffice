@@ -876,7 +876,7 @@
 
 		public function report_report_generator_insert() {
 			$file_name = Input::file('layout')->getClientOriginalName();
-			Input::file('layout')->move('assets/dokumen', $name);
+			Input::file('layout')->move('assets/dokumen', $file_name);
 
 			$data = [
 				'report_code' => Input::get('report_code'),
@@ -933,11 +933,14 @@
 				$id5 +=1;
 			}
 
+			$file_name = Input::file('layout')->getClientOriginalName();
+			Input::file('layout')->move('assets/dokumen', $file_name);
+
 			$report_generator = [
 				'report_code' => Input::get('report_code'),
 				'short_desc' => Input::get('short_desc'),
 				'long_desc' => Input::get('long_desc'),
-				'layout' => Input::get('layout'),
+				'layout' => $file_name,
 				'trperizinan_id' => Input::get('trperizinan_id'),
 				'report_type' => Input::get('report_type')
 			];

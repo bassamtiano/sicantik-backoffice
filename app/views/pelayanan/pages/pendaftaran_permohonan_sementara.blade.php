@@ -6,7 +6,7 @@
 			width: 3%;
 			text-align: center;
 		}
-		
+
 		.c_pendaftaran_id {
 			width: 10%;
 		}
@@ -69,14 +69,14 @@
 	<form ng-submit="filter_pelayanan()">
 		<div class="table-form-content">
 			<div class="form-item">
-				<button ng-click="" style="width='30px'">Tambah Pemohon</button>
+				<button ng-click="open_modal('modal_tambah', '')" style="width='30px'">Tambah Pemohon</button>
 			</div>
 			<!-- <div class="form-item wide">
 				<select class="form-option" ng-model="pengaduan_id" ng-options="pdpsop.sts_pesan_id as pdpsop.n_sts_pesan for pdpsop in pengaduan_daftar_pengaduan_saran_opsi_pengaduan">
 					<option value="">Pilih Opsi Pengaduan</option>
 				</select>
 			</div>
-			
+
 			<div class="form-item">
 				<input type="submit" value="Filter">
 			</div> -->
@@ -111,7 +111,7 @@
 
 
 @section('table_nav')
-	
+
 	<table>
 		<tr>
 			<th class="c_no">No</th>
@@ -123,7 +123,6 @@
 			<th class="c_status" ng-click="predicate='status'; reverse=!reverse">Status</th>
 			<th class="c_d_terima_berkas" ng-click="predicate='d_terima_berkas'; reverse=!reverse">Tgl Permohonan</th>
 			<th class="c_aksi">Aksi</th>
-			<th class="c_verifikasi">Verifikasi</th>
 		</tr>
 	</table>
 
@@ -134,7 +133,7 @@
 	<table role="table-fluid">
 		<tr ng-repeat="ppps in pelayanan_pendaftaran_permohonan_sementara_data | orderBy:predicate:reverse | filter:search | limitTo:displayed">
 			<td class="c_no">@{{ $index+1 }}</td>
-			<td class="c_pendaftaran_id">@{{ ppps.pendaftaran_id }}</td>
+			<td class="c_pendaftaran_id">@{{ ppps.id }} @{{ ppps.pendaftaran_id }}</td>
 			<td class="c_no_referensi">@{{ ppps.no_referensi }}</td>
 			<td class="c_n_pemohon">@{{ ppps.n_pemohon }}</td>
 			<td class="c_n_perizinan">@{{ ppps.n_perizinan }}</td>
@@ -142,10 +141,12 @@
 			<td class="c_status">@{{ ppps.c_paralel }}</td>
 			<td class="c_d_terima_berkas">@{{ ppps.d_terima_berkas }}</td>
 			<td class="c_aksi">
-				<a href ng-click="open_modal('modal_edit', ppps.id)" class="row-item ya">Edit</a>
+				<span class="button-group group-2">
+					<a href ng-click="open_modal('modal_edit', ppps.id)" class="edit">Edit</a>
+					<a href ng-click="open_modal('modal_delete', ppps.id)" class="delete">Delete</a>
+				</span>
 			</td>
-			<td class="c_verifikasi">@{{  }}</td>
-			
+
 		</tr>
 		<tr>
 			<td colspan="12" style="text-align:center">
@@ -158,4 +159,5 @@
 
 @section('modal-content')
 	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_sementara_modal_edit', ['modal_name' => 'modal_edit'])
+	@include('pelayanan.modals.pelayanan_pendaftaran_permohonan_sementara_modal_delete', ['modal_name' => 'modal_delete'])
 @stop

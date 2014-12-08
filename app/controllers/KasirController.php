@@ -103,9 +103,34 @@
 				$result['nilai_retribusi'] = 0;
 			}
 
-			return $result;
+			$result['surat_title'] = 'Kwitansi';
 
-			// return View::make('kasir/dokumen/pembayaran_retribusi_dokumen', ['data' => 'aw']);
+			$settings = Settings::get_data_cetak();
+			$header = [];
+
+			foreach ($settings as $key) {
+				$header[$key['name']] = $key['value'];
+			}
+
+			$title_kabupaten = Trkabupaten::get_nama_kabupaten($header['app_city']);
+			$surat_title = 'Kwitansi';
+
+			$data = [
+				'logo' => 'assets/img/logo.png',
+				'title_nama' => $header['app_kantor'],
+				'title_kabupaten' => $title_kabupaten,
+				'title_alamat' => $header['app_alamat'],
+				'title_tlp' => $header['app_tlp'],
+				'title_fax' => $header['app_fax'],
+				'surat_title' => $surat_title
+			];
+
+
+
+			$result = $result + $data;
+
+			$pdf = PDF::loadView('kasir.dokumen.pembayaran_retribusi_dokumen', $result);
+			return $pdf->setPaper('a4')->setOrientation('portrait')->download($surat_title . '.pdf');
 		}
 
 	}
